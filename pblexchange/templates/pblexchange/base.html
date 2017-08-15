@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PBL Exchange</title>
+    {% block links %}
+    {% endblock %}
+</head>
+<body>
+<h1>PBL Exchange</h1>
+<a href="{% url 'ask' %}">Ask a question</a>
+{% block content %}
+Hello World!
+{% endblock %}
+</body>
+</html>
