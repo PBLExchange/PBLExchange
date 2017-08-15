@@ -1,9 +1,10 @@
 {% extends 'pblexchange/base.html' %}
 
 {% block content %}
-    <form action="{% url 'home' %}" method="post">
+    <form action="{% url 'home' %}" method="post" class="pure-form pure-form-stacked">
         {% csrf_token %}
-        {{ question.as_p }}
+        {{ question.media }}
+        {{ question }}
         <input type="submit" value="Submit">
     </form>
 {% endblock %}

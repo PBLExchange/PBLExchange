@@ -1,16 +1,37 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>PBL Exchange</title>
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css"
+          integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w"
+          crossorigin="anonymous">
     {% block links %}
+        <link rel="stylesheet" href="{% static 'pblexchange/css/base.css' %}" type="text/css">
     {% endblock %}
 </head>
 <body>
-<h1>PBL Exchange</h1>
+<h1><a href="{% url 'home' %}">PBL Exchange</a></h1>
 <a href="{% url 'ask' %}">Ask a question</a>
 {% block content %}
-Hello World!
+    {% if questions %}
+        {% for question in questions %}
+            <div class="pure-g">
+                <div class="pure-u-1-4">
+                    <a href="{% url 'upvote' question.pk %}" class="button-xsmall pure-button">Up vote</a>
+                    <p>{{ question.votes }}</p>
+                    <a href="{% url 'downvote' question.pk %}" class="button-xsmall pure-button">Down vote</a>
+                </div>
+                <div class="pure-u-3-4">
+                    <b>{{ question.title }}</b><br />
+                    {{ question.body|safe|truncatechars_html:255 }}
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No questions at the moment.</p>
+    {% endif %}
 {% endblock %}
 </body>
 </html>

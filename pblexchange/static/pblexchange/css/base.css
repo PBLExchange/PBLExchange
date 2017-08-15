@@ -1,0 +1,8 @@
+.question {
+    border: #000 1px solid;
+}
+
+.question div {
+    display: block;
+    float: left;
+}
