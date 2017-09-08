@@ -31,7 +31,7 @@ class Question(models.Model):
     tags = models.ManyToManyField(Tag, blank=True)
     created_date = models.DateTimeField(auto_now_add=True)
     edited_date = models.DateTimeField(auto_now=True)
-    votes = models.IntegerField()
+    votes = models.IntegerField(default=0)
 
     def __str__(self):
         return self.title

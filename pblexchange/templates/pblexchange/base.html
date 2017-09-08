@@ -18,14 +18,22 @@
     {% if questions %}
         {% for question in questions %}
             <div class="pure-g">
-                <div class="pure-u-1-4">
+                <div class="pure-u-1-8">
                     <a href="{% url 'upvote' question.pk %}" class="button-xsmall pure-button">Up vote</a>
                     <p>{{ question.votes }}</p>
                     <a href="{% url 'downvote' question.pk %}" class="button-xsmall pure-button">Down vote</a>
                 </div>
-                <div class="pure-u-3-4">
+                <div class="pure-u-7-8">
                     <b>{{ question.title }}</b><br />
-                    {{ question.body|safe|truncatechars_html:255 }}
+                    {{ question.body|safe|truncatechars_html:255 }}<br />
+                    Asked by
+                    <i>
+                        {% if question.author.get_full_name %}
+                            {{ question.author.get_full_name }}
+                        {% else %}
+                            {{ question.author.get_username }}
+                        {% endif %}
+                    </i>
                 </div>
             </div>
         {% endfor %}
