@@ -1,0 +1,36 @@
+{% extends base_template %}
+{% load questions %}
+
+{% block content %}
+    <h1>{{ question.title }}</h1>
+    <div>
+        {{ question.body|safe }}
+    </div>
+    <p>Asked by
+        <i>
+            {% if question.author.get_full_name %}
+                {{ question.author.get_full_name }}
+            {% else %}
+                {{ question.author.get_username }}
+            {% endif %}
+        </i>
+    </p>
+
+    <hr/>
+    <h2>Answers:</h2>
+    {% answer_list question %}
+    <hr/>
+
+    {% if user.is_authenticated %}
+        <form action="{% url 'questions:answers:submit' question.pk %}" method="post" class="pure-form pure-form-stacked">
+            {% csrf_token %}
+            {{ answer_form.media }}
+            {{ answer_form }}
+            <br/>
+            <button type="submit" class="pure-button pure-button-primary">Submit</button>
+        </form>
+    {% else %}
+        <p>Please <a href="{% url 'login' %}">log in</a> to answer questions.</p>
+    {% endif %}
+
+{% endblock %}

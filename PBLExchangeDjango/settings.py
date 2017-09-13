@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'pblexchange.apps.PblexchangeConfig',
+    'questions',
     'ckeditor',
     'ckeditor_uploader',
 ]
@@ -129,3 +130,7 @@ MEDIA_ROOT = 'media/'
 
 # CKEditor upload settings
 CKEDITOR_UPLOAD_PATH = 'uploads/'
+
+
+# Login redirect
+LOGIN_REDIRECT_URL = 'home'

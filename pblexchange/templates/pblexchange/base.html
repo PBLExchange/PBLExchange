@@ -1,4 +1,5 @@
 {% load static %}
+{% load questions %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,39 +8,28 @@
     <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css"
           integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w"
           crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'pblexchange/css/font-awesome.min.css' %}">
     {% block links %}
         <link rel="stylesheet" href="{% static 'pblexchange/css/base.css' %}" type="text/css">
     {% endblock %}
 </head>
 <body>
-<h1><a href="{% url 'home' %}">PBL Exchange</a></h1>
-<a href="{% url 'ask' %}">Ask a question</a>
+<div class="pure-menu pure-menu-horizontal">
+    <a href="{% url 'home' %}" class="pure-menu-heading pure-menu-link">PBL Exchange</a>
+    <ul class="pure-menu-list">
+        <li class="pure-menu-item"><a href="{% url 'questions:ask' %}" class="pure-menu-link">Ask a question</a></li>
+        {% if user.is_authenticated %}
+            <li class="pure-menu-item"><a href="{% url 'logout' %}" class="pure-menu-link">Log out</a></li>
+        {% else %}
+            <li class="pure-menu-item"><a href="{% url 'login' %}" class="pure-menu-link">Log in</a></li>
+        {% endif %}
+    </ul>
+</div>
+<!--<h1><a href="{% url 'home' %}">PBL Exchange</a></h1>
+<a href="{% url 'questions:ask' %}">Ask a question</a>-->
+
 {% block content %}
-    {% if questions %}
-        {% for question in questions %}
-            <div class="pure-g">
-                <div class="pure-u-1-8">
-                    <a href="{% url 'upvote' question.pk %}" class="button-xsmall pure-button">Up vote</a>
-                    <p>{{ question.votes }}</p>
-                    <a href="{% url 'downvote' question.pk %}" class="button-xsmall pure-button">Down vote</a>
-                </div>
-                <div class="pure-u-7-8">
-                    <b>{{ question.title }}</b><br />
-                    {{ question.body|safe|truncatechars_html:255 }}<br />
-                    Asked by
-                    <i>
-                        {% if question.author.get_full_name %}
-                            {{ question.author.get_full_name }}
-                        {% else %}
-                            {{ question.author.get_username }}
-                        {% endif %}
-                    </i>
-                </div>
-            </div>
-        {% endfor %}
-    {% else %}
-        <p>No questions at the moment.</p>
-    {% endif %}
+    {% question_list questions %}
 {% endblock %}
 </body>
 </html>

@@ -1,0 +1,10 @@
+{% extends 'pblexchange/base.html' %}
+
+{% block content %}
+    <h2>Login</h2>
+    <form class="pure-form" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="pure-button pure-button-primary">Login</button>
+    </form>
+{% endblock %}

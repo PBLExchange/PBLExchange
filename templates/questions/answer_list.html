@@ -1,0 +1,24 @@
+{% if answers %}
+    {% for answer in answers %}
+        <div class="answer pure-g">
+            <div class="vote pure-u-1-8">
+                <a href="{% url 'questions:answers:upvote' answer.pk %}" class="button-xsmall pure-button"><i class="fa fa-thumbs-up fa-1g" aria-hidden="true"></i></a>
+                <p>{{ answer.votes }}</p>
+                <a href="{% url 'questions:answers:downvote' answer.pk %}" class="button-xsmall pure-button"><i class="fa fa-thumbs-down fa-1g" aria-hidden="true"></i></a>
+            </div>
+            <div class="answer-body pure-u-7-8">
+                <div>{{ answer.body|safe }}</div>
+                Asked by
+                <i>
+                    {% if answer.author.get_full_name %}
+                        {{ answer.author.get_full_name }}
+                    {% else %}
+                        {{ answer.author.get_username }}
+                    {% endif %}
+                </i>
+            </div>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>There are currently no answers.</p>
+{% endif %}
