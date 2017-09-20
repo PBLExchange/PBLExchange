@@ -9,17 +9,22 @@
             </div>
             <div class="answer-body pure-u-7-8">
                 <div>{{ answer.body|safe }}</div>
-                Asked by
-                <i>
-                    {% if answer.author.get_full_name %}
-                        {{ answer.author.get_full_name }}
-                    {% else %}
-                        {{ answer.author.get_username }}
-                    {% endif %}
-                </i>
+                Asked by <i>{% display_name answer %}</i>
                 <hr/>
 
                 {% comment_list answer.question answer %}
+                <div>
+                    <label for="comment-a-{{ answer.pk }}">Add comment</label>
+                    <input type="checkbox" id="comment-a-{{ answer.pk }}" class="add-comment">
+
+                    <form action="{% url 'questions:comments:submit:a' question.pk answer.pk %}" method="post" class="comment-form pure-form pure-form-stacked">
+                        {% csrf_token %}
+                        {{ comment_form.media }}
+                        {{ comment_form }}
+                        <br/>
+                        <button type="submit" class="pure-button pure-button-primary">Submit</button>
+                    </form>
+                </div>
             </div>
         </div>
     {% endfor %}

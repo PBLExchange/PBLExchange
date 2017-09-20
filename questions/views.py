@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponseRedirect, Http404, reverse, get_object_or_404
-from questions.forms import QuestionForm, AnswerForm
-from questions.models import Question
+from questions.forms import QuestionForm, AnswerForm, CommentForm
+from questions.models import Question, Answer, QuestionVote
 
 
 # Create your views here.
@@ -12,6 +12,7 @@ def detail(request, question_id, base_template='pblexchange/base.html', **kwargs
         'base_template': base_template,
         'question': question,
         'answer_form': AnswerForm(),
+        'comment_form': CommentForm(),
     })
 
 
@@ -24,7 +25,7 @@ def ask(request, base_template='pblexchange/base.html', **kwargs):
     })
 
 
-def submit(request, form_type=QuestionForm, question_id=None, **kwargs):
+def submit(request, question_id=None, answer_id=None, form_type=QuestionForm, **kwargs):
     if request.method == 'POST' and request.user.is_authenticated():
         post = form_type(request.POST)
         post = post.save(commit=False)
@@ -33,6 +34,9 @@ def submit(request, form_type=QuestionForm, question_id=None, **kwargs):
         if question_id:
             question = get_object_or_404(Question, pk=question_id)
             post.question = question
+            if answer_id:
+                answer = get_object_or_404(Answer, pk=answer_id)
+                post.answer = answer
             is_question = False
         post.save()
         if is_question:
@@ -43,12 +47,21 @@ def submit(request, form_type=QuestionForm, question_id=None, **kwargs):
         return Http404()
 
 
-def vote(request, post_id, amount, post_type=Question, **kwargs):
+def vote(request, post_id, amount, post_type=Question, vote_type=QuestionVote, **kwargs):
     if not request.user.is_authenticated():
         return HttpResponseRedirect(reverse('login'))
-    post = post_type.objects.get(pk=post_id)
-    if post:
-        post.votes += amount
+    post = get_object_or_404(post_type, pk=post_id)
+
+    prev_vote = vote_type.objects.filter(post=post.pk, user=request.user)
+
+    if not prev_vote or prev_vote.first().vote != amount:
+        if amount > 0:
+            post.up_votes += amount
+        else:
+            post.down_votes -= amount
+        v,_ = vote_type.objects.get_or_create(user=request.user, post=post)
+        v.vote += amount
+        v.save()
         post.save()
 
     if isinstance(post, Question):

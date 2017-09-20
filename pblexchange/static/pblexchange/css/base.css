@@ -15,3 +15,15 @@
 .answer {
     margin: 1em;
 }
+
+.add-comment {
+    display: none;
+}
+
+.add-comment:checked + .comment-form {
+    display: block;
+}
+
+.comment-form {
+    display: none;
+}

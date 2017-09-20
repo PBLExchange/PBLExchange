@@ -23,12 +23,21 @@ class Category(models.Model):
 class Post(models.Model):
     class Meta:
         abstract = True
+
     body = RichTextUploadingField()
     author = models.ForeignKey(User)
     anonymous = models.BooleanField()
     created_date = models.DateTimeField(auto_now_add=True)
     edited_date = models.DateTimeField(auto_now=True)
-    votes = models.IntegerField(default=0)
+    up_votes = models.IntegerField(default=0)
+    down_votes = models.IntegerField(default=0)
+
+    @property
+    def votes(self):
+        return self.up_votes - self.down_votes
+
+    def __str__(self):
+        return self.body
 
 
 class Question(Post):
@@ -48,3 +57,24 @@ class Answer(Post):
 class Comment(Post):
     question = models.ForeignKey(Question)
     answer = models.ForeignKey(Answer, null=True)
+
+
+class Vote(models.Model):
+    class Meta:
+        abstract = True
+
+    user = models.ForeignKey(User)
+    vote = models.SmallIntegerField(default=0)
+    post = models.ForeignKey(Post)
+
+
+class QuestionVote(Vote):
+    post = models.ForeignKey(Question)
+
+
+class AnswerVote(Vote):
+    post = models.ForeignKey(Answer)
+
+
+class CommentVote(Vote):
+    post = models.ForeignKey(Comment)

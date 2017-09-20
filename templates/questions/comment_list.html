@@ -1,21 +1,18 @@
+{% load questions %}
 {% if comments %}
     {% for comment in comments %}
         <div class="comment pure-g">
             <div class="comment-vote pure-u-1-8">
-                <p>{{ comment.votes }}
-                <a href="{% url 'questions:comment:upvote' comment.pk %}" class="button-xsmall pure-button"><i class="fa fa-thumbs-up fa-1g" aria-hidden="true"></i></a>
-                <a href="{% url 'questions:comment:downvote' comment.pk %}" class="button-xsmall pure-button"><i class="fa fa-thumbs-down fa-1g" aria-hidden="true"></i></a>
+                <p>
+                    <a href="{% url 'questions:comments:upvote' comment.pk %}" class="button-xsmall pure-button"><i class="fa fa-thumbs-up fa-1g" aria-hidden="true"></i></a>
+                    <a href="{% url 'questions:comments:downvote' comment.pk %}" class="button-xsmall pure-button"><i class="fa fa-thumbs-down fa-1g" aria-hidden="true"></i></a>
+                    {{ comment.votes }}
                 </p>
             </div>
             <div class="comment-body pure-u-7-8">
-                <div>{{ comment.body|safe }}</div>
-                - <i>
-                    {% if comment.author.get_full_name %}
-                        {{ comment.author.get_full_name }}
-                    {% else %}
-                        {{ comment.author.get_username }}
-                    {% endif %}
-                </i>
+                <div>
+                    {{ comment.body }} - <i>{% display_name comment %}</i>
+                </div>
             </div>
         </div>
     {% endfor %}

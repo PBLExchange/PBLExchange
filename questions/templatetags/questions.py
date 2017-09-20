@@ -1,5 +1,6 @@
 from django import template
 from questions.models import Answer, Comment
+from questions.forms import CommentForm
 
 register = template.Library()
 
@@ -13,6 +14,8 @@ def question_list(questions):
 def answer_list(question):
     return {
         'answers': Answer.objects.filter(question=question.pk),
+        'question': question,
+        'comment_form': CommentForm(),
     }
 
 
@@ -22,7 +25,16 @@ def comment_list(question, answer=None):
     if answer:
         comments = comments.filter(answer=answer.pk)
     else:
-        comments = comments.filter(answer=None)
+        comments = comments.filter(answer__isnull=True)
     return {
-        'answers': comments,
+        'comments': comments,
     }
+
+
+@register.simple_tag
+def display_name(post):
+    if post.anonymous:
+        return 'anonymous'
+    if post.author.get_full_name():
+        return post.author.get_full_name()
+    return post.author.get_username()
