@@ -24,14 +24,14 @@ def ask(request, base_template='pblexchange/base.html', **kwargs):
     })
 
 
-def submit(request, form_type=QuestionForm, **kwargs):
+def submit(request, form_type=QuestionForm, question_id=None, **kwargs):
     if request.method == 'POST' and request.user.is_authenticated():
         post = form_type(request.POST)
         post = post.save(commit=False)
         post.author = request.user
         is_question = True
-        if kwargs['question_id']:
-            question = get_object_or_404(Question, pk=kwargs['question_id'])
+        if question_id:
+            question = get_object_or_404(Question, pk=question_id)
             post.question = question
             is_question = False
         post.save()

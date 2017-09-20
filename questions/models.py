@@ -43,3 +43,8 @@ class Question(Post):
 
 class Answer(Post):
     question = models.ForeignKey(Question)
+
+
+class Comment(Post):
+    question = models.ForeignKey(Question)
+    answer = models.ForeignKey(Answer, null=True)

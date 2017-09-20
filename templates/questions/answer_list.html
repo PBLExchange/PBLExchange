@@ -1,3 +1,4 @@
+{% load questions %}
 {% if answers %}
     {% for answer in answers %}
         <div class="answer pure-g">
@@ -16,6 +17,9 @@
                         {{ answer.author.get_username }}
                     {% endif %}
                 </i>
+                <hr/>
+
+                {% comment_list answer.question answer %}
             </div>
         </div>
     {% endfor %}

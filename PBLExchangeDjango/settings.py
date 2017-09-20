@@ -134,3 +134,4 @@ CKEDITOR_UPLOAD_PATH = 'uploads/'
 
 # Login redirect
 LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'home'
