@@ -20,6 +20,7 @@ class CustomCASBackend(CASBackend):
             return None
         user = None
         username = self.clean_username(username)
+        # Extra added line, to ensure it is not the full email address
         if "@" in username:
             username = username.split('@')[0]
 
