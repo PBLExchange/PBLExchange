@@ -8,7 +8,7 @@ from django_cas_ng.signals import cas_user_authenticated
 from django_cas_ng.utils import get_cas_client
 
 class CustomCASBackend(CASBackend):
-    # The following function has been overwritten as the base function does not send the cas attribute list to the configure_user() method
+    # Modifications/additions are indicated by a comment '# Extra ...'
     def authenticate(self, request, ticket, service):
         """Verifies CAS ticket and gets or creates User object"""
         client = get_cas_client(service_url=service)
@@ -34,6 +34,7 @@ class CustomCASBackend(CASBackend):
                 UserModel.USERNAME_FIELD: username
             })
             if created:
+                # Extra parameter, attributes, added
                 user = self.configure_user(user, attributes)
         else:
             created = False
@@ -93,7 +94,6 @@ class CustomCASBackend(CASBackend):
         return user
 
     def configure_user(self, user, attributes):
-        print(attributes)
         user.username = user.username
         user.email = attributes['mail']
         user.first_name = attributes['givenName']
