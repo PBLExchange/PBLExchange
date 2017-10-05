@@ -20,6 +20,9 @@ class CustomCASBackend(CASBackend):
             return None
         user = None
         username = self.clean_username(username)
+        # Extra added line, to ensure it is not the full email address
+        if "@" in username:
+            username = username.split('@')[0]
 
         UserModel = get_user_model()
 
@@ -91,7 +94,7 @@ class CustomCASBackend(CASBackend):
 
     def configure_user(self, user, attributes):
         print(attributes)
-        user.username = user.username.split('@')[0]
+        user.username = user.username
         user.email = attributes['mail']
         user.first_name = attributes['givenName']
         user.last_name = attributes['sn']
