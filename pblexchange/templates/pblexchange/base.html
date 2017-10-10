@@ -18,6 +18,7 @@
     <a href="{% url 'home' %}" class="pure-menu-heading pure-menu-link">PBL Exchange</a>
     <ul class="pure-menu-list">
         <li class="pure-menu-item"><a href="{% url 'questions:ask' %}" class="pure-menu-link">Ask a question</a></li>
+        <li class="pure-menu-item"><a href="{% url 'users:overview' %}" class="pure-menu-link">Users</a></li>
         {% if user.is_authenticated %}
             <li class="pure-menu-item"><a href="{% url 'logout' %}" class="pure-menu-link">Log out</a></li>
         {% else %}
