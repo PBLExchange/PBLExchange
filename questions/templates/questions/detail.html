@@ -6,6 +6,7 @@
     <div>
         {{ question.body|safe }}
     </div>
+    {% tag_list question %}
     <p>Asked by <i>{% display_name question %}</i>
     </p>
 

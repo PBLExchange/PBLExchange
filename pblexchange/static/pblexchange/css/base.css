@@ -27,3 +27,10 @@
 .comment-form {
     display: none;
 }
+
+.tag {
+    background: lightgray;
+    padding: .3em .5em;
+    display: inline-block;
+    margin: .4em .2em;
+}

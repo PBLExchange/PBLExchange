@@ -17,6 +17,7 @@
 <div class="pure-menu pure-menu-horizontal">
     <a href="{% url 'home' %}" class="pure-menu-heading pure-menu-link">PBL Exchange</a>
     <ul class="pure-menu-list">
+        <li class="pure-menu-item"><a href="{% url 'questions:tags' %}" class="pure-menu-link">Tags</a></li>
         <li class="pure-menu-item"><a href="{% url 'questions:ask' %}" class="pure-menu-link">Ask a question</a></li>
         {% if user.is_authenticated %}
             <li class="pure-menu-item"><a href="{% url 'logout' %}" class="pure-menu-link">Log out</a></li>

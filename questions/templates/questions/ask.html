@@ -1,6 +1,7 @@
 {% extends base_template %}
 
 {% block content %}
+    <h1>Ask Question:</h1>
     <form action="{% url 'questions:submit' %}" method="post" class="pure-form pure-form-stacked">
         {% csrf_token %}
         {{ post_form.media }}

@@ -1,0 +1,10 @@
+{% extends base_template %}
+
+{% block content %}
+    <h1>Tags:</h1>
+    <div>
+    {% for tag in tags %}
+        {{ tag.question_set.count }} x <a href="{% url 'questions:tag' tag.tag %}" class="tag">{{ tag.tag }}</a>
+    {% endfor %}
+    </div>
+{% endblock %}

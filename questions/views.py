@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponseRedirect, Http404, reverse, get_object_or_404
 from questions.forms import QuestionForm, AnswerForm, CommentForm
-from questions.models import Question, Answer, QuestionVote
+from questions.models import Question, Answer, QuestionVote, Tag
 
 
 # Create your views here.
@@ -27,8 +27,8 @@ def ask(request, base_template='pblexchange/base.html', **kwargs):
 
 def submit(request, question_id=None, answer_id=None, form_type=QuestionForm, **kwargs):
     if request.method == 'POST' and request.user.is_authenticated():
-        post = form_type(request.POST)
-        post = post.save(commit=False)
+        post_form = form_type(request.POST)
+        post = post_form.save(commit=False)
         post.author = request.user
         is_question = True
         if question_id:
@@ -39,6 +39,7 @@ def submit(request, question_id=None, answer_id=None, form_type=QuestionForm, **
                 post.answer = answer
             is_question = False
         post.save()
+        post_form.save_m2m()  # needed to save many-to-many relations.
         if is_question:
             return HttpResponseRedirect(reverse('home'))
         else:
@@ -68,3 +69,19 @@ def vote(request, post_id, amount, post_type=Question, vote_type=QuestionVote, *
         return HttpResponseRedirect(reverse('home'))
     else:
         return HttpResponseRedirect(reverse('questions:detail', args=(post.question.pk,)))
+
+
+def tags(request, base_template='pblexchange/base.html', **kwargs):
+    return render(request, 'questions/tags.html', {
+        'base_template': base_template,
+        'tags': Tag.objects.all(),
+    })
+
+
+def tag(request, tag_text, base_template='pblexchange/base.html', **kwargs):
+    t = get_object_or_404(Tag, tag=tag_text)
+    return render(request, 'questions/list.html', {
+        'base_template': base_template,
+        'title': tag_text + ':',
+        'questions': t.question_set.all(),
+    })

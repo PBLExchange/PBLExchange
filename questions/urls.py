@@ -5,6 +5,8 @@ from .forms import AnswerForm, CommentForm
 
 urlpatterns = [
     url(r'^detail/(?P<question_id>[0-9]+)$', views.detail, name='detail'),
+    url(r'^tags$', views.tags, name='tags'),
+    url(r'^tags/(?P<tag_text>[a-zA-Z0-9_\-]+)$', views.tag, name='tag'),
     url(r'^ask', views.ask, name='ask'),
     url(r'^submit$', views.submit, name='submit'),
     url(r'^upvote/(?P<post_id>[0-9]+)$', views.vote, {'amount': 1}, name='upvote'),

@@ -31,6 +31,13 @@ def comment_list(question, answer=None):
     }
 
 
+@register.inclusion_tag('questions/tag_list.html')
+def tag_list(question):
+    return {
+        'tags': question.tags.all()
+    }
+
+
 @register.simple_tag
 def display_name(post):
     if post.anonymous:

@@ -9,6 +9,7 @@
             </div>
             <div class="question-body pure-u-7-8">
                 <a href="{% url 'questions:detail' question.pk %}"><b>{{ question.title }}</b></a><br />
+                {% tag_list question %}
                 Asked by <i>{% display_name question %}</i>
             </div>
         </div>
