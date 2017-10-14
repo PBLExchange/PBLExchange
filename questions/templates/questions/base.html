@@ -1,0 +1,9 @@
+{% extends base_template %}
+
+{% block sub_menu %}
+    <ul class="pure-menu-list">
+        <li class="pure-menu-item"><a href="{% url 'questions:new' %}" class="pure-menu-link">New</a></li>
+        <li class="pure-menu-item"><a href="{% url 'questions:unanswered' %}" class="pure-menu-link">Unanswered</a></li>
+        <li class="pure-menu-item"><a href="{% url 'questions:hot' %}" class="pure-menu-link">Hot</a></li>
+    </ul>
+{% endblock %}

@@ -40,11 +40,24 @@ class Post(models.Model):
         return self.body
 
 
+class QuestionManager(models.Manager):
+    def unanswered(self):
+        return self.recent().filter(answer=None)
+
+    def recent(self):
+        return self.order_by('-created_date')
+
+    def hot(self):
+        return None
+
+
 class Question(Post):
     title = models.CharField(max_length=160)
     category = models.ForeignKey(Category, null=True, blank=True)
     course = models.ManyToManyField(Course, blank=True)
     tags = models.ManyToManyField(Tag, blank=True)
+
+    objects = QuestionManager()
 
     def __str__(self):
         return self.title
@@ -66,6 +79,7 @@ class Vote(models.Model):
     user = models.ForeignKey(User)
     vote = models.SmallIntegerField(default=0)
     post = models.ForeignKey(Post)
+    date = models.DateTimeField(auto_now=True)
 
 
 class QuestionVote(Vote):

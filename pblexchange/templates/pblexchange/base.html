@@ -4,8 +4,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>PBL Exchange</title>
-    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css"
+    <link rel="stylesheet" href="{% static 'pblexchange/css/pure-min.css' %}"
           integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w"
           crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'pblexchange/css/font-awesome.min.css' %}">
@@ -14,7 +15,7 @@
     {% endblock %}
 </head>
 <body>
-<div class="pure-menu pure-menu-horizontal">
+<div class="pure-menu pure-menu-horizontal" style="border-bottom: 1px #000 solid; background: whitesmoke">
     <a href="{% url 'home' %}" class="pure-menu-heading pure-menu-link">PBL Exchange</a>
     <ul class="pure-menu-list">
         <li class="pure-menu-item"><a href="{% url 'questions:tags' %}" class="pure-menu-link">Tags</a></li>
@@ -25,6 +26,10 @@
             <li class="pure-menu-item"><a href="{% url 'login' %}" class="pure-menu-link">Log in</a></li>
         {% endif %}
     </ul>
+</div>
+<div class="pure-menu pure-menu-horizontal" style="background: whitesmoke">
+    {% block sub_menu %}
+    {% endblock %}
 </div>
 <!--<h1><a href="{% url 'home' %}">PBL Exchange</a></h1>
 <a href="{% url 'questions:ask' %}">Ask a question</a>-->

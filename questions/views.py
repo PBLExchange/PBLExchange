@@ -4,6 +4,30 @@ from questions.models import Question, Answer, QuestionVote, Tag
 
 
 # Create your views here.
+def new(request, base_template='pblexchange/base.html', **kwargs):
+    return render(request, 'questions/list.html', {
+        'base_template': base_template,
+        'title': 'new',
+        'questions': Question.objects.recent()
+    })
+
+
+def unanswered(request, base_template='pblexchange/base.html', **kwargs):
+    return render(request, 'questions/list.html', {
+        'base_template': base_template,
+        'title': 'unanswered',
+        'questions': Question.objects.unanswered()
+    })
+
+
+def hot(request, base_template='pblexchange/base.html', **kwargs):
+    return render(request, 'questions/list.html', {
+        'base_template': base_template,
+        'title': 'hot',
+        'questions': Question.objects.recent()
+    })
+
+
 def detail(request, question_id, base_template='pblexchange/base.html', **kwargs):
     question = Question.objects.get(pk=question_id)
     if not question:
@@ -82,6 +106,6 @@ def tag(request, tag_text, base_template='pblexchange/base.html', **kwargs):
     t = get_object_or_404(Tag, tag=tag_text)
     return render(request, 'questions/list.html', {
         'base_template': base_template,
-        'title': tag_text + ':',
+        'title': tag_text,
         'questions': t.question_set.all(),
     })

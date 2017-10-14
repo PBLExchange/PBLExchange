@@ -4,6 +4,9 @@ from .models import Answer, Comment, AnswerVote, CommentVote
 from .forms import AnswerForm, CommentForm
 
 urlpatterns = [
+    url(r'^new$', views.new, name='new'),
+    url(r'^unanswered$', views.unanswered, name='unanswered'),
+    url(r'^hot$', views.hot, name='hot'),
     url(r'^detail/(?P<question_id>[0-9]+)$', views.detail, name='detail'),
     url(r'^tags$', views.tags, name='tags'),
     url(r'^tags/(?P<tag_text>[a-zA-Z0-9_\-]+)$', views.tag, name='tag'),
