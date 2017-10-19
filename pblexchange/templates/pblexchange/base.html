@@ -1,5 +1,6 @@
 {% load static %}
 {% load questions %}
+{% load menu %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,18 +16,7 @@
     {% endblock %}
 </head>
 <body>
-<div class="pure-menu pure-menu-horizontal" style="border-bottom: 1px #000 solid; background: whitesmoke">
-    <a href="{% url 'home' %}" class="pure-menu-heading pure-menu-link">PBL Exchange</a>
-    <ul class="pure-menu-list">
-        <li class="pure-menu-item"><a href="{% url 'questions:tags' %}" class="pure-menu-link">Tags</a></li>
-        <li class="pure-menu-item"><a href="{% url 'questions:ask' %}" class="pure-menu-link">Ask a question</a></li>
-        {% if user.is_authenticated %}
-            <li class="pure-menu-item"><a href="{% url 'logout' %}" class="pure-menu-link">Log out</a></li>
-        {% else %}
-            <li class="pure-menu-item"><a href="{% url 'login' %}" class="pure-menu-link">Log in</a></li>
-        {% endif %}
-    </ul>
-</div>
+{% menu user %}
 <div class="pure-menu pure-menu-horizontal" style="background: whitesmoke">
     {% block sub_menu %}
     {% endblock %}

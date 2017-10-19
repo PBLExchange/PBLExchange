@@ -2,6 +2,10 @@ from django.conf.urls import url, include
 from . import views
 from .models import Answer, Comment, AnswerVote, CommentVote
 from .forms import AnswerForm, CommentForm
+from pblexchange.models import Menu
+
+Menu.register('Tags', 'questions:tags')
+Menu.register('Ask a Question', 'questions:ask')
 
 urlpatterns = [
     url(r'^new$', views.new, name='new'),

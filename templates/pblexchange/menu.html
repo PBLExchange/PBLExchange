@@ -1,0 +1,14 @@
+<div class="pure-menu pure-menu-horizontal" style="border-bottom: 1px #000 solid; background: whitesmoke">
+    <a href="{% url 'home' %}" class="pure-menu-heading pure-menu-link">PBL Exchange</a>
+    <ul class="pure-menu-list">
+        {% for field in menu %}
+            <li class="pure-menu-item"><a href="{% url field.lookup %}" class="pure-menu-link">{{ field.title }}</a></li>
+        {% endfor %}
+
+        {% if user.is_authenticated %}
+            <li class="pure-menu-item"><a href="{% url 'logout' %}" class="pure-menu-link">Log out</a></li>
+        {% else %}
+            <li class="pure-menu-item"><a href="{% url 'login' %}" class="pure-menu-link">Log in</a></li>
+        {% endif %}
+    </ul>
+</div>
