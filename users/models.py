@@ -5,5 +5,5 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 class UserProfile(models.Model):
-    user=models.ForeignKey(User, unique=True) #TODO: should this be a OnetoOne field instead?
+    user=models.OneToOneField(User, unique=True) #TODO: should this be a OnetoOne or FoerignKey field instead? (django proposes OneToOne)
     points=models.PositiveIntegerField(default=0)
