@@ -4,5 +4,5 @@ from . import models
 
 
 urlpatterns = [
-    url(r'^users', views.users(), name='overview')
+    url(r'^', views.users(), name='overview')
 ]
