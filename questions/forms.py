@@ -24,7 +24,7 @@ class QuestionForm(forms.ModelForm):
         tag_strings = re.sub('[\s+]', '', self.cleaned_data['tags']).lower().split(',')
         tags = []
         for t in tag_strings:
-            tag,_ = Tag.objects.get_or_create(tag=t)
+            tag, _ = Tag.objects.get_or_create(tag=t)
             tags.append(tag)
         return tags
 

@@ -1,6 +1,7 @@
 from django.db import models
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.contrib.auth.models import User
+from django.db.models import F
 
 
 # Create your models here.
@@ -66,6 +67,9 @@ class Question(Post):
 class AnswerManager(models.Manager):
     def accepted(self, question):
         return self.filter(question=question.pk, accepted=True).count() > 0
+
+    def sorted(self, question):
+        return self.filter(question=question.pk).order_by('-accepted', (F('up_votes') - F('down_votes')).desc())
 
 
 class Answer(Post):

@@ -3,27 +3,36 @@
 
 {% block content %}
     <h1>{{ question.title }}</h1>
-    <div>
-        {{ question.body|safe }}
-    </div>
-    {% tag_list question %}
-    <p>Asked by <i>{% display_name question %}</i>
-    </p>
+    <div class="pure-g">
+        <div class="vote pure-u-1-8">
+            <a href="{% url 'questions:upvote' question.pk %}" class="button-xsmall pure-button"><i class="fa fa-thumbs-up fa-1g" aria-hidden="true"></i></a>
+            <p>{{ question.votes }}</p>
+            <a href="{% url 'questions:downvote' question.pk %}" class="button-xsmall pure-button"><i class="fa fa-thumbs-down fa-1g" aria-hidden="true"></i></a>
+        </div>
+        <div class="pure-u-7-8">
+            <div>
+                {{ question.body|safe }}
+            </div>
+            {% tag_list question %}
+            <p>Asked by <i>{% display_name question %}</i>
+            </p>
 
-    <h3>Comments:</h3>
-    {% comment_list question %}
+            <h3>Comments:</h3>
+            {% comment_list question %}
 
-    <div>
-        <label for="comment-q">Add comment</label>
-        <input type="checkbox" id="comment-q" class="add-comment">
+            <div>
+                <label for="comment-q">Add comment</label>
+                <input type="checkbox" id="comment-q" class="add-comment">
 
-        <form action="{% url 'questions:comments:submit:q' question.pk %}" method="post" class="comment-form pure-form pure-form-stacked">
-            {% csrf_token %}
-            {{ comment_form.media }}
-            {{ comment_form }}
-            <br/>
-            <button type="submit" class="pure-button pure-button-primary">Submit</button>
-        </form>
+                <form action="{% url 'questions:comments:submit:q' question.pk %}" method="post" class="comment-form pure-form pure-form-stacked">
+                    {% csrf_token %}
+                    {{ comment_form.media }}
+                    {{ comment_form }}
+                    <br/>
+                    <button type="submit" class="pure-button pure-button-primary">Submit</button>
+                </form>
+            </div>
+        </div>
     </div>
 
     <hr/>

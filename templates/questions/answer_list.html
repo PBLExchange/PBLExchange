@@ -6,7 +6,7 @@
                 <a href="{% url 'questions:answers:upvote' answer.pk %}" class="button-xsmall pure-button"><i class="fa fa-thumbs-up fa-1g" aria-hidden="true"></i></a>
                 <p>{{ answer.votes }}</p>
                 <a href="{% url 'questions:answers:downvote' answer.pk %}" class="button-xsmall pure-button"><i class="fa fa-thumbs-down fa-1g" aria-hidden="true"></i></a>
-                {% if not accepted %}
+                {% if answer.question.author.pk == user.pk and not accepted %}
                     <p><a href="{% url 'questions:answers:accept' answer.pk %}">Accept</a></p>
                 {% elif answer.accepted %}
                     <p>Accepted answer</p>

@@ -10,13 +10,14 @@ def question_list(questions):
     return {'questions': questions}
 
 
-@register.inclusion_tag('questions/answer_list.html')
-def answer_list(question):
+@register.inclusion_tag('questions/answer_list.html', takes_context=True)
+def answer_list(context, question):
     return {
-        'answers': Answer.objects.filter(question=question.pk),
+        'answers': Answer.objects.sorted(question),
         'accepted': Answer.objects.accepted(question),
         'question': question,
         'comment_form': CommentForm(),
+        'user': context['request'].user,
     }
 
 
