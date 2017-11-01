@@ -63,8 +63,16 @@ class Question(Post):
         return self.title
 
 
+class AnswerManager(models.Manager):
+    def accepted(self, question):
+        return self.filter(question=question.pk, accepted=True).count() > 0
+
+
 class Answer(Post):
     question = models.ForeignKey(Question)
+    accepted = models.BooleanField(default=False)
+
+    objects = AnswerManager()
 
 
 class Comment(Post):

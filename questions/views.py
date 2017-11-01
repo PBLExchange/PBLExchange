@@ -95,6 +95,17 @@ def vote(request, post_id, amount, post_type=Question, vote_type=QuestionVote, *
         return HttpResponseRedirect(reverse('questions:detail', args=(post.question.pk,)))
 
 
+def accept_answer(request, post_id, **kwargs):
+    if not request.user.is_authenticated():
+        return HttpResponseRedirect(reverse('login'))
+    post = get_object_or_404(Answer, pk=post_id)
+    if Answer.objects.accepted(post.question):
+        return HttpResponseRedirect(reverse('questions:detail', args=(post.question.pk,)))
+    post.accepted = True
+    post.save()
+    return HttpResponseRedirect(reverse('questions:detail', args=(post.question.pk,)))
+
+
 def tags(request, base_template='pblexchange/base.html', **kwargs):
     return render(request, 'questions/tags.html', {
         'base_template': base_template,

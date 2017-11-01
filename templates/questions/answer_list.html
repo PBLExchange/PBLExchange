@@ -1,11 +1,16 @@
 {% load questions %}
 {% if answers %}
     {% for answer in answers %}
-        <div class="answer pure-g">
+        <div class="answer pure-g" {% if answer.accepted %}style="background-color: #00FF00"{% endif %}>
             <div class="vote pure-u-1-8">
                 <a href="{% url 'questions:answers:upvote' answer.pk %}" class="button-xsmall pure-button"><i class="fa fa-thumbs-up fa-1g" aria-hidden="true"></i></a>
                 <p>{{ answer.votes }}</p>
                 <a href="{% url 'questions:answers:downvote' answer.pk %}" class="button-xsmall pure-button"><i class="fa fa-thumbs-down fa-1g" aria-hidden="true"></i></a>
+                {% if not accepted %}
+                    <p><a href="{% url 'questions:answers:accept' answer.pk %}">Accept</a></p>
+                {% elif answer.accepted %}
+                    <p>Accepted answer</p>
+                {% endif %}
             </div>
             <div class="answer-body pure-u-7-8">
                 <div>{{ answer.body|safe }}</div>

@@ -14,6 +14,7 @@ def question_list(questions):
 def answer_list(question):
     return {
         'answers': Answer.objects.filter(question=question.pk),
+        'accepted': Answer.objects.accepted(question),
         'question': question,
         'comment_form': CommentForm(),
     }
