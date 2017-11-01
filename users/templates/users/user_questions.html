@@ -1,0 +1,7 @@
+{% extends 'users/detail.html' %}
+{% load questions %}
+
+{% block content %}
+    <h1>{{ title|title }}</h1>
+    {% question_list questions %}
+{% endblock %}

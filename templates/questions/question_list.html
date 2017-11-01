@@ -1,4 +1,5 @@
 {% load questions %}
+{% load users %}
 {% if questions %}
     {% for question in questions %}
         <div class="question pure-g">
@@ -10,7 +11,7 @@
             <div class="question-body pure-u-7-8">
                 <a href="{% url 'questions:detail' question.pk %}"><b>{{ question.title }}</b></a><br />
                 {% tag_list question %}
-                Asked by <i>{% display_name question %}</i>
+                Asked by <i>{% get_user question.author question.anonymous %}</i>
             </div>
         </div>
     {% endfor %}

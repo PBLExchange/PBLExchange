@@ -51,6 +51,15 @@ class QuestionManager(models.Manager):
     def hot(self):
         return None
 
+    def by_user(self, user):
+        return self.recent().filter(author=user.pk, anonymous=False)
+
+    def unanswered_by_user(self, user):
+        return self.by_user(user).filter(answer=None)
+
+    def answered_by_user(self, user):
+        return self.recent().filter(answer__author=user, answer__anonymous=False)
+
 
 class Question(Post):
     title = models.CharField(max_length=160)

@@ -1,4 +1,16 @@
 {% extends base_template %}
-{% load user_profile %}
 
-<h1>{{ user_profile.user.username }}</h1>
+{% block sub_menu %}
+    <ul class="pure-menu-list">
+        <li class="pure-menu-item"><a href="{% url 'users:detail' user_profile.user_id %}" class="pure-menu-link">Profile</a></li>
+        <li class="pure-menu-item"><a href="{% url 'users:questions' user_profile.user_id %}" class="pure-menu-link">Questions</a></li>
+        <li class="pure-menu-item"><a href="{% url 'users:unanswered' user_profile.user_id %}" class="pure-menu-link">Unanswered</a></li>
+        <li class="pure-menu-item"><a href="{% url 'users:answered' user_profile.user_id %}" class="pure-menu-link">Answers</a></li>
+    </ul>
+{% endblock %}
+
+
+{% block content %}
+    <h1>{{ user_profile.user.username }}</h1>
+    <p>{{ user_profile.points }} points</p>
+{% endblock %}
