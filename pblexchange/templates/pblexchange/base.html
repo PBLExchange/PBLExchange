@@ -16,13 +16,11 @@
     {% endblock %}
 </head>
 <body>
-{% menu user %}
+{% menu %}
 <div class="pure-menu pure-menu-horizontal" style="background: whitesmoke">
     {% block sub_menu %}
     {% endblock %}
 </div>
-<!--<h1><a href="{% url 'home' %}">PBL Exchange</a></h1>
-<a href="{% url 'questions:ask' %}">Ask a question</a>-->
 
 {% block content %}
     <h1>Questions:</h1>

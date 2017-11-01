@@ -7,6 +7,8 @@ from django.conf import settings
 from django_cas_ng.signals import cas_user_authenticated
 from django_cas_ng.utils import get_cas_client
 
+from users import models as users_model
+
 class CustomCASBackend(CASBackend):
     # Modifications/additions are indicated by a comment '# Extra ...'
     def authenticate(self, request, ticket, service):
@@ -98,4 +100,8 @@ class CustomCASBackend(CASBackend):
         user.email = attributes['mail']
         user.first_name = attributes['givenName']
         user.last_name = attributes['sn']
+
+        # create a user profile
+        new_user_profile = users_model.UserProfile(user=user)
+        new_user_profile.save()
         return user
