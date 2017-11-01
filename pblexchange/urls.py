@@ -1,6 +1,11 @@
 from django.conf.urls import url
+
+from pblexchange.models import Menu
 from . import views
 from django_cas_ng import views as cas_views
+
+Menu.register('Tags', 'questions:tags')
+Menu.register('Ask a Question', 'questions:ask')
 
 urlpatterns = [
     url(r'^$', views.index, name='home'),

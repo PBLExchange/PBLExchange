@@ -106,6 +106,6 @@ def tag(request, tag_text, base_template='pblexchange/base.html', **kwargs):
     t = get_object_or_404(Tag, tag=tag_text)
     return render(request, 'questions/list.html', {
         'base_template': base_template,
-        'title': tag_text,
+        'title': tag_text.replace('_', ' ').replace('-', ' '),
         'questions': t.question_set.all(),
     })
