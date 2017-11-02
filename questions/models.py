@@ -1,7 +1,9 @@
+from datetime import timedelta
+from django.utils import timezone
 from django.db import models
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.contrib.auth.models import User
-from django.db.models import F
+from django.db.models import F, Count, Value
 
 
 # Create your models here.
@@ -49,7 +51,15 @@ class QuestionManager(models.Manager):
         return self.order_by('-created_date')
 
     def hot(self):
-        return None
+        one_day_ago = timezone.now() - timedelta(days=1)
+        return self.annotate(
+            hotness=
+            Count(F('answer'))
+            + Count(F('comment'))
+            + Count(F('questionvote'))
+            + Count(F('answer__answervote'))
+            + Count(F('comment__commentvote'))
+        ).order_by('-hotness')
 
     def by_user(self, user):
         return self.recent().filter(author=user.pk, anonymous=False)
@@ -58,7 +68,7 @@ class QuestionManager(models.Manager):
         return self.by_user(user).filter(answer=None)
 
     def answered_by_user(self, user):
-        return self.recent().filter(answer__author=user, answer__anonymous=False)
+        return self.recent().filter(answer__author=user, answer__anonymous=False).distinct()
 
 
 class Question(Post):

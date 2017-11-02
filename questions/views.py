@@ -23,8 +23,8 @@ def unanswered(request, base_template='pblexchange/base.html', **kwargs):
 def hot(request, base_template='pblexchange/base.html', **kwargs):
     return render(request, 'questions/list.html', {
         'base_template': base_template,
-        'title': 'hot',
-        'questions': Question.objects.recent()
+        'title': 'Popular',
+        'questions': Question.objects.hot()
     })
 
 
