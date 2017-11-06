@@ -1,3 +1,4 @@
+from django.db.models import Count
 from django.shortcuts import render, HttpResponseRedirect, Http404, reverse, get_object_or_404
 from questions.forms import QuestionForm, AnswerForm, CommentForm
 from questions.models import Question, Answer, QuestionVote, Tag
@@ -80,14 +81,9 @@ def vote(request, post_id, amount, post_type=Question, vote_type=QuestionVote, *
     prev_vote = vote_type.objects.filter(post=post.pk, user=request.user)
 
     if not prev_vote or prev_vote.first().vote != amount:
-        if amount > 0:
-            post.up_votes += amount
-        else:
-            post.down_votes -= amount
-        v,_ = vote_type.objects.get_or_create(user=request.user, post=post)
+        v, _ = vote_type.objects.get_or_create(user=request.user, post=post)
         v.vote += amount
         v.save()
-        post.save()
 
     if isinstance(post, Question):
         return HttpResponseRedirect(reverse('home'))
@@ -109,14 +105,14 @@ def accept_answer(request, post_id, **kwargs):
 def tags(request, base_template='pblexchange/base.html', **kwargs):
     return render(request, 'questions/tags.html', {
         'base_template': base_template,
-        'tags': Tag.objects.all(),
+        'tags': Tag.objects.annotate(cardinality=Count('question')).order_by('-cardinality'),
     })
 
 
 def tag(request, tag_text, base_template='pblexchange/base.html', **kwargs):
     t = get_object_or_404(Tag, tag=tag_text)
-    return render(request, 'questions/list.html', {
+    return render(request, 'questions/questions.html', {
         'base_template': base_template,
-        'title': tag_text.replace('_', ' ').replace('-', ' '),
-        'questions': t.question_set.all(),
+        'title': tag_text,
+        'questions': t.question_set.order_by('-created_date'),
     })

@@ -1,20 +1,14 @@
 {% load questions %}
-{% load users %}
 {% if comments %}
     {% for comment in comments %}
-        <div class="comment pure-g">
-            <div class="comment-vote pure-u-1-8">
-                <p>
-                    <a href="{% url 'questions:comments:upvote' comment.pk %}" class="button-xsmall pure-button"><i class="fa fa-thumbs-up fa-1g" aria-hidden="true"></i></a>
-                    <a href="{% url 'questions:comments:downvote' comment.pk %}" class="button-xsmall pure-button"><i class="fa fa-thumbs-down fa-1g" aria-hidden="true"></i></a>
-                    {{ comment.votes }}
-                </p>
+        <div class="pble-c-list-item hentry comment">
+            <div class="pble-c-item-content">
+                {{ comment.body }}
             </div>
-            <div class="comment-body pure-u-7-8">
-                <div>
-                    {{ comment.body }} - <i>{% get_user comment.author comment.anonymous %}</i>
-                </div>
+            <div class="pble-c-item-footer">
+                {% post_meta comment %}
             </div>
+            <div class="pble-c-item-clear"></div>
         </div>
     {% endfor %}
 {% endif %}

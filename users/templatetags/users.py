@@ -22,4 +22,5 @@ def get_user(user, anonymous=False):
     name = user.get_username()
     if user.get_full_name():
         name = user.get_full_name()
-    return mark_safe('<a href="' + reverse('users:detail', args=(user.pk,)) + '">' + name + '</a>')
+    return mark_safe('<a href="' + reverse('users:detail', args=(user.pk,)) + '" class="pble-user-link">'
+                     + name + '</a>')

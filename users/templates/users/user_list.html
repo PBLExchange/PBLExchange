@@ -1,16 +1,18 @@
 {% extends base_template %}
+{% load users %}
 
 {% block content %}
     <h1>List of users:</h1>
-    {% if users %}
-        {% for user in users %}
-            <div class="user pure-g">
-                <div class="pure-u-1-8">
-                    <a href="{% url 'users:detail' user.pk %}">{{ user.username }}</a>
-                </div>
-            </div>
-        {% endfor %}
-    {% else %}
-        <p> No registered user(s) at the moment.</p>
-    {% endif %}
+    <div class="pble-part-ranking">
+        {% if users %}
+            {% for user in users %}
+                <span class="pble-ranking-item pble-top-users-item">
+                    <span class="pble-top-users-label">{% get_user user %}</span>
+                    <span class="pble-top-users-score">{{ user.userprofile.points }}</span>
+                </span>
+            {% endfor %}
+        {% else %}
+            <p> No registered user(s) at the moment.</p>
+        {% endif %}
+    </div>
 {% endblock %}

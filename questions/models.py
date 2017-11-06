@@ -1,9 +1,11 @@
 from datetime import timedelta
+
+from django.db.models.functions import Coalesce
 from django.utils import timezone
 from django.db import models
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.contrib.auth.models import User
-from django.db.models import F, Count, Value
+from django.db.models import F, Count, Value, Sum
 
 
 # Create your models here.
@@ -20,7 +22,12 @@ class Course(models.Model):
 
 
 class Category(models.Model):
+    class Meta:
+        verbose_name_plural = 'categories'
     name = models.CharField(max_length=160)
+
+    def __str__(self):
+        return self.name
 
 
 class Post(models.Model):
@@ -32,12 +39,6 @@ class Post(models.Model):
     anonymous = models.BooleanField()
     created_date = models.DateTimeField(auto_now_add=True)
     edited_date = models.DateTimeField(auto_now=True)
-    up_votes = models.IntegerField(default=0)
-    down_votes = models.IntegerField(default=0)
-
-    @property
-    def votes(self):
-        return self.up_votes - self.down_votes
 
     def __str__(self):
         return self.body
@@ -79,6 +80,10 @@ class Question(Post):
 
     objects = QuestionManager()
 
+    @property
+    def votes(self):
+        return self.questionvote_set.aggregate(Sum('vote'))['vote__sum'] or 0
+
     def __str__(self):
         return self.title
 
@@ -88,7 +93,7 @@ class AnswerManager(models.Manager):
         return self.filter(question=question.pk, accepted=True).count() > 0
 
     def sorted(self, question):
-        return self.filter(question=question.pk).order_by('-accepted', (F('up_votes') - F('down_votes')).desc())
+        return self.filter(question=question.pk).annotate(votes_sum=Coalesce(Sum('answervote__vote'), 0)).order_by('-accepted', F('votes_sum').desc())
 
 
 class Answer(Post):
@@ -97,10 +102,18 @@ class Answer(Post):
 
     objects = AnswerManager()
 
+    @property
+    def votes(self):
+        return self.answervote_set.aggregate(Sum('vote'))['vote__sum'] or 0
+
 
 class Comment(Post):
     question = models.ForeignKey(Question)
     answer = models.ForeignKey(Answer, null=True)
+
+    @property
+    def votes(self):
+        return self.commentvote_set.aggregate(Sum('vote'))['vote__sum'] or 0
 
 
 class Vote(models.Model):

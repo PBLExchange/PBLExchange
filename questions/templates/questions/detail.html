@@ -1,55 +1,58 @@
 {% extends base_template %}
 {% load questions %}
+{% load users %}
 
 {% block content %}
     <h1>{{ question.title }}</h1>
-    <div class="pure-g">
-        <div class="vote pure-u-1-8">
-            <a href="{% url 'questions:upvote' question.pk %}" class="button-xsmall pure-button"><i class="fa fa-thumbs-up fa-1g" aria-hidden="true"></i></a>
-            <p>{{ question.votes }}</p>
-            <a href="{% url 'questions:downvote' question.pk %}" class="button-xsmall pure-button"><i class="fa fa-thumbs-down fa-1g" aria-hidden="true"></i></a>
-        </div>
-        <div class="pure-u-7-8">
-            <div>
-                {{ question.body|safe }}
+    <div class="pble-part-q-view">
+        <div class="pble-q-view hentry question">
+            <div class="pble-q-view-stats">
+                {% voting question %}
             </div>
-            {% tag_list question %}
-            <p>Asked by <i>{% display_name question %}</i>
-            </p>
+            <div class="pble-q-view-main">
+                <div class="pble-q-view-content">
+                    {{ question.body|safe }}
+                </div>
+                {% tag_list question 'pble-q-view' %}
+                {% post_meta question 'pble-q-view' %}
 
-            <h3>Comments:</h3>
-            {% comment_list question %}
+                <div class="pble-q-view-c-list">
+                    {% comment_list question %}
+                </div>
 
-            <div>
-                <label for="comment-q">Add comment</label>
-                <input type="checkbox" id="comment-q" class="add-comment">
+                <div style="display: none">
+                    <label for="comment-q">Add comment</label>
+                    <input type="checkbox" id="comment-q" class="add-comment">
 
-                <form action="{% url 'questions:comments:submit:q' question.pk %}" method="post" class="comment-form pure-form pure-form-stacked">
-                    {% csrf_token %}
-                    {{ comment_form.media }}
-                    {{ comment_form }}
-                    <br/>
-                    <button type="submit" class="pure-button pure-button-primary">Submit</button>
-                </form>
+                    <form action="{% url 'questions:comments:submit:q' question.pk %}" method="post" class="comment-form pure-form pure-form-stacked">
+                        {% csrf_token %}
+                        {{ comment_form.media }}
+                        {{ comment_form }}
+                        <br/>
+                        <button type="submit" class="pure-button pure-button-primary">Submit</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
+    <div class="pble-part-a-list">
+        <h2 id="a_list_title">{{ question.answer_set.count }} Answers</h2>
+        <div class="pble-a-list" id="a_list">
+            {% answer_list question %}
+        </div>
+        <hr/>
 
-    <hr/>
-    <h2>Answers:</h2>
-    {% answer_list question %}
-    <hr/>
-
-    {% if user.is_authenticated %}
-        <form action="{% url 'questions:answers:submit' question.pk %}" method="post" class="pure-form pure-form-stacked">
-            {% csrf_token %}
-            {{ answer_form.media }}
-            {{ answer_form }}
-            <br/>
-            <button type="submit" class="pure-button pure-button-primary">Submit</button>
-        </form>
-    {% else %}
-        <p>Please <a href="{% url 'login' %}">log in</a> to answer questions.</p>
-    {% endif %}
+        {% if user.is_authenticated %}
+            <form action="{% url 'questions:answers:submit' question.pk %}" method="post" class="pure-form pure-form-stacked">
+                {% csrf_token %}
+                {{ answer_form.media }}
+                {{ answer_form }}
+                <br/>
+                <button type="submit" class="pure-button pure-button-primary">Submit</button>
+            </form>
+        {% else %}
+            <p>Please <a href="{% url 'login' %}">log in</a> to answer questions.</p>
+        {% endif %}
+    </div>
 
 {% endblock %}

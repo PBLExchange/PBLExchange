@@ -1,30 +1,88 @@
 {% load static %}
 {% load questions %}
+{% load users %}
 {% load menu %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>PBL Exchange</title>
-    <link rel="stylesheet" href="{% static 'pblexchange/css/pure-min.css' %}"
-          integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w"
-          crossorigin="anonymous">
-    <link rel="stylesheet" href="{% static 'pblexchange/css/font-awesome.min.css' %}">
-    {% block links %}
-        <link rel="stylesheet" href="{% static 'pblexchange/css/base.css' %}" type="text/css">
-    {% endblock %}
-</head>
-<body>
-{% menu %}
-<div class="pure-menu pure-menu-horizontal" style="background: whitesmoke">
-    {% block sub_menu %}
-    {% endblock %}
-</div>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>PBL Exchange</title>
+        <link rel="stylesheet" href="{% static 'pblexchange/css/pure-min.css' %}"
+              integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w"
+              crossorigin="anonymous">
+        <link rel="stylesheet" href="{% static 'pblexchange/css/font-awesome.min.css' %}">
+        <link rel="stylesheet" href="{% static 'pblexchange/css/pble-styles.css' %}">
+        {% block links %}
+            <!--<link rel="stylesheet" href="{% static 'pblexchange/css/base.css' %}" type="text/css">-->
+        {% endblock %}
+    </head>
+    <body class="pble-template-question pble-body-js-off">
+        <div class="qam-login-bar">
+            <div class="qam-login-group">
+                <div class="pble-nav-user">
+                    <div class="pble-logged-in-avatar"></div>
 
-{% block content %}
-    <h1>Questions:</h1>
-    {% question_list questions %}
-{% endblock %}
-</body>
+                    <div class="pble-logged-in">
+                        <span class="pble-logged-in-pad">Hello </span><span class="pble-logged-in-data">{% get_user request.user %}</span>
+                    </div>
+                    <span class="pble-logged-in-points">
+                        ({{ request.user.userprofile.points }} points)
+                    </span>
+                    <ul class="pble-nav-user-list">
+                        <li class="pble-nav-user-item pble-nav-user-logout">
+                            <a href="{% url 'logout' %}" class="pble-nav-user-link">Logout</a>
+                        </li>
+                    </ul>
+                    <div class="pble-nav-user-clear"></div>
+                </div>
+                <div class="pble-search">
+                    <form>
+                        <input type="text" name="q" value="" class="pble-search-field">
+                        <input type="submit" value="Search" class="pble-search-button">
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="pble-body-wrapper">
+            <div class="pble-header">
+                <div class="pble-logo">
+                    <a href="{% url 'home' %}" class="pble-logo-link">PBL Exchange</a> <!--TODO: make dynamic-->
+                </div>
+                <div class="pble-header-clear"></div>
+            </div>
+
+            <div class="pble-main-shadow">
+                <div class="pble-main-wrapper">
+                    {% menu %}
+                    <div class="pble-nav-sub">
+                        {% block sub_menu %}
+                        {% endblock %}
+                    </div>
+                    {% block sidepanel %}
+                    <div class="pble-sidepanel">
+                        <div class="pble-widgets-side pble-widget-side-top">
+                            <div class="pble-widget-side pble-widget-side-top">
+                                {% question_stats %}
+                            </div>
+                        </div>
+
+                        <div class="pble-sidebar">
+                            Insert some text here.... Preferably as dynamic content...
+                            Add categories below!
+                        </div>
+                    </div>
+                    {% endblock %}
+
+                    <div class="pble-main">
+                        {% block content %}
+                            <h1>Questions:</h1>
+                            {% question_list questions %}
+                        {% endblock %}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </body>
 </html>

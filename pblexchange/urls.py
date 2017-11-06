@@ -4,6 +4,7 @@ from pblexchange.models import Menu
 from . import views
 from django_cas_ng import views as cas_views
 
+Menu.register('Questions', 'home')
 Menu.register('Tags', 'questions:tags')
 Menu.register('Users', 'users:overview')
 Menu.register('Ask a Question', 'questions:ask')

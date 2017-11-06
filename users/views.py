@@ -19,11 +19,11 @@ def detail(request, user_id, base_template='pblexchange/base.html', **kwargs):
     })
 
 
-def question_list(request, user_id, questions, base_template='pblexchange/base.html', **kwargs):
+def question_list(request, user_id, questions, title_prefix='', base_template='pblexchange/base.html', **kwargs):
     user = get_object_or_404(User, pk=user_id)
     return render(request, 'users/user_questions.html', {
         'base_template': base_template,
         'user_profile': user.userprofile,
-        'title': user.get_full_name(),
+        'title': title_prefix + user.get_full_name(),
         'questions': questions(user),
     })

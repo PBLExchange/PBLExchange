@@ -1,20 +1,27 @@
 {% load questions %}
 {% load users %}
+
+<div class="pble-q-list">
 {% if questions %}
     {% for question in questions %}
-        <div class="question pure-g">
-            <div class="vote pure-u-1-8">
-                <a href="{% url 'questions:upvote' question.pk %}" class="button-xsmall pure-button"><i class="fa fa-thumbs-up fa-1g" aria-hidden="true"></i></a>
-                <p>{{ question.votes }}</p>
-                <a href="{% url 'questions:downvote' question.pk %}" class="button-xsmall pure-button"><i class="fa fa-thumbs-down fa-1g" aria-hidden="true"></i></a>
+        <div class="pble-q-list-item">
+            <div class="pble-q-item-stats">
+                {% voting question %}
+                <span class="pble-a-count">
+                    <span class="pble-a-count-data">{{ question.answer_set.count }}</span><span class="pble-a-count-pad"> answers</span>
+                </span>
             </div>
-            <div class="question-body pure-u-7-8">
-                <a href="{% url 'questions:detail' question.pk %}"><b>{{ question.title }}</b></a><br />
+            <div class="pble-q-item-main">
+                <div class="pble-q-item-title">
+                    <a href="{% url 'questions:detail' question.pk %}">{{ question.title }}</a>
+                </div>
+                {% post_meta question %}
                 {% tag_list question %}
-                Asked by <i>{% get_user question.author question.anonymous %}</i>
             </div>
+            <div class="pble-q-item-clear"></div>
         </div>
     {% endfor %}
 {% else %}
     <p>No questions at the moment.</p>
 {% endif %}
+</div>

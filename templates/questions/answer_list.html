@@ -2,27 +2,29 @@
 {% load users %}
 {% if answers %}
     {% for answer in answers %}
-        <div class="answer pure-g" {% if answer.accepted %}style="background-color: #00FF00"{% endif %}>
-            <div class="vote pure-u-1-8">
-                <a href="{% url 'questions:answers:upvote' answer.pk %}" class="button-xsmall pure-button"><i class="fa fa-thumbs-up fa-1g" aria-hidden="true"></i></a>
-                <p>{{ answer.votes }}</p>
-                <a href="{% url 'questions:answers:downvote' answer.pk %}" class="button-xsmall pure-button"><i class="fa fa-thumbs-down fa-1g" aria-hidden="true"></i></a>
+        <div class="pble-a-list-item hentry answer{{ answer.accepted|yesno:"answer-selected pble-a-list-item-selected," }}">
+            {% voting answer %}
+            <div class="pble-a-item-main">
                 {% if answer.question.author.pk == user.pk and not accepted %}
-                    <p><a href="{% url 'questions:answers:accept' answer.pk %}">Accept</a></p>
+                    <div class="pble-a-selection">
+                        <a href="{% url 'questions:answers:accept' answer.pk %}"><input type="submit" value="" title="Click to select as best answer" class="pble-a-select-button"></a>
+                    </div>
                 {% elif answer.accepted %}
-                    <p>Accepted answer</p>
+                    <div class="pble-a-selection">
+                        <input type="submit" value="" class="pble-a-unselect-button" title="Best answer">
+                        <div class="pble-a-selected-text">Best answer</div>
+                    </div>
                 {% endif %}
-            </div>
-            <div class="answer-body pure-u-7-8">
-                <div>{{ answer.body|safe }}</div>
-                Answered by <i>{% get_user answer.author answer.anonymous %}</i>
-                <hr/>
+                <div class="pble-a-item-content">
+                    <div class="entry-content">{{ answer.body|safe }}</div>
+                </div>
+                {% post_meta answer 'pble-a-item' %}
 
-                {% comment_list answer.question answer %}
-                <div>
-                    <label for="comment-a-{{ answer.pk }}">Add comment</label>
-                    <input type="checkbox" id="comment-a-{{ answer.pk }}" class="add-comment">
-
+                <div class="pble-a-item-c-list">
+                    {% comment_list answer.question answer %}
+                </div>
+                <div class="pble-c-form" style="display: none;">
+                    <h2>Your comment on this answer:</h2>
                     <form action="{% url 'questions:comments:submit:a' question.pk answer.pk %}" method="post" class="comment-form pure-form pure-form-stacked">
                         {% csrf_token %}
                         {{ comment_form.media }}
@@ -32,6 +34,7 @@
                     </form>
                 </div>
             </div>
+            <div class="pble-a-item-clear"></div>
         </div>
     {% endfor %}
 {% else %}

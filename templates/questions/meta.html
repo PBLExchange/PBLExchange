@@ -1,0 +1,21 @@
+{% load users %}
+<span class="{{ class_prefix }}-avatar-meta">
+    <span class="{{ class_prefix }}-meta">
+        <span class="{{ class_prefix }}-what">{{ what }}</span>
+        <span class="{{ class_prefix }}-when">
+            <span class="{{ class_prefix }}-when-data"><span class="published updated">{{ post.created_date|date }}</span></span>
+        </span>
+        {% if post.category %}
+        <span class="{{ class_prefix }}-where">
+            <span class="{{ class_prefix }}-where-pad">in </span><span class="{{ class_prefix }}-where-data">{{ post.category }}</span>
+        </span>
+        {% endif %}
+        <span class="{{ class_prefix }}-who">
+            <span class="{{ class_prefix }}-who-pad">by </span>
+            <span class="{{ class_prefix }}-who-data">{% get_user post.author %}</span>
+            <span class="{{ class_prefix }}-who-points">
+                <span class="{{ class_prefix }}-who-points-pad">(</span><span class="{{ class_prefix }}-who-points-data">{{ post.author.userprofile.points }}</span><span class="{{ class_prefix }}-who-points-pad"> points)</span>
+            </span>
+        </span>
+    </span>
+</span>

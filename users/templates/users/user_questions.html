@@ -1,7 +1,16 @@
-{% extends 'users/detail.html' %}
+{% extends base_template %}
 {% load questions %}
 
+{% block sub_menu %}
+    <ul class="pble-nav-sub-list">
+        <li class="pble-nav-sub-item"><a href="{% url 'users:detail' user_profile.user_id %}" class="pble-nav-sub-link">Profile</a></li>
+        <li class="pble-nav-sub-item"><a href="{% url 'users:questions' user_profile.user_id %}" class="pble-nav-sub-link">Questions</a></li>
+        <li class="pble-nav-sub-item"><a href="{% url 'users:unanswered' user_profile.user_id %}" class="pble-nav-sub-link">Unanswered</a></li>
+        <li class="pble-nav-sub-item"><a href="{% url 'users:answered' user_profile.user_id %}" class="pble-nav-sub-link">Answers</a></li>
+    </ul>
+{% endblock %}
+
 {% block content %}
-    <h1>{{ title|title }}</h1>
+    <h1>{{ title }}</h1>
     {% question_list questions %}
 {% endblock %}

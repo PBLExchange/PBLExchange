@@ -1,5 +1,7 @@
 from django import template
-from questions.models import Answer, Comment
+from django.contrib.auth.models import User
+
+from questions.models import Question, Answer, Comment
 from questions.forms import CommentForm
 
 register = template.Library()
@@ -34,9 +36,49 @@ def comment_list(question, answer=None):
 
 
 @register.inclusion_tag('questions/tag_list.html')
-def tag_list(question):
+def tag_list(question, class_prefix='pble-q-item'):
     return {
-        'tags': question.tags.all()
+        'class_prefix': class_prefix,
+        'tags': question.tags.all(),
+    }
+
+
+@register.inclusion_tag('questions/stats.html')
+def question_stats():
+    return {
+        'questions_count': Question.objects.count(),
+        'answers_count': Answer.objects.count(),
+        'comments_count': Comment.objects.count(),
+        'users_count': User.objects.count(),
+    }
+
+
+@register.inclusion_tag('questions/vote.html')
+def voting(post):
+    post_upvote = 'questions:upvote'
+    post_downvote = 'questions:downvote'
+    if type(post) is Answer:
+        post_upvote = 'questions:answers:upvote'
+        post_downvote = 'questions:answers:downvote'
+    if type(post) is Comment:
+        post_upvote = 'questions:answers:upvote'
+        post_downvote = 'questions:answers:downvote'
+    return {
+        'post': post,
+        'post_upvote': post_upvote,
+        'post_downvote': post_downvote,
+    }
+
+
+@register.inclusion_tag('questions/meta.html')
+def post_meta(post, class_prefix='pble-q-item'):
+    what = 'asked'
+    if type(post) is Answer:
+        what = 'answered'
+    return {
+        'class_prefix': class_prefix,
+        'post': post,
+        'what': what,
     }
 
 
