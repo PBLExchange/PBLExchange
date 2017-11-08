@@ -2,10 +2,10 @@
 {% load users %}
 
 {% block content %}
-    <h1>List of users:</h1>
+    <h1>Top scoring users</h1>
     <div class="pble-part-ranking">
         {% if users %}
-            {% for user in users %}
+            {% for user in users|sort_score_ascending %}
                 <span class="pble-ranking-item pble-top-users-item">
                     <span class="pble-top-users-label">{% get_user user %}</span>
                     <span class="pble-top-users-score">{{ user.userprofile.points }}</span>
