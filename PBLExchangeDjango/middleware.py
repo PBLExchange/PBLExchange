@@ -1,4 +1,5 @@
 from django.http import HttpResponseRedirect
+from django.shortcuts import reverse
 from django.conf import settings
 from re import compile
 
@@ -30,6 +31,6 @@ class LoginRequiredMiddleware(object):
         if not request.user.is_authenticated():
             path = request.path_info.lstrip('/')
             if not any(m.match(path) for m in EXEMPT_URLS):
-                return HttpResponseRedirect(settings.LOGIN_URL)
+                return HttpResponseRedirect(reverse(settings.LOGIN_URL))
 
         return self.get_response(request)
