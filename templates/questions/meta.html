@@ -1,9 +1,10 @@
 {% load users %}
+{% load utils %}
 <span class="{{ class_prefix }}-avatar-meta">
     <span class="{{ class_prefix }}-meta">
         <span class="{{ class_prefix }}-what">{{ what }}</span>
         <span class="{{ class_prefix }}-when">
-            <span class="{{ class_prefix }}-when-data"><span class="published updated">{{ post.created_date|date }}</span></span>
+            <span class="{{ class_prefix }}-when-data"><span class="published updated">{{ post.created_date|timesince|upto:',' }}</span></span><span class="{{ class_prefix }}-when-pad"> ago</span>
         </span>
         {% if post.category %}
         <span class="{{ class_prefix }}-where">

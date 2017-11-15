@@ -22,9 +22,23 @@ class CustomCASBackend(CASBackend):
             return None
         user = None
         username = self.clean_username(username)
+        domain = username
         # Extra added line, to ensure it is not the full email address
         if "@" in username:
+            domain = username.split('@')[1]
             username = username.split('@')[0]
+
+        EXEMPT_USERS = []
+        DISALLOWED_DOMAINS = []
+
+        if hasattr(settings, 'EXEMPT_USERS'):
+            EXEMPT_USERS += settings.EXEMPT_USERS
+
+        if hasattr(settings, 'DISALLOWED_DOMAINS'):
+            DISALLOWED_DOMAINS += settings.DISALLOWED_DOMAINS
+
+        if domain in DISALLOWED_DOMAINS and username not in EXEMPT_USERS:
+            return None
 
         UserModel = get_user_model()
 
