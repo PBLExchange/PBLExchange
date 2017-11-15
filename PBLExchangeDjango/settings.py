@@ -53,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'PBLExchangeDjango.middleware.LoginRequiredMiddleware',
 ]
 
 AUTHENTICATION_BACKENDS = (
@@ -138,6 +139,8 @@ MEDIA_ROOT = 'media/'
 # CKEditor upload settings
 CKEDITOR_UPLOAD_PATH = 'uploads/'
 
+
+LOGIN_URL = 'login'
 
 # Login redirect
 LOGIN_REDIRECT_URL = 'home'
