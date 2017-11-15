@@ -7,7 +7,7 @@ from users import models
 def users(request, base_template='pblexchange/base.html', **kwargs):
     return render(request, 'users/user_list.html', {
         'base_template': base_template,
-        'users': User.objects.all(),
+        'userprofiles': models.UserProfile.objects.sorted_score_descending(),
     })
 
 

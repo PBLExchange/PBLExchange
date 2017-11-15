@@ -1,9 +1,29 @@
 {% extends 'users/user_questions.html' %}
+{% load users %}
 
 {% block sidepanel %}
 {% endblock %}
 
 {% block content %}
-    <h1>{{ user_profile.user.username }}</h1>
-    <p>{{ user_profile.points }} points</p>
+    <h1>User {{ user_profile.user.get_full_name }} ({{ user_profile.user.username }})</h1>
+    <div class="pble-part-form-activity">
+        <h2>Activity by {{ user_profile.user.get_full_name }}</h2>
+    <!-- TODO: Make form for adding bonus points -->
+        <form>
+            <table class="pble-form-wide-table">
+                <tbody>
+                    <tr id="bonus"></tr>
+                    <tr id="points"></tr>
+                    <tr id="title"></tr>
+                    <tr id="questions"></tr>
+                    <tr id="answers"></tr>
+                    <tr id="comments"></tr>
+                    <tr id="votedon"></tr>
+                    <tr id="votegave"></tr>
+                    <tr id="votegot"></tr>
+                    <tr></tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
 {% endblock %}

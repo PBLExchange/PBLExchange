@@ -14,6 +14,15 @@ def get_user(user, anonymous=False):
     return mark_safe('<a href="' + reverse('users:detail', args=(user.pk,)) + '" class="pble-user-link">'
                      + name + '</a>')
 
-@register.filter
-def sort_score_ascending(users_list):
-    return sorted(users_list, key=lambda user: getattr(user.userprofile, 'points'));
+@register.simple_tag
+def userprofile_get_user(userprofile):
+    full_name = userprofile.user.get_username()
+    if userprofile.user.get_full_name():
+        full_name = userprofile.user.get_full_name()
+    return mark_safe('<a href="' + reverse('users:detail', args=(userprofile.user.pk,)) + '" class="pble-user-link">'
+                     + full_name + '</a>')
+
+
+#@register.filter
+#def sort_score_descending(users_list):
+#    return sorted(users_list, key=lambda user: getattr(user.userprofile, 'points'));

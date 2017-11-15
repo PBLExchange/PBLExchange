@@ -4,11 +4,11 @@
 {% block content %}
     <h1>Top scoring users</h1>
     <div class="pble-part-ranking">
-        {% if users %}
-            {% for user in users|sort_score_ascending %}
+        {% if userprofiles %}
+            {% for userprofile in userprofiles %}
                 <span class="pble-ranking-item pble-top-users-item">
-                    <span class="pble-top-users-label">{% get_user user %}</span>
-                    <span class="pble-top-users-score">{{ user.userprofile.points }}</span>
+                    <span class="pble-top-users-label">{% userprofile_get_user userprofile %}</span>
+                    <span class="pble-top-users-score">{{ userprofile.points }}</span>
                 </span>
             {% endfor %}
         {% else %}
