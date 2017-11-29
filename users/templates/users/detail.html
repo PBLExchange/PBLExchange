@@ -13,14 +13,70 @@
             <table class="pble-form-wide-table">
                 <tbody>
                     <tr id="bonus"></tr>
-                    <tr id="points"></tr>
-                    <tr id="title"></tr>
-                    <tr id="questions"></tr>
-                    <tr id="answers"></tr>
-                    <tr id="comments"></tr>
-                    <tr id="votedon"></tr>
-                    <tr id="votegave"></tr>
-                    <tr id="votegot"></tr>
+                    <tr id="points">
+                        <td class="pble-form-wide-label">Score:</td>
+                        <td class="pble-form-wide-data">
+                            <span class="pble-form-wide-static">
+                                <span class="pble-uf-user-points">{{ user_profile.points }}</span>
+                                points (ranked #
+                                <span class="pble-uf-user-rank">{{ user_profile|get_rank:user_profile.points }}</span>
+                                )
+                            </span>
+                        </td>
+                    </tr>
+                    <tr id="title">
+                        <td class="pble-form-wide-label">Title:</td>
+                        <td class="pble-form-wide-data">
+                            <span class="pble-form-wide-static">{{ user_profile.title }}</span>
+                        </td>
+                    </tr>
+                    <tr id="questions">
+                        <td class="pble-wide-form-label">Questions:</td>
+                        <td class="qa-form-wide-data">
+                            <span class="pble-form-wide-static">
+                                <span class="pble-uf-user-q-posts">{% user_questions_quantity user_profile.user %}</span>
+                                (
+                                <span class="pble-uf-user-q-selects">{% user_accepted_answers user_profile.user %}</span>
+                                with best answer chosen)
+                            </span>
+                        </td>
+                    </tr>
+                    <tr id="answers">
+                        <td class="pble-form-wide-label">Answers:</td>
+                        <td class="pble-form-wide-data">
+                            <span class="pble-form-wide-static">
+                                <span class="pble-uf-user-a-posts">{% user_answers user_profile.user %}</span>
+                                (
+                                <span class="pble-uf-user-a-selecteds">{% user_answers_chosen user_profile.user %}</span>
+                                chosen as best)
+                            </span>
+                        </td>
+                    </tr>
+                    <tr id="comments">
+                        <td class="pble-form-wide-label">Comments:</td>
+                        <td class="qa-form-wide-data">
+                            <span class="pble-form-wide-static">
+                                <span class="pble-uf-user-c-posts">{% user_comments_quantity user_profile.user %}</span>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr id="votedon">
+                        <td class="pble-form-wide-label">Voted on:</td>
+                        <td class="pble-form-wide-data">
+                            <span class="pble-form-wide-static">
+                                <span class="pble-uf-user-q-votes">{% user_question_votes user_profile.user %}</span>
+                                questions,
+                                <span class="pble-uf-user-a-votes">{% user_answer_votes user_profile.user %}</span>
+                                answers
+                            </span>
+                        </td>
+                    </tr>
+                    <tr id="votegave">
+
+                    </tr>
+                    <tr id="votegot">
+
+                    </tr>
                     <tr></tr>
                 </tbody>
             </table>

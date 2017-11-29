@@ -10,5 +10,6 @@ class UserProfileManager(models.Manager):
 class UserProfile(models.Model):
     user = models.OneToOneField(User, unique=True)
     points = models.PositiveIntegerField(default=0)
+    title = models.CharField(max_length=32, default='PBLE-novice')
 
     objects = UserProfileManager()
