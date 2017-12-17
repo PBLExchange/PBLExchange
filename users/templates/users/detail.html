@@ -9,7 +9,8 @@
     <div class="pble-part-form-activity">
         <h2>Activity by {{ user_profile.user.get_full_name }}</h2>
     <!-- TODO: Make form for adding bonus points -->
-        <form>
+        <form method="post">
+            {% csrf_token %}
             <table class="pble-form-wide-table">
                 <tbody>
                     <tr id="bonus"></tr>
@@ -72,12 +73,32 @@
                         </td>
                     </tr>
                     <tr id="votegave">
-
+                        <td class="pble-form-wide-label">Gave out:</td>
+                        <td class="pble-form-wide-data">
+                            <span class="pble-form-wide-static">
+                                <span class="pble-uf-user-upvotes">{% user_upvotes_given user_profile.user %}</span>
+                                up votes,
+                                <span class="pble-uf-user-downvotes">{% user_downvotes_given user_profile.user %}</span>
+                                down votes
+                            </span>
+                        </td>
                     </tr>
                     <tr id="votegot">
-
+                        <td class="pble-form-wide-label">Received:</td>
+                        <td class="pble-form-wide-data">
+                            <span class="pble-form-wide-static">
+                                <span class="pble-uf-user-upvotes">{% user_upvotes_received user_profile.user %}</span>
+                                up votes,
+                                <span class="pble-uf-user-downvotes">{% user_downvotes_received user_profile.user %}</span>
+                                down votes
+                            </span>
+                        </td>
                     </tr>
-                    <tr></tr>
+                    <tr>
+                        <td class="pble-form-wide-buttons" colspan="3">
+                            <input class="pble-form-wide-button pble-form-wide-button-setbonus" name="dosetbonus" value="Update bonus" title="" type="submit">
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </form>

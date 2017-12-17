@@ -1,6 +1,7 @@
 from django import template
 from django.shortcuts import reverse
 from django.utils.safestring import mark_safe
+from itertools import chain, count as it_count
 from django.contrib.auth.models import User
 
 from users.models import UserProfile
@@ -53,6 +54,29 @@ def user_answers(user):
 @register.simple_tag
 def user_answers_chosen(user):
     return Answer.objects.filter(author=user.pk, accepted=True).count()
+
+@register.simple_tag
+def user_upvotes_given(user):
+    return QuestionVote.objects.filter(user=user.pk, vote__gt=0).count() + \
+                         AnswerVote.objects.filter(user=user.pk, vote__gt=0).count() + \
+                         CommentVote.objects.filter(user=user.pk, vote__gt=0).count()
+
+@register.simple_tag
+def user_downvotes_given(user):
+    return QuestionVote.objects.filter(user=user.pk, vote__lt=0).count() + \
+                         AnswerVote.objects.filter(user=user.pk, vote__lt=0).count() + \
+                         CommentVote.objects.filter(user=user.pk, vote__lt=0).count()
+@register.simple_tag
+def user_upvotes_received(user):
+    return QuestionVote.objects.filter(post__author=user.pk, vote__gt=0).count() + \
+                         AnswerVote.objects.filter(post__author=user.pk, vote__gt=0).count() + \
+                         CommentVote.objects.filter(post__author=user.pk, vote__gt=0).count()
+
+@register.simple_tag
+def user_downvotes_received(user):
+    return QuestionVote.objects.filter(post__author=user.pk, vote__lt=0).count() + \
+                         AnswerVote.objects.filter(post__author=user.pk, vote__lt=0).count() + \
+                         CommentVote.objects.filter(post__author=user.pk, vote__lt=0).count()
 
 @register.filter(name='get_rank')
 def get_user_rank(val, user_points):
