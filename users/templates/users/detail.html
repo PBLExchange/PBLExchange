@@ -9,11 +9,20 @@
     <div class="pble-part-form-activity">
         <h2>Activity by {{ user_profile.user.get_full_name }}</h2>
     <!-- TODO: Make form for adding bonus points -->
-        <form method="post">
+        <form action="" method="post">
             {% csrf_token %}
+            {{ form }}
             <table class="pble-form-wide-table">
                 <tbody>
-                    <tr id="bonus"></tr>
+                    {% if user_profile.user.is_authenticated and user_profile.user.is_superuser %} <!--TODO: should this be .is_staff or .is_superuser? (remember to correct button as well-->
+                        <tr id="bonus">
+                            <td class="pble-form-wide-label">Bonus points:</td>
+                            <td class="pble-form-wide-data">
+                                <input class="pble-form-wide-number" name="bonus" value="0" type="text">
+                                <span class="pble-form-wide-note">(only shown to admins)</span>
+                            </td>
+                        </tr>
+                    {% endif %}
                     <tr id="points">
                         <td class="pble-form-wide-label">Score:</td>
                         <td class="pble-form-wide-data">
@@ -94,11 +103,13 @@
                             </span>
                         </td>
                     </tr>
-                    <tr>
-                        <td class="pble-form-wide-buttons" colspan="3">
-                            <input class="pble-form-wide-button pble-form-wide-button-setbonus" name="dosetbonus" value="Update bonus" title="" type="submit">
-                        </td>
-                    </tr>
+                    {% if user_profile.user.is_authenticated and user_profile.user.is_superuser %}
+                        <tr>
+                            <td class="pble-form-wide-buttons" colspan="3">
+                                <input class="pble-form-wide-button pble-form-wide-button-setbonus" name="dosetbonus" value="Update bonus" title="" type="submit">
+                            </td>
+                        </tr>
+                    {% endif %}
                 </tbody>
             </table>
         </form>

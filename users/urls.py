@@ -1,5 +1,5 @@
 from django.conf.urls import url, include
-from . import views
+from . import views, forms
 from questions.models import Question
 
 
@@ -16,7 +16,10 @@ detail_patterns = [
     url(r'^answers$', views.question_list, {
         'questions': Question.objects.answered_by_user,
         'title_prefix': 'Answers by ',
-    }, name='answered')
+    }, name='answered'),
+    url(r'^bonus_points$', views.bonus_points, {
+        'form_type': forms.BonusPointForm
+    }, name='bonus_points')
 ]
 
 

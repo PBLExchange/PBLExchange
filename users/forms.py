@@ -5,6 +5,5 @@ from .models import UserProfile, User
 
 class BonusPointForm(forms.ModelForm):
     points = forms.IntegerField(
-        default=1,
         validators=[MinValueValidator(1)]
     )

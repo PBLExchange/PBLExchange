@@ -29,5 +29,14 @@ def question_list(request, user_id, questions, title_prefix='', base_template='p
         'questions': questions(user),
     })
 
-def add_bonus_points(request, user_id=None, form_type=BonusPointForm):
-    return True
+def bonus_points(request, bonus_points=0, user_profile=None, form_type=BonusPointForm, base_template='pblexchange/base.html', **kwargs):
+    if request.method == 'POST' and request.user.is_authenticated():
+        target_profile = models.UserProfile.objects.get(user=user_profile.user.pk)
+        target_profile.points + bonus_points
+
+        return render(request,'users/detail.html', {
+            'base_template': base_template,
+            'user_profile': user_profile
+        })
+    else:
+        return Http404()
