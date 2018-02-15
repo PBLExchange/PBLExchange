@@ -105,7 +105,6 @@ def vote(request, post_id, amount, post_type=Question, vote_type=QuestionVote, *
                 try: # TODO: not working; points goes below 1
                     receiving_UP.save()
                 except ValidationError:
-                    print('hello')
                     pass # TODO: Should we do something?
         else:
             raise Http404("'users' module does not exist under INSTALLED_APPS in settings.py")

@@ -9,15 +9,15 @@
     <div class="pble-part-form-activity">
         <h2>Activity by {{ user_profile.user.get_full_name }}</h2>
     <!-- TODO: Display error msg when validator fails -->
-        <form action="{% url 'users:bonus_points' %}" method="post">
+        <form action="{% url 'users:bonus_points' user_profile.user_id %}" method="post">
             {% csrf_token %}
             <table class="pble-form-wide-table">
                 <tbody>
-                    {% if user_profile.user.is_authenticated and user_profile.user.is_superuser %} <!--TODO: should this be .is_staff or .is_superuser? (remember to correct button as well-->
+                    {% if user.is_authenticated and user.is_superuser %} <!--TODO: should this be .is_staff or .is_superuser? (remember to correct button as well-->
                         <tr id="bonus">
                             <td class="pble-form-wide-label">Bonus points:</td>
                             <td class="pble-form-wide-data">
-                                <input class="pble-form-wide-number" name="bonus" value="0" type="text">
+                                <input class="pble-form-wide-number" name="bonus_points_txt_field" value="0" type="text">
                                 <span class="pble-form-wide-note">(only shown to admins)</span>
                             </td>
                         </tr>
@@ -102,10 +102,10 @@
                             </span>
                         </td>
                     </tr>
-                    {% if user_profile.user.is_authenticated and user_profile.user.is_superuser %}
+                    {% if user.is_authenticated and user.is_superuser %}
                         <tr>
                             <td class="pble-form-wide-buttons" colspan="3">
-                                <input class="pble-form-wide-button pble-form-wide-button-setbonus" name="bonus_points_input" value="Update bonus" title="" type="submit">
+                                <input class="pble-form-wide-button pble-form-wide-button-setbonus" name="bonus_points_btn" value="Update bonus" title="" type="submit">
                             </td>
                         </tr>
                     {% endif %}

@@ -42,13 +42,9 @@ def bonus_points(request, user_profile=None, base_template='pblexchange/base.htm
                 target_profile.save()
 
                 return HttpResponseRedirect(reverse('users:detail', args=(target_profile.user_id,)))
-                #return render(request,'users/detail.html', {
-                #    'base_template': base_template,
-                #    'user_profile': user_profile
-                #})
             else: #TODO: Better error handling
-                return form.error
+                raise Http404()
         else:
-            return Http404("'users' module does not exist under INSTALLED_APPS in settings.py") #TODO: display a proper error message
+            raise Http404("'users' module does not exist under INSTALLED_APPS in settings.py") #TODO: display a proper error message
     else:
-        return Http404()
+        raise Http404()
