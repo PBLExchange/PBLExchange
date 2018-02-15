@@ -1,8 +1,10 @@
 from django.db.models import Count
 from django.shortcuts import render, HttpResponseRedirect, Http404, reverse, get_object_or_404
+from django.core.validators import ValidationError
 from questions.forms import QuestionForm, AnswerForm, CommentForm
-from questions.models import Question, Answer, QuestionVote, Tag
-
+from questions.models import Question, Answer, QuestionVote, CommentVote, AnswerVote, Tag
+from users.models import UserProfile
+from PBLExchangeDjango import settings
 
 # Create your views here.
 def new(request, base_template='pblexchange/base.html', **kwargs):
@@ -79,11 +81,34 @@ def vote(request, post_id, amount, post_type=Question, vote_type=QuestionVote, *
     post = get_object_or_404(post_type, pk=post_id)
 
     prev_vote = vote_type.objects.filter(post=post.pk, user=request.user)
+    receiving_UP = UserProfile.objects.get(user=post.author.pk)
 
     if not prev_vote or prev_vote.first().vote != amount:
         v, _ = vote_type.objects.get_or_create(user=request.user, post=post)
         v.vote += amount
         v.save()
+        if 'users' in settings.INSTALLED_APPS:
+            if request.user != post.author: # TODO: if you cannot vote on your own post, this check becomes redundant
+                if amount > 0:
+                    if isinstance(v, QuestionVote):
+                        receiving_UP.points += 5
+                    if isinstance(v, AnswerVote):
+                        receiving_UP.points += 10
+                    if isinstance(v, CommentVote):
+                        receiving_UP.points += 2
+                else:
+                    if isinstance(v, (QuestionVote, AnswerVote)):
+                        receiving_UP.points -= 2
+                    if isinstance(v, CommentVote):
+                        receiving_UP.points -= 1
+
+                try: # TODO: not working; points goes below 1
+                    receiving_UP.save()
+                except ValidationError:
+                    print('hello')
+                    pass # TODO: Should we do something?
+        else:
+            raise Http404("'users' module does not exist under INSTALLED_APPS in settings.py")
 
     if isinstance(post, Question):
         return HttpResponseRedirect(reverse('home'))
@@ -99,6 +124,12 @@ def accept_answer(request, post_id, **kwargs):
         return HttpResponseRedirect(reverse('questions:detail', args=(post.question.pk,)))
     post.accepted = True
     post.save()
+    acceptor_UP = UserProfile.objects.get(user=request.user)
+    acceptor_UP.points += 2
+    acceptor_UP.save()
+    receiving_UP = UserProfile.objects.get(user=post.author)
+    receiving_UP.points += 15
+    receiving_UP.save()
     return HttpResponseRedirect(reverse('questions:detail', args=(post.question.pk,)))
 
 

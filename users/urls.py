@@ -17,9 +17,7 @@ detail_patterns = [
         'questions': Question.objects.answered_by_user,
         'title_prefix': 'Answers by ',
     }, name='answered'),
-    url(r'^bonus_points$', views.bonus_points, {
-        'form_type': forms.BonusPointForm
-    }, name='bonus_points')
+    url(r'^bonus_points$', views.bonus_points, name='bonus_points')
 ]
 
 

@@ -8,10 +8,9 @@
     <h1>User {{ user_profile.user.get_full_name }} ({{ user_profile.user.username }})</h1>
     <div class="pble-part-form-activity">
         <h2>Activity by {{ user_profile.user.get_full_name }}</h2>
-    <!-- TODO: Make form for adding bonus points -->
-        <form action="" method="post">
+    <!-- TODO: Display error msg when validator fails -->
+        <form action="{% url 'users:bonus_points' %}" method="post">
             {% csrf_token %}
-            {{ form }}
             <table class="pble-form-wide-table">
                 <tbody>
                     {% if user_profile.user.is_authenticated and user_profile.user.is_superuser %} <!--TODO: should this be .is_staff or .is_superuser? (remember to correct button as well-->
@@ -106,7 +105,7 @@
                     {% if user_profile.user.is_authenticated and user_profile.user.is_superuser %}
                         <tr>
                             <td class="pble-form-wide-buttons" colspan="3">
-                                <input class="pble-form-wide-button pble-form-wide-button-setbonus" name="dosetbonus" value="Update bonus" title="" type="submit">
+                                <input class="pble-form-wide-button pble-form-wide-button-setbonus" name="bonus_points_input" value="Update bonus" title="" type="submit">
                             </td>
                         </tr>
                     {% endif %}
