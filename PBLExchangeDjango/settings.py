@@ -25,6 +25,8 @@ SECRET_KEY = '4bw!xfvafdoc^8qkn*ix*i3)ndc9^k3_7*mkm&5d3t0)7ns#&='
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+PBL_VERSION = "1.0-dev"
+
 ALLOWED_HOSTS = []
 
 
