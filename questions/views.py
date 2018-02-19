@@ -6,6 +6,7 @@ from questions.models import Question, Answer, QuestionVote, CommentVote, Answer
 from users.models import UserProfile
 from PBLExchangeDjango import settings
 
+
 # Create your views here.
 def new(request, base_template='pblexchange/base.html', **kwargs):
     return render(request, 'questions/list.html', {
@@ -88,7 +89,7 @@ def vote(request, post_id, amount, post_type=Question, vote_type=QuestionVote, *
         v.vote += amount
         v.save()
         if 'users' in settings.INSTALLED_APPS:
-            if request.user != post.author: # TODO: if you cannot vote on your own post, this check becomes redundant
+            if request.user != post.author:  # TODO: if you cannot vote on your own post, this check becomes redundant
                 if amount > 0:
                     if isinstance(v, QuestionVote):
                         receiving_UP.points += 5
@@ -102,17 +103,16 @@ def vote(request, post_id, amount, post_type=Question, vote_type=QuestionVote, *
                     if isinstance(v, CommentVote):
                         receiving_UP.points -= 1
 
-                try: # TODO: not working; points goes below 1
+                try:
+                    receiving_UP.full_clean()
                     receiving_UP.save()
                 except ValidationError:
-                    pass # TODO: Should we do something?
+                    receiving_UP.points = 1
+                    receiving_UP.save()
         else:
             raise Http404("'users' module does not exist under INSTALLED_APPS in settings.py")
 
-    if isinstance(post, Question):
-        return HttpResponseRedirect(reverse('home'))
-    else:
-        return HttpResponseRedirect(reverse('questions:detail', args=(post.question.pk,)))
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
 def accept_answer(request, post_id, **kwargs):

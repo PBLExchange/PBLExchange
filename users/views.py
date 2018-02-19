@@ -32,19 +32,20 @@ def question_list(request, user_id, questions, title_prefix='', base_template='p
         'questions': questions(user),
     })
 
-def bonus_points(request, user_profile=None, base_template='pblexchange/base.html', **kwargs):
+
+def bonus_points(request, user_id, **kwargs):
     if request.method == 'POST' and request.user.is_authenticated():
         form = BonusPointForm(request.POST)
         if 'users' in settings.INSTALLED_APPS:
             if form.is_valid():
-                target_profile = models.UserProfile.objects.get(user=user_profile.user.pk)
+                target_profile = User.objects.get(id=user_id).userprofile
                 target_profile.points += form.cleaned_data['points']
                 target_profile.save()
 
                 return HttpResponseRedirect(reverse('users:detail', args=(target_profile.user_id,)))
-            else: #TODO: Better error handling
-                raise Http404()
+            else:  # TODO: Better error handling
+                raise Http404('Form is not valid')
         else:
-            raise Http404("'users' module does not exist under INSTALLED_APPS in settings.py") #TODO: display a proper error message
+            raise Http404("'users' module does not exist under INSTALLED_APPS in settings.py")  # TODO: display a proper error message
     else:
         raise Http404()
