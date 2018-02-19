@@ -138,6 +138,16 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = 'media/'
 
 
+# PBLE Defaults
+PBLE_DEFAULT_SETTINGS = {
+    'question_up_vote_points': '5',
+    'answer_up_vote_points': '10',
+    'comment_up_vote_points': '2',
+    'question_down_vote_points': '-2',
+    'answer_down_vote_points': '-2',
+    'comment_down_vote_points': '-1',
+}
+
 # CKEditor upload settings
 CKEDITOR_UPLOAD_PATH = 'uploads/'
 

@@ -5,6 +5,7 @@ from questions.forms import QuestionForm, AnswerForm, CommentForm
 from questions.models import Question, Answer, QuestionVote, CommentVote, AnswerVote, Tag
 from users.models import UserProfile
 from PBLExchangeDjango import settings
+from pblexchange.models import Setting
 
 
 # Create your views here.
@@ -92,16 +93,18 @@ def vote(request, post_id, amount, post_type=Question, vote_type=QuestionVote, *
             if request.user != post.author:  # TODO: if you cannot vote on your own post, this check becomes redundant
                 if amount > 0:
                     if isinstance(v, QuestionVote):
-                        receiving_UP.points += 5
+                        receiving_UP.points += int(Setting.get('question_up_vote_points'))
                     if isinstance(v, AnswerVote):
-                        receiving_UP.points += 10
+                        receiving_UP.points += int(Setting.get('answer_up_vote_points'))
                     if isinstance(v, CommentVote):
-                        receiving_UP.points += 2
+                        receiving_UP.points += int(Setting.get('comment_up_vote_points'))
                 else:
-                    if isinstance(v, (QuestionVote, AnswerVote)):
-                        receiving_UP.points -= 2
+                    if isinstance(v, QuestionVote):
+                        receiving_UP.points -= int(Setting.get('question_down_vote_points'))
+                    if isinstance(v, AnswerVote):
+                        receiving_UP.points -= int(Setting.get('answer_down_vote_points'))
                     if isinstance(v, CommentVote):
-                        receiving_UP.points -= 1
+                        receiving_UP.points -= int(Setting.get('comment_down_vote_points'))
 
                 try:
                     receiving_UP.full_clean()
