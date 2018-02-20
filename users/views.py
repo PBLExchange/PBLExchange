@@ -44,7 +44,7 @@ def bonus_points(request, user_id, **kwargs):
 
                 return HttpResponseRedirect(reverse('users:detail', args=(target_profile.user_id,)))
             else:  # TODO: Better error handling
-                raise Http404('Form is not valid')
+                return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
         else:
             raise Http404("'users' module does not exist under INSTALLED_APPS in settings.py")  # TODO: display a proper error message
     else:
