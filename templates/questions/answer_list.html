@@ -11,8 +11,10 @@
                     </div>
                 {% elif answer.accepted %}
                     <div class="pble-a-selection">
-                        <input type="submit" value="" class="pble-a-unselect-button" title="Best answer">
-                        <div class="pble-a-selected-text">Best answer</div>
+                        <a href="{% url 'questions:answers:accept' answer.pk %}">
+                            <input type="submit" value="" class="pble-a-unselect-button" title="Best answer">
+                            <div class="pble-a-selected-text">Best answer</div>
+                        </a>
                     </div>
                 {% endif %}
                 <div class="pble-a-item-content">

@@ -146,6 +146,8 @@ PBLE_DEFAULT_SETTINGS = {
     'question_down_vote_points': '-2',
     'answer_down_vote_points': '-2',
     'comment_down_vote_points': '-1',
+    'accepted_answer_points': '15',
+    'accepted_answer_acceptor_points': '2'
 }
 
 # CKEditor upload settings
