@@ -160,6 +160,7 @@ def accept_answer(request, post_id, **kwargs):
     else:
         raise Http404("'users' module does not exist under INSTALLED_APPS in settings.py")
 
+
 def tags(request, base_template='pblexchange/base.html', **kwargs):
     return render(request, 'questions/tags.html', {
         'base_template': base_template,
