@@ -86,27 +86,42 @@ def vote(request, post_id, amount, post_type=Question, vote_type=QuestionVote, *
     receiving_UP = UserProfile.objects.get(user=post.author.pk)
 
     if not prev_vote or prev_vote.first().vote != amount:
-        v, _ = vote_type.objects.get_or_create(user=request.user, post=post)
-        v.vote += amount
-        v.save()
         if 'users' in settings.INSTALLED_APPS:
-            if request.user != post.author:  # TODO: if you cannot vote on your own post, this check becomes redundant
-                if amount > 0:
-                    if isinstance(v, QuestionVote):
-                        receiving_UP.points += int(Setting.get('question_up_vote_points'))
-                    if isinstance(v, AnswerVote):
-                        receiving_UP.points += int(Setting.get('answer_up_vote_points'))
-                    if isinstance(v, CommentVote):
-                        receiving_UP.points += int(Setting.get('comment_up_vote_points'))
+            if request.user != post.author:
+                v, _ = vote_type.objects.get_or_create(user=request.user, post=post)
+                v.vote += amount
+                if v.vote != 0:
+                    if amount > 0:
+                        if isinstance(v, QuestionVote):
+                            receiving_UP.points += int(Setting.get('question_up_vote_points'))
+                        elif isinstance(v, AnswerVote):
+                            receiving_UP.points += int(Setting.get('answer_up_vote_points'))
+                        elif isinstance(v, CommentVote):
+                            receiving_UP.points += int(Setting.get('comment_up_vote_points'))
+                    else:
+                        if isinstance(v, QuestionVote):
+                            receiving_UP.points += int(Setting.get('question_down_vote_points'))
+                        elif isinstance(v, AnswerVote):
+                            receiving_UP.points += int(Setting.get('answer_down_vote_points'))
+                        elif isinstance(v, CommentVote):
+                            receiving_UP.points += int(Setting.get('comment_down_vote_points'))
                 else:
-                    if isinstance(v, QuestionVote):
-                        receiving_UP.points -= int(Setting.get('question_down_vote_points'))
-                    if isinstance(v, AnswerVote):
-                        receiving_UP.points -= int(Setting.get('answer_down_vote_points'))
-                    if isinstance(v, CommentVote):
-                        receiving_UP.points -= int(Setting.get('comment_down_vote_points'))
-
+                    if prev_vote.first().vote == 1:
+                        if isinstance(v, QuestionVote):
+                            receiving_UP.points -= int(Setting.get('question_up_vote_points'))
+                        elif isinstance(v, AnswerVote):
+                            receiving_UP.points -= int(Setting.get('answer_up_vote_points'))
+                        elif isinstance(v, CommentVote):
+                            receiving_UP.points -= int(Setting.get('comment_up_vote_points'))
+                    else:
+                        if isinstance(v, QuestionVote):
+                            receiving_UP.points -= int(Setting.get('question_down_vote_points'))
+                        elif isinstance(v, AnswerVote):
+                            receiving_UP.points -= int(Setting.get('answer_down_vote_points'))
+                        elif isinstance(v, CommentVote):
+                            receiving_UP.points -= int(Setting.get('comment_down_vote_points'))
                 try:
+                    v.save()
                     receiving_UP.full_clean()
                     receiving_UP.save()
                 except ValidationError:
