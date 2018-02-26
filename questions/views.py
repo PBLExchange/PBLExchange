@@ -137,22 +137,24 @@ def accept_answer(request, post_id, **kwargs):
     if not request.user.is_authenticated():
         return HttpResponseRedirect(reverse('login'))
     post = get_object_or_404(Answer, pk=post_id)
-    acceptor_up = UserProfile.objects.get(user=request.user)
-    receiving_up = UserProfile.objects.get(user=post.author)
-    if Answer.objects.accepted(post.question):
-        post.accepted = False
+
+    if request.user != post.author:
+        acceptor_up = UserProfile.objects.get(user=request.user)
+        receiving_up = UserProfile.objects.get(user=post.author)
+        if Answer.objects.accepted(post.question):
+            post.accepted = False
+            post.save()
+            acceptor_up.points -= int(Setting.get('accepted_answer_acceptor_points'))
+            acceptor_up.save()
+            receiving_up.points -= int(Setting.get('accepted_answer_points'))
+            receiving_up.save()
+            return HttpResponseRedirect(reverse('questions:detail', args=(post.question.pk,)))
+        post.accepted = True
         post.save()
-        acceptor_up.points -= int(Setting.get('accepted_answer_acceptor_points'))
+        acceptor_up.points += int(Setting.get('accepted_answer_acceptor_points'))
         acceptor_up.save()
-        receiving_up.points -= int(Setting.get('accepted_answer_points'))
+        receiving_up.points += int(Setting.get('accepted_answer_points'))
         receiving_up.save()
-        return HttpResponseRedirect(reverse('questions:detail', args=(post.question.pk,)))
-    post.accepted = True
-    post.save()
-    acceptor_up.points += int(Setting.get('accepted_answer_acceptor_points'))
-    acceptor_up.save()
-    receiving_up.points += int(Setting.get('accepted_answer_points'))
-    receiving_up.save()
     return HttpResponseRedirect(reverse('questions:detail', args=(post.question.pk,)))
 
 
