@@ -138,25 +138,27 @@ def accept_answer(request, post_id, **kwargs):
         return HttpResponseRedirect(reverse('login'))
     post = get_object_or_404(Answer, pk=post_id)
 
-    if request.user != post.author:
-        acceptor_up = UserProfile.objects.get(user=request.user)
-        receiving_up = UserProfile.objects.get(user=post.author)
-        if Answer.objects.accepted(post.question):
-            post.accepted = False
+    if 'users' in settings.INSTALLED_APPS:
+        if request.user != post.author:
+            acceptor_up = UserProfile.objects.get(user=request.user)
+            receiving_up = UserProfile.objects.get(user=post.author)
+            if Answer.objects.accepted(post.question):
+                post.accepted = False
+                post.save()
+                acceptor_up.points -= int(Setting.get('accepted_answer_acceptor_points'))
+                acceptor_up.save()
+                receiving_up.points -= int(Setting.get('accepted_answer_points'))
+                receiving_up.save()
+                return HttpResponseRedirect(reverse('questions:detail', args=(post.question.pk,)))
+            post.accepted = True
             post.save()
-            acceptor_up.points -= int(Setting.get('accepted_answer_acceptor_points'))
+            acceptor_up.points += int(Setting.get('accepted_answer_acceptor_points'))
             acceptor_up.save()
-            receiving_up.points -= int(Setting.get('accepted_answer_points'))
+            receiving_up.points += int(Setting.get('accepted_answer_points'))
             receiving_up.save()
-            return HttpResponseRedirect(reverse('questions:detail', args=(post.question.pk,)))
-        post.accepted = True
-        post.save()
-        acceptor_up.points += int(Setting.get('accepted_answer_acceptor_points'))
-        acceptor_up.save()
-        receiving_up.points += int(Setting.get('accepted_answer_points'))
-        receiving_up.save()
-    return HttpResponseRedirect(reverse('questions:detail', args=(post.question.pk,)))
-
+        return HttpResponseRedirect(reverse('questions:detail', args=(post.question.pk,)))
+    else:
+        raise Http404("'users' module does not exist under INSTALLED_APPS in settings.py")
 
 def tags(request, base_template='pblexchange/base.html', **kwargs):
     return render(request, 'questions/tags.html', {
