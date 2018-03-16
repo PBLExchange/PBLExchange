@@ -163,6 +163,6 @@ LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
 
 #Django-cas-ng settings
-CAS_SERVER_URL = 'https://login.aau.dk/cas/'
+CAS_SERVER_URL = 'https://signon.aau.dk/cas/'
 CAS_VERSION = 'CAS_2_SAML_1_0'
 CAS_APPLY_ATTRIBUTES_TO_USER = True
