@@ -115,7 +115,9 @@ class CustomCASBackend(CASBackend):
         user.first_name = attributes['givenName']
         user.last_name = attributes['sn']
 
-        # create a user profile
+        # create a user profile & settings
         new_user_profile = users_model.UserProfile(user=user)
         new_user_profile.save()
+        new_user_settings = users_model.UserSettings(user=user)
+        new_user_settings.save()
         return user

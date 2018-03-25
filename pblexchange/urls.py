@@ -8,6 +8,7 @@ Menu.register('Questions', 'home')
 Menu.register('Tags', 'questions:tags')
 Menu.register('Users', 'users:overview')
 Menu.register('Ask a Question', 'questions:ask')
+Menu.register('Subscriptions', 'subscriptions:categories')
 
 urlpatterns = [
     url(r'^$', views.index, name='home'),

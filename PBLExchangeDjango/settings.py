@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'ckeditor',
     'ckeditor_uploader',
     'django_cas_ng',
-    'users'
+    'users',
+    'subscriptions'
 ]
 
 MIDDLEWARE = [

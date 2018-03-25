@@ -16,3 +16,9 @@ class UserProfile(models.Model):
     title = models.CharField(max_length=32, default='PBLE-novice')
 
     objects = UserProfileManager()
+
+
+class UserSettings(models.Model):
+    user = models.OneToOneField(User, unique=True)
+    post_notification_enabled = models.BooleanField(default=True)
+    subscription_enabled = models.BooleanField(default=True)
