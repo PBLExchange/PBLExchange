@@ -34,14 +34,15 @@ def tags(request, base_template='pblexchange/base.html', **kwargs):
     })
 
 
-# TODO: I am not sure using UerProfile instead of User (both in .models and here) is a good idea
+# TODO: I am not sure using UserProfile instead of User (both in .models and here) is a good idea
 def peers(request, base_template='pblexchange/base.html', **kwargs):
     if not request.user.is_authenticated():
         HttpResponseRedirect(reverse('login'))
 
     user_sub, _ = Subscription.objects.get_or_create(user=request.user)
-    user_users_subs = user_sub.peers.order_by('username')
-    usrs = UserProfile.objects.all()
+    user_users_subs = user_sub.peers.order_by('user') # TODO: order_by user.username
+    usrs = UserProfile.objects.all().exclude(user=request.user).\
+        exclude(user__in=[u.user for u in user_users_subs]).order_by('user')
     return render(request, 'subscriptions/peer_list.html', {
         'base_template': base_template,
         'sub_users': user_users_subs,
@@ -63,7 +64,7 @@ def alter_categories(request, category_text, **kwargs):
         user_sub.categories.add(category)
     user_sub.save()
     # TODO: should we redirect back to overview or keep using meta.referer?
-    return HttpResponseRedirect(reverse('categories'))
+    return HttpResponseRedirect(reverse('subscription:categories'))
 
 
 def alter_tags(request, tag_text, **kwargs):
@@ -86,13 +87,17 @@ def alter_peers(request, username, **kwargs):
     if not request.user.is_authenticated():
         HttpResponseRedirect(reverse('login'))
 
-    usr = User.objects.get(username=username)
-    user_sub, _ = Subscription.objects.get_or_create(user=request.user)
+    username_usr = User.objects.get(username=username)
 
-    if usr in user_sub.users.all():
-        user_sub.users.remove(usr)
-    else:
-        user_sub.users.add(usr)
-    user_sub.save()
-    # TODO: should we redirect back to overview or keep using meta.referer?
-    return HttpResponseRedirect(reverse('subscriptions:tags'))
+    if request.user != username_usr:
+        username_up = UserProfile.objects.get(user=username_usr)
+        request_usr__sub, _ = Subscription.objects.get_or_create(user=request.user)
+
+        if username_up in request_usr__sub.peers.all():
+            request_usr__sub.peers.remove(username_up)
+        else:
+            request_usr__sub.peers.add(username_up)
+        request_usr__sub.save()
+        # TODO: should we redirect back to overview or keep using meta.referer?
+
+    return HttpResponseRedirect(reverse('subscriptions:peers'))
