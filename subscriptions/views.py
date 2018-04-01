@@ -1,8 +1,10 @@
 from django.shortcuts import render, HttpResponseRedirect, reverse, get_object_or_404
 from django.contrib.auth.models import User
+from django.db.models import Q
 from .models import Subscription
 from questions.models import Category, Tag
 from users.models import UserProfile
+from questions.models import Question, Answer, Comment
 
 
 # Create your views here.
@@ -64,7 +66,7 @@ def alter_categories(request, category_text, **kwargs):
         user_sub.categories.add(category)
     user_sub.save()
     # TODO: should we redirect back to overview or keep using meta.referer?
-    return HttpResponseRedirect(reverse('subscription:categories'))
+    return HttpResponseRedirect(reverse('subscriptions:categories'))
 
 
 def alter_tags(request, tag_text, **kwargs):
@@ -101,3 +103,13 @@ def alter_peers(request, username, **kwargs):
         # TODO: should we redirect back to overview or keep using meta.referer?
 
     return HttpResponseRedirect(reverse('subscriptions:peers'))
+
+
+# Notification methods
+def post_notification(post, **kwargs):
+    if isinstance(post, Question):
+        users_to_notify = Subscription.objects.filter(Q(tags__tag__in=post.tag) |
+                                                      Q(categories__name__in=post.category) |
+                                                      Q(peers__user__username__in=post.author))
+        print('heææp')
+    return True

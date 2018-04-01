@@ -39,13 +39,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'pblexchange.apps.PblexchangeConfig',
     'questions',
     'ckeditor',
     'ckeditor_uploader',
     'django_cas_ng',
     'users',
-    'subscriptions'
+    'subscriptions',
+    'pinax',
+    'pinax.notifications',
+    'pinax.templates'
 ]
 
 MIDDLEWARE = [
@@ -163,7 +167,10 @@ DISALLOWED_DOMAINS = ['student.aau.dk']
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
 
-#Django-cas-ng settings
+# Django-cas-ng settings
 CAS_SERVER_URL = 'https://login.aau.dk/cas/'
 CAS_VERSION = 'CAS_2_SAML_1_0'
 CAS_APPLY_ATTRIBUTES_TO_USER = True
+
+# Used for django.contrib.sites
+SITE_ID = 1
