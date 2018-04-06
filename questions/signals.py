@@ -1,30 +1,20 @@
 from django.db.models.signals import post_save
-from django.dispatch import receiver
+from django.core.mail import send_mail
 
 from .models import Question, Answer, Comment
-from subscriptions.views import post_notification
 
 
-@receiver(post_save, sender=Question)
-def send_notifications(sender, instance, created, **kwargs):
-    print('Q saved!!')
+def create_notification(sender, instance, created, **kwargs):
     if created:
-        post_notification(instance)
+        if isinstance(instance, Question):
+            #send_mail('PBL Exchange subscription notification', 'Title:' + instance.title + '\nauthor: ' + instance.author.username, 'pblexchange@aau.dk', ['gblegm13@student.aau.dk'])
+            print('TODO!!')
+        elif isinstance(instance, Answer):
+            print('TODO!!')
+        elif isinstance(instance, Comment):
+            print('TODO!!')
 
 
-@receiver(post_save, sender=Answer)
-def send_notifications(sender, instance, created, **kwargs):
-    print('A saved!!')
-    if created:
-        post_notification(instance)
-
-
-@receiver(post_save, sender=Comment)
-def send_notifications(sender, instance, created, **kwargs):
-    if created:
-        print('C saved!!')
-        post_notification(instance)
-
-# @receiver(post_save, sender=Question)
-# def save_user_profile(sender, instance, **kwargs):
-    # TODO: should we notify users when edits happen? if so, do it here.
+post_save.connect(create_notification, sender=Question)
+post_save.connect(create_notification, sender=Answer)
+post_save.connect(create_notification, sender=Comment)

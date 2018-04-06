@@ -1,6 +1,7 @@
 from django.shortcuts import render, HttpResponseRedirect, reverse, get_object_or_404
 from django.contrib.auth.models import User
 from django.db.models import Q
+from django.core.mail import send_mail
 from .models import Subscription
 from questions.models import Category, Tag
 from users.models import UserProfile
@@ -108,8 +109,9 @@ def alter_peers(request, username, **kwargs):
 # Notification methods
 def post_notification(post, **kwargs):
     if isinstance(post, Question):
-        users_to_notify = Subscription.objects.filter(Q(tags__tag__in=post.tag) |
-                                                      Q(categories__name__in=post.category) |
-                                                      Q(peers__user__username__in=post.author))
-        print('heææp')
-    return True
+        #users_to_notify = Subscription.objects.filter(Q(tags__tag__in=post.tag) |
+        #                                              Q(categories__name__in=post.category) |
+        #                                              Q(peers__user__username__in=post.author))
+        print('Email is a sending')
+        send_mail('Subject here', 'Here is the message.', 'from@example.com', ['gblegm13@student.aau.dk'], fail_silently = False,)
+        return True

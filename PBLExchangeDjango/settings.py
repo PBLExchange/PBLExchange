@@ -46,10 +46,7 @@ INSTALLED_APPS = [
     'ckeditor_uploader',
     'django_cas_ng',
     'users',
-    'subscriptions',
-    'pinax',
-    'pinax.notifications',
-    'pinax.templates'
+    'subscriptions'
 ]
 
 MIDDLEWARE = [
@@ -69,6 +66,15 @@ AUTHENTICATION_BACKENDS = (
 )
 
 ROOT_URLCONF = 'PBLExchangeDjango.urls'
+
+# Mail settings
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'GideonBlegmand@gmail.com'
+# SECURITY WARNING: keep the password private!
+EMAIL_HOST_PASSWORD = ''
+EMAIL_PORT = 587
 
 TEMPLATES = [
     {
@@ -171,6 +177,3 @@ LOGOUT_REDIRECT_URL = 'home'
 CAS_SERVER_URL = 'https://login.aau.dk/cas/'
 CAS_VERSION = 'CAS_2_SAML_1_0'
 CAS_APPLY_ATTRIBUTES_TO_USER = True
-
-# Used for django.contrib.sites
-SITE_ID = 1
