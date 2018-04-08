@@ -8,6 +8,7 @@ from django_cas_ng.signals import cas_user_authenticated
 from django_cas_ng.utils import get_cas_client
 
 from users import models as users_model
+from subscriptions.models import Subscription
 
 class CustomCASBackend(CASBackend):
     # Modifications/additions are indicated by a comment '# Extra ...'
@@ -120,4 +121,8 @@ class CustomCASBackend(CASBackend):
         new_user_profile.save()
         new_user_settings = users_model.UserSettings(user=user)
         new_user_settings.save()
+
+        # create user subscription
+        new_user_subscription = Subscription(user=user)
+        new_user_subscription.save()
         return user

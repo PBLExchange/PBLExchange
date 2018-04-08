@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.sites',
     'pblexchange.apps.PblexchangeConfig',
     'questions',
     'ckeditor',
@@ -166,7 +165,7 @@ CKEDITOR_UPLOAD_PATH = 'uploads/'
 
 # Login settings
 LOGIN_URL = 'login'
-EXEMPT_USERS = ['aklost11', 'gblegm13']
+EXEMPT_USERS = ['aklost11', 'gblegm13', 'csteph13']
 DISALLOWED_DOMAINS = ['student.aau.dk']
 
 # Login redirect

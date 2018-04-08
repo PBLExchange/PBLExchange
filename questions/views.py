@@ -139,6 +139,7 @@ def accept_answer(request, post_id, **kwargs):
     post = get_object_or_404(Answer, pk=post_id)
 
     if 'users' in settings.INSTALLED_APPS:
+        # Assign points and set post.accepted
         if request.user != post.author:
             acceptor_up = UserProfile.objects.get(user=request.user)
             receiving_up = UserProfile.objects.get(user=post.author)
@@ -150,12 +151,12 @@ def accept_answer(request, post_id, **kwargs):
                 receiving_up.points -= int(Setting.get('accepted_answer_points'))
                 receiving_up.save()
                 return HttpResponseRedirect(reverse('questions:detail', args=(post.question.pk,)))
-            post.accepted = True
-            post.save()
             acceptor_up.points += int(Setting.get('accepted_answer_acceptor_points'))
             acceptor_up.save()
             receiving_up.points += int(Setting.get('accepted_answer_points'))
             receiving_up.save()
+        post.accepted = not post.accepted
+        post.save()
         return HttpResponseRedirect(reverse('questions:detail', args=(post.question.pk,)))
     else:
         raise Http404("'users' module does not exist under INSTALLED_APPS in settings.py")
