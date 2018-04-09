@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponseRedirect, Http404, reverse
-from questions.models import Question
+from pble_questions.models import Question
 
 
 # Create your views here.

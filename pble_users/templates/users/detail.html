@@ -1,0 +1,116 @@
+{% extends 'users/user_questions.html' %}
+{% load users %}
+
+{% block sidepanel %}
+{% endblock %}
+
+{% block content %}
+    <h1>User {{ user_profile.user.get_full_name }} ({{ user_profile.user.username }})</h1>
+    <div class="pble-part-form-activity">
+        <h2>Activity by {{ user_profile.user.get_full_name }}</h2>
+    <!-- TODO: Display error msg when validator fails -->
+        <form action="{% url 'pble_users:bonus_points' user_profile.user_id %}" method="post">
+            {% csrf_token %}
+            <table class="pble-form-wide-table">
+                <tbody>
+                    {% if user.is_authenticated and user.is_superuser %} <!--TODO: should this be .is_staff or .is_superuser? (remember to correct button as well-->
+                        <tr id="bonus">
+                            <td class="pble-form-wide-label">Bonus points:</td>
+                            <td class="pble-form-wide-data">
+                                <input class="pble-form-wide-number" name="points" value="1" type="number" min="0" required id="id_points" />
+                                <span class="pble-form-wide-note">(only shown to admins)</span>
+                            </td>
+                        </tr>
+                    {% endif %}
+                    <tr id="points">
+                        <td class="pble-form-wide-label">Score:</td>
+                        <td class="pble-form-wide-data">
+                            <span class="pble-form-wide-static">
+                                <span class="pble-uf-user-points">{{ user_profile.points }}</span>
+                                points (ranked #
+                                <span class="pble-uf-user-rank">{{ user_profile|get_rank:user_profile.points }}</span>
+                                )
+                            </span>
+                        </td>
+                    </tr>
+                    <tr id="title">
+                        <td class="pble-form-wide-label">Title:</td>
+                        <td class="pble-form-wide-data">
+                            <span class="pble-form-wide-static">{{ user_profile.title }}</span>
+                        </td>
+                    </tr>
+                    <tr id="questions">
+                        <td class="pble-wide-form-label">Questions:</td>
+                        <td class="qa-form-wide-data">
+                            <span class="pble-form-wide-static">
+                                <span class="pble-uf-user-q-posts">{% user_questions_quantity user_profile.user %}</span>
+                                (
+                                <span class="pble-uf-user-q-selects">{% user_accepted_answers user_profile.user %}</span>
+                                with best answer chosen)
+                            </span>
+                        </td>
+                    </tr>
+                    <tr id="answers">
+                        <td class="pble-form-wide-label">Answers:</td>
+                        <td class="pble-form-wide-data">
+                            <span class="pble-form-wide-static">
+                                <span class="pble-uf-user-a-posts">{% user_answers user_profile.user %}</span>
+                                (
+                                <span class="pble-uf-user-a-selecteds">{% user_answers_chosen user_profile.user %}</span>
+                                chosen as best)
+                            </span>
+                        </td>
+                    </tr>
+                    <tr id="comments">
+                        <td class="pble-form-wide-label">Comments:</td>
+                        <td class="qa-form-wide-data">
+                            <span class="pble-form-wide-static">
+                                <span class="pble-uf-user-c-posts">{% user_comments_quantity user_profile.user %}</span>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr id="votedon">
+                        <td class="pble-form-wide-label">Voted on:</td>
+                        <td class="pble-form-wide-data">
+                            <span class="pble-form-wide-static">
+                                <span class="pble-uf-user-q-votes">{% user_question_votes user_profile.user %}</span>
+                                questions,
+                                <span class="pble-uf-user-a-votes">{% user_answer_votes user_profile.user %}</span>
+                                answers
+                            </span>
+                        </td>
+                    </tr>
+                    <tr id="votegave">
+                        <td class="pble-form-wide-label">Gave out:</td>
+                        <td class="pble-form-wide-data">
+                            <span class="pble-form-wide-static">
+                                <span class="pble-uf-user-upvotes">{% user_upvotes_given user_profile.user %}</span>
+                                up votes,
+                                <span class="pble-uf-user-downvotes">{% user_downvotes_given user_profile.user %}</span>
+                                down votes
+                            </span>
+                        </td>
+                    </tr>
+                    <tr id="votegot">
+                        <td class="pble-form-wide-label">Received:</td>
+                        <td class="pble-form-wide-data">
+                            <span class="pble-form-wide-static">
+                                <span class="pble-uf-user-upvotes">{% user_upvotes_received user_profile.user %}</span>
+                                up votes,
+                                <span class="pble-uf-user-downvotes">{% user_downvotes_received user_profile.user %}</span>
+                                down votes
+                            </span>
+                        </td>
+                    </tr>
+                    {% if user.is_authenticated and user.is_superuser %}
+                        <tr>
+                            <td class="pble-form-wide-buttons" colspan="3">
+                                <input class="pble-form-wide-button pble-form-wide-button-setbonus" name="bonus_points_btn" value="Update bonus" title="" type="submit">
+                            </td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </form>
+    </div>
+{% endblock %}

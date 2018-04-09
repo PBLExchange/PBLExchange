@@ -1,9 +1,0 @@
-{% extends base_template %}
-
-{% block sub_menu %}
-    <ul class="pble-nav-sub-list">
-        <li class="pble-nav-sub-item"><a href="{% url 'questions:new' %}" class="pble-nav-sub-link">Recent</a></li>
-        <li class="pble-nav-sub-item pble-nav-sub-hot"><a href="{% url 'questions:hot' %}" class="pble-nav-sub-link">Popular!</a></li>
-        <li class="pble-nav-sub-item"><a href="{% url 'questions:unanswered' %}" class="pble-nav-sub-link">Unanswered</a></li>
-    </ul>
-{% endblock %}

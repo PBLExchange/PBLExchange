@@ -6,11 +6,11 @@ from django_cas_ng import views as cas_views
 from PBLExchangeDjango.settings import INSTALLED_APPS
 
 Menu.register('Questions', 'home')
-Menu.register('Tags', 'questions:tags')
-Menu.register('Users', 'users:overview')
-if 'subscriptions' in INSTALLED_APPS:
-    Menu.register('Subscriptions', 'subscriptions:categories')
-Menu.register('Ask a Question', 'questions:ask')
+Menu.register('Tags', 'pble_questions:tags')
+Menu.register('Users', 'pble_users:overview')
+if 'pble_subscriptions' in INSTALLED_APPS:
+    Menu.register('Subscriptions', 'pble_subscriptions:categories')
+Menu.register('Ask a Question', 'pble_questions:ask')
 
 urlpatterns = [
     url(r'^$', views.index, name='home'),

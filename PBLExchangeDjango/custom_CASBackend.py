@@ -7,8 +7,8 @@ from django.conf import settings
 from django_cas_ng.signals import cas_user_authenticated
 from django_cas_ng.utils import get_cas_client
 
-from users import models as users_model
-from subscriptions.models import Subscription
+from pble_users import models as users_model
+from pble_subscriptions.models import Subscription
 
 class CustomCASBackend(CASBackend):
     # Modifications/additions are indicated by a comment '# Extra ...'
@@ -44,7 +44,7 @@ class CustomCASBackend(CASBackend):
         UserModel = get_user_model()
 
         # Note that this could be accomplished in one try-except clause, but
-        # instead we use get_or_create when creating unknown users since it has
+        # instead we use get_or_create when creating unknown pble_users since it has
         # built-in safeguards for multiple threads.
         if settings.CAS_CREATE_USER:
             user, created = UserModel._default_manager.get_or_create(**{
