@@ -119,7 +119,8 @@ class Answer(Post):
         if 'pble_subscriptions' in INSTALLED_APPS:
             if old and old.accepted != self.accepted:  # accepted has changed, notify author
                 m = apps.get_model('pble_subscriptions', 'Subscription')
-                if m.answer_notifications and m.user != self.author:
+                m_user = m.objects.get(user=self.author).user
+                if m.answer_notifications and m_user != self.question.author:
                     current_site = Site.objects.get_current()
                     q_url = current_site.domain + reverse('pble_questions:detail', args=(
                         self.question.id,))  # TODO: On release set django_site domain field to pblexchange.aau.dk
