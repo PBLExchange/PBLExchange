@@ -1,11 +1,13 @@
 from django.shortcuts import render, HttpResponseRedirect, reverse, get_object_or_404
 from django.contrib.auth.models import User
 from django.db.models import Q
-from django.core.mail import send_mail
 from .models import Subscription
 from pble_questions.models import Category, Tag
 from pble_users.models import UserProfile
 from pble_questions.models import Question, Answer, Comment
+from django.core.mail import send_mail, send_mass_mail
+from django.template import loader
+from django.contrib.sites.models import Site
 
 
 # Create your views here.
@@ -107,11 +109,75 @@ def alter_peers(request, username, **kwargs):
 
 
 # Notification methods
-def post_notification(post, **kwargs):
-    if isinstance(post, Question):
-        #users_to_notify = Subscription.objects.filter(Q(tags__tag__in=post.tag) |
-        #                                              Q(categories__name__in=post.category) |
-        #                                              Q(peers__user__username__in=post.author))
-        print('Email is a sending')
-        send_mail('Subject here', 'Here is the message.', 'from@example.com', ['gblegm13@student.aau.dk'], fail_silently = False,)
-        return True
+def send_answer_notification(answer, **kwargs):
+    a_author_subscription = Subscription.objects.get(user=answer.question.author)
+    if a_author_subscription.answer_notifications and answer.author != answer.question.author:
+        current_site = Site.objects.get_current()
+        q_url = current_site.domain + reverse('pble_questions:detail', args=(
+            answer.question.id,))    # TODO: On release set django_site domain field to pblexchange.aau.dk
+        html_message = loader.render_to_string(
+            'subscriptions/answer_notification.html',
+            {
+                'answer_author': answer.author.username,
+                'recipient_username': answer.question.author.username,
+                'q_url': q_url,
+                'answer_text': answer.body,  # TODO: This body contains html p tags by default, remove them
+                'q_title': answer.question.title
+            }
+        )
+        send_mail('PBL Exchange new answer', '', 'pblexchange@aau.dk', [answer.question.author.email],
+                  fail_silently=True, html_message=html_message)
+
+
+def send_comment_notifications(comment):    # TODO: Test this feature!!!!
+    message_list = ()
+    answer_comments = Comment.objects.filter(answer=comment.answer)
+    answer_comments.filter(author__subscription__comment_notifications=True)
+    current_site = Site.objects.get_current()
+    q_url = current_site.domain + reverse('pble_questions:detail', args=(
+        comment.question.id,))   # TODO: On release set django_site domain field to pblexchange.aau.dk
+
+    for ac in answer_comments:
+        html_message = loader.render_to_string(
+            'subscriptions/comment_notification.html',
+            {
+                'recipient_username': comment.author.username,
+                'q_url': q_url,
+                'answer_text': comment.answer.body,  # TODO: This body contains html p tags by default, remove them
+                'comment_text': comment.body,   # TODO: remove any html tags
+                'q_title': comment.question.title,
+                'comment_author': comment.author.username,
+            }
+        )
+        message = ('PBL Exchange new comment', '', 'pblexchange@aau.dk', [ac.author.email], html_message)
+        message_list += message
+
+    send_mass_mail(message_list, fail_silently=False)
+
+
+def send_accepted_notification(answer):
+    a_author_subscription = Subscription.objects.get(user=answer.question.author)
+
+    if a_author_subscription.answer_notifications:
+        current_site = Site.objects.get_current()
+        q_url = current_site.domain + reverse('pble_questions:detail', args=(
+            answer.question.id,))  # TODO: On release set django_site domain field to pblexchange.aau.dk
+
+        accept_action = ''
+        if answer.accepted:
+            accept_action = 'accepted'
+        else:
+            accept_action = 'unaccepted'
+
+        html_message = loader.render_to_string(
+            'subscriptions/accepted_notification.html',
+            {
+                'recipient_username': answer.author.username,
+                'q_url': q_url,
+                'question_author': answer.question.author.username,
+                'q_title': answer.question.title,
+                'accept_action': accept_action,
+            }
+        )
+        send_mail('PBL Exchange new answer', '', 'pblexchange@aau.dk', [answer.question.author.email],
+                  fail_silently=True, html_message=html_message)

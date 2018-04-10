@@ -6,6 +6,13 @@ from django.db import models
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.contrib.auth.models import User
 from django.db.models import F, Count, Value, Sum
+# Imports for Answer.save overwrite
+from PBLExchangeDjango.settings import INSTALLED_APPS
+from django.apps import apps
+from django.contrib.sites.models import Site
+from django.template import loader
+from django.core.mail import send_mail
+from django.shortcuts import reverse
 
 
 # Create your models here.
@@ -105,6 +112,36 @@ class Answer(Post):
     @property
     def votes(self):
         return self.answervote_set.aggregate(Sum('vote'))['vote__sum'] or 0
+
+    def save(self, *args, **kw):    # OBS: See signals used for emailing under signals.py
+        old = type(self).objects.get(pk=self.pk) if self.pk else None
+        super(Answer, self).save(*args, **kw)
+        if 'pble_subscriptions' in INSTALLED_APPS:
+            if old and old.accepted != self.accepted:  # accepted has changed, notify author
+                m = apps.get_model('pble_subscriptions', 'Subscription')
+                if m.answer_notifications and m.user != self.author:
+                    current_site = Site.objects.get_current()
+                    q_url = current_site.domain + reverse('pble_questions:detail', args=(
+                        self.question.id,))  # TODO: On release set django_site domain field to pblexchange.aau.dk
+
+                    accept_action = ''
+                    if self.accepted:
+                        accept_action = 'accepted'
+                    else:
+                        accept_action = 'unaccepted'
+
+                    html_message = loader.render_to_string(
+                        'subscriptions/accepted_notification.html',
+                        {
+                            'recipient_username': self.author.username,
+                            'q_url': q_url,
+                            'question_author': self.question.author.username,
+                            'q_title': self.question.title,
+                            'accept_action': accept_action,
+                        }
+                    )
+                    send_mail('PBL Exchange new answer', '', 'pblexchange@aau.dk', [self.question.author.email],
+                              fail_silently=True, html_message=html_message)
 
 
 class Comment(Post):

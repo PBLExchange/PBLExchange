@@ -4,7 +4,7 @@ from . import views
 subscribe_patterns = [
     url(r'category/(?P<category_text>[a-zA-Z0-9_\-]+)$', views.alter_categories, name='subscribe_category'),
     url(r'tag/(?P<tag_text>[a-zA-Z0-9_\-]+)$', views.alter_tags, name='subscribe_tag'),
-    url(r'peer/(?P<username>[a-zA-Z0-9_\-]+)$', views.alter_peers, name='subscribe_peer')
+    url(r'peer/(?P<username>[a-zA-Z0-9_\-]+)$', views.alter_peers, name='subscribe_peer')   # TODO: Use uid instead of username
 ]
 # TODO: these urls and views should use the pk of the respective items
 

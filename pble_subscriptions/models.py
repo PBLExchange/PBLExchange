@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from pble_questions.models import Question, Answer, Comment, Category, Tag
+#from pble_questions.models import Question, Answer, Comment, Category, Tag
 from pble_users.models import UserProfile
 
 
@@ -12,11 +12,12 @@ class Subscription(models.Model):
     DIGEST_CHOICES = ((NEVER, 'Never'), (DAILY, 'Daily'), (WEEKLY, 'Weekly'))
 
     user = models.OneToOneField(User, unique=True)
-    categories = models.ManyToManyField(Category)
-    tags = models.ManyToManyField(Tag)
+    categories = models.ManyToManyField('pble_questions.Category')
+    tags = models.ManyToManyField('pble_questions.Tag')
     peers = models.ManyToManyField(UserProfile)
     answer_notifications = models.BooleanField(default=True)
-    comment_notifications = models.BooleanField(default=True)
+    comment_notifications = models.BooleanField(default=False)
+    digest_notifications = models.BooleanField(default=True)
     digest = models.CharField(max_length=6, choices=DIGEST_CHOICES, default=DAILY)
 
 
@@ -29,12 +30,12 @@ class Notification(models.Model):
 
 
 class QuestionNotification(Notification):
-    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    question = models.ForeignKey('pble_questions.Question', on_delete=models.CASCADE)
 
 
 class AnswerNotification(Notification):
-    answer = models.ForeignKey(Answer, on_delete=models.CASCADE)
+    answer = models.ForeignKey('pble_questions.Answer', on_delete=models.CASCADE)
 
 
 class CommentNotification(Notification):
-    comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
+    comment = models.ForeignKey('pble_questions.Comment', on_delete=models.CASCADE)
