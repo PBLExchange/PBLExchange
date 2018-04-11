@@ -5,7 +5,7 @@ from pble_questions.forms import QuestionForm, AnswerForm, CommentForm
 from pble_questions.models import Question, Answer, QuestionVote, CommentVote, AnswerVote, Tag
 from pble_users.models import UserProfile
 from PBLExchangeDjango import settings
-from pblexchange.models import Setting
+from pblexchange.models import Setting, ExternalLink
 
 
 # Create your views here.
@@ -13,7 +13,8 @@ def new(request, base_template='pblexchange/base.html', **kwargs):
     return render(request, 'questions/list.html', {
         'base_template': base_template,
         'title': 'new',
-        'questions': Question.objects.recent()
+        'questions': Question.objects.recent(),
+        'link_list': ExternalLink.objects.filter(featured=True),
     })
 
 
@@ -21,7 +22,8 @@ def unanswered(request, base_template='pblexchange/base.html', **kwargs):
     return render(request, 'questions/list.html', {
         'base_template': base_template,
         'title': 'unanswered',
-        'questions': Question.objects.unanswered()
+        'questions': Question.objects.unanswered(),
+        'link_list': ExternalLink.objects.filter(featured=True),
     })
 
 
@@ -29,7 +31,8 @@ def hot(request, base_template='pblexchange/base.html', **kwargs):
     return render(request, 'questions/list.html', {
         'base_template': base_template,
         'title': 'Popular',
-        'questions': Question.objects.hot()
+        'questions': Question.objects.hot(),
+        'link_list': ExternalLink.objects.filter(featured=True),
     })
 
 
@@ -42,6 +45,7 @@ def detail(request, question_id, base_template='pblexchange/base.html', **kwargs
         'question': question,
         'answer_form': AnswerForm(),
         'comment_form': CommentForm(),
+        'link_list': ExternalLink.objects.filter(featured=True),
     })
 
 
@@ -50,7 +54,8 @@ def ask(request, base_template='pblexchange/base.html', **kwargs):
         return HttpResponseRedirect(reverse('login'))
     return render(request, 'questions/ask.html', {
         'base_template': base_template,
-        'post_form': QuestionForm()
+        'post_form': QuestionForm(),
+        'link_list': ExternalLink.objects.filter(featured=True),
     })
 
 
@@ -166,6 +171,7 @@ def tags(request, base_template='pblexchange/base.html', **kwargs):
     return render(request, 'questions/tags.html', {
         'base_template': base_template,
         'tags': Tag.objects.annotate(cardinality=Count('question')).order_by('-cardinality'),
+        'link_list': ExternalLink.objects.filter(featured=True),
     })
 
 
@@ -175,4 +181,5 @@ def tag(request, tag_text, base_template='pblexchange/base.html', **kwargs):
         'base_template': base_template,
         'title': tag_text,
         'questions': t.question_set.order_by('-created_date'),
+        'link_list': ExternalLink.objects.filter(featured=True),
     })

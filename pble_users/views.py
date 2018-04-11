@@ -2,6 +2,7 @@ from django.shortcuts import render, HttpResponseRedirect, Http404, HttpResponse
 from django.contrib.auth.models import User
 from pble_users import models
 from pble_users.forms import BonusPointForm
+from pblexchange.models import ExternalLink
 from pble_questions.models import Vote, QuestionVote, CommentVote, AnswerVote
 
 from PBLExchangeDjango import settings #TODO: Am i checking if app exists correctly?
@@ -12,6 +13,7 @@ def users(request, base_template='pblexchange/base.html', **kwargs):
     return render(request, 'users/user_list.html', {
         'base_template': base_template,
         'userprofiles': models.UserProfile.objects.sorted_score_descending(),
+        'link_list': ExternalLink.objects.filter(featured=True),
     })
 
 
@@ -30,6 +32,7 @@ def question_list(request, user_id, questions, title_prefix='', base_template='p
         'user_profile': user.userprofile,
         'title': title_prefix + user.get_full_name(),
         'questions': questions(user),
+        'link_list': ExternalLink.objects.filter(featured=True),
     })
 
 
