@@ -1,0 +1,23 @@
+{% extends 'subscriptions/base.html' %}
+
+{% block content %}
+    <h1>Tags you are subscribed to:</h1>
+    <div class="pble-part-ranking">
+    {% for tag in sub_tags %}
+        <span class="pble-ranking-item pble-top-tags-item">
+            <span class="pble-top-tags-label"><a href="{% url 'pble_subscriptions:subscribe_tag' tag.tag %}" class="pble-tag-link">{{ tag.tag }}</a></span>
+            <!-- TODO: set proper href to category sub/unsub -->
+        </span>
+    {% endfor %}
+    </div>
+
+    <h1>Tags you are <u>not</u> subscribed to:</h1>
+    <div class="pble-part-ranking">
+    {% for tag in not_sub_tags %}
+        <span class="pble-ranking-item pble-top-tags-item">
+            <span class="pble-top-tags-label"><a href="{% url 'pble_subscriptions:subscribe_tag' tag.tag %}" class="pble-tag-link">{{ tag.tag }}</a></span>
+            <!-- TODO: set proper href to category sub/unsub -->
+        </span>
+    {% endfor %}
+    </div>
+{% endblock %}

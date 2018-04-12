@@ -7,11 +7,11 @@
             <div class="pble-a-item-main">
                 {% if answer.question.author.pk == user.pk and not accepted %}
                     <div class="pble-a-selection">
-                        <a href="{% url 'questions:answers:accept' answer.pk %}"><input type="submit" value="" title="Click to select as best answer" class="pble-a-select-button"></a>
+                        <a href="{% url 'pble_questions:answers:accept' answer.pk %}"><input type="submit" value="" title="Click to select as best answer" class="pble-a-select-button"></a>
                     </div>
                 {% elif answer.accepted %}
                     <div class="pble-a-selection">
-                        <a href="{% url 'questions:answers:accept' answer.pk %}">
+                        <a href="{% url 'pble_questions:answers:accept' answer.pk %}">
                             <input type="submit" value="" class="pble-a-unselect-button" title="Best answer">
                             <div class="pble-a-selected-text">Best answer</div>
                         </a>
@@ -27,7 +27,7 @@
                 </div>
                 <div class="pble-c-form" style="display: none;">
                     <h2>Your comment on this answer:</h2>
-                    <form action="{% url 'questions:comments:submit:a' question.pk answer.pk %}" method="post" class="comment-form pure-form pure-form-stacked">
+                    <form action="{% url 'pble_questions:comments:submit:a' question.pk answer.pk %}" method="post" class="comment-form pure-form pure-form-stacked">
                         {% csrf_token %}
                         {{ comment_form.media }}
                         {{ comment_form }}

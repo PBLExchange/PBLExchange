@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    </head>
+    <body>
+        <h2>Hello {{ recipient_username }},</h2>
+        <h3>
+            {{ answer_author }} has provided the following answer to your question <a href="{{ q_url }}">{{ q_title }}</a>
+        </h3>
+        Answer: {{ answer_text|striptags }}
+    </body>
+</html>

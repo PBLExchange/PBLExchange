@@ -1,0 +1,24 @@
+{% extends base_template %}
+
+{% block sub_menu %}
+    <ul class="pble-nav-sub-list">
+        <li class="pble-nav-sub-item"><a href="{% url 'pble_subscriptions:categories' %}" class="pble-nav-sub-link">Categories</a></li>
+        <li class="pble-nav-sub-item"><a href="{% url 'pble_subscriptions:tags' %}" class="pble-nav-sub-link">Tags</a></li>
+        <li class="pble-nav-sub-item"><a href="{% url 'pble_subscriptions:peers' %}" class="pble-nav-sub-link">Peers</a></li>
+    </ul>
+{% endblock %}
+
+{% block sidepanel %}
+    <div class="pble-sidepanel">
+        <div class="pble-widgets-side pble-widget-side-top">
+            <div class="pble-widget-side pble-widget-side-top">
+                <p>Interested in a specific type of content?<br>
+                Subscribe or unsubscribe to the categories, tags or peers who pique your interest by clicking on them.</p>
+            </div>
+        </div>
+
+        <div class="pble-sidebar">
+            Insert possibiity to modify notification/sub settings
+        </div>
+    </div>
+{% endblock %}

@@ -66,8 +66,10 @@
                         </div>
 
                         <div class="pble-sidebar">
-                            Insert some text here.... Preferably as dynamic content...
-                            Add categories below!
+                            Expand your knowledge of Problem Based Learning using the following links:<br>
+                            {% for link in link_list %}
+                                <a href="{{ link.url }}">{{ link.title }}</a><br>
+                            {% endfor %}
                         </div>
                     </div>
                     {% endblock %}

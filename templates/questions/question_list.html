@@ -13,7 +13,7 @@
             </div>
             <div class="pble-q-item-main">
                 <div class="pble-q-item-title">
-                    <a href="{% url 'questions:detail' question.pk %}">{{ question.title }}</a>
+                    <a href="{% url 'pble_questions:detail' question.pk %}">{{ question.title }}</a>
                 </div>
                 {% post_meta question %}
                 {% tag_list question %}
