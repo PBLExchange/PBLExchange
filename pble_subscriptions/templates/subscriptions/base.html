@@ -20,13 +20,38 @@
         <div class="pble-sidebar">
             <form action="{% url 'pble_subscriptions:alter_subscription_settings' %}" method="post">
             {% csrf_token %}
-                Change your notifications settings:<br><hr>
+                {% if error_message %}
+                    <strong style="color: red;"> {{ error_message }}<br></strong>
+                {% endif %}
+                Change your notifications settings:<br><br>
+
                 {% if answer_notifications %}
-                <input type="checkbox" name="subscription_checked" value="Bike"checked>Subscription enabled<br><hr>
+                <input type="checkbox" name="answer_checked" value="answer_enabled" checked>Answer notifications<br>
                 {% else %}
-                <input type="checkbox" name="subscription_unchecked" value="Car">Subscription enabled<br><hr>
+                <input type="checkbox" name="answer_checked" value="answer_enabled">Answer notifications<br>
                 {% endif %}
 
+                {% if comment_notifications %}
+                <input type="checkbox" name="comment_checked" value="comment_enabled" checked>Comment notifications<br>
+                {% else %}
+                <input type="checkbox" name="comment_checked" value="comment_enabled">Comment notifications<br>
+                {% endif %}
+
+                <!-- Grouped checkboxes for digest options -->
+                <fieldset class="form-group">
+                    <legend class="legend-label">Subscription Digest</legend>
+                    <label class="radio-inline">
+                        <input id="digest1" name="subscription_digest" value="M" type="radio"> Never
+                    </label>
+                    <label class="radio-inline">
+                        <input id="digest2" name="subscription_digest" value="F" type="radio" checked> Daily
+                    </label>
+                    <label class="radio-inline">
+                        <input id="digest3" name="subscription_digest" value="C" type="radio" checked> Weekly
+                    </label>
+                </fieldset>
+
+                <br><br>
                 <input class="pble-form-wide-button pble-form-wide-button-setbonus" name="bonus_points_btn" value="Update bonus" title="" type="submit">
             </form>
         </div>

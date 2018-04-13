@@ -2,6 +2,7 @@ from django.shortcuts import render, HttpResponseRedirect, reverse, get_object_o
 from django.contrib.auth.models import User
 from django.db.models import Q
 from .models import Subscription
+from .forms import SubscriptionSettingsForm
 from pble_questions.models import Category, Tag
 from pble_users.models import UserProfile
 from pble_questions.models import Question, Answer, Comment
@@ -11,7 +12,7 @@ from django.contrib.sites.models import Site
 
 
 # Create your views here.
-def categories(request, base_template='pblexchange/base.html', **kwargs):
+def categories(request, base_template='pblexchange/base.html', error_message='', **kwargs):
     if not request.user.is_authenticated():
         HttpResponseRedirect(reverse('login'))
 
@@ -19,15 +20,18 @@ def categories(request, base_template='pblexchange/base.html', **kwargs):
     user_category_subs = user_sub.categories.order_by('name')
     user_category_nonsubs = Category.objects.all().exclude(name__in=list(user_category_subs)).order_by('name')
     answer_notifications = user_sub.answer_notifications
+    comment_notifications = user_sub.comment_notifications
     return render(request, 'subscriptions/category_list.html', {
         'base_template': base_template,
         'sub_categories': user_category_subs,
         'not_sub_categories': user_category_nonsubs,
         'answer_notifications': answer_notifications,
+        'comment_notifications': comment_notifications,
+        'error_message': error_message,
     })
 
 
-def tags(request, base_template='pblexchange/base.html', **kwargs):
+def tags(request, base_template='pblexchange/base.html', error_message='', **kwargs):
     if not request.user.is_authenticated():
         HttpResponseRedirect(reverse('login'))
 
@@ -35,16 +39,19 @@ def tags(request, base_template='pblexchange/base.html', **kwargs):
     user_tag_subs = user_sub.tags.order_by('tag')
     user_tag_nonsubs = Tag.objects.all().exclude(tag__in=list(user_tag_subs)).order_by('tag')
     answer_notifications = user_sub.answer_notifications
+    comment_notifications = user_sub.comment_notifications
     return render(request, 'subscriptions/tag_list.html', {
         'base_template': base_template,
         'sub_tags': user_tag_subs,
         'not_sub_tags': user_tag_nonsubs,
         'answer_notifications': answer_notifications,
+        'comment_notifications': comment_notifications,
+        'error_message': error_message,
     })
 
 
 # TODO: I am not sure using UserProfile instead of User (both in .models and here) is a good idea
-def peers(request, base_template='pblexchange/base.html', **kwargs):
+def peers(request, base_template='pblexchange/base.html', error_message='', **kwargs):
     if not request.user.is_authenticated():
         HttpResponseRedirect(reverse('login'))
 
@@ -53,11 +60,14 @@ def peers(request, base_template='pblexchange/base.html', **kwargs):
     usrs = UserProfile.objects.all().exclude(user=request.user).\
         exclude(user__in=[u.user for u in user_users_subs]).order_by('user')
     answer_notifications = user_sub.answer_notifications
+    comment_notifications = user_sub.comment_notifications
     return render(request, 'subscriptions/peer_list.html', {
         'base_template': base_template,
         'sub_users': user_users_subs,
         'not_sub_users': usrs,
         'answer_notifications': answer_notifications,
+        'comment_notifications': comment_notifications,
+        'error_message': error_message,
     })
 
 
@@ -114,12 +124,24 @@ def alter_peers(request, username, **kwargs):
     return HttpResponseRedirect(reverse('pble_subscriptions:peers'))
 
 
-def alter_subscription_settings(request, **kwargs):
+def alter_subscription_settings(request, form_type=SubscriptionSettingsForm, **kwargs):
     if not request.user.is_authenticated():
         HttpResponseRedirect(reverse('login'))
 
     if request.method == 'POST':
-        pass
+        post_form = form_type(request.POST)
+        if post_form.is_valid():
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+        else:
+            if 'category' in request.META.get('HTTP_REFERER'):
+                return categories(request, 'pblexchange/base.html',
+                                  error_message='Input error; subscription and notification settings was not changed')
+            elif 'tag' in request.META.get('HTTP_REFERER'):
+                return tags(request, 'pblexchange/base.html',
+                            error_message='Input error; subscription and notification settings was not changed')
+            elif 'peer' in request.META.get('HTTP_REFERER'):
+                return categories(request, 'pblexchange/base.html',
+                                  error_message='Input error; subscription and notification settings was not changed')
     else:
         raise Http404
 
@@ -141,6 +163,7 @@ def send_answer_notification(answer, **kwargs):
                 'q_title': answer.question.title
             }
         )
+        #   TODO: Remember to email answer author
         send_mail('PBL Exchange new answer', '', 'pblexchange@aau.dk', [answer.question.author.email],
                   fail_silently=True, html_message=html_message)
 
