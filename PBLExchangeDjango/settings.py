@@ -48,7 +48,7 @@ INSTALLED_APPS = [
     'django_cas_ng',
     'pble_users',
     'pble_subscriptions',
-    'pble_search',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
@@ -182,3 +182,7 @@ CAS_APPLY_ATTRIBUTES_TO_USER = True
 
 # Set site id for the django.contrib.sites framework
 SITE_ID = 1
+
+
+# Whoosh search settings
+WHOOSH_STORAGE_DIR = 'data/whoosh'

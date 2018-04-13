@@ -2,6 +2,7 @@
 {% load questions %}
 {% load users %}
 {% load menu %}
+{% load links %}
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -35,10 +36,7 @@
                     <div class="pble-nav-user-clear"></div>
                 </div>
                 <div class="pble-search">
-                    <form>
-                        <input type="text" name="q" value="" class="pble-search-field">
-                        <input type="submit" value="Search" class="pble-search-button">
-                    </form>
+                    {% question_search %}
                 </div>
             </div>
         </div>
@@ -66,10 +64,7 @@
                         </div>
 
                         <div class="pble-sidebar">
-                            Expand your knowledge of Problem Based Learning using the following links:<br>
-                            {% for link in link_list %}
-                                <a href="{{ link.url }}">{{ link.title }}</a><br>
-                            {% endfor %}
+                            {% links %}
                         </div>
                     </div>
                     {% endblock %}

@@ -55,3 +55,12 @@ class CommentForm(forms.ModelForm):
             'body',
             'anonymous'
         ]
+
+
+class SearchForm(forms.Form):
+    q = forms.CharField()
+
+    class Meta:
+        fields = [
+            'q'
+        ]

@@ -5,7 +5,10 @@ from django.utils import timezone
 from django.db import models
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.contrib.auth.models import User
-from django.db.models import F, Count, Value, Sum
+from django.db.models import F, Count, Sum
+
+from pble_questions.managers import WhooshManager
+
 # Imports for Answer.save overwrite
 from PBLExchangeDjango.settings import INSTALLED_APPS
 from django.apps import apps
@@ -51,7 +54,10 @@ class Post(models.Model):
         return self.body
 
 
-class QuestionManager(models.Manager):
+class QuestionManager(WhooshManager):
+    def __init__(self, *args, **kwargs):
+        super(QuestionManager, self).__init__(*args, **kwargs)
+
     def unanswered(self):
         return self.recent().filter(answer=None)
 
@@ -85,7 +91,7 @@ class Question(Post):
     course = models.ManyToManyField(Course, blank=True)
     tags = models.ManyToManyField(Tag, blank=True)
 
-    objects = QuestionManager()
+    objects = QuestionManager(default='title', fields=['title', 'body'])
 
     @property
     def votes(self):

@@ -2,7 +2,7 @@ from django import template
 from django.contrib.auth.models import User
 
 from pble_questions.models import Question, Answer, Comment
-from pble_questions.forms import CommentForm
+from pble_questions.forms import CommentForm, SearchForm
 
 register = template.Library()
 
@@ -89,3 +89,10 @@ def display_name(post):
     if post.author.get_full_name():
         return post.author.get_full_name()
     return post.author.get_username()
+
+
+@register.inclusion_tag('questions/search_tag.html')
+def question_search():
+    return {
+        'form': SearchForm()
+    }

@@ -1,0 +1,6 @@
+{% load widget_tweaks %}
+<form method="GET" action="{% url 'pble_questions:search' %}">
+    {{ form.q|add_class:"pble-search-field" }}
+    <!--<input type="text" name="q" value="" class="pble-search-field">-->
+    <input type="submit" value="Search" class="pble-search-button">
+</form>

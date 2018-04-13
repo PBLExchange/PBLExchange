@@ -1,0 +1,7 @@
+{% extends base_template %}
+{% load questions %}
+
+{% block content %}
+    <h1>Results of search:</h1>
+    {% question_list questions %}
+{% endblock %}
