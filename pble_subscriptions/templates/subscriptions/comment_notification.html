@@ -9,8 +9,8 @@
         </h3>
         Question:  <a href="{{ q_url }}">{{ q_title }}</a>
 
-        Answer: {{ answer_text|striptags }}
+        Answer: {{ answer_text|striptags|safe }}
 
-        Comment: {{ comment_text|striptags }}
+        Comment: {{ comment_text|striptags|safe }}
     </body>
 </html>

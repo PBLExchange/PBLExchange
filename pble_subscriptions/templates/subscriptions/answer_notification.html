@@ -7,6 +7,6 @@
         <h3>
             {{ answer_author }} has provided the following answer to your question <a href="{{ q_url }}">{{ q_title }}</a>
         </h3>
-        Answer: {{ answer_text|striptags }}
+        Answer: {{ answer_text|striptags|safe }}
     </body>
 </html>

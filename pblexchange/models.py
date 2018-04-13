@@ -39,7 +39,7 @@ class Setting(models.Model):
 
 class ExternalLink(models.Model):
     id = models.AutoField(primary_key=True)
-    title = models.CharField(max_length=64)
+    title = models.CharField(max_length=64, unique=True)
     url = models.URLField(validators=[URLValidator], unique=True)
     featured = models.BooleanField(default=True)
 

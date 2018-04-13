@@ -12,5 +12,6 @@ urlpatterns = [
     url(r'^categories$', views.categories, name='categories'),
     url(r'^tags$', views.tags, name='tags'),
     url(r'^peers$', views.peers, name='peers'),
-    url(r'^alter_subscription/', include(subscribe_patterns))
+    url(r'^alter_subscription/', include(subscribe_patterns)),
+    url(r'^alter_subscription_settings', views.alter_subscription_settings, name='alter_subscription_settings'),
 ]

@@ -18,7 +18,17 @@
         </div>
 
         <div class="pble-sidebar">
-            Insert possibiity to modify notification/sub settings
+            <form action="{% url 'pble_subscriptions:alter_subscription_settings' %}" method="post">
+            {% csrf_token %}
+                Change your notifications settings:<br><hr>
+                {% if answer_notifications %}
+                <input type="checkbox" name="subscription_checked" value="Bike"checked>Subscription enabled<br><hr>
+                {% else %}
+                <input type="checkbox" name="subscription_unchecked" value="Car">Subscription enabled<br><hr>
+                {% endif %}
+
+                <input class="pble-form-wide-button pble-form-wide-button-setbonus" name="bonus_points_btn" value="Update bonus" title="" type="submit">
+            </form>
         </div>
     </div>
 {% endblock %}

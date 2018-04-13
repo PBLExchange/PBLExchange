@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponseRedirect, reverse, get_object_or_404
+from django.shortcuts import render, HttpResponseRedirect, reverse, get_object_or_404, Http404
 from django.contrib.auth.models import User
 from django.db.models import Q
 from .models import Subscription
@@ -18,10 +18,12 @@ def categories(request, base_template='pblexchange/base.html', **kwargs):
     user_sub, _ = Subscription.objects.get_or_create(user=request.user)
     user_category_subs = user_sub.categories.order_by('name')
     user_category_nonsubs = Category.objects.all().exclude(name__in=list(user_category_subs)).order_by('name')
+    answer_notifications = user_sub.answer_notifications
     return render(request, 'subscriptions/category_list.html', {
         'base_template': base_template,
         'sub_categories': user_category_subs,
-        'not_sub_categories': user_category_nonsubs
+        'not_sub_categories': user_category_nonsubs,
+        'answer_notifications': answer_notifications,
     })
 
 
@@ -32,10 +34,12 @@ def tags(request, base_template='pblexchange/base.html', **kwargs):
     user_sub, _ = Subscription.objects.get_or_create(user=request.user)
     user_tag_subs = user_sub.tags.order_by('tag')
     user_tag_nonsubs = Tag.objects.all().exclude(tag__in=list(user_tag_subs)).order_by('tag')
+    answer_notifications = user_sub.answer_notifications
     return render(request, 'subscriptions/tag_list.html', {
         'base_template': base_template,
         'sub_tags': user_tag_subs,
-        'not_sub_tags': user_tag_nonsubs
+        'not_sub_tags': user_tag_nonsubs,
+        'answer_notifications': answer_notifications,
     })
 
 
@@ -48,10 +52,12 @@ def peers(request, base_template='pblexchange/base.html', **kwargs):
     user_users_subs = user_sub.peers.order_by('user') # TODO: order_by user.username
     usrs = UserProfile.objects.all().exclude(user=request.user).\
         exclude(user__in=[u.user for u in user_users_subs]).order_by('user')
+    answer_notifications = user_sub.answer_notifications
     return render(request, 'subscriptions/peer_list.html', {
         'base_template': base_template,
         'sub_users': user_users_subs,
-        'not_sub_users': usrs
+        'not_sub_users': usrs,
+        'answer_notifications': answer_notifications,
     })
 
 
@@ -106,6 +112,16 @@ def alter_peers(request, username, **kwargs):
         # TODO: should we redirect back to overview or keep using meta.referer?
 
     return HttpResponseRedirect(reverse('pble_subscriptions:peers'))
+
+
+def alter_subscription_settings(request, **kwargs):
+    if not request.user.is_authenticated():
+        HttpResponseRedirect(reverse('login'))
+
+    if request.method == 'POST':
+        pass
+    else:
+        raise Http404
 
 
 # Notification methods
