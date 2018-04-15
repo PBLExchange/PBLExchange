@@ -132,16 +132,16 @@ def alter_subscription_settings(request, form_type=SubscriptionSettingsForm, **k
         post_form = form_type(request.POST)
         if post_form.is_valid():
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-        else:
-            if 'category' in request.META.get('HTTP_REFERER'):
+        else: # TODO: is there dynamic way to determine referer association?
+            if 'categories' in request.META.get('HTTP_REFERER'):
                 return categories(request, 'pblexchange/base.html',
                                   error_message='Input error; subscription and notification settings was not changed')
-            elif 'tag' in request.META.get('HTTP_REFERER'):
+            elif 'tags' in request.META.get('HTTP_REFERER'):
                 return tags(request, 'pblexchange/base.html',
                             error_message='Input error; subscription and notification settings was not changed')
-            elif 'peer' in request.META.get('HTTP_REFERER'):
-                return categories(request, 'pblexchange/base.html',
-                                  error_message='Input error; subscription and notification settings was not changed')
+            elif 'peers' in request.META.get('HTTP_REFERER'):
+                return peers(request, 'pblexchange/base.html',
+                             error_message='Input error; subscription and notification settings was not changed')
     else:
         raise Http404
 
@@ -163,7 +163,7 @@ def send_answer_notification(answer, **kwargs):
                 'q_title': answer.question.title
             }
         )
-        #   TODO: Remember to email answer author
+
         send_mail('PBL Exchange new answer', '', 'pblexchange@aau.dk', [answer.question.author.email],
                   fail_silently=True, html_message=html_message)
 
@@ -191,6 +191,7 @@ def send_comment_notifications(comment):    # TODO: Test this feature!!!!
         message = ('PBL Exchange new comment', '', 'pblexchange@aau.dk', [ac.author.email], html_message)
         message_list += message
 
+    # TODO: Remember to email answer author
     send_mass_mail(message_list, fail_silently=False)
 
 
