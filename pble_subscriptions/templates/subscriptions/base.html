@@ -1,4 +1,5 @@
 {% extends base_template %}
+{% load subscriptions %}
 
 {% block sub_menu %}
     <ul class="pble-nav-sub-list">
@@ -38,19 +39,8 @@
                 {% endif %}
 
                 <!-- Grouped checkboxes for digest options -->
-                <!-- TODO: autogenerate this and set correct element as checked -->
-                <fieldset class="form-group">
-                    <legend class="legend-label">Subscription Digest</legend>
-                    <label class="radio-inline">
-                        <input id="digest1" name="subscription_digest" value="NEVER" type="radio"> Never
-                    </label>
-                    <label class="radio-inline">
-                        <input id="digest2" name="subscription_digest" value="DAILY" type="radio" checked> Daily
-                    </label>
-                    <label class="radio-inline">
-                        <input id="digest3" name="subscription_digest" value="WEEKLY" type="radio" checked> Weekly
-                    </label>
-                </fieldset>
+                <!-- TODO: auto generate the digest options html -->
+                {% digest_options user.id %}
 
                 <br><br>
                 <input class="pble-form-wide-button pble-form-wide-button-setbonus" name="update_btn" value="Update settings" title="" type="submit">

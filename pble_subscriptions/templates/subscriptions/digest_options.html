@@ -1,0 +1,40 @@
+{% if current_digest == "NEVER" %}
+    <fieldset class="form-group">
+        <legend class="legend-label">Subscription Digest</legend>
+        <label class="radio-inline">
+            <input id="digest1" name="subscription_digest" value="NEVER" type="radio" checked> Never
+        </label>
+        <label class="radio-inline">
+            <input id="digest2" name="subscription_digest" value="DAILY" type="radio"> Daily
+        </label>
+        <label class="radio-inline">
+            <input id="digest3" name="subscription_digest" value="WEEKLY" type="radio"> Weekly
+        </label>
+    </fieldset>
+{% elif current_digest == "DAILY" %}
+    <fieldset class="form-group">
+        <legend class="legend-label">Subscription Digest</legend>
+        <label class="radio-inline">
+            <input id="digest1" name="subscription_digest" value="NEVER" type="radio"> Never
+        </label>
+        <label class="radio-inline">
+            <input id="digest2" name="subscription_digest" value="DAILY" type="radio" checked> Daily
+        </label>
+        <label class="radio-inline">
+            <input id="digest3" name="subscription_digest" value="WEEKLY" type="radio"> Weekly
+        </label>
+    </fieldset>
+{% elif current_digest == "WEEKLY" %}
+    <fieldset class="form-group">
+        <legend class="legend-label">Subscription Digest</legend>
+        <label class="radio-inline">
+            <input id="digest1" name="subscription_digest" value="NEVER" type="radio"> Never
+        </label>
+        <label class="radio-inline">
+            <input id="digest2" name="subscription_digest" value="DAILY" type="radio"> Daily
+        </label>
+        <label class="radio-inline">
+            <input id="digest3" name="subscription_digest" value="WEEKLY" type="radio" checked> Weekly
+        </label>
+    </fieldset>
+{% endif %}
