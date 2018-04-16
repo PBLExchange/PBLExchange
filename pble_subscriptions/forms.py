@@ -3,14 +3,14 @@ from .models import Subscription
 
 
 class SubscriptionSettingsForm(forms.Form):
-    answer_checked = forms.BooleanField(required=True)
-    comment_checked = forms.BooleanField(required=True)
+    answer_check = forms.BooleanField(required=False)
+    comment_check = forms.BooleanField(required=False)
     subscription_digest = forms.MultipleChoiceField(choices=Subscription.DIGEST_CHOICES, label="digest choice", required=True)
 
     class Meta:
         model = Subscription
         fields = [
-            'answer_checked',
-            'comment_checked',
+            'answer_check',
+            'comment_check',
             'subscription_digest'
         ]

@@ -131,6 +131,12 @@ def alter_subscription_settings(request, form_type=SubscriptionSettingsForm, **k
     if request.method == 'POST':
         post_form = form_type(request.POST)
         if post_form.is_valid():
+            user_subscription = Subscription.objects.get(user=request.user)
+            form_data = post_form.cleaned_data
+            user_subscription.answer_notifications = form_data.get('answer_check')
+            user_subscription.comment_notifications = form_data.get('comment_check')
+            user_subscription.digest = form_data.get('subscription_digest')[0]
+            user_subscription.save()
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
         else: # TODO: is there dynamic way to determine referer association?
             if 'categories' in request.META.get('HTTP_REFERER'):

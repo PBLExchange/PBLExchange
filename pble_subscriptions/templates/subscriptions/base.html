@@ -26,33 +26,34 @@
                 Change your notifications settings:<br><br>
 
                 {% if answer_notifications %}
-                <input type="checkbox" name="answer_checked" value="answer_enabled" checked>Answer notifications<br>
+                <input type="checkbox" name="answer_check" value="answer_enabled" checked>Answer notifications<br>
                 {% else %}
-                <input type="checkbox" name="answer_checked" value="answer_enabled">Answer notifications<br>
+                <input type="checkbox" name="answer_check" value="answer_enabled">Answer notifications<br>
                 {% endif %}
 
                 {% if comment_notifications %}
-                <input type="checkbox" name="comment_checked" value="comment_enabled" checked>Comment notifications<br>
+                <input type="checkbox" name="comment_check" value="comment_enabled" checked>Comment notifications<br>
                 {% else %}
-                <input type="checkbox" name="comment_checked" value="comment_enabled">Comment notifications<br>
+                <input type="checkbox" name="comment_check" value="comment_enabled">Comment notifications<br>
                 {% endif %}
 
                 <!-- Grouped checkboxes for digest options -->
+                <!-- TODO: autogenerate this and set correct element as checked -->
                 <fieldset class="form-group">
                     <legend class="legend-label">Subscription Digest</legend>
                     <label class="radio-inline">
-                        <input id="digest1" name="subscription_digest" value="M" type="radio"> Never
+                        <input id="digest1" name="subscription_digest" value="NEVER" type="radio"> Never
                     </label>
                     <label class="radio-inline">
-                        <input id="digest2" name="subscription_digest" value="F" type="radio" checked> Daily
+                        <input id="digest2" name="subscription_digest" value="DAILY" type="radio" checked> Daily
                     </label>
                     <label class="radio-inline">
-                        <input id="digest3" name="subscription_digest" value="C" type="radio" checked> Weekly
+                        <input id="digest3" name="subscription_digest" value="WEEKLY" type="radio" checked> Weekly
                     </label>
                 </fieldset>
 
                 <br><br>
-                <input class="pble-form-wide-button pble-form-wide-button-setbonus" name="bonus_points_btn" value="Update bonus" title="" type="submit">
+                <input class="pble-form-wide-button pble-form-wide-button-setbonus" name="update_btn" value="Update settings" title="" type="submit">
             </form>
         </div>
     </div>
