@@ -153,6 +153,7 @@ def alter_subscription_settings(request, form_type=SubscriptionSettingsForm, **k
 
 
 # Notification methods
+# TODO: Make these functions use celery task methods for asynchronous behaviour
 def send_answer_notification(answer, **kwargs):
     a_author_subscription = Subscription.objects.get(user=answer.question.author)
     if a_author_subscription.answer_notifications and answer.author != answer.question.author:
