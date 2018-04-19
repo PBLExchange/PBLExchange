@@ -37,7 +37,7 @@ def question_list(request, user_id, questions, title_prefix='', base_template='p
 
 
 def bonus_points(request, user_id, **kwargs):
-    if request.method == 'POST' and request.user.is_authenticated():
+    if request.method == 'POST' and request.user.is_authenticated() and request.user.is_superuser:
         form = BonusPointForm(request.POST)
         if 'pble_users' in settings.INSTALLED_APPS:
             if form.is_valid():

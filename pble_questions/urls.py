@@ -5,6 +5,7 @@ from .forms import AnswerForm, CommentForm
 
 
 urlpatterns = [
+    url(r'^search', views.search, name='search'),
     url(r'^new$', views.new, name='new'),
     url(r'^unanswered$', views.unanswered, name='unanswered'),
     url(r'^hot$', views.hot, name='hot'),

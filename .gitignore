@@ -5,3 +5,5 @@ __pycache__
 .directory
 *.sqlite3
 /static/
+/PBLExchangeDjango/private_settings.py
+/data/

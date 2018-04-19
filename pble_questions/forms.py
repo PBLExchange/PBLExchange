@@ -20,8 +20,10 @@ class QuestionForm(forms.ModelForm):
         ]
 
     def clean_tags(self):
-        # Removes all spaces in the string (tags cannot contain spaces), and splits on ','
-        tag_strings = re.sub('[\s+]', '', self.cleaned_data['tags']).lower().split(',')
+        # Removes all spaces in the string (tags cannot contain spaces),
+        # replace æøå with normal letters, and splits on ','
+        tag_strings = re.sub('[\s+]', '', self.cleaned_data['tags']).lower().replace('æ', 'ae').replace('ø', 'oe')\
+            .replace('å', 'aa').split(',')
         tags = []
         for t in tag_strings:
             if t == '':
@@ -52,4 +54,13 @@ class CommentForm(forms.ModelForm):
         fields = [
             'body',
             'anonymous'
+        ]
+
+
+class SearchForm(forms.Form):
+    q = forms.CharField()
+
+    class Meta:
+        fields = [
+            'q'
         ]

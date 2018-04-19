@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
+import PBLExchangeDjango.private_settings as ps
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -20,7 +21,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '4bw!xfvafdoc^8qkn*ix*i3)ndc9^k3_7*mkm&5d3t0)7ns#&='
+SECRET_KEY = ps.SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -48,6 +49,7 @@ INSTALLED_APPS = [
     'pble_users',
     'pble_subscriptions',
     'djcelery',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
@@ -71,10 +73,10 @@ ROOT_URLCONF = 'PBLExchangeDjango.urls'
 # Mail settings
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'GideonBlegmand@gmail.com'
+EMAIL_HOST = ps.EMAIL_HOST
+EMAIL_HOST_USER = ps.EMAIL_HOST_USER
 # SECURITY WARNING: keep the password private!
-EMAIL_HOST_PASSWORD = ''
+EMAIL_HOST_PASSWORD = ps.EMAIL_HOST_PASSWORD
 EMAIL_PORT = 587
 
 TEMPLATES = [
@@ -175,11 +177,11 @@ LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
 
 # Django-cas-ng settings
-CAS_SERVER_URL = 'https://login.aau.dk/cas/'
+CAS_SERVER_URL = 'https://signon.aau.dk/cas/'
 CAS_VERSION = 'CAS_2_SAML_1_0'
 CAS_APPLY_ATTRIBUTES_TO_USER = True
 
-# TODO: Move to private settings
+# Celery related settings
 BROKER_URL = "amqp://pble:pble1234@localhost:5672/pblevhost"
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
@@ -190,3 +192,7 @@ CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
 
 # Set site id for the django.contrib.sites framework
 SITE_ID = 1
+
+
+# Whoosh search settings
+WHOOSH_STORAGE_DIR = 'data/whoosh'
