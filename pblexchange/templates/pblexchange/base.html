@@ -3,6 +3,7 @@
 {% load users %}
 {% load menu %}
 {% load links %}
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -23,14 +24,14 @@
                     <div class="pble-logged-in-avatar"></div>
 
                     <div class="pble-logged-in">
-                        <span class="pble-logged-in-pad">Hello </span><span class="pble-logged-in-data">{% get_user request.user %}</span>
+                        <span class="pble-logged-in-pad">{% trans 'Hello' %} </span><span class="pble-logged-in-data">{% get_user request.user %}</span>
                     </div>
                     <span class="pble-logged-in-points">
-                        ({{ request.user.userprofile.points }} points)
+                        ({{ request.user.userprofile.points }} {% trans 'points' %})
                     </span>
                     <ul class="pble-nav-user-list">
                         <li class="pble-nav-user-item pble-nav-user-logout">
-                            <a href="{% url 'logout' %}" class="pble-nav-user-link">Logout</a>
+                            <a href="{% url 'logout' %}" class="pble-nav-user-link">{% trans 'Logout' %}</a>
                         </li>
                     </ul>
                     <div class="pble-nav-user-clear"></div>
