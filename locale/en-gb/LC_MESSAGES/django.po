@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-21 00:28+0000\n"
+"POT-Creation-Date: 2018-04-21 00:35+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,6 +23,10 @@ msgstr ""
 
 #: PBLExchangeDjango/settings.py:148
 msgid "Danish"
+msgstr ""
+
+#: pble_questions/views.py:16
+msgid "new"
 msgstr ""
 
 #: pblexchange/templates/pblexchange/base.html:27
@@ -63,6 +67,10 @@ msgstr ""
 
 #: pblexchange/templates/pblexchange/base.html:100
 msgid "Powered by"
+msgstr ""
+
+#: pblexchange/views.py:11
+msgid "questions"
 msgstr ""
 
 #: templates/questions/question_list.html:12

@@ -148,9 +148,9 @@ LANGUAGES = [
     ('da', _('Danish')),
 ]
 
-LOCALE_PATH = (
+LOCALE_PATHS = [
     os.path.join(BASE_DIR, 'locale'),
-)
+]
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/

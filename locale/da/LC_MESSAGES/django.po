@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-21 00:22+0000\n"
+"POT-Creation-Date: 2018-04-21 00:35+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,6 +24,10 @@ msgstr "Engelsk"
 #: PBLExchangeDjango/settings.py:148
 msgid "Danish"
 msgstr "Dansk"
+
+#: pble_questions/views.py:16
+msgid "new"
+msgstr "nye"
 
 #: pblexchange/templates/pblexchange/base.html:27
 msgid "Hello"
@@ -55,7 +59,7 @@ msgstr "som et Github issue"
 
 #: pblexchange/templates/pblexchange/base.html:93
 msgid "or"
-msgstr "lol"
+msgstr "eller"
 
 #: pblexchange/templates/pblexchange/base.html:94
 msgid "via email"
@@ -64,6 +68,10 @@ msgstr "via email"
 #: pblexchange/templates/pblexchange/base.html:100
 msgid "Powered by"
 msgstr "Drevet af"
+
+#: pblexchange/views.py:11
+msgid "questions"
+msgstr "sp&oslash;rgsm&aring;l"
 
 #: templates/questions/question_list.html:12
 msgid "answers"
