@@ -29,6 +29,8 @@
                     <span class="pble-logged-in-points">
                         ({{ request.user.userprofile.points }} {% trans 'points' %})
                     </span>
+                    {% get_current_language as LANGUAGE %}
+                    {{ LANGUAGE }}
                     <ul class="pble-nav-user-list">
                         <li class="pble-nav-user-item pble-nav-user-logout">
                             <a href="{% url 'logout' %}" class="pble-nav-user-link">{% trans 'Logout' %}</a>
@@ -44,7 +46,7 @@
         <div class="pble-body-wrapper">
             <div class="pble-header">
                 <div class="pble-logo">
-                    <a href="{% url 'home' %}" class="pble-logo-link">PBL Exchange</a> <!--TODO: make dynamic-->
+                    <a href="{% url 'home' %}" class="pble-logo-link">{% trans 'PBL Exchange' %}</a> {# TODO: make dynamic #}
                 </div>
                 <div class="pble-header-clear"></div>
             </div>
@@ -73,7 +75,7 @@
 
                     <div class="pble-main">
                         {% block content %}
-                            <h1>Questions:</h1>
+                            <h1>{% trans 'Questions' %}:</h1>
                             {% question_list questions %}
                         {% endblock %}
                     </div>
@@ -86,16 +88,16 @@
                 <div class="pble-nav-footer">
                     <ul class="pble-nav-footer-list">
                         <li class="pble-nav-footer-item pble-nav-footer-feedback">
-                            Submit feedback and bugs
-                            <a class="pble-nav-footer-link" href="https://github.com/GideonBlegmand/PBLExchange-Django/issues">as a Github issue</a>
-                            or
-                            <a class="pble-nav-footer-link" href="mailto:hans@cs.aau.dk">via email</a>
+                            {% trans 'Submit feedback and bugs' %}
+                            <a class="pble-nav-footer-link" href="https://github.com/GideonBlegmand/PBLExchange-Django/issues">{% trans 'as a Github issue' %}</a>
+                            {% trans 'or' %}
+                            <a class="pble-nav-footer-link" href="mailto:hans@cs.aau.dk">{% trans 'via email' %}</a>
                         </li>
                     </ul>
                     <div class="pble-nav-footer-clear"></div>
                 </div>
                 <!-- insert theme as seen on original Q2A site -->
-                <div class="pble-attribution">Powered by <a href="https://github.com/GideonBlegmand/PBLExchange-Django">PBLExchangeDjango</a></div>
+                <div class="pble-attribution">{% trans 'Powered by' %} <a href="https://github.com/GideonBlegmand/PBLExchange-Django">PBLExchangeDjango</a></div>
                 <div class="pble-footer-clear"></div>
             </div>
         </div>
