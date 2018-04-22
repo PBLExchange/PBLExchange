@@ -1,0 +1,39 @@
+{% load subscriptions %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+    </head>
+    <body>
+        <h2>Hello {{ recipient }}, this is your {{ digest_option }} digest.</h2>
+        {% if category_questions %}
+            <h4>
+                Questions matching your category subscription
+            </h4>
+
+            {% for q in category_questions %}
+            {% question_url q %}, {{ q.category }}<br>
+            {% endfor %}
+
+            <br>
+        {% endif %}
+        {% if peer_questions %}
+            <h4>
+                Questions matching your peer subscription
+            </h4>
+            {% for q in peer_questions %}
+                {% question_url q %}, {{ q.author }}<br>
+            {% endfor %}
+        {% endif %}
+
+            <br>
+        {% if tag_questions %}
+            <h4>
+                Questions matching your tag subscription
+            </h4>
+            {% for q in tag_questions %}
+                {% question_url q %}, {% for t in q.tags.all %} {{ t.tag }}, {% endfor %}<br>
+            {% endfor %}
+        {% endif %}
+    </body>
+</html>

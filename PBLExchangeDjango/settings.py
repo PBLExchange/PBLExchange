@@ -169,7 +169,7 @@ CKEDITOR_UPLOAD_PATH = 'uploads/'
 
 # Login settings
 LOGIN_URL = 'login'
-EXEMPT_USERS = ['aklost11', 'gblegm13',]
+EXEMPT_USERS = ['aklost11', 'gblegm13', 'csteph13']
 DISALLOWED_DOMAINS = ['student.aau.dk']
 
 # Login redirect
@@ -191,8 +191,7 @@ CELERY_RESULT_BACKEND = 'djcelery.backends.database:DatabaseBackend'
 CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
 
 # Set site id for the django.contrib.sites framework
-SITE_ID = 1
-
+SITE_ID = 1     # TODO: On release set django_site domain field to pblexchange.aau.dk
 
 # Whoosh search settings
 WHOOSH_STORAGE_DIR = 'data/whoosh'

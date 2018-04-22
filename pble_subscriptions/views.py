@@ -6,7 +6,7 @@ from .forms import SubscriptionSettingsForm
 from pble_questions.models import Category, Tag
 from pble_users.models import UserProfile
 from pble_questions.models import Question, Answer, Comment
-from django.core.mail import send_mail, send_mass_mail
+from django.core.mail import send_mail, get_connection, EmailMultiAlternatives
 from django.template import loader
 from django.contrib.sites.models import Site
 
@@ -50,15 +50,14 @@ def tags(request, base_template='pblexchange/base.html', error_message='', **kwa
     })
 
 
-# TODO: I am not sure using UserProfile instead of User (both in .models and here) is a good idea
 def peers(request, base_template='pblexchange/base.html', error_message='', **kwargs):
     if not request.user.is_authenticated():
         HttpResponseRedirect(reverse('login'))
 
     user_sub, _ = Subscription.objects.get_or_create(user=request.user)
-    user_users_subs = user_sub.peers.order_by('user') # TODO: order_by user.username
+    user_users_subs = user_sub.peers.order_by('user__username')
     usrs = UserProfile.objects.all().exclude(user=request.user).\
-        exclude(user__in=[u.user for u in user_users_subs]).order_by('user')
+        exclude(user__in=[u.user for u in user_users_subs]).order_by('user__username')
     answer_notifications = user_sub.answer_notifications
     comment_notifications = user_sub.comment_notifications
     return render(request, 'subscriptions/peer_list.html', {
@@ -83,8 +82,8 @@ def alter_categories(request, category_text, **kwargs):
         user_sub.categories.remove(category)
     else:
         user_sub.categories.add(category)
+
     user_sub.save()
-    # TODO: should we redirect back to overview or keep using meta.referer?
     return HttpResponseRedirect(reverse('pble_subscriptions:categories'))
 
 
@@ -99,8 +98,8 @@ def alter_tags(request, tag_text, **kwargs):
         user_sub.tags.remove(tag)
     else:
         user_sub.tags.add(tag)
+
     user_sub.save()
-    # TODO: should we redirect back to overview or keep using meta.referer?
     return HttpResponseRedirect(reverse('pble_subscriptions:tags'))
 
 
@@ -119,12 +118,17 @@ def alter_peers(request, username, **kwargs):
         else:
             request_usr__sub.peers.add(username_up)
         request_usr__sub.save()
-        # TODO: should we redirect back to overview or keep using meta.referer?
 
     return HttpResponseRedirect(reverse('pble_subscriptions:peers'))
 
 
 def alter_subscription_settings(request, form_type=SubscriptionSettingsForm, **kwargs):
+
+    import pble_subscriptions.tasks as ta
+
+    #ta.send_daily_digest()
+    ta.send_weekly_digest()
+
     if not request.user.is_authenticated():
         HttpResponseRedirect(reverse('login'))
 
@@ -159,14 +163,14 @@ def send_answer_notification(answer, **kwargs):
     if a_author_subscription.answer_notifications and answer.author != answer.question.author:
         current_site = Site.objects.get_current()
         q_url = current_site.domain + reverse('pble_questions:detail', args=(
-            answer.question.id,))    # TODO: On release set django_site domain field to pblexchange.aau.dk
+            answer.question.id,))
         html_message = loader.render_to_string(
             'subscriptions/answer_notification.html',
             {
                 'answer_author': answer.author.username,
                 'recipient_username': answer.question.author.username,
                 'q_url': q_url,
-                'answer_text': answer.body,  # TODO: This body contains html p tags by default, remove them
+                'answer_text': answer.body,
                 'q_title': answer.question.title
             }
         )
@@ -176,30 +180,40 @@ def send_answer_notification(answer, **kwargs):
 
 
 def send_comment_notifications(comment):    # TODO: Test this feature!!!!
-    message_list = ()
-    answer_comments = Comment.objects.filter(answer=comment.answer)
-    answer_comments.filter(author__subscription__comment_notifications=True)
+    receivers_list = ()
+    answer_comments = Comment.objects.filter(answer=comment.answer).filter(author__subscription__comment_notifications=True)
     current_site = Site.objects.get_current()
     q_url = current_site.domain + reverse('pble_questions:detail', args=(
-        comment.question.id,))   # TODO: On release set django_site domain field to pblexchange.aau.dk
+        comment.question.id,))
 
-    for ac in answer_comments:
+    connection = get_connection()  # uses SMTP server specified in settings.py
+    connection.open()  # If you don't open the connection manually, Django will automatically open, then tear down the connection in msg.send()
+
+    for e in answer_comments:
+        if e.author not in receivers_list and e != comment.answer.author:
+            receivers_list.__add__(e.author)
+
+    if comment.answer.author not in receivers_list:
+        receivers_list.__add__(comment.answer.author)
+
+    for user in receivers_list:
         html_message = loader.render_to_string(
             'subscriptions/comment_notification.html',
             {
-                'recipient_username': comment.author.username,
+                'recipient_username': user.username,
                 'q_url': q_url,
-                'answer_text': comment.answer.body,  # TODO: This body contains html p tags by default, remove them
-                'comment_text': comment.body,   # TODO: remove any html tags
+                'answer_text': comment.answer.body,
+                'comment_text': comment.body,
                 'q_title': comment.question.title,
                 'comment_author': comment.author.username,
             }
         )
-        message = ('PBL Exchange new comment', '', 'pblexchange@aau.dk', [ac.author.email], html_message)
-        message_list += message
+        message = EmailMultiAlternatives('PBL Exchange daily digest', '', 'pblexchange@aau.dk', [u.user.email],
+                                         connection=connection)
+        message.attach_alternative(html_message, 'text/html')
+        message.send()
 
-    # TODO: Remember to email answer author
-    send_mass_mail(message_list, fail_silently=False)
+    connection.close()  # Cleanup
 
 
 def send_accepted_notification(answer):
@@ -208,7 +222,7 @@ def send_accepted_notification(answer):
     if a_author_subscription.answer_notifications:
         current_site = Site.objects.get_current()
         q_url = current_site.domain + reverse('pble_questions:detail', args=(
-            answer.question.id,))  # TODO: On release set django_site domain field to pblexchange.aau.dk
+            answer.question.id,))
 
         accept_action = ''
         if answer.accepted:
