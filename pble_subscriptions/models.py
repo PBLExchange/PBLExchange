@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-#from pble_questions.models import Question, Answer, Comment, Category, Tag
+from pble_questions.models import Question
 from pble_users.models import UserProfile
 
 
@@ -25,16 +25,7 @@ class Notification(models.Model):
         abstract = True
 
     created_date = models.DateTimeField(auto_now_add=True)
-    #delivered = models.BooleanField(default=False)
 
 
 class QuestionNotification(Notification):
-    question = models.ForeignKey('pble_questions.Question', on_delete=models.CASCADE)
-
-
-class AnswerNotification(Notification):
-    answer = models.ForeignKey('pble_questions.Answer', on_delete=models.CASCADE)
-
-
-class CommentNotification(Notification):
-    comment = models.ForeignKey('pble_questions.Comment', on_delete=models.CASCADE)
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)

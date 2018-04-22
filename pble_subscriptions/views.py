@@ -1,6 +1,5 @@
 from django.shortcuts import render, HttpResponseRedirect, reverse, get_object_or_404, Http404
 from django.contrib.auth.models import User
-from django.db.models import Q
 from .models import Subscription
 from .forms import SubscriptionSettingsForm
 from pble_questions.models import Category, Tag
@@ -124,11 +123,6 @@ def alter_peers(request, username, **kwargs):
 
 def alter_subscription_settings(request, form_type=SubscriptionSettingsForm, **kwargs):
 
-    import pble_subscriptions.tasks as ta
-
-    #ta.send_daily_digest()
-    ta.send_weekly_digest()
-
     if not request.user.is_authenticated():
         HttpResponseRedirect(reverse('login'))
 
@@ -208,7 +202,7 @@ def send_comment_notifications(comment):    # TODO: Test this feature!!!!
                 'comment_author': comment.author.username,
             }
         )
-        message = EmailMultiAlternatives('PBL Exchange daily digest', '', 'pblexchange@aau.dk', [u.user.email],
+        message = EmailMultiAlternatives('PBL Exchange daily digest', '', 'pblexchange@aau.dk', [user.email],
                                          connection=connection)
         message.attach_alternative(html_message, 'text/html')
         message.send()

@@ -79,6 +79,13 @@ EMAIL_HOST_USER = ps.EMAIL_HOST_USER
 EMAIL_HOST_PASSWORD = ps.EMAIL_HOST_PASSWORD
 EMAIL_PORT = 587
 
+# Since send_mass_mail() does not work with HTML we use Django's EmailMultiAlternatives (see pble_subscription/tasks.py)
+ALTERNATE_EMAIL_HOST_PASSWORD = ps.ALTERNATE_EMAIL_HOST_PASSWORD
+ALTERNATE_EMAIL_HOST_USER = ps.ALTERNATE_EMAIL_HOST_USER
+ALTERNATE_EMAIL_HOST = ps.ALTERNATE_EMAIL_HOST
+ALTERNATE_EMAIL_PORT = 587
+ALTERNATE_EMAIL_USE_TLS = True
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',

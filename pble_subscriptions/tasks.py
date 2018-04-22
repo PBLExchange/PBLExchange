@@ -1,34 +1,25 @@
 # Celery tasks
-from celery import Celery
 from pble_subscriptions.models import Subscription, QuestionNotification
-from datetime import datetime, timedelta, time, date
+from pble_questions.models import Tag
+from datetime import timedelta, time, date
 from django.utils import timezone
 from django.template import loader
 from collections import defaultdict
-
-#app = Celery('tasks', broker='amqp://guest@localhost//')
-
 from celery.schedules import crontab
 from celery.task import periodic_task
-#from myapp.utils import scrapers
 from celery.utils.log import get_task_logger
 from datetime import datetime
-from django.core.mail import send_mail, send_mass_mail, get_connection, EmailMultiAlternatives
+# Since send_mass_email does not work with HTML message we use an alternative
+from django.core.mail import get_connection, EmailMultiAlternatives
 
-logger = get_task_logger(__name__)
-from PBLExchangeDjango.celery import app as celery_app
-
-
-# A periodic task that will run every minute (the symbol "*" means every)
-@periodic_task(run_every=(crontab(hour="*", minute="*", day_of_week="*")))
-def heartbeat():
-    logger.info("Start task")
-    #now = datetime.now()
-    #result = scrapers.scraper_example(now.day, now.minute)
-    logger.info("Task finished: result = blabla")
+# Method for debugging---prints in the celery worker tab
+# logger = get_task_logger(__name__)
+# @periodic_task(run_every=(crontab(hour="*", minute="*", day_of_week="*")))
+# def beat():
+#    logger.info('Task executed!! DONE')
 
 
-@periodic_task(run_every=(crontab(hour="*", minute="*", day_of_week="*")))
+@periodic_task(run_every=(crontab(hour="07", minute="50", day_of_week="*")))
 def send_daily_digest():
     midnight_today = datetime.combine(timezone.now(), time.min)
     midnight_day_ago = midnight_today - timedelta(days=1)
@@ -61,8 +52,9 @@ def send_daily_digest():
         # Reduce number of users to iterate
         current_users = current_users.exclude(user__in=excl_users)
 
-        for u in current_users.filter(tags__tag__in=qn.question.tags.all()):
-            tag_questions[u.user.username].append(qn.question)
+        for u in current_users:
+            if u.tags.intersection(Tag.objects.filter(question=qn.question)):
+                tag_questions[u.user.username].append(qn.question)
 
     # Assemble emails for the users
     for u in users:
@@ -86,11 +78,10 @@ def send_daily_digest():
             message.attach_alternative(html_message, 'text/html')
             message.send()
 
-    print('Daily done')
     connection.close()  # Cleanup
 
 
-@periodic_task(run_every=(crontab(hour="07", minute="*", day_of_week="*")))
+@periodic_task(run_every=(crontab(hour="*", minute="*/5", day_of_week="*")))
 def send_weekly_digest():
     midnight_today = datetime.combine(date.today(), time.min)
     midnight_week_ago = midnight_today - timedelta(weeks=1)
@@ -100,9 +91,6 @@ def send_weekly_digest():
     category_questions = defaultdict(list)
     peer_questions = defaultdict(list)
     tag_questions = defaultdict(list)
-
-    for a in q_notifications:
-        print(a.question.tags)
 
     connection = get_connection()  # uses SMTP server specified in settings.py
     connection.open()  # If you don't open the connection manually, Django will automatically open, then tear down the connection in msg.send()
@@ -126,8 +114,9 @@ def send_weekly_digest():
         # Reduce number of users to iterate
         current_users = current_users.exclude(user__in=excl_users)
 
-        for u in current_users.filter(tags__tag__in=qn.question.tags.all()):
-            tag_questions[u.user.username].append(qn.question)
+        for u in current_users:
+            if u.tags.intersection(Tag.objects.filter(question=qn.question)):
+                tag_questions[u.user.username].append(qn.question)
 
     # Assemble emails for the users
     for u in users:
@@ -151,5 +140,4 @@ def send_weekly_digest():
             message.attach_alternative(html_message, 'text/html')
             message.send()
 
-    print('Weekly done')
     connection.close()  # Cleanup
