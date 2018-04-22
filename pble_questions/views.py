@@ -21,7 +21,7 @@ def new(request, base_template='pblexchange/base.html', **kwargs):
 def unanswered(request, base_template='pblexchange/base.html', **kwargs):
     return render(request, 'questions/list.html', {
         'base_template': base_template,
-        'title': 'unanswered',
+        'title': _('unanswered'),
         'questions': Question.objects.unanswered(),
     })
 
@@ -29,7 +29,7 @@ def unanswered(request, base_template='pblexchange/base.html', **kwargs):
 def hot(request, base_template='pblexchange/base.html', **kwargs):
     return render(request, 'questions/list.html', {
         'base_template': base_template,
-        'title': 'Popular',
+        'title': _('popular'),
         'questions': Question.objects.hot(),
     })
 

@@ -1,5 +1,6 @@
 {% load questions %}
 {% load users %}
+{% load i18n %}
 {% if answers %}
     {% for answer in answers %}
         <div class="pble-a-list-item hentry answer{{ answer.accepted|yesno:"answer-selected pble-a-list-item-selected," }}">
@@ -7,13 +8,13 @@
             <div class="pble-a-item-main">
                 {% if answer.question.author.pk == user.pk and not accepted %}
                     <div class="pble-a-selection">
-                        <a href="{% url 'pble_questions:answers:accept' answer.pk %}"><input type="submit" value="" title="Click to select as best answer" class="pble-a-select-button"></a>
+                        <a href="{% url 'pble_questions:answers:accept' answer.pk %}"><input type="submit" value="" title="{% trans 'Click to select as best answer' %}" class="pble-a-select-button"></a>
                     </div>
                 {% elif answer.accepted %}
                     <div class="pble-a-selection">
                         <a href="{% url 'pble_questions:answers:accept' answer.pk %}">
-                            <input type="submit" value="" class="pble-a-unselect-button" title="Best answer">
-                            <div class="pble-a-selected-text">Best answer</div>
+                            <input type="submit" value="" class="pble-a-unselect-button" title="{% trans 'Best answer' %}">
+                            <div class="pble-a-selected-text">{% trans 'Best answer' %}</div>
                         </a>
                     </div>
                 {% endif %}
@@ -26,13 +27,13 @@
                     {% comment_list answer.question answer %}
                 </div>
                 <div class="pble-c-form" style="display: none;">
-                    <h2>Your comment on this answer:</h2>
+                    <h2>{% trans 'Your comment on this answer' %}:</h2>
                     <form action="{% url 'pble_questions:comments:submit:a' question.pk answer.pk %}" method="post" class="comment-form pure-form pure-form-stacked">
                         {% csrf_token %}
                         {{ comment_form.media }}
                         {{ comment_form }}
                         <br/>
-                        <button type="submit" class="pure-button pure-button-primary">Submit</button>
+                        <button type="submit" class="pure-button pure-button-primary">{% trans 'Submit' %}</button>
                     </form>
                 </div>
             </div>
@@ -40,5 +41,5 @@
         </div>
     {% endfor %}
 {% else %}
-    <p>There are currently no answers.</p>
+    <p>{% trans 'There are currently no answers' %}.</p>
 {% endif %}

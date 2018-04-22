@@ -29,8 +29,6 @@
                     <span class="pble-logged-in-points">
                         ({{ request.user.userprofile.points }} {% trans 'points' %})
                     </span>
-                    {% get_current_language as LANGUAGE %}
-                    {{ LANGUAGE }}
                     <ul class="pble-nav-user-list">
                         <li class="pble-nav-user-item pble-nav-user-logout">
                             <a href="{% url 'logout' %}" class="pble-nav-user-link">{% trans 'Logout' %}</a>

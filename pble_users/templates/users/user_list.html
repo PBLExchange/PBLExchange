@@ -1,8 +1,9 @@
 {% extends base_template %}
 {% load users %}
+{% load i18n %}
 
 {% block content %}
-    <h1>Top scoring users</h1>
+    <h1>{% trans 'Top scoring users' %}</h1>
     <div class="pble-part-ranking">
         {% if userprofiles %}
             {% for userprofile in userprofiles %}
@@ -12,7 +13,7 @@
                 </span>
             {% endfor %}
         {% else %}
-            <p> No registered user(s) at the moment.</p>
+            <p>{% trans 'No registered user(s) at the moment' %}.</p>
         {% endif %}
     </div>
 {% endblock %}

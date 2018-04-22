@@ -3,6 +3,7 @@ from django.shortcuts import reverse
 from django.utils.safestring import mark_safe
 from itertools import chain, count as it_count
 from django.contrib.auth.models import User
+from django.utils.translation import ugettext as _
 
 from pble_users.models import UserProfile
 from pble_questions.models import *
@@ -12,7 +13,7 @@ register = template.Library()
 @register.simple_tag
 def get_user(user, anonymous=False):
     if anonymous:
-        return 'anonymous'
+        return _('anonymous')
     name = user.get_username()
     if user.get_full_name():
         name = user.get_full_name()

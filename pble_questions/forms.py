@@ -1,6 +1,7 @@
 import re
 
 from django import forms
+from django.utils.translation import ugettext_lazy as _
 
 from .models import Question, Answer, Comment, Tag
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
@@ -34,7 +35,7 @@ class QuestionForm(forms.ModelForm):
 
 
 class AnswerForm(forms.ModelForm):
-    body = forms.CharField(label='Answer', widget=CKEditorUploadingWidget())
+    body = forms.CharField(label=_('Answer'), widget=CKEditorUploadingWidget())
     prefix = 'answer'
 
     class Meta:
@@ -46,7 +47,7 @@ class AnswerForm(forms.ModelForm):
 
 
 class CommentForm(forms.ModelForm):
-    body = forms.CharField(label='Comment', widget=None)
+    body = forms.CharField(label=_('Comment'), widget=None)
     prefix = 'comment'
 
     class Meta:
