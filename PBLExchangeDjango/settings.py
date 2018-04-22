@@ -63,6 +63,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'PBLExchangeDjango.middleware.LoginRequiredMiddleware',
+    'pble_users.middleware.LanguageMiddleware',
 ]
 
 AUTHENTICATION_BACKENDS = (
