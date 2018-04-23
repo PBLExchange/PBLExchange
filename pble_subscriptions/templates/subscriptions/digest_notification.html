@@ -12,7 +12,7 @@
             </h4>
 
             {% for q in category_questions %}
-            {% question_url q %}, {{ q.category }}<br>
+            {% question_url q %}: {{ q.category }}<br>
             {% endfor %}
 
             <br>
@@ -22,7 +22,7 @@
                 Questions matching your peer subscription
             </h4>
             {% for q in peer_questions %}
-                {% question_url q %}, {{ q.author }}<br>
+                {% question_url q %}: {{ q.author }}<br>
             {% endfor %}
         {% endif %}
 
@@ -32,7 +32,7 @@
                 Questions matching your tag subscription
             </h4>
             {% for q in tag_questions %}
-                {% question_url q %}, {% for t in q.tags.all %} {{ t.tag }}, {% endfor %}<br>
+                {% question_url q %}: {% for t in q.tags.all %} {{ t.tag }}, {% endfor %}<br>
             {% endfor %}
         {% endif %}
     </body>

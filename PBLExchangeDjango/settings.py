@@ -189,11 +189,11 @@ CAS_VERSION = 'CAS_2_SAML_1_0'
 CAS_APPLY_ATTRIBUTES_TO_USER = True
 
 # Celery related settings
-BROKER_URL = "amqp://pble:pble1234@localhost:5672/pblevhost"
+CELERY_BROKER_URL = ps.CELERY_BROKER_URL
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
-CELERY_TIMEZONE = 'Europe/Copenhagen'
+CELERY_TIMEZONE = ps.CELERY_TIMEZONE
 CELERY_RESULT_BACKEND = 'djcelery.backends.database:DatabaseBackend'
 CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
 
