@@ -2,6 +2,8 @@
 {% load questions %}
 {% load users %}
 {% load menu %}
+{% load links %}
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -22,30 +24,31 @@
                     <div class="pble-logged-in-avatar"></div>
 
                     <div class="pble-logged-in">
-                        <span class="pble-logged-in-pad">Hello </span><span class="pble-logged-in-data">{% get_user request.user %}</span>
+                        <span class="pble-logged-in-pad">{% trans 'Hello' %} </span><span class="pble-logged-in-data">{% get_user request.user %}</span>
                     </div>
                     <span class="pble-logged-in-points">
-                        ({{ request.user.userprofile.points }} points)
+                        ({{ request.user.userprofile.points }} {% trans 'points' %})
                     </span>
                     <ul class="pble-nav-user-list">
                         <li class="pble-nav-user-item pble-nav-user-logout">
-                            <a href="{% url 'logout' %}" class="pble-nav-user-link">Logout</a>
+                            <a href="{% url 'logout' %}" class="pble-nav-user-link">{% trans 'Logout' %}</a>
+                        </li>
+                        <li class="pble-nav-user-item">
+                            <a href="{% url 'set_language' 'da' %}"><img src="{% static 'pblexchange/images/dk.png' %}" style="height: 1em"/></a>
+                            <a href="{% url 'set_language' 'en' %}"><img src="{% static 'pblexchange/images/uk.png' %}" style="height: 1em"/></a>
                         </li>
                     </ul>
                     <div class="pble-nav-user-clear"></div>
                 </div>
                 <div class="pble-search">
-                    <form>
-                        <input type="text" name="q" value="" class="pble-search-field">
-                        <input type="submit" value="Search" class="pble-search-button">
-                    </form>
+                    {% question_search %}
                 </div>
             </div>
         </div>
         <div class="pble-body-wrapper">
             <div class="pble-header">
                 <div class="pble-logo">
-                    <a href="{% url 'home' %}" class="pble-logo-link">PBL Exchange</a> <!--TODO: make dynamic-->
+                    <a href="{% url 'home' %}" class="pble-logo-link">{% trans 'PBL Exchange' %}</a> {# TODO: make dynamic #}
                 </div>
                 <div class="pble-header-clear"></div>
             </div>
@@ -66,20 +69,40 @@
                         </div>
 
                         <div class="pble-sidebar">
-                            Insert some text here.... Preferably as dynamic content...
-                            Add categories below!
+                            {% links %}
                         </div>
+
                     </div>
                     {% endblock %}
 
                     <div class="pble-main">
                         {% block content %}
-                            <h1>Questions:</h1>
+                            <h1>{% trans 'Questions' %}:</h1>
                             {% question_list questions %}
                         {% endblock %}
                     </div>
                 </div>
             </div>
         </div>
+        <!-- pble footer group -->
+        <div class="pble-footer-bottom-group">
+            <div class="pble-footer">
+                <div class="pble-nav-footer">
+                    <ul class="pble-nav-footer-list">
+                        <li class="pble-nav-footer-item pble-nav-footer-feedback">
+                            {% trans 'Submit feedback and bugs' %}
+                            <a class="pble-nav-footer-link" href="https://github.com/GideonBlegmand/PBLExchange-Django/issues">{% trans 'as a Github issue' %}</a>
+                            {% trans 'or' %}
+                            <a class="pble-nav-footer-link" href="mailto:hans@cs.aau.dk">{% trans 'via email' %}</a>
+                        </li>
+                    </ul>
+                    <div class="pble-nav-footer-clear"></div>
+                </div>
+                <!-- insert theme as seen on original Q2A site -->
+                <div class="pble-attribution">{% trans 'Powered by' %} <a href="https://github.com/GideonBlegmand/PBLExchange-Django">PBLExchangeDjango</a></div>
+                <div class="pble-footer-clear"></div>
+            </div>
+        </div>
+        <!-- end pble footer group -->
     </body>
 </html>

@@ -1,0 +1,19 @@
+{% extends base_template %}
+{% load users %}
+{% load i18n %}
+
+{% block content %}
+    <h1>{% trans 'Top scoring users' %}</h1>
+    <div class="pble-part-ranking">
+        {% if userprofiles %}
+            {% for userprofile in userprofiles %}
+                <span class="pble-ranking-item pble-top-users-item">
+                    <span class="pble-top-users-label">{% userprofile_get_user userprofile %}</span>
+                    <span class="pble-top-users-score">{{ userprofile.points }}</span>
+                </span>
+            {% endfor %}
+        {% else %}
+            <p>{% trans 'No registered user(s) at the moment' %}.</p>
+        {% endif %}
+    </div>
+{% endblock %}

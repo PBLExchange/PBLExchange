@@ -1,21 +1,22 @@
 {% load users %}
 {% load utils %}
+{% load i18n %}
 <span class="{{ class_prefix }}-avatar-meta">
     <span class="{{ class_prefix }}-meta">
         <span class="{{ class_prefix }}-what">{{ what }}</span>
         <span class="{{ class_prefix }}-when">
-            <span class="{{ class_prefix }}-when-data"><span class="published updated">{{ post.created_date|timesince|upto:',' }}</span></span><span class="{{ class_prefix }}-when-pad"> ago</span>
+            <span class="{{ class_prefix }}-when-data"><span class="published updated">{{ post.created_date|timesince|upto:',' }}</span></span><span class="{{ class_prefix }}-when-pad"> {% trans 'ago' %}</span>
         </span>
         {% if post.category %}
         <span class="{{ class_prefix }}-where">
-            <span class="{{ class_prefix }}-where-pad">in </span><span class="{{ class_prefix }}-where-data">{{ post.category }}</span>
+            <span class="{{ class_prefix }}-where-pad">{% trans 'in' %} </span><span class="{{ class_prefix }}-where-data">{{ post.category }}</span>
         </span>
         {% endif %}
         <span class="{{ class_prefix }}-who">
-            <span class="{{ class_prefix }}-who-pad">by </span>
+            <span class="{{ class_prefix }}-who-pad">{% trans 'by' %} </span>
             <span class="{{ class_prefix }}-who-data">{% get_user post.author %}</span>
             <span class="{{ class_prefix }}-who-points">
-                <span class="{{ class_prefix }}-who-points-pad">(</span><span class="{{ class_prefix }}-who-points-data">{{ post.author.userprofile.points }}</span><span class="{{ class_prefix }}-who-points-pad"> points)</span>
+                <span class="{{ class_prefix }}-who-points-pad">(</span><span class="{{ class_prefix }}-who-points-data">{{ post.author.userprofile.points }}</span><span class="{{ class_prefix }}-who-points-pad"> {% trans 'points' %})</span>
             </span>
         </span>
     </span>

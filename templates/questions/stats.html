@@ -1,14 +1,15 @@
+{% load i18n %}
 <div class="pble-activity-count">
     <p class="pble-activity-count-item">
-        <span class="pble-activity-count-data">{{ questions_count }}</span> questions
+        <span class="pble-activity-count-data">{{ questions_count }}</span> {% trans 'questions' %}
     </p>
     <p class="pble-activity-count-item">
-        <span class="pble-activity-count-data">{{ answers_count }}</span> answers
+        <span class="pble-activity-count-data">{{ answers_count }}</span> {% trans 'answers' %}
     </p>
     <p class="pble-activity-count-item">
-        <span class="pble-activity-count-data">{{ comments_count }}</span> comments
+        <span class="pble-activity-count-data">{{ comments_count }}</span> {% trans 'comments' %}
     </p>
     <p class="pble-activity-count-item">
-        <span class="pble-activity-count-data">{{ users_count }}</span> users
+        <span class="pble-activity-count-data">{{ users_count }}</span> {%trans 'users' %}
     </p>
 </div>

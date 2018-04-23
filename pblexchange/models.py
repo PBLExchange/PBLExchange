@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import URLValidator
 from PBLExchangeDjango import settings
 
 
@@ -34,3 +35,13 @@ class Setting(models.Model):
         obj, _ = Setting.objects.get_or_create(name=name)
         obj.value = value
         obj.save()
+
+
+class ExternalLink(models.Model):
+    id = models.AutoField(primary_key=True)
+    title = models.CharField(max_length=64, unique=True)
+    url = models.URLField(validators=[URLValidator], unique=True)
+    featured = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.title

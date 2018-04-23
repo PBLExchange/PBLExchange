@@ -1,0 +1,13 @@
+{% extends base_template %}
+{% load i18n %}
+
+{% block content %}
+    <h1>{% trans 'Ask a question' %}</h1>
+    <form action="{% url 'pble_questions:submit' %}" method="post" class="pure-form pure-form-stacked">
+        {% csrf_token %}
+        {{ post_form.media }}
+        {{ post_form }}
+        <input type="submit" value="{% trans 'Submit' %}">
+    </form>
+{% endblock %}
+

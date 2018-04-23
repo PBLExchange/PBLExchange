@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
+import PBLExchangeDjango.private_settings as ps
+from django.utils.translation import ugettext_lazy as _
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -20,7 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '4bw!xfvafdoc^8qkn*ix*i3)ndc9^k3_7*mkm&5d3t0)7ns#&='
+SECRET_KEY = ps.SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -39,23 +41,29 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'pblexchange.apps.PblexchangeConfig',
-    'questions',
+    'pble_questions',
     'ckeditor',
     'ckeditor_uploader',
     'django_cas_ng',
-    'users'
+    'pble_users',
+    'pble_subscriptions',
+    'djcelery',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'PBLExchangeDjango.middleware.LoginRequiredMiddleware',
+    'pble_users.middleware.LanguageMiddleware',
 ]
 
 AUTHENTICATION_BACKENDS = (
@@ -64,6 +72,22 @@ AUTHENTICATION_BACKENDS = (
 )
 
 ROOT_URLCONF = 'PBLExchangeDjango.urls'
+
+# Mail settings
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_HOST = ps.EMAIL_HOST
+EMAIL_HOST_USER = ps.EMAIL_HOST_USER
+# SECURITY WARNING: keep the password private!
+EMAIL_HOST_PASSWORD = ps.EMAIL_HOST_PASSWORD
+EMAIL_PORT = 587
+
+# Since send_mass_mail() does not work with HTML we use Django's EmailMultiAlternatives (see pble_subscription/tasks.py)
+ALTERNATE_EMAIL_HOST_PASSWORD = ps.ALTERNATE_EMAIL_HOST_PASSWORD
+ALTERNATE_EMAIL_HOST_USER = ps.ALTERNATE_EMAIL_HOST_USER
+ALTERNATE_EMAIL_HOST = ps.ALTERNATE_EMAIL_HOST
+ALTERNATE_EMAIL_PORT = 587
+ALTERNATE_EMAIL_USE_TLS = True
 
 TEMPLATES = [
     {
@@ -127,6 +151,14 @@ USE_L10N = True
 
 USE_TZ = True
 
+LANGUAGES = [
+    ('en-gb', _('English')),
+    ('da', _('Danish')),
+]
+
+LOCALE_PATHS = [
+    os.path.join(BASE_DIR, 'locale'),
+]
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
@@ -155,7 +187,7 @@ CKEDITOR_UPLOAD_PATH = 'uploads/'
 
 # Login settings
 LOGIN_URL = 'login'
-EXEMPT_USERS = ['aklost11', 'gblegm13']
+EXEMPT_USERS = ['aklost11', 'gblegm13', 'csteph13']
 DISALLOWED_DOMAINS = ['student.aau.dk']
 
 # Login redirect
@@ -166,3 +198,18 @@ LOGOUT_REDIRECT_URL = 'home'
 CAS_SERVER_URL = 'https://signon.aau.dk/cas/'
 CAS_VERSION = 'CAS_2_SAML_1_0'
 CAS_APPLY_ATTRIBUTES_TO_USER = True
+
+# Celery related settings
+CELERY_BROKER_URL = ps.CELERY_BROKER_URL
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = ps.CELERY_TIMEZONE
+CELERY_RESULT_BACKEND = 'djcelery.backends.database:DatabaseBackend'
+CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
+
+# Set site id for the django.contrib.sites framework
+SITE_ID = 1     # TODO: On release set django_site domain field to pblexchange.aau.dk
+
+# Whoosh search settings
+WHOOSH_STORAGE_DIR = 'data/whoosh'

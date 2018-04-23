@@ -2,7 +2,7 @@
     <div class="{{ class_prefix }}-tags">
         <ul class="{{ class_prefix }}-tag-list">
             {% for tag in tags %}
-                <li class="{{ class_prefix }}-tag-item"><a href="{% url 'questions:tag' tag.tag %}" class="pble-tag-link">{{ tag.tag }}</a></li>
+                <li class="{{ class_prefix }}-tag-item"><a href="{% url 'pble_questions:tag' tag.tag %}" class="pble-tag-link">{{ tag.tag }}</a></li>
             {% endfor %}
         </ul>
     </div>
