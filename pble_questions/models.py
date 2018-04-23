@@ -6,6 +6,7 @@ from django.db import models
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.contrib.auth.models import User
 from django.db.models import F, Count, Sum
+from django.utils.translation import ugettext_lazy as _
 
 from pble_questions.managers import WhooshManager
 
@@ -44,9 +45,9 @@ class Post(models.Model):
     class Meta:
         abstract = True
 
-    body = RichTextUploadingField()
+    body = RichTextUploadingField(verbose_name=_('body'))
     author = models.ForeignKey(User)
-    anonymous = models.BooleanField()
+    anonymous = models.BooleanField(verbose_name=_('anonymous'))
     created_date = models.DateTimeField(auto_now_add=True)
     edited_date = models.DateTimeField(auto_now=True)
 
@@ -86,10 +87,10 @@ class QuestionManager(WhooshManager):
 
 
 class Question(Post):
-    title = models.CharField(max_length=160)
-    category = models.ForeignKey(Category, null=True, blank=True)
-    course = models.ManyToManyField(Course, blank=True)
-    tags = models.ManyToManyField(Tag, blank=True)
+    title = models.CharField(verbose_name=_('title'), max_length=160)
+    category = models.ForeignKey(Category, verbose_name=_('category'), null=True, blank=True)
+    course = models.ManyToManyField(Course, verbose_name=_('course'), blank=True)
+    tags = models.ManyToManyField(Tag, verbose_name=_('tags'), blank=True)
 
     objects = QuestionManager(default='title', fields=['title', 'body'])
 

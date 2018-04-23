@@ -1,6 +1,7 @@
 from django.db.models import Count
 from django.shortcuts import render, HttpResponseRedirect, Http404, reverse, get_object_or_404
 from django.core.validators import ValidationError
+from django.utils.translation import ugettext as _
 from pble_questions.forms import QuestionForm, AnswerForm, CommentForm, SearchForm
 from pble_questions.models import Question, Answer, QuestionVote, CommentVote, AnswerVote, Tag
 from pble_users.models import UserProfile
@@ -12,7 +13,7 @@ from pblexchange.models import Setting
 def new(request, base_template='pblexchange/base.html', **kwargs):
     return render(request, 'questions/list.html', {
         'base_template': base_template,
-        'title': 'new',
+        'title': _('new'),
         'questions': Question.objects.recent(),
     })
 
@@ -20,7 +21,7 @@ def new(request, base_template='pblexchange/base.html', **kwargs):
 def unanswered(request, base_template='pblexchange/base.html', **kwargs):
     return render(request, 'questions/list.html', {
         'base_template': base_template,
-        'title': 'unanswered',
+        'title': _('unanswered'),
         'questions': Question.objects.unanswered(),
     })
 
@@ -28,7 +29,7 @@ def unanswered(request, base_template='pblexchange/base.html', **kwargs):
 def hot(request, base_template='pblexchange/base.html', **kwargs):
     return render(request, 'questions/list.html', {
         'base_template': base_template,
-        'title': 'Popular',
+        'title': _('popular'),
         'questions': Question.objects.hot(),
     })
 

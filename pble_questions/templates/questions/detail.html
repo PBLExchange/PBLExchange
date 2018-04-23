@@ -1,6 +1,7 @@
 {% extends base_template %}
 {% load questions %}
 {% load users %}
+{% load i18n %}
 
 {% block content %}
     <h1>{{ question.title }}</h1>
@@ -21,7 +22,7 @@
                 </div>
 
                 <div style="display: none">
-                    <label for="comment-q">Add comment</label>
+                    <label for="comment-q">{% trans 'Add comment' %}</label>
                     <input type="checkbox" id="comment-q" class="add-comment">
 
                     <form action="{% url 'pble_questions:comments:submit:q' question.pk %}" method="post" class="comment-form pure-form pure-form-stacked">
@@ -29,14 +30,14 @@
                         {{ comment_form.media }}
                         {{ comment_form }}
                         <br/>
-                        <button type="submit" class="pure-button pure-button-primary">Submit</button>
+                        <button type="submit" class="pure-button pure-button-primary">{% trans 'Submit' %}</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
     <div class="pble-part-a-list">
-        <h2 id="a_list_title">{{ question.answer_set.count }} Answers</h2>
+        <h2 id="a_list_title">{{ question.answer_set.count }} {% trans 'Answers' %}</h2>
         <div class="pble-a-list" id="a_list">
             {% answer_list question %}
         </div>
@@ -48,10 +49,10 @@
                 {{ answer_form.media }}
                 {{ answer_form }}
                 <br/>
-                <button type="submit" class="pure-button pure-button-primary">Submit</button>
+                <button type="submit" class="pure-button pure-button-primary">{% trans 'Submit' %}</button>
             </form>
         {% else %}
-            <p>Please <a href="{% url 'login' %}">log in</a> to answer questions.</p>
+            <p>{% trans 'Please' %} <a href="{% url 'login' %}">{% trans 'log in' %}</a> {% trans 'to answer questions' %}.</p>
         {% endif %}
     </div>
 

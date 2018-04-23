@@ -1,7 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils.translation import ugettext_lazy as _
 
 from django.core.validators import MinValueValidator
+
+from PBLExchangeDjango import settings
 
 
 # Create your models here.
@@ -22,3 +25,4 @@ class UserSettings(models.Model):
     user = models.OneToOneField(User, unique=True)
     post_notification_enabled = models.BooleanField(default=True)
     subscription_enabled = models.BooleanField(default=True)
+    language = models.CharField(verbose_name=_('language'), max_length=4, choices=settings.LANGUAGES, default=settings.LANGUAGE_CODE)

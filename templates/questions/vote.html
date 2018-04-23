@@ -1,11 +1,12 @@
+{% load i18n %}
 <div class="pble-voting pble-voting-net">
     <div class="pble-vote-buttons pble-vote-buttons-net">
-        <a href="{% url post_upvote post.pk %}" title="Click to vote up" class="pble-vote-first-button pble-vote-up-button">+</a>
-        <a href="{% url post_downvote post.pk %}" title="Click to vote down" class="pble-vote-second-button pble-vote-down-button">-</a>
+        <a href="{% url post_upvote post.pk %}" title="{% trans 'Click to vote up' %}" class="pble-vote-first-button pble-vote-up-button">+</a>
+        <a href="{% url post_downvote post.pk %}" title="{% trans 'Click to vote down' %}" class="pble-vote-second-button pble-vote-down-button">-</a>
     </div>
     <div class="pble-vote-count pble-vote-count-net">
         <span class="pble-netvote-count">
-            <span class="pble-netvote-count-data">{{ post.votes }}</span><span class="pble-netvote-count-pad"> votes</span>
+            <span class="pble-netvote-count-data">{{ post.votes }}</span><span class="pble-netvote-count-pad"> {% trans 'votes' %}</span>
         </span>
     </div>
     <div class="pble-vote-clear"></div>

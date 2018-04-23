@@ -1,0 +1,332 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-04-22 18:44+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: da\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: PBLExchangeDjango/settings.py:147
+msgid "English"
+msgstr "Engelsk"
+
+#: PBLExchangeDjango/settings.py:148
+msgid "Danish"
+msgstr "Dansk"
+
+#: pble_questions/forms.py:38
+msgid "Answer"
+msgstr "Svar"
+
+#: pble_questions/forms.py:50
+msgid "Comment"
+msgstr "kommentar"
+
+#: pble_questions/models.py:48
+msgid "body"
+msgstr "krop"
+
+#: pble_questions/models.py:50 pble_questions/templatetags/questions.py:89
+#: pble_users/templatetags/users.py:16
+msgid "anonymous"
+msgstr "anonym"
+
+#: pble_questions/models.py:90
+msgid "title"
+msgstr "titel"
+
+#: pble_questions/models.py:91
+msgid "category"
+msgstr "kategori"
+
+#: pble_questions/models.py:92
+msgid "course"
+msgstr "kursus"
+
+#: pble_questions/models.py:93
+msgid "tags"
+msgstr "tags"
+
+#: pble_questions/templates/questions/ask.html:5
+msgid "Ask a question"
+msgstr "Stil et spørgsmål"
+
+#: pble_questions/templates/questions/ask.html:10
+#: pble_questions/templates/questions/detail.html:33
+#: pble_questions/templates/questions/detail.html:52
+#: templates/questions/answer_list.html:36
+msgid "Submit"
+msgstr "Send"
+
+#: pble_questions/templates/questions/base.html:6
+msgid "Recent"
+msgstr "Nylige"
+
+#: pble_questions/templates/questions/base.html:7
+msgid "Popular"
+msgstr "Populært"
+
+#: pble_questions/templates/questions/base.html:8
+#: pble_users/templates/users/user_questions.html:9
+msgid "Unanswered"
+msgstr "Ubesvaret"
+
+#: pble_questions/templates/questions/detail.html:25
+msgid "Add comment"
+msgstr "tilføj kommentar"
+
+#: pble_questions/templates/questions/detail.html:40
+#: pble_users/templates/users/detail.html:55
+#: pble_users/templates/users/user_questions.html:10
+msgid "Answers"
+msgstr "Svar"
+
+#: pble_questions/templates/questions/detail.html:55
+msgid "Please"
+msgstr "Venligst"
+
+#: pble_questions/templates/questions/detail.html:55
+msgid "log in"
+msgstr "log in"
+
+#: pble_questions/templates/questions/detail.html:55
+msgid "to answer questions"
+msgstr "for at svar på spørgsmål"
+
+#: pble_questions/templates/questions/questions.html:6
+msgid "Recent questions tagged"
+msgstr "Nylige spørgsmål tagget med"
+
+#: pble_questions/templates/questions/tags.html:5 pblexchange/urls.py:10
+msgid "Tags"
+msgstr "Tags"
+
+#: pble_questions/templatetags/questions.py:76
+msgid "asked"
+msgstr "stillet for"
+
+#: pble_questions/templatetags/questions.py:78
+msgid "answered"
+msgstr "besvaret for"
+
+#: pble_questions/views.py:16
+msgid "new"
+msgstr "nye"
+
+#: pble_questions/views.py:24
+msgid "unanswered"
+msgstr "ubesvaret"
+
+#: pble_questions/views.py:32
+msgid "popular"
+msgstr "populært"
+
+#: pble_users/templates/users/detail.html:9
+#: pble_users/templates/users/user_questions.html:7
+msgid "User"
+msgstr "Bruger"
+
+#: pble_users/templates/users/detail.html:11
+msgid "Activity by"
+msgstr "Aktivitet af"
+
+#: pble_users/templates/users/detail.html:19
+msgid "Bonus points"
+msgstr "Bonus point"
+
+#: pble_users/templates/users/detail.html:22
+msgid "only shown to admins"
+msgstr "kun vist til adminstratorer"
+
+#: pble_users/templates/users/detail.html:27
+msgid "Score"
+msgstr "Score"
+
+#: pble_users/templates/users/detail.html:31
+#: pblexchange/templates/pblexchange/base.html:30
+#: templates/questions/meta.html:19
+msgid "points"
+msgstr "point"
+
+#: pble_users/templates/users/detail.html:31
+msgid "ranked"
+msgstr "rangeret"
+
+#: pble_users/templates/users/detail.html:38
+msgid "Title"
+msgstr "Titel"
+
+#: pble_users/templates/users/detail.html:44
+#: pble_users/templates/users/user_questions.html:8
+#: pblexchange/templates/pblexchange/base.html:76 pblexchange/urls.py:9
+msgid "Questions"
+msgstr "Spørgsmål"
+
+#: pble_users/templates/users/detail.html:50
+msgid "with best answer chosen"
+msgstr "med bedste svar"
+
+#: pble_users/templates/users/detail.html:61
+msgid "chosen as best"
+msgstr "valgt som bedste"
+
+#: pble_users/templates/users/detail.html:66
+msgid "Comments"
+msgstr "kommentarer"
+
+#: pble_users/templates/users/detail.html:74
+msgid "Voted on"
+msgstr "Stemt på"
+
+#: pble_users/templates/users/detail.html:78 pblexchange/views.py:11
+#: templates/questions/stats.html:4
+msgid "questions"
+msgstr "spørgsmål"
+
+#: pble_users/templates/users/detail.html:80
+#: templates/questions/question_list.html:12 templates/questions/stats.html:7
+msgid "answers"
+msgstr "svar"
+
+#: pble_users/templates/users/detail.html:85
+msgid "Gave out"
+msgstr "Gav"
+
+#: pble_users/templates/users/detail.html:89
+#: pble_users/templates/users/detail.html:100
+msgid "up votes"
+msgstr "op stemmer"
+
+#: pble_users/templates/users/detail.html:91
+#: pble_users/templates/users/detail.html:102
+msgid "down votes"
+msgstr "ned stemmer"
+
+#: pble_users/templates/users/detail.html:96
+msgid "Received"
+msgstr "Modtaget"
+
+#: pble_users/templates/users/detail.html:109
+msgid "Update bonus"
+msgstr "Opdatér bonus"
+
+#: pble_users/templates/users/user_list.html:6
+msgid "Top scoring users"
+msgstr "Top scorende brugere"
+
+#: pble_users/templates/users/user_list.html:16
+msgid "No registered user(s) at the moment"
+msgstr "Ingen registrerede brugere på nuværende tidspunkt"
+
+#: pblexchange/templates/pblexchange/base.html:27
+msgid "Hello"
+msgstr "Hej"
+
+#: pblexchange/templates/pblexchange/base.html:34
+msgid "Logout"
+msgstr "Log ud"
+
+#: pblexchange/templates/pblexchange/base.html:47
+msgid "PBL Exchange"
+msgstr "PBL Exchange"
+
+#: pblexchange/templates/pblexchange/base.html:89
+msgid "Submit feedback and bugs"
+msgstr "Send feedback og rapportér fejl"
+
+#: pblexchange/templates/pblexchange/base.html:90
+msgid "as a Github issue"
+msgstr "som et Github issue"
+
+#: pblexchange/templates/pblexchange/base.html:91
+msgid "or"
+msgstr "eller"
+
+#: pblexchange/templates/pblexchange/base.html:92
+msgid "via email"
+msgstr "via email"
+
+#: pblexchange/templates/pblexchange/base.html:98
+msgid "Powered by"
+msgstr "Drevet af"
+
+#: pblexchange/urls.py:11
+msgid "Users"
+msgstr "Brugere"
+
+#: pblexchange/urls.py:13
+msgid "Subscriptions"
+msgstr "Abonnementer"
+
+#: pblexchange/urls.py:14
+msgid "Ask a Question"
+msgstr "Stil et spørgsmål"
+
+#: templates/pblexchange/links.html:2
+msgid ""
+"Expand your knowledge of Problem Based Learning using the following links"
+msgstr "Udvid din viden om Problem Baseret Læring ved hjælp af følgende links"
+
+#: templates/questions/answer_list.html:11
+msgid "Click to select as best answer"
+msgstr "Klik for at vælge som bedste svar"
+
+#: templates/questions/answer_list.html:16
+#: templates/questions/answer_list.html:17
+msgid "Best answer"
+msgstr "Bedste svar"
+
+#: templates/questions/answer_list.html:30
+msgid "Your comment on this answer"
+msgstr "Din kommentar på dette svar"
+
+#: templates/questions/answer_list.html:44
+msgid "There are currently no answers"
+msgstr "Der er på nuværende tidspunkt ingen svar"
+
+#: templates/questions/meta.html:8
+msgid "ago"
+msgstr "siden"
+
+#: templates/questions/meta.html:12
+msgid "in"
+msgstr "i"
+
+#: templates/questions/meta.html:16
+msgid "by"
+msgstr "af"
+
+#: templates/questions/question_list.html:26
+msgid "No questions at the moment"
+msgstr "Ingen spørgsmål på nuværende tidspunkt"
+
+#: templates/questions/stats.html:10
+msgid "comments"
+msgstr "kommentar"
+
+#: templates/questions/stats.html:13
+msgid "users"
+msgstr "brugere"
+
+#: templates/questions/vote.html:4
+msgid "Click to vote up"
+msgstr "Klik for at stemme op"
+
+#: templates/questions/vote.html:5
+msgid "Click to vote down"
+msgstr "Klik for at stemme ned"
+
+#: templates/questions/vote.html:9
+msgid "votes"
+msgstr "stemmer"

@@ -1,5 +1,6 @@
 {% load questions %}
 {% load users %}
+{% load i18n %}
 
 <div class="pble-q-list">
 {% if questions %}
@@ -8,7 +9,7 @@
             <div class="pble-q-item-stats">
                 {% voting question %}
                 <span class="pble-a-count">
-                    <span class="pble-a-count-data">{{ question.answer_set.count }}</span><span class="pble-a-count-pad"> answers</span>
+                    <span class="pble-a-count-data">{{ question.answer_set.count }}</span><span class="pble-a-count-pad"> {% trans 'answers' %}</span>
                 </span>
             </div>
             <div class="pble-q-item-main">
@@ -22,6 +23,6 @@
         </div>
     {% endfor %}
 {% else %}
-    <p>No questions at the moment.</p>
+    <p>{% trans 'No questions at the moment' %}.</p>
 {% endif %}
 </div>

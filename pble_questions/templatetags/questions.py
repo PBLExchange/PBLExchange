@@ -1,5 +1,6 @@
 from django import template
 from django.contrib.auth.models import User
+from django.utils.translation import ugettext as _
 
 from pble_questions.models import Question, Answer, Comment
 from pble_questions.forms import CommentForm, SearchForm
@@ -72,9 +73,9 @@ def voting(post):
 
 @register.inclusion_tag('questions/meta.html')
 def post_meta(post, class_prefix='pble-q-item'):
-    what = 'asked'
+    what = _('asked')
     if type(post) is Answer:
-        what = 'answered'
+        what = _('answered')
     return {
         'class_prefix': class_prefix,
         'post': post,
@@ -85,7 +86,7 @@ def post_meta(post, class_prefix='pble-q-item'):
 @register.simple_tag
 def display_name(post):
     if post.anonymous:
-        return 'anonymous'
+        return _('anonymous')
     if post.author.get_full_name():
         return post.author.get_full_name()
     return post.author.get_username()
