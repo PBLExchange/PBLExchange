@@ -182,6 +182,9 @@ PBLE_DEFAULT_SETTINGS = {
     'accepted_answer_acceptor_points': '2'
 }
 
+# Default PBLE groups, Thresholds may be changed but increasing order must be preserved
+PBLE_GROUPS = [('PBL-novice', 1), ('PBL-experienced', 500), ('PBL-expert', 1000)]
+
 # CKEditor upload settings
 CKEDITOR_UPLOAD_PATH = 'uploads/'
 

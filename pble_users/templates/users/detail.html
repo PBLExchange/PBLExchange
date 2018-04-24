@@ -14,7 +14,7 @@
             {% csrf_token %}
             <table class="pble-form-wide-table">
                 <tbody>
-                    {% if user.is_authenticated and user.is_superuser %} {# TODO: should this be .is_staff or .is_superuser? (remember to correct button as well #}
+                    {% if user.is_authenticated and user.is_staff %}
                         <tr id="bonus">
                             <td class="pble-form-wide-label">{% trans 'Bonus points' %}:</td>
                             <td class="pble-form-wide-data">
@@ -103,7 +103,7 @@
                             </span>
                         </td>
                     </tr>
-                    {% if user.is_authenticated and user.is_superuser %}
+                    {% if user.is_authenticated and user.is_staff %}
                         <tr>
                             <td class="pble-form-wide-buttons" colspan="3">
                                 <input class="pble-form-wide-button pble-form-wide-button-setbonus" name="bonus_points_btn" value="{% trans 'Update bonus' %}" title="" type="submit">

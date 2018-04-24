@@ -3,9 +3,8 @@ from django.contrib.auth.models import User
 from pble_users import models
 from pble_users.forms import BonusPointForm
 from pblexchange.models import ExternalLink
-from pble_questions.models import Vote, QuestionVote, CommentVote, AnswerVote
-
-from PBLExchangeDjango import settings #TODO: Am i checking if app exists correctly?
+from PBLExchangeDjango import settings
+from .decorators import group_required
 
 
 # Create your views here.
@@ -36,6 +35,7 @@ def question_list(request, user_id, questions, title_prefix='', base_template='p
     })
 
 
+@group_required(settings.PBLE_GROUPS[1][0])
 def bonus_points(request, user_id, **kwargs):
     if request.method == 'POST' and request.user.is_authenticated() and request.user.is_superuser:
         form = BonusPointForm(request.POST)
