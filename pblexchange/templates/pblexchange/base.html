@@ -34,8 +34,8 @@
                             <a href="{% url 'logout' %}" class="pble-nav-user-link">{% trans 'Logout' %}</a>
                         </li>
                         <li class="pble-nav-user-item">
-                            <a href="{% url 'set_language' 'da' %}"><img src="{% static 'pblexchange/images/dk.png' %}" style="height: 1em"/></a>
-                            <a href="{% url 'set_language' 'en' %}"><img src="{% static 'pblexchange/images/uk.png' %}" style="height: 1em"/></a>
+                            <a href="{% url 'pble_users:set_language' 'da' %}"><img src="{% static 'pblexchange/images/dk.png' %}" style="height: 1em"/></a>
+                            <a href="{% url 'pble_users:set_language' 'en' %}"><img src="{% static 'pblexchange/images/uk.png' %}" style="height: 1em"/></a>
                         </li>
                     </ul>
                     <div class="pble-nav-user-clear"></div>

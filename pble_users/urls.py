@@ -24,4 +24,5 @@ detail_patterns = [
 urlpatterns = [
     url(r'^$', views.users, name='overview'),
     url(r'^detail/(?P<user_id>[0-9]+)/', include(detail_patterns)),
+    url(r'^language/(?P<lang_code>[a-zA-Z\-]+)$', views.set_language, name='set_language'),
 ]

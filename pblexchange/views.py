@@ -13,13 +13,3 @@ def index(request):
         'link_list': ExternalLink.objects.filter(featured=True),
     })
 
-
-def set_language(request, lang_code):
-    if request.user.is_authenticated():
-        if lang_code and check_for_language(lang_code):
-            request.user.usersettings.language = lang_code
-            request.user.usersettings.save()
-    redirect = request.META.get('HTTP_REFERER')
-    if not redirect:
-        redirect = reverse('home')
-    return HttpResponseRedirect(redirect)
