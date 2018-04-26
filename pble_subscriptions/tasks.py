@@ -81,7 +81,7 @@ def send_daily_digest():
     connection.close()  # Cleanup
 
 
-@periodic_task(run_every=(crontab(hour="*", minute="*/5", day_of_week="*")))
+@periodic_task(run_every=(crontab(hour="7", minute="50", day_of_week="0")))
 def send_weekly_digest():
     midnight_today = datetime.combine(date.today(), time.min)
     midnight_week_ago = midnight_today - timedelta(weeks=1)

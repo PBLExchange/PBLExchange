@@ -25,6 +25,8 @@ class QuestionForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         if Category.objects.count() < 1:
             del self.fields['category']
+        else:
+            self.fields['category'].empty_label = None
 
     def clean_tags(self):
         # Removes all spaces in the string (tags cannot contain spaces),
