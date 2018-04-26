@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-26 02:09+0000\n"
+"POT-Creation-Date: 2018-04-26 02:48+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,11 +25,11 @@ msgstr "Engelsk"
 msgid "Danish"
 msgstr "Dansk"
 
-#: pble_questions/forms.py:38
+#: pble_questions/forms.py:44
 msgid "Answer"
 msgstr "Svar"
 
-#: pble_questions/forms.py:50
+#: pble_questions/forms.py:56
 msgid "Comment"
 msgstr "Kommentar"
 
@@ -286,6 +286,10 @@ msgstr "Stil et spørgsmål"
 msgid ""
 "Expand your knowledge of Problem Based Learning using the following links"
 msgstr "Udvid din viden om Problem Baseret Læring ved hjælp af følgende links"
+
+#: templates/pblexchange/menu.html:9
+msgid "Admin"
+msgstr "Adminstrator"
 
 #: templates/questions/answer_list.html:11
 msgid "Click to select as best answer"
