@@ -3,7 +3,7 @@ import re
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 
-from .models import Question, Answer, Comment, Tag
+from .models import Question, Answer, Comment, Tag, Category
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
 
@@ -15,10 +15,16 @@ class QuestionForm(forms.ModelForm):
         model = Question
         fields = [
             'title',
+            'category',
             'body',
             'anonymous',
             'tags',
         ]
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        if Category.objects.count() < 1:
+            del self.fields['category']
 
     def clean_tags(self):
         # Removes all spaces in the string (tags cannot contain spaces),

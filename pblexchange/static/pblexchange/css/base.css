@@ -1,21 +1,3 @@
-.question {
-    border: #000 1px solid;
-    margin: 1em;
-}
-
-.vote {
-    text-align: center;
-    background-color: #dadada;
-}
-
-.question-body {
-    /*padding: 1em;*/
-}
-
-.answer {
-    margin: 1em;
-}
-
 .add-comment {
     display: none;
 }
@@ -26,11 +8,4 @@
 
 .comment-form {
     display: none;
-}
-
-.tag {
-    background: lightgray;
-    padding: .3em .5em;
-    display: inline-block;
-    margin: .4em .2em;
 }

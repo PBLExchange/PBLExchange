@@ -1,5 +1,7 @@
 from django.shortcuts import render, HttpResponseRedirect, Http404, HttpResponse, reverse, get_object_or_404
 from django.contrib.auth.models import User
+from django.utils.translation import check_for_language
+
 from pble_users import models
 from pble_users.forms import BonusPointForm
 from pblexchange.models import ExternalLink
@@ -52,3 +54,14 @@ def bonus_points(request, user_id, **kwargs):
             raise Http404("'pble_users' module does not exist under INSTALLED_APPS in settings.py")  # TODO: display a proper error message
     else:
         raise Http404()
+
+
+def set_language(request, lang_code, **kwargs):
+    if request.user.is_authenticated():
+        if lang_code and check_for_language(lang_code):
+            request.user.usersettings.language = lang_code
+            request.user.usersettings.save()
+    redirect = request.META.get('HTTP_REFERER')
+    if not redirect:
+        redirect = reverse('home')
+    return HttpResponseRedirect(redirect)

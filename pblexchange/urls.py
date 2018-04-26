@@ -17,5 +17,4 @@ urlpatterns = [
     url(r'^$', views.index, name='home'),
     url(r'^login/$', cas_views.login, name='login'),
     url(r'^logout/$', cas_views.logout, name='logout'),
-    url(r'^language/(?P<lang_code>[a-zA-Z\-]+)$', views.set_language, name='set_language'),
 ]

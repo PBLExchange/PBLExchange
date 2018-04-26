@@ -21,11 +21,11 @@
                     {% comment_list question %}
                 </div>
 
-                <div style="display: none">
-                    <label for="comment-q">{% trans 'Add comment' %}</label>
-                    <input type="checkbox" id="comment-q" class="add-comment">
-
-                    <form action="{% url 'pble_questions:comments:submit:q' question.pk %}" method="post" class="comment-form pure-form pure-form-stacked">
+                <label for="comment-q">{% trans 'Add comment' %}</label>
+                <input type="checkbox" id="comment-q" class="add-comment">
+                <div class="comment-form pble-c-form" {# style="display: none;" #}>
+                    <h2>{% trans 'Your comment on this question' %}:</h2>
+                    <form action="{% url 'pble_questions:comments:submit:q' question.pk %}" method="post" class="pure-form pure-form-stacked">
                         {% csrf_token %}
                         {{ comment_form.media }}
                         {{ comment_form }}
