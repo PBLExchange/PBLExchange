@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-22 18:44+0000\n"
+"POT-Creation-Date: 2018-04-26 02:09+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,11 +17,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: PBLExchangeDjango/settings.py:147
+#: PBLExchangeDjango/settings.py:155
 msgid "English"
 msgstr ""
 
-#: PBLExchangeDjango/settings.py:148
+#: PBLExchangeDjango/settings.py:156
 msgid "Danish"
 msgstr ""
 
@@ -65,7 +65,7 @@ msgstr ""
 #: pble_questions/templates/questions/ask.html:10
 #: pble_questions/templates/questions/detail.html:33
 #: pble_questions/templates/questions/detail.html:52
-#: templates/questions/answer_list.html:36
+#: templates/questions/answer_list.html:38
 msgid "Submit"
 msgstr ""
 
@@ -82,8 +82,13 @@ msgstr ""
 msgid "Unanswered"
 msgstr ""
 
-#: pble_questions/templates/questions/detail.html:25
+#: pble_questions/templates/questions/detail.html:24
+#: templates/questions/answer_list.html:29
 msgid "Add comment"
+msgstr ""
+
+#: pble_questions/templates/questions/detail.html:27
+msgid "Your comment on this question"
 msgstr ""
 
 #: pble_questions/templates/questions/detail.html:40
@@ -132,6 +137,10 @@ msgstr ""
 msgid "popular"
 msgstr ""
 
+#: pble_users/models.py:28
+msgid "language"
+msgstr ""
+
 #: pble_users/templates/users/detail.html:9
 #: pble_users/templates/users/user_questions.html:7
 msgid "User"
@@ -169,7 +178,7 @@ msgstr ""
 
 #: pble_users/templates/users/detail.html:44
 #: pble_users/templates/users/user_questions.html:8
-#: pblexchange/templates/pblexchange/base.html:76 pblexchange/urls.py:9
+#: pblexchange/templates/pblexchange/base.html:80 pblexchange/urls.py:9
 msgid "Questions"
 msgstr ""
 
@@ -237,27 +246,27 @@ msgstr ""
 msgid "Logout"
 msgstr ""
 
-#: pblexchange/templates/pblexchange/base.html:47
+#: pblexchange/templates/pblexchange/base.html:51
 msgid "PBL Exchange"
 msgstr ""
 
-#: pblexchange/templates/pblexchange/base.html:89
+#: pblexchange/templates/pblexchange/base.html:93
 msgid "Submit feedback and bugs"
 msgstr ""
 
-#: pblexchange/templates/pblexchange/base.html:90
+#: pblexchange/templates/pblexchange/base.html:94
 msgid "as a Github issue"
 msgstr ""
 
-#: pblexchange/templates/pblexchange/base.html:91
+#: pblexchange/templates/pblexchange/base.html:95
 msgid "or"
 msgstr ""
 
-#: pblexchange/templates/pblexchange/base.html:92
+#: pblexchange/templates/pblexchange/base.html:96
 msgid "via email"
 msgstr ""
 
-#: pblexchange/templates/pblexchange/base.html:98
+#: pblexchange/templates/pblexchange/base.html:102
 msgid "Powered by"
 msgstr ""
 
@@ -287,11 +296,11 @@ msgstr ""
 msgid "Best answer"
 msgstr ""
 
-#: templates/questions/answer_list.html:30
+#: templates/questions/answer_list.html:32
 msgid "Your comment on this answer"
 msgstr ""
 
-#: templates/questions/answer_list.html:44
+#: templates/questions/answer_list.html:46
 msgid "There are currently no answers"
 msgstr ""
 

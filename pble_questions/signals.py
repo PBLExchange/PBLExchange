@@ -18,6 +18,6 @@ def create_notification(sender, instance, created, **kwargs):
                 send_comment_notifications(instance)
 
 
-post_save.connect(create_notification, sender=Question)
-post_save.connect(create_notification, sender=Answer)
-post_save.connect(create_notification, sender=Comment)
+#post_save.connect(create_notification, sender=Question)
+#post_save.connect(create_notification, sender=Answer)
+#post_save.connect(create_notification, sender=Comment)

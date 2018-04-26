@@ -174,8 +174,11 @@ def send_answer_notification(answer, **kwargs):
 
 
 def send_comment_notifications(comment):    # TODO: Test this feature!!!!
-    receivers_list = ()
-    answer_comments = Comment.objects.filter(answer=comment.answer).filter(author__subscription__comment_notifications=True)
+    receivers_list = set()
+    comments = comment.answer.comment_set.filter(author__subscription__comment_notifications=True) if comment.answer \
+        else comment.question.comment_set.filter(author__subscription__comment_notifications=True)
+    post_author = comment.answer.author if comment.answer else comment.question.author
+#    answer_comments = Comment.objects.filter(answer=comment.answer).filter(author__subscription__comment_notifications=True)
     current_site = Site.objects.get_current()
     q_url = current_site.domain + reverse('pble_questions:detail', args=(
         comment.question.id,))
@@ -183,12 +186,10 @@ def send_comment_notifications(comment):    # TODO: Test this feature!!!!
     connection = get_connection()  # uses SMTP server specified in settings.py
     connection.open()  # If you don't open the connection manually, Django will automatically open, then tear down the connection in msg.send()
 
-    for e in answer_comments:
-        if e.author not in receivers_list and e != comment.answer.author:
-            receivers_list.__add__(e.author)
+    for e in comments:
+        receivers_list.add(e.author)
 
-    if comment.answer.author not in receivers_list:
-        receivers_list.__add__(comment.answer.author)
+    receivers_list.add(post_author)
 
     for user in receivers_list:
         html_message = loader.render_to_string(
@@ -196,7 +197,7 @@ def send_comment_notifications(comment):    # TODO: Test this feature!!!!
             {
                 'recipient_username': user.username,
                 'q_url': q_url,
-                'answer_text': comment.answer.body,
+                'answer_text': comment.answer.body if comment.answer else '',
                 'comment_text': comment.body,
                 'q_title': comment.question.title,
                 'comment_author': comment.author.username,

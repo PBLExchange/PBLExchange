@@ -3,7 +3,7 @@
 {% load i18n %}
 {% if answers %}
     {% for answer in answers %}
-        <div class="pble-a-list-item hentry answer{{ answer.accepted|yesno:"answer-selected pble-a-list-item-selected," }}">
+        <div class="pble-a-list-item hentry answer {{ answer.accepted|yesno:"answer-selected pble-a-list-item-selected," }}">
             {% voting answer %}
             <div class="pble-a-item-main">
                 {% if answer.question.author.pk == user.pk and not accepted %}
@@ -26,9 +26,11 @@
                 <div class="pble-a-item-c-list">
                     {% comment_list answer.question answer %}
                 </div>
-                <div class="pble-c-form" style="display: none;">
+                <label for="comment-a-{{ answer.pk }}">{% trans 'Add comment' %}</label>
+                <input type="checkbox" id="comment-a-{{ answer.pk }}" class="add-comment">
+                <div class="comment-form pble-c-form" {# style="display: none;" #}>
                     <h2>{% trans 'Your comment on this answer' %}:</h2>
-                    <form action="{% url 'pble_questions:comments:submit:a' question.pk answer.pk %}" method="post" class="comment-form pure-form pure-form-stacked">
+                    <form action="{% url 'pble_questions:comments:submit:a' question.pk answer.pk %}" method="post" class="pure-form pure-form-stacked">
                         {% csrf_token %}
                         {{ comment_form.media }}
                         {{ comment_form }}

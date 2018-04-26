@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-22 18:44+0000\n"
+"POT-Creation-Date: 2018-04-26 02:09+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,11 +17,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: PBLExchangeDjango/settings.py:147
+#: PBLExchangeDjango/settings.py:155
 msgid "English"
 msgstr "Engelsk"
 
-#: PBLExchangeDjango/settings.py:148
+#: PBLExchangeDjango/settings.py:156
 msgid "Danish"
 msgstr "Dansk"
 
@@ -31,7 +31,7 @@ msgstr "Svar"
 
 #: pble_questions/forms.py:50
 msgid "Comment"
-msgstr "kommentar"
+msgstr "Kommentar"
 
 #: pble_questions/models.py:48
 msgid "body"
@@ -65,7 +65,7 @@ msgstr "Stil et spørgsmål"
 #: pble_questions/templates/questions/ask.html:10
 #: pble_questions/templates/questions/detail.html:33
 #: pble_questions/templates/questions/detail.html:52
-#: templates/questions/answer_list.html:36
+#: templates/questions/answer_list.html:38
 msgid "Submit"
 msgstr "Send"
 
@@ -82,9 +82,14 @@ msgstr "Populært"
 msgid "Unanswered"
 msgstr "Ubesvaret"
 
-#: pble_questions/templates/questions/detail.html:25
+#: pble_questions/templates/questions/detail.html:24
+#: templates/questions/answer_list.html:29
 msgid "Add comment"
-msgstr "tilføj kommentar"
+msgstr "Tilføj kommentar"
+
+#: pble_questions/templates/questions/detail.html:27
+msgid "Your comment on this question"
+msgstr "Din kommentar på dette spørgsmål"
 
 #: pble_questions/templates/questions/detail.html:40
 #: pble_users/templates/users/detail.html:55
@@ -132,6 +137,10 @@ msgstr "ubesvaret"
 msgid "popular"
 msgstr "populært"
 
+#: pble_users/models.py:28
+msgid "language"
+msgstr "sprog"
+
 #: pble_users/templates/users/detail.html:9
 #: pble_users/templates/users/user_questions.html:7
 msgid "User"
@@ -169,7 +178,7 @@ msgstr "Titel"
 
 #: pble_users/templates/users/detail.html:44
 #: pble_users/templates/users/user_questions.html:8
-#: pblexchange/templates/pblexchange/base.html:76 pblexchange/urls.py:9
+#: pblexchange/templates/pblexchange/base.html:80 pblexchange/urls.py:9
 msgid "Questions"
 msgstr "Spørgsmål"
 
@@ -183,7 +192,7 @@ msgstr "valgt som bedste"
 
 #: pble_users/templates/users/detail.html:66
 msgid "Comments"
-msgstr "kommentarer"
+msgstr "Kommentarer"
 
 #: pble_users/templates/users/detail.html:74
 msgid "Voted on"
@@ -237,27 +246,27 @@ msgstr "Hej"
 msgid "Logout"
 msgstr "Log ud"
 
-#: pblexchange/templates/pblexchange/base.html:47
+#: pblexchange/templates/pblexchange/base.html:51
 msgid "PBL Exchange"
 msgstr "PBL Exchange"
 
-#: pblexchange/templates/pblexchange/base.html:89
+#: pblexchange/templates/pblexchange/base.html:93
 msgid "Submit feedback and bugs"
 msgstr "Send feedback og rapportér fejl"
 
-#: pblexchange/templates/pblexchange/base.html:90
+#: pblexchange/templates/pblexchange/base.html:94
 msgid "as a Github issue"
 msgstr "som et Github issue"
 
-#: pblexchange/templates/pblexchange/base.html:91
+#: pblexchange/templates/pblexchange/base.html:95
 msgid "or"
 msgstr "eller"
 
-#: pblexchange/templates/pblexchange/base.html:92
+#: pblexchange/templates/pblexchange/base.html:96
 msgid "via email"
 msgstr "via email"
 
-#: pblexchange/templates/pblexchange/base.html:98
+#: pblexchange/templates/pblexchange/base.html:102
 msgid "Powered by"
 msgstr "Drevet af"
 
@@ -287,11 +296,11 @@ msgstr "Klik for at vælge som bedste svar"
 msgid "Best answer"
 msgstr "Bedste svar"
 
-#: templates/questions/answer_list.html:30
+#: templates/questions/answer_list.html:32
 msgid "Your comment on this answer"
 msgstr "Din kommentar på dette svar"
 
-#: templates/questions/answer_list.html:44
+#: templates/questions/answer_list.html:46
 msgid "There are currently no answers"
 msgstr "Der er på nuværende tidspunkt ingen svar"
 
@@ -313,7 +322,7 @@ msgstr "Ingen spørgsmål på nuværende tidspunkt"
 
 #: templates/questions/stats.html:10
 msgid "comments"
-msgstr "kommentar"
+msgstr "kommentarer"
 
 #: templates/questions/stats.html:13
 msgid "users"
