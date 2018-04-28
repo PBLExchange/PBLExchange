@@ -1,0 +1,8 @@
+{% load i18n %}
+{% load news_articles %}
+<label><strong>{% trans 'PBL Exchange news' %}:<br></strong></label>
+<ul>
+{% for news_article in news_articles %}
+    <li>({{ news_article.start_date }}) <i>{{ news_article.headline }}:</i> <br>{{ news_article.lead }}</li>
+{% endfor %}
+</ul>

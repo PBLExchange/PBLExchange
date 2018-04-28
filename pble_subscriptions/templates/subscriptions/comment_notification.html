@@ -7,9 +7,9 @@
         <h3>
             {{ comment_author }} has provided the following comment to an answer you also commented on:
         </h3>
-        Question:  <a href="{{ q_url }}">{{ q_title }}</a>
+        Question:  <a href="{{ q_url }}">{{ q_title }}</a><br>
 
-        Answer: {{ answer_text|striptags|safe }}
+        Answer: {{ answer_text|striptags|safe }}<br>
 
         Comment: {{ comment_text|striptags|safe }}
     </body>

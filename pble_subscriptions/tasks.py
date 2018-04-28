@@ -19,7 +19,7 @@ from django.core.mail import get_connection, EmailMultiAlternatives
 #    logger.info('Task executed!! DONE')
 
 
-@periodic_task(run_every=(crontab(hour="07", minute="50", day_of_week="*")))
+@periodic_task(run_every=(crontab(hour="8", minute="0", day_of_week="*")))
 def send_daily_digest():
     midnight_today = datetime.combine(timezone.now(), time.min)
     midnight_day_ago = midnight_today - timedelta(days=1)

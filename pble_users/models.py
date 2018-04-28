@@ -34,7 +34,7 @@ class UserProfile(models.Model):
         super(UserProfile, self).save(*args, **kw)
 
 
-class UserSettings(models.Model):
+class UserSetting(models.Model):
     user = models.OneToOneField(User, unique=True)
     post_notification_enabled = models.BooleanField(default=True)
     subscription_enabled = models.BooleanField(default=True)

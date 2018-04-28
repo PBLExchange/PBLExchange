@@ -1,5 +1,8 @@
 from django.db import models
+from django.core.exceptions import ValidationError
 from django.core.validators import URLValidator
+from datetime import datetime, timedelta
+from django.utils import timezone# localtime, now
 from PBLExchangeDjango import settings
 
 
@@ -45,3 +48,21 @@ class ExternalLink(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class NewsArticle(models.Model):
+    id = models.AutoField(primary_key=True)
+    headline = models.CharField(max_length=32)
+    lead = models.CharField(max_length=64)
+    body = models.CharField(max_length=512)
+    start_date = models.DateField(default=timezone.now)
+    end_date = models.DateField(default=timezone.now()+timedelta(days=14))
+
+    def save(self, *args, **kw):
+        if self.start_date > self.end_date:  # TODO: Better error handling than throwing and not handling an exception
+            raise ValidationError('start_date must be before end_date')
+        else:
+            super(NewsArticle, self).save(*args, **kw)
+
+    def __str__(self):
+        return self.headline

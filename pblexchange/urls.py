@@ -17,4 +17,5 @@ urlpatterns = [
     url(r'^$', views.index, name='home'),
     url(r'^login/$', cas_views.login, name='login'),
     url(r'^logout/$', cas_views.logout, name='logout'),
+    url(r'^news_article/(?P<news_article_id>[0-9]+)$', views.news_article, name='news_article'),
 ]
