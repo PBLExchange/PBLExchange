@@ -59,8 +59,8 @@ def bonus_points(request, user_id, **kwargs):
 def set_language(request, lang_code, **kwargs):
     if request.user.is_authenticated():
         if lang_code and check_for_language(lang_code):
-            request.user.usersettings.language = lang_code
-            request.user.usersettings.save()
+            request.user.usersetting.language = lang_code
+            request.user.usersetting.save()
     redirect = request.META.get('HTTP_REFERER')
     if not redirect:
         redirect = reverse('home')

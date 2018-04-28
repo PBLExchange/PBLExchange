@@ -9,7 +9,9 @@
         </h3>
         Question:  <a href="{{ q_url }}">{{ q_title }}</a><br>
 
+        {% if answe_text %}
         Answer: {{ answer_text|striptags|safe }}<br>
+        {% endif %}
 
         Comment: {{ comment_text|striptags|safe }}
     </body>

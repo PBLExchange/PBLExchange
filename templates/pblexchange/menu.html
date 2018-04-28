@@ -6,6 +6,9 @@
             <li class="pble-nav-main-item"><a href="{% url field.lookup %}" class="pble-nav-main-link">{{ field.title }}</a></li>
         {% endfor %}
         {% if user.is_staff %}
+            <li class="pble-nav-main-item"><a href="{% url 'news_article_write' %}" class="pble-nav-main-link">{% trans 'Write article' %}</a></li>
+        {% endif %}
+        {% if user.is_staff %}
             <li class="pble-nav-main-item"><a href="{% url 'admin:index' %}" class="pble-nav-main-link">{% trans 'Admin' %}</a></li>
         {% endif %}
     </ul>
