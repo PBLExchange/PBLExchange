@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-26 02:48+0000\n"
+"POT-Creation-Date: 2018-04-29 21:01+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,19 +25,19 @@ msgstr ""
 msgid "Danish"
 msgstr ""
 
-#: pble_questions/forms.py:44
+#: pble_questions/forms.py:46
 msgid "Answer"
 msgstr ""
 
-#: pble_questions/forms.py:56
+#: pble_questions/forms.py:58
 msgid "Comment"
 msgstr ""
 
-#: pble_questions/models.py:48
+#: pble_questions/models.py:48 pblexchange/forms.py:14
 msgid "body"
 msgstr ""
 
-#: pble_questions/models.py:50 pble_questions/templatetags/questions.py:89
+#: pble_questions/models.py:50 pble_questions/templatetags/questions.py:92
 #: pble_users/templatetags/users.py:16
 msgid "anonymous"
 msgstr ""
@@ -65,6 +65,7 @@ msgstr ""
 #: pble_questions/templates/questions/ask.html:10
 #: pble_questions/templates/questions/detail.html:33
 #: pble_questions/templates/questions/detail.html:52
+#: templates/pblexchange/write_news_article.html:10
 #: templates/questions/answer_list.html:38
 msgid "Submit"
 msgstr ""
@@ -80,6 +81,10 @@ msgstr ""
 #: pble_questions/templates/questions/base.html:8
 #: pble_users/templates/users/user_questions.html:9
 msgid "Unanswered"
+msgstr ""
+
+#: pble_questions/templates/questions/category.html:6
+msgid "Recent questions posted in"
 msgstr ""
 
 #: pble_questions/templates/questions/detail.html:24
@@ -113,15 +118,17 @@ msgstr ""
 msgid "Recent questions tagged"
 msgstr ""
 
-#: pble_questions/templates/questions/tags.html:5 pblexchange/urls.py:10
+#: pble_questions/templates/questions/tags.html:5
+#: pble_subscriptions/templates/subscriptions/base.html:8
+#: pblexchange/urls.py:10
 msgid "Tags"
 msgstr ""
 
-#: pble_questions/templatetags/questions.py:76
+#: pble_questions/templatetags/questions.py:79
 msgid "asked"
 msgstr ""
 
-#: pble_questions/templatetags/questions.py:78
+#: pble_questions/templatetags/questions.py:81
 msgid "answered"
 msgstr ""
 
@@ -137,7 +144,91 @@ msgstr ""
 msgid "popular"
 msgstr ""
 
-#: pble_users/models.py:28
+#: pble_subscriptions/templates/subscriptions/base.html:7
+msgid "Categories"
+msgstr ""
+
+#: pble_subscriptions/templates/subscriptions/base.html:9
+msgid "Peers"
+msgstr ""
+
+#: pble_subscriptions/templates/subscriptions/base.html:17
+msgid "Interested in a specific type of content?"
+msgstr ""
+
+#: pble_subscriptions/templates/subscriptions/base.html:18
+msgid ""
+"Subscribe or unsubscribe to the categories, tags or peers who pique your "
+"interest by clicking on them."
+msgstr ""
+
+#: pble_subscriptions/templates/subscriptions/base.html:28
+msgid "Change your notifications settings:"
+msgstr ""
+
+#: pble_subscriptions/templates/subscriptions/base.html:31
+#: pble_subscriptions/templates/subscriptions/base.html:33
+msgid "Answer notifications"
+msgstr ""
+
+#: pble_subscriptions/templates/subscriptions/base.html:37
+#: pble_subscriptions/templates/subscriptions/base.html:39
+msgid "Comment notifications"
+msgstr ""
+
+#: pble_subscriptions/templates/subscriptions/base.html:47
+msgid "Update"
+msgstr ""
+
+#: pble_subscriptions/templates/subscriptions/category_list.html:5
+msgid "Categories you are subscribed to:"
+msgstr ""
+
+#: pble_subscriptions/templates/subscriptions/category_list.html:15
+msgid "Categories you are <u>not</u> subscribed to:"
+msgstr ""
+
+#: pble_subscriptions/templates/subscriptions/digest_options.html:5
+#: pble_subscriptions/templates/subscriptions/digest_options.html:18
+#: pble_subscriptions/templates/subscriptions/digest_options.html:31
+msgid "Subscription Digest"
+msgstr ""
+
+#: pble_subscriptions/templates/subscriptions/digest_options.html:7
+#: pble_subscriptions/templates/subscriptions/digest_options.html:20
+#: pble_subscriptions/templates/subscriptions/digest_options.html:33
+msgid "Never"
+msgstr ""
+
+#: pble_subscriptions/templates/subscriptions/digest_options.html:10
+#: pble_subscriptions/templates/subscriptions/digest_options.html:23
+#: pble_subscriptions/templates/subscriptions/digest_options.html:36
+msgid "Daily"
+msgstr ""
+
+#: pble_subscriptions/templates/subscriptions/digest_options.html:13
+#: pble_subscriptions/templates/subscriptions/digest_options.html:26
+#: pble_subscriptions/templates/subscriptions/digest_options.html:39
+msgid "Weekly"
+msgstr ""
+
+#: pble_subscriptions/templates/subscriptions/peer_list.html:5
+msgid "Users you are subscribed to:"
+msgstr ""
+
+#: pble_subscriptions/templates/subscriptions/peer_list.html:14
+msgid "Users you are <u>not</u> subscribed to:"
+msgstr ""
+
+#: pble_subscriptions/templates/subscriptions/tag_list.html:5
+msgid "Tags you are subscribed to:"
+msgstr ""
+
+#: pble_subscriptions/templates/subscriptions/tag_list.html:15
+msgid "Tags you are <u>not</u> subscribed to:"
+msgstr ""
+
+#: pble_users/models.py:41
 msgid "language"
 msgstr ""
 
@@ -163,7 +254,7 @@ msgid "Score"
 msgstr ""
 
 #: pble_users/templates/users/detail.html:31
-#: pblexchange/templates/pblexchange/base.html:30
+#: pblexchange/templates/pblexchange/base.html:31
 #: templates/questions/meta.html:19
 msgid "points"
 msgstr ""
@@ -178,7 +269,7 @@ msgstr ""
 
 #: pble_users/templates/users/detail.html:44
 #: pble_users/templates/users/user_questions.html:8
-#: pblexchange/templates/pblexchange/base.html:80 pblexchange/urls.py:9
+#: pblexchange/templates/pblexchange/base.html:93 pblexchange/urls.py:9
 msgid "Questions"
 msgstr ""
 
@@ -198,7 +289,7 @@ msgstr ""
 msgid "Voted on"
 msgstr ""
 
-#: pble_users/templates/users/detail.html:78 pblexchange/views.py:11
+#: pble_users/templates/users/detail.html:78 pblexchange/views.py:14
 #: templates/questions/stats.html:4
 msgid "questions"
 msgstr ""
@@ -238,35 +329,39 @@ msgstr ""
 msgid "No registered user(s) at the moment"
 msgstr ""
 
-#: pblexchange/templates/pblexchange/base.html:27
+#: pblexchange/forms.py:13
+msgid "lead"
+msgstr ""
+
+#: pblexchange/templates/pblexchange/base.html:28
 msgid "Hello"
 msgstr ""
 
-#: pblexchange/templates/pblexchange/base.html:34
+#: pblexchange/templates/pblexchange/base.html:35
 msgid "Logout"
 msgstr ""
 
-#: pblexchange/templates/pblexchange/base.html:51
+#: pblexchange/templates/pblexchange/base.html:52
 msgid "PBL Exchange"
 msgstr ""
 
-#: pblexchange/templates/pblexchange/base.html:93
+#: pblexchange/templates/pblexchange/base.html:106
 msgid "Submit feedback and bugs"
 msgstr ""
 
-#: pblexchange/templates/pblexchange/base.html:94
+#: pblexchange/templates/pblexchange/base.html:107
 msgid "as a Github issue"
 msgstr ""
 
-#: pblexchange/templates/pblexchange/base.html:95
+#: pblexchange/templates/pblexchange/base.html:108
 msgid "or"
 msgstr ""
 
-#: pblexchange/templates/pblexchange/base.html:96
+#: pblexchange/templates/pblexchange/base.html:109
 msgid "via email"
 msgstr ""
 
-#: pblexchange/templates/pblexchange/base.html:102
+#: pblexchange/templates/pblexchange/base.html:115
 msgid "Powered by"
 msgstr ""
 
@@ -288,7 +383,19 @@ msgid ""
 msgstr ""
 
 #: templates/pblexchange/menu.html:9
+msgid "Write article"
+msgstr ""
+
+#: templates/pblexchange/menu.html:10
 msgid "Admin"
+msgstr ""
+
+#: templates/pblexchange/news_articles.html:4
+msgid "PBL Exchange news:"
+msgstr ""
+
+#: templates/pblexchange/write_news_article.html:5
+msgid "Write your article"
 msgstr ""
 
 #: templates/questions/answer_list.html:11
@@ -306,6 +413,10 @@ msgstr ""
 
 #: templates/questions/answer_list.html:46
 msgid "There are currently no answers"
+msgstr ""
+
+#: templates/questions/categories_list.html:4
+msgid "All categories"
 msgstr ""
 
 #: templates/questions/meta.html:8

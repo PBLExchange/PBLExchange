@@ -119,7 +119,7 @@ class CustomCASBackend(CASBackend):
         # create a user profile & settings
         new_user_profile = users_model.UserProfile(user=user)
         new_user_profile.save()
-        new_user_settings = users_model.UserSettings(user=user)
+        new_user_settings = users_model.UserSetting(user=user)
         new_user_settings.save()
 
         # create user subscription

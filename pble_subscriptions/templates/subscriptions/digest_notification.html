@@ -22,7 +22,7 @@
                 Questions matching your peer subscription
             </h4>
             {% for q in peer_questions %}
-                {% question_url q %}: {{ q.author }}<br>
+                {% question_url q %}: {% if q.anonymous %} anonymous {% else %} {{ q.author }} {% endif %}<br>
             {% endfor %}
         {% endif %}
 

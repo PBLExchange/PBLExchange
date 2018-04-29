@@ -1,0 +1,8 @@
+{% extends base_template %}
+{% load questions %}
+{% load i18n %}
+
+{% block content %}
+    <h1>{% trans 'Recent questions posted in' %} {{ title }}</h1>
+    {% question_list questions %}
+{% endblock %}

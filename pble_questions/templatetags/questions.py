@@ -1,8 +1,11 @@
 from django import template
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext as _
+from django.db.models import Count
+from django.contrib.sites.models import Site
+from django.shortcuts import reverse
 
-from pble_questions.models import Question, Answer, Comment
+from pble_questions.models import Question, Answer, Comment, Category
 from pble_questions.forms import CommentForm, SearchForm
 
 register = template.Library()
@@ -97,3 +100,22 @@ def question_search():
     return {
         'form': SearchForm()
     }
+
+
+@register.inclusion_tag('questions/categories_list.html')
+def categories_list():
+    categories = Category.objects.annotate(cardinality=Count('question'))
+
+    return {
+        'categories': categories,
+    }
+
+
+@register.inclusion_tag('questions/category_href.html')
+def category_url(category):
+    current_site = Site.objects.get_current()
+    cat_url = current_site.domain + reverse('pble_questions:category', args=(
+        category.name,))
+    return {'cat_url': cat_url,
+            'cat_name': category.name,
+            }

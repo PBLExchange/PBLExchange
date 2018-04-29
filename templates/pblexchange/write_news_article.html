@@ -1,0 +1,12 @@
+{% extends base_template %}
+{% load i18n %}
+
+{% block content %}
+    <h1>{% trans 'Write your article' %}</h1>
+    <form action="{% url 'news_article_submit' %}" method="post" class="pure-form pure-form-stacked">
+        {% csrf_token %}
+        {{ post_form.media }}
+        {{ post_form }}
+        <input type="submit" value="{% trans 'Submit' %}">
+    </form>
+{% endblock %}

@@ -148,7 +148,7 @@ class Answer(Post):
                             'accept_action': accept_action,
                         }
                     )
-                    send_mail('PBL Exchange new answer', '', 'pblexchange@aau.dk', [self.question.author.email],
+                    send_mail('PBL Exchange new answer', '', 'pblexchange@aau.dk', [self.author.email],
                               fail_silently=True, html_message=html_message)
 
 

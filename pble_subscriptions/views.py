@@ -122,7 +122,6 @@ def alter_peers(request, username, **kwargs):
 
 
 def alter_subscription_settings(request, form_type=SubscriptionSettingsForm, **kwargs):
-
     if not request.user.is_authenticated():
         HttpResponseRedirect(reverse('login'))
 
@@ -151,17 +150,22 @@ def alter_subscription_settings(request, form_type=SubscriptionSettingsForm, **k
 
 
 # Notification methods
-# TODO: Make these functions use celery task methods for asynchronous behaviour
+# TODO: Consider making these functions use celery task methods for asynchronous behaviour
 def send_answer_notification(answer, **kwargs):
     a_author_subscription = Subscription.objects.get(user=answer.question.author)
     if a_author_subscription.answer_notifications and answer.author != answer.question.author:
         current_site = Site.objects.get_current()
         q_url = current_site.domain + reverse('pble_questions:detail', args=(
             answer.question.id,))
+        if answer.anonymous:
+            a_author = 'anonymous'
+        else:
+            a_author = answer.author.username
+
         html_message = loader.render_to_string(
             'subscriptions/answer_notification.html',
             {
-                'answer_author': answer.author.username,
+                'answer_author': a_author,
                 'recipient_username': answer.question.author.username,
                 'q_url': q_url,
                 'answer_text': answer.body,
@@ -173,12 +177,11 @@ def send_answer_notification(answer, **kwargs):
                   fail_silently=True, html_message=html_message)
 
 
-def send_comment_notifications(comment):    # TODO: Test this feature!!!!
+def send_comment_notifications(comment):
     receivers_list = set()
-    comments = comment.answer.comment_set.filter(author__subscription__comment_notifications=True) if comment.answer \
-        else comment.question.comment_set.filter(author__subscription__comment_notifications=True)
+    comments = comment.answer.comment_set.filter(author__subscription__comment_notifications=True, answer=comment.answer) if comment.answer \
+        else comment.question.comment_set.filter(author__subscription__comment_notifications=True, answer__isnull=True)
     post_author = comment.answer.author if comment.answer else comment.question.author
-#    answer_comments = Comment.objects.filter(answer=comment.answer).filter(author__subscription__comment_notifications=True)
     current_site = Site.objects.get_current()
     q_url = current_site.domain + reverse('pble_questions:detail', args=(
         comment.question.id,))
@@ -189,7 +192,13 @@ def send_comment_notifications(comment):    # TODO: Test this feature!!!!
     for e in comments:
         receivers_list.add(e.author)
 
-    receivers_list.add(post_author)
+    if Subscription.objects.get(user=post_author).comment_notifications:
+        receivers_list.add(post_author)
+
+    if comment.anonymous:
+        c_author = 'anonymous'
+    else:
+        c_author = comment.author.username
 
     for user in receivers_list:
         html_message = loader.render_to_string(
@@ -200,7 +209,7 @@ def send_comment_notifications(comment):    # TODO: Test this feature!!!!
                 'answer_text': comment.answer.body if comment.answer else '',
                 'comment_text': comment.body,
                 'q_title': comment.question.title,
-                'comment_author': comment.author.username,
+                'comment_author': c_author,
             }
         )
         message = EmailMultiAlternatives('PBL Exchange daily digest', '', 'pblexchange@aau.dk', [user.email],
@@ -209,31 +218,3 @@ def send_comment_notifications(comment):    # TODO: Test this feature!!!!
         message.send()
 
     connection.close()  # Cleanup
-
-
-def send_accepted_notification(answer):
-    a_author_subscription = Subscription.objects.get(user=answer.question.author)
-
-    if a_author_subscription.answer_notifications:
-        current_site = Site.objects.get_current()
-        q_url = current_site.domain + reverse('pble_questions:detail', args=(
-            answer.question.id,))
-
-        accept_action = ''
-        if answer.accepted:
-            accept_action = 'accepted'
-        else:
-            accept_action = 'unaccepted'
-
-        html_message = loader.render_to_string(
-            'subscriptions/accepted_notification.html',
-            {
-                'recipient_username': answer.author.username,
-                'q_url': q_url,
-                'question_author': answer.question.author.username,
-                'q_title': answer.question.title,
-                'accept_action': accept_action,
-            }
-        )
-        send_mail('PBL Exchange new answer', '', 'pblexchange@aau.dk', [answer.question.author.email],
-                  fail_silently=True, html_message=html_message)

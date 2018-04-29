@@ -1,5 +1,11 @@
 from django.db import models
+from django.core.exceptions import ValidationError
 from django.core.validators import URLValidator
+from django.contrib.auth.models import User
+from datetime import timedelta
+from django.utils import timezone
+from ckeditor_uploader.fields import RichTextUploadingField
+from ckeditor.fields import RichTextField
 from PBLExchangeDjango import settings
 
 
@@ -45,3 +51,22 @@ class ExternalLink(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class NewsArticle(models.Model):
+    id = models.AutoField(primary_key=True)
+    author = models.ForeignKey(User)
+    headline = models.CharField(max_length=32)
+    lead = models.CharField(max_length=256, blank=True)
+    body = RichTextUploadingField()
+    start_date = models.DateField(default=timezone.now)
+    end_date = models.DateField(default=timezone.now()+timedelta(days=14))
+
+    def save(self, *args, **kw):
+        if self.start_date > self.end_date:  # TODO: Better error handling than throwing and not handling an exception
+            raise ValidationError('start_date must be before end_date')
+        else:
+            super(NewsArticle, self).save(*args, **kw)
+
+    def __str__(self):
+        return self.headline

@@ -3,6 +3,7 @@
 {% load users %}
 {% load menu %}
 {% load links %}
+{% load news_articles %}
 {% load i18n %}
 <!DOCTYPE html>
 <html lang="en">
@@ -70,6 +71,18 @@
 
                         <div class="pble-sidebar">
                             {% links %}
+                        </div>
+
+                        <div class="pble-nav-cat">
+                            <div class="pble-nav-cat-list pble-nav-cat-list-1">
+                                {% news_articles %}
+                            </div>
+                        </div>
+
+                        <div class="pble-nav-cat">
+                            <div class="pble-nav-cat-list pble-nav-cat-list-1">
+                                {% categories_list %}
+                            </div>
                         </div>
 
                     </div>

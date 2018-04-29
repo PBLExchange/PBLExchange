@@ -183,7 +183,16 @@ def categories(request, base_template='pblexchange/base.html', **kwargs):
     return render(request, 'questions/list.html', {
         'base_template': base_template,
         'title': _('Categories'),
-        'questions': Category.objects.get(name='').question_set
+        'questions': Category.objects.get(name='').question_set,
+    })
+
+
+def category(request, category_text, base_template='pblexchange/base.html', **kwargs):
+    t = get_object_or_404(Category, name=category_text)
+    return render(request, 'questions/category.html', {
+        'base_template': base_template,
+        'title': category_text,
+        'questions': t.question_set.order_by('-created_date'),
     })
 
 

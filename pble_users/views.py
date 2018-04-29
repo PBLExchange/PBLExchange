@@ -5,9 +5,8 @@ from django.utils.translation import check_for_language
 from pble_users import models
 from pble_users.forms import BonusPointForm
 from pblexchange.models import ExternalLink
-from pble_questions.models import Vote, QuestionVote, CommentVote, AnswerVote
-
-from PBLExchangeDjango import settings #TODO: Am i checking if app exists correctly?
+from PBLExchangeDjango import settings
+from .decorators import group_required
 
 
 # Create your views here.
@@ -38,6 +37,7 @@ def question_list(request, user_id, questions, title_prefix='', base_template='p
     })
 
 
+@group_required()  # Leave blank to only allow admins
 def bonus_points(request, user_id, **kwargs):
     if request.method == 'POST' and request.user.is_authenticated() and request.user.is_superuser:
         form = BonusPointForm(request.POST)
@@ -59,8 +59,8 @@ def bonus_points(request, user_id, **kwargs):
 def set_language(request, lang_code, **kwargs):
     if request.user.is_authenticated():
         if lang_code and check_for_language(lang_code):
-            request.user.usersettings.language = lang_code
-            request.user.usersettings.save()
+            request.user.usersetting.language = lang_code
+            request.user.usersetting.save()
     redirect = request.META.get('HTTP_REFERER')
     if not redirect:
         redirect = reverse('home')
