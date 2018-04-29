@@ -1,0 +1,8 @@
+{% load i18n %}
+{% load questions %}
+<ul>
+<li class="pble-nav-cat-item pble-nav-cat-all">{% trans 'All categories' %}:</li>
+
+{% for category in categories %}
+    <li class="pble-nav-cat-item">{% category_url category %} ({{ category.cardinality }})</li>
+{% endfor %}
