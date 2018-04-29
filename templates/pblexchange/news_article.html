@@ -2,7 +2,10 @@
 {% load i18n %}
 
 {% block content %}
-    <h1>{{ headline }}</h1>
-    <h4>{{ lead }}</h4>
-    <p>{{ body }}</p>
+    <h1>{{ news_article.headline }}</h1>
+    <small>Written by {{ news_article.author.username }}</small>
+    {% if news_article.lead %}
+        <h4>{{ news_article.lead }}</h4>
+    {% endif %}
+    <p>{{ news_article.body|safe }}</p>
 {% endblock %}

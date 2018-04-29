@@ -24,9 +24,7 @@ def news_article(request, news_article_id):
     na = NewsArticle.objects.get(pk=news_article_id)
     return render(request, 'pblexchange/news_article.html', {
         'base_template': 'pblexchange/base.html',
-        'headline': na.headline,
-        'lead': na.lead,
-        'body': na.body,
+        'news_article': na,
     })
 
 
@@ -34,25 +32,30 @@ def write_article(request, base_template='pblexchange/base.html', **kwargs):
     if not request.user.is_authenticated():
         return HttpResponseRedirect(reverse('login'))
 
-    if request.user.is_staff:
-        return render(request, 'questions/ask.html', {
+    if request.user.is_staff or request.user.is_superuser:
+        return render(request, 'pblexchange/write_news_article.html', {
             'base_template': base_template,
             'post_form': NewsArticleForm(),
+            'error_msg': '',
         })
     else:
         raise PermissionDenied
 
 
-def submit_article(request, news_article_id=None, form_type=NewsArticleForm, **kwargs):
+def submit_article(request, form_type=NewsArticleForm, **kwargs):
     if request.method == 'POST' and request.user.is_authenticated():
-        if request.user.is_staff:
+        if request.user.is_staff or request.user.is_superuser:
             post_form = form_type(request.POST)
-            post = post_form.save(commit=False)
-            new_na = get_object_or_404(NewsArticle, pk=news_article_id)
-            #new_na.author = request.user
-            post.save()
-            post_form.save_m2m()  # needed to save many-to-many relations.
-            return HttpResponseRedirect(reverse('news_article', args=(new_na.pk,)))
+            if post_form.is_valid():
+                new_na = post_form.save(commit=False)
+                new_na.author = request.user
+                new_na.save()
+                return HttpResponseRedirect(reverse('news_article', args=(new_na.pk,)))
+            else:
+                return render(request, 'pblexchange/write_news_article.html', {
+                    'base_template': 'pblexchange/base.html',
+                    'post_form': post_form,
+                })
         else:
             raise PermissionDenied
     else:

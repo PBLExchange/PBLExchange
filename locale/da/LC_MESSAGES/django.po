@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-29 10:48+0000\n"
+"POT-Creation-Date: 2018-04-29 12:40+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,7 +33,7 @@ msgstr "Svar"
 msgid "Comment"
 msgstr "Kommentar"
 
-#: pble_questions/models.py:48
+#: pble_questions/models.py:48 pblexchange/forms.py:13
 msgid "body"
 msgstr "krop"
 
@@ -65,6 +65,7 @@ msgstr "Stil et spørgsmål"
 #: pble_questions/templates/questions/ask.html:10
 #: pble_questions/templates/questions/detail.html:33
 #: pble_questions/templates/questions/detail.html:52
+#: templates/pblexchange/write_news_article.html:10
 #: templates/questions/answer_list.html:38
 msgid "Submit"
 msgstr "Send"
@@ -174,8 +175,8 @@ msgid "Comment notifications"
 msgstr "Kommentar notifikationer"
 
 #: pble_subscriptions/templates/subscriptions/base.html:47
-msgid "Update settings"
-msgstr ""
+msgid "Update"
+msgstr "Opdatér"
 
 #: pble_subscriptions/templates/subscriptions/category_list.html:5
 msgid "Categories you are subscribed to:"
@@ -326,6 +327,10 @@ msgstr "Top scorende brugere"
 msgid "No registered user(s) at the moment"
 msgstr "Ingen registrerede brugere på nuværende tidspunkt"
 
+#: pblexchange/forms.py:12
+msgid "lead"
+msgstr "underrubrik"
+
 #: pblexchange/templates/pblexchange/base.html:28
 msgid "Hello"
 msgstr "Hej"
@@ -387,6 +392,10 @@ msgstr "Adminstrator"
 msgid "PBL Exchange news:"
 msgstr "PBL Exchange nyheder:"
 
+#: templates/pblexchange/write_news_article.html:5
+msgid "Write your article"
+msgstr "Skriv din artikel"
+
 #: templates/questions/answer_list.html:11
 msgid "Click to select as best answer"
 msgstr "Klik for at vælge som bedste svar"
@@ -439,3 +448,12 @@ msgstr "Klik for at stemme ned"
 #: templates/questions/vote.html:9
 msgid "votes"
 msgstr "stemmer"
+
+#~ msgid "headline"
+#~ msgstr "rubrik"
+
+#~ msgid "start date"
+#~ msgstr "begyndelses dato"
+
+#~ msgid "end date"
+#~ msgstr "slut dato"
