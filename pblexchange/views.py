@@ -49,6 +49,7 @@ def submit_article(request, news_article_id=None, form_type=NewsArticleForm, **k
             post_form = form_type(request.POST)
             post = post_form.save(commit=False)
             new_na = get_object_or_404(NewsArticle, pk=news_article_id)
+            #new_na.author = request.user
             post.save()
             post_form.save_m2m()  # needed to save many-to-many relations.
             return HttpResponseRedirect(reverse('news_article', args=(new_na.pk,)))

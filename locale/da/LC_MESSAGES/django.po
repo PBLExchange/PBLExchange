@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-26 02:48+0000\n"
+"POT-Creation-Date: 2018-04-29 10:48+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,11 +25,11 @@ msgstr "Engelsk"
 msgid "Danish"
 msgstr "Dansk"
 
-#: pble_questions/forms.py:44
+#: pble_questions/forms.py:46
 msgid "Answer"
 msgstr "Svar"
 
-#: pble_questions/forms.py:56
+#: pble_questions/forms.py:58
 msgid "Comment"
 msgstr "Kommentar"
 
@@ -113,7 +113,9 @@ msgstr "for at svar på spørgsmål"
 msgid "Recent questions tagged"
 msgstr "Nylige spørgsmål tagget med"
 
-#: pble_questions/templates/questions/tags.html:5 pblexchange/urls.py:10
+#: pble_questions/templates/questions/tags.html:5
+#: pble_subscriptions/templates/subscriptions/base.html:8
+#: pblexchange/urls.py:10
 msgid "Tags"
 msgstr "Tags"
 
@@ -137,7 +139,93 @@ msgstr "ubesvaret"
 msgid "popular"
 msgstr "populært"
 
-#: pble_users/models.py:28
+#: pble_subscriptions/templates/subscriptions/base.html:7
+msgid "Categories"
+msgstr "Kategorier"
+
+#: pble_subscriptions/templates/subscriptions/base.html:9
+msgid "Peers"
+msgstr "Kolleger"
+
+#: pble_subscriptions/templates/subscriptions/base.html:17
+msgid "Interested in a specific type of content?"
+msgstr "Interesseret i en specifik type af indhold?"
+
+#: pble_subscriptions/templates/subscriptions/base.html:18
+msgid ""
+"Subscribe or unsubscribe to the categories, tags or peers who pique your "
+"interest by clicking on them."
+msgstr ""
+"Abonnér eller afmeld til kategorier, tags, eller kolleger som vækker din "
+"interesse ved at klikke på dem."
+
+#: pble_subscriptions/templates/subscriptions/base.html:28
+msgid "Change your notifications settings:"
+msgstr "Ændre dine notifikations indstillinger:"
+
+#: pble_subscriptions/templates/subscriptions/base.html:31
+#: pble_subscriptions/templates/subscriptions/base.html:33
+msgid "Answer notifications"
+msgstr "Svar notifikationer"
+
+#: pble_subscriptions/templates/subscriptions/base.html:37
+#: pble_subscriptions/templates/subscriptions/base.html:39
+msgid "Comment notifications"
+msgstr "Kommentar notifikationer"
+
+#: pble_subscriptions/templates/subscriptions/base.html:47
+msgid "Update settings"
+msgstr ""
+
+#: pble_subscriptions/templates/subscriptions/category_list.html:5
+msgid "Categories you are subscribed to:"
+msgstr "Kategorier du abonnerer på:"
+
+#: pble_subscriptions/templates/subscriptions/category_list.html:15
+msgid "Categories you are <u>not</u> subscribed to:"
+msgstr "Kategorier du <u>ikke</u> abonnerer på:"
+
+#: pble_subscriptions/templates/subscriptions/digest_options.html:5
+#: pble_subscriptions/templates/subscriptions/digest_options.html:18
+#: pble_subscriptions/templates/subscriptions/digest_options.html:31
+msgid "Subscription Digest"
+msgstr "Abonnoment interval"
+
+#: pble_subscriptions/templates/subscriptions/digest_options.html:7
+#: pble_subscriptions/templates/subscriptions/digest_options.html:20
+#: pble_subscriptions/templates/subscriptions/digest_options.html:33
+msgid "Never"
+msgstr "Aldrig"
+
+#: pble_subscriptions/templates/subscriptions/digest_options.html:10
+#: pble_subscriptions/templates/subscriptions/digest_options.html:23
+#: pble_subscriptions/templates/subscriptions/digest_options.html:36
+msgid "Daily"
+msgstr "Dagligt"
+
+#: pble_subscriptions/templates/subscriptions/digest_options.html:13
+#: pble_subscriptions/templates/subscriptions/digest_options.html:26
+#: pble_subscriptions/templates/subscriptions/digest_options.html:39
+msgid "Weekly"
+msgstr "Ugentligt"
+
+#: pble_subscriptions/templates/subscriptions/peer_list.html:5
+msgid "Users you are subscribed to:"
+msgstr "Brugere du abonnerer på:"
+
+#: pble_subscriptions/templates/subscriptions/peer_list.html:14
+msgid "Users you are <u>not</u> subscribed to:"
+msgstr "Brugere du <u>ikke</u> abonnerer på:"
+
+#: pble_subscriptions/templates/subscriptions/tag_list.html:5
+msgid "Tags you are subscribed to:"
+msgstr "Tags du abonnerer på:"
+
+#: pble_subscriptions/templates/subscriptions/tag_list.html:15
+msgid "Tags you are <u>not</u> subscribed to:"
+msgstr "Tags du <u>ikke</u> abonnerer på:"
+
+#: pble_users/models.py:41
 msgid "language"
 msgstr "sprog"
 
@@ -163,7 +251,7 @@ msgid "Score"
 msgstr "Score"
 
 #: pble_users/templates/users/detail.html:31
-#: pblexchange/templates/pblexchange/base.html:30
+#: pblexchange/templates/pblexchange/base.html:31
 #: templates/questions/meta.html:19
 msgid "points"
 msgstr "point"
@@ -178,7 +266,7 @@ msgstr "Titel"
 
 #: pble_users/templates/users/detail.html:44
 #: pble_users/templates/users/user_questions.html:8
-#: pblexchange/templates/pblexchange/base.html:80 pblexchange/urls.py:9
+#: pblexchange/templates/pblexchange/base.html:87 pblexchange/urls.py:9
 msgid "Questions"
 msgstr "Spørgsmål"
 
@@ -198,7 +286,7 @@ msgstr "Kommentarer"
 msgid "Voted on"
 msgstr "Stemt på"
 
-#: pble_users/templates/users/detail.html:78 pblexchange/views.py:11
+#: pble_users/templates/users/detail.html:78 pblexchange/views.py:14
 #: templates/questions/stats.html:4
 msgid "questions"
 msgstr "spørgsmål"
@@ -238,35 +326,35 @@ msgstr "Top scorende brugere"
 msgid "No registered user(s) at the moment"
 msgstr "Ingen registrerede brugere på nuværende tidspunkt"
 
-#: pblexchange/templates/pblexchange/base.html:27
+#: pblexchange/templates/pblexchange/base.html:28
 msgid "Hello"
 msgstr "Hej"
 
-#: pblexchange/templates/pblexchange/base.html:34
+#: pblexchange/templates/pblexchange/base.html:35
 msgid "Logout"
 msgstr "Log ud"
 
-#: pblexchange/templates/pblexchange/base.html:51
+#: pblexchange/templates/pblexchange/base.html:52
 msgid "PBL Exchange"
 msgstr "PBL Exchange"
 
-#: pblexchange/templates/pblexchange/base.html:93
+#: pblexchange/templates/pblexchange/base.html:100
 msgid "Submit feedback and bugs"
 msgstr "Send feedback og rapportér fejl"
 
-#: pblexchange/templates/pblexchange/base.html:94
+#: pblexchange/templates/pblexchange/base.html:101
 msgid "as a Github issue"
 msgstr "som et Github issue"
 
-#: pblexchange/templates/pblexchange/base.html:95
+#: pblexchange/templates/pblexchange/base.html:102
 msgid "or"
 msgstr "eller"
 
-#: pblexchange/templates/pblexchange/base.html:96
+#: pblexchange/templates/pblexchange/base.html:103
 msgid "via email"
 msgstr "via email"
 
-#: pblexchange/templates/pblexchange/base.html:102
+#: pblexchange/templates/pblexchange/base.html:109
 msgid "Powered by"
 msgstr "Drevet af"
 
@@ -288,8 +376,16 @@ msgid ""
 msgstr "Udvid din viden om Problem Baseret Læring ved hjælp af følgende links"
 
 #: templates/pblexchange/menu.html:9
+msgid "Write article"
+msgstr "Skriv artikel"
+
+#: templates/pblexchange/menu.html:10
 msgid "Admin"
 msgstr "Adminstrator"
+
+#: templates/pblexchange/news_articles.html:3
+msgid "PBL Exchange news:"
+msgstr "PBL Exchange nyheder:"
 
 #: templates/questions/answer_list.html:11
 msgid "Click to select as best answer"

@@ -1,40 +1,42 @@
+{% load i18n %}
+
 {% if current_digest == "NEVER" %}
     <fieldset class="form-group">
-        <legend class="legend-label">Subscription Digest</legend>
+        <legend class="legend-label">{% trans 'Subscription Digest' %}</legend>
         <label class="radio-inline">
-            <input id="digest1" name="subscription_digest" value="NEVER" type="radio" checked> Never
+            <input id="digest1" name="subscription_digest" value="NEVER" type="radio" checked> {% trans 'Never' %}
         </label>
         <label class="radio-inline">
-            <input id="digest2" name="subscription_digest" value="DAILY" type="radio"> Daily
+            <input id="digest2" name="subscription_digest" value="DAILY" type="radio"> {% trans 'Daily' %}
         </label>
         <label class="radio-inline">
-            <input id="digest3" name="subscription_digest" value="WEEKLY" type="radio"> Weekly
+            <input id="digest3" name="subscription_digest" value="WEEKLY" type="radio"> {% trans 'Weekly' %}
         </label>
     </fieldset>
 {% elif current_digest == "DAILY" %}
     <fieldset class="form-group">
-        <legend class="legend-label">Subscription Digest</legend>
+        <legend class="legend-label">{% trans 'Subscription Digest' %}</legend>
         <label class="radio-inline">
-            <input id="digest1" name="subscription_digest" value="NEVER" type="radio"> Never
+            <input id="digest1" name="subscription_digest" value="NEVER" type="radio"> {% trans 'Never' %}
         </label>
         <label class="radio-inline">
-            <input id="digest2" name="subscription_digest" value="DAILY" type="radio" checked> Daily
+            <input id="digest2" name="subscription_digest" value="DAILY" type="radio" checked> {% trans 'Daily' %}
         </label>
         <label class="radio-inline">
-            <input id="digest3" name="subscription_digest" value="WEEKLY" type="radio"> Weekly
+            <input id="digest3" name="subscription_digest" value="WEEKLY" type="radio"> {% trans 'Weekly' %}
         </label>
     </fieldset>
 {% elif current_digest == "WEEKLY" %}
     <fieldset class="form-group">
-        <legend class="legend-label">Subscription Digest</legend>
+        <legend class="legend-label">{% trans 'Subscription Digest' %}</legend>
         <label class="radio-inline">
-            <input id="digest1" name="subscription_digest" value="NEVER" type="radio"> Never
+            <input id="digest1" name="subscription_digest" value="NEVER" type="radio"> {% trans 'Never' %}
         </label>
         <label class="radio-inline">
-            <input id="digest2" name="subscription_digest" value="DAILY" type="radio"> Daily
+            <input id="digest2" name="subscription_digest" value="DAILY" type="radio"> {% trans 'Daily' %}
         </label>
         <label class="radio-inline">
-            <input id="digest3" name="subscription_digest" value="WEEKLY" type="radio" checked> Weekly
+            <input id="digest3" name="subscription_digest" value="WEEKLY" type="radio" checked> {% trans 'Weekly' %}
         </label>
     </fieldset>
 {% endif %}

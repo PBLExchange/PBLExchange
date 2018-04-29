@@ -1,7 +1,8 @@
 {% extends 'subscriptions/base.html' %}
+{% load i18n %}
 
 {% block content %}
-    <h1>Users you are subscribed to:</h1>
+    <h1>{% trans 'Users you are subscribed to:' %}</h1>
     <div class="pble-part-ranking">
     {% for userprofile in sub_users %}
         <span class="pble-ranking-item pble-top-tags-item">
@@ -10,7 +11,7 @@
     {% endfor %}
     </div>
 
-    <h1>Users you are <u>not</u> subscribed to:</h1>
+    <h1>{% trans 'Users you are <u>not</u> subscribed to:' %}</h1>
     <div class="pble-part-ranking">
     {% for userprofile in not_sub_users %}
         <span class="pble-ranking-item pble-top-tags-item">

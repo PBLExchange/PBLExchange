@@ -1,11 +1,12 @@
 {% extends base_template %}
 {% load subscriptions %}
+{% load i18n %}
 
 {% block sub_menu %}
     <ul class="pble-nav-sub-list">
-        <li class="pble-nav-sub-item"><a href="{% url 'pble_subscriptions:categories' %}" class="pble-nav-sub-link">Categories</a></li>
-        <li class="pble-nav-sub-item"><a href="{% url 'pble_subscriptions:tags' %}" class="pble-nav-sub-link">Tags</a></li>
-        <li class="pble-nav-sub-item"><a href="{% url 'pble_subscriptions:peers' %}" class="pble-nav-sub-link">Peers</a></li>
+        <li class="pble-nav-sub-item"><a href="{% url 'pble_subscriptions:categories' %}" class="pble-nav-sub-link">{% trans 'Categories' %}</a></li>
+        <li class="pble-nav-sub-item"><a href="{% url 'pble_subscriptions:tags' %}" class="pble-nav-sub-link">{% trans 'Tags' %}</a></li>
+        <li class="pble-nav-sub-item"><a href="{% url 'pble_subscriptions:peers' %}" class="pble-nav-sub-link">{% trans 'Peers' %}</a></li>
     </ul>
 {% endblock %}
 
@@ -13,8 +14,8 @@
     <div class="pble-sidepanel">
         <div class="pble-widgets-side pble-widget-side-top">
             <div class="pble-widget-side pble-widget-side-top">
-                <p>Interested in a specific type of content?<br>
-                Subscribe or unsubscribe to the categories, tags or peers who pique your interest by clicking on them.</p>
+                <p>{% trans 'Interested in a specific type of content?' %}<br>
+                {% trans 'Subscribe or unsubscribe to the categories, tags or peers who pique your interest by clicking on them.' %}</p>
             </div>
         </div>
 
@@ -24,18 +25,18 @@
                 {% if error_message %}
                     <strong style="color: red;"> {{ error_message }}<br></strong>
                 {% endif %}
-                Change your notifications settings:<br><br>
+                {% trans 'Change your notifications settings:' %}<br><br>
 
                 {% if answer_notifications %}
-                <input type="checkbox" name="answer_check" value="answer_enabled" checked>Answer notifications<br>
+                <input type="checkbox" name="answer_check" value="answer_enabled" checked>{% trans 'Answer notifications' %}<br>
                 {% else %}
-                <input type="checkbox" name="answer_check" value="answer_enabled">Answer notifications<br>
+                <input type="checkbox" name="answer_check" value="answer_enabled">{% trans 'Answer notifications' %}<br>
                 {% endif %}
 
                 {% if comment_notifications %}
-                <input type="checkbox" name="comment_check" value="comment_enabled" checked>Comment notifications<br>
+                <input type="checkbox" name="comment_check" value="comment_enabled" checked>{% trans 'Comment notifications' %}<br>
                 {% else %}
-                <input type="checkbox" name="comment_check" value="comment_enabled">Comment notifications<br>
+                <input type="checkbox" name="comment_check" value="comment_enabled">{% trans 'Comment notifications' %}<br>
                 {% endif %}
 
                 <!-- Grouped checkboxes for digest options -->
@@ -43,7 +44,7 @@
                 {% digest_options user.id %}
 
                 <br><br>
-                <input class="pble-form-wide-button pble-form-wide-button-setbonus" name="update_btn" value="Update settings" title="" type="submit">
+                <input class="pble-form-wide-button pble-form-wide-button-setbonus" name="update_btn" value={% trans 'Update settings' %} title="" type="submit">
             </form>
         </div>
     </div>

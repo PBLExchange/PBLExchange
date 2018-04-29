@@ -192,7 +192,8 @@ def send_comment_notifications(comment):
     for e in comments:
         receivers_list.add(e.author)
 
-    receivers_list.add(post_author)
+    if Subscription.objects.get(user=post_author).comment_notifications:
+        receivers_list.add(post_author)
 
     if comment.anonymous:
         c_author = 'anonymous'
@@ -217,35 +218,3 @@ def send_comment_notifications(comment):
         message.send()
 
     connection.close()  # Cleanup
-
-
-def send_accepted_notification(answer):
-    a_author_subscription = Subscription.objects.get(user=answer.question.author)
-
-    if a_author_subscription.answer_notifications:
-        current_site = Site.objects.get_current()
-        q_url = current_site.domain + reverse('pble_questions:detail', args=(
-            answer.question.id,))
-
-        if answer.accepted:
-            accept_action = 'accepted'
-        else:
-            accept_action = 'unaccepted'
-
-        if answer.question.anonymous:
-            q_author = 'anonymous'
-        else:
-            q_author = answer.question.author.username
-
-        html_message = loader.render_to_string(
-            'subscriptions/accepted_notification.html',
-            {
-                'recipient_username': answer.author.username,
-                'q_url': q_url,
-                'question_author': q_author,
-                'q_title': answer.question.title,
-                'accept_action': accept_action,
-            }
-        )
-        send_mail('PBL Exchange new answer', '', 'pblexchange@aau.dk', [answer.question.author.email],
-                  fail_silently=True, html_message=html_message)

@@ -1,6 +1,6 @@
 {% load i18n %}
 {% load news_articles %}
-<label><strong>{% trans 'PBL Exchange news' %}:<br></strong></label>
+<label><strong>{% trans 'PBL Exchange news:' %}<br></strong></label>
 <ul>
 {% for news_article in news_articles %}
     <li>({{ news_article.start_date }}) {% news_article_url news_article %}</li>
