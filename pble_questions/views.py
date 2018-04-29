@@ -3,7 +3,7 @@ from django.shortcuts import render, HttpResponseRedirect, Http404, reverse, get
 from django.core.validators import ValidationError
 from django.utils.translation import ugettext as _
 from pble_questions.forms import QuestionForm, AnswerForm, CommentForm, SearchForm
-from pble_questions.models import Question, Answer, QuestionVote, CommentVote, AnswerVote, Tag
+from pble_questions.models import Question, Answer, QuestionVote, CommentVote, AnswerVote, Tag, Category
 from pble_users.models import UserProfile
 from PBLExchangeDjango import settings
 from pblexchange.models import Setting
@@ -176,6 +176,14 @@ def tag(request, tag_text, base_template='pblexchange/base.html', **kwargs):
         'base_template': base_template,
         'title': tag_text,
         'questions': t.question_set.order_by('-created_date'),
+    })
+
+
+def categories(request, base_template='pblexchange/base.html', **kwargs):
+    return render(request, 'questions/list.html', {
+        'base_template': base_template,
+        'title': _('Categories'),
+        'questions': Category.objects.get(name='').question_set
     })
 
 
