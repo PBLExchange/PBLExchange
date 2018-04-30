@@ -2285,11 +2285,6 @@ a.pble-browse-cat-link:visited {
 	border-bottom: 1px solid #ccc;
 	border-right: 1px solid #ccc;
 	border-radius: 2px;
-	-moz-transition: all ease-in-out 0.75s;
-	-webkit-transition: all ease-in-out 0.75s;
-	-o-transition: all ease-in-out 0.75s;
-	-ms-transition: all ease-in-out 0.75s;
-	transition: all ease-in-out 0.75s;
 }
 
 .pble-widget-side a {
