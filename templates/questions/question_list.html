@@ -11,6 +11,11 @@
                 <span class="pble-a-count">
                     <span class="pble-a-count-data">{{ question.answer_set.count }}</span><span class="pble-a-count-pad"> {% trans 'answers' %}</span>
                 </span>
+                {% if question.bounty > 0 %}
+                    <span class="pble-bounty">
+                        +{{ question.bounty }}
+                    </span>
+                {% endif %}
             </div>
             <div class="pble-q-item-main">
                 <div class="pble-q-item-title">

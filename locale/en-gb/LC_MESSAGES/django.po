@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-30 12:55+0000\n"
+"POT-Creation-Date: 2018-04-30 14:25+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,28 +33,28 @@ msgstr ""
 msgid "Comment"
 msgstr ""
 
-#: pble_questions/models.py:59 pblexchange/forms.py:14
+#: pble_questions/models.py:60 pblexchange/forms.py:14
 msgid "body"
 msgstr ""
 
-#: pble_questions/models.py:61 pble_questions/templatetags/questions.py:92
+#: pble_questions/models.py:62 pble_questions/templatetags/questions.py:93
 #: pble_users/templatetags/users.py:16
 msgid "anonymous"
 msgstr ""
 
-#: pble_questions/models.py:101
+#: pble_questions/models.py:102
 msgid "title"
 msgstr ""
 
-#: pble_questions/models.py:102
+#: pble_questions/models.py:103
 msgid "category"
 msgstr ""
 
-#: pble_questions/models.py:103
+#: pble_questions/models.py:104
 msgid "course"
 msgstr ""
 
-#: pble_questions/models.py:104
+#: pble_questions/models.py:105
 msgid "tags"
 msgstr ""
 
@@ -63,8 +63,8 @@ msgid "Ask a question"
 msgstr ""
 
 #: pble_questions/templates/questions/ask.html:10
-#: pble_questions/templates/questions/detail.html:33
-#: pble_questions/templates/questions/detail.html:52
+#: pble_questions/templates/questions/detail.html:39
+#: pble_questions/templates/questions/detail.html:58
 #: templates/pblexchange/write_news_article.html:10
 #: templates/questions/answer_list.html:38
 msgid "Submit"
@@ -83,8 +83,12 @@ msgstr ""
 msgid "Unanswered"
 msgstr ""
 
+#: pble_questions/templates/questions/base.html:9
+msgid "Unclaimed bounties"
+msgstr ""
+
 #: pble_questions/templates/questions/categories.html:5
-#: pble_questions/views.py:143
+#: pble_questions/views.py:151
 #: pble_subscriptions/templates/subscriptions/base.html:7
 msgid "Categories"
 msgstr ""
@@ -93,30 +97,30 @@ msgstr ""
 msgid "Recent questions posted in"
 msgstr ""
 
-#: pble_questions/templates/questions/detail.html:24
+#: pble_questions/templates/questions/detail.html:30
 #: templates/questions/answer_list.html:29
 msgid "Add comment"
 msgstr ""
 
-#: pble_questions/templates/questions/detail.html:27
+#: pble_questions/templates/questions/detail.html:33
 msgid "Your comment on this question"
 msgstr ""
 
-#: pble_questions/templates/questions/detail.html:40
+#: pble_questions/templates/questions/detail.html:46
 #: pble_users/templates/users/detail.html:71
 #: pble_users/templates/users/user_questions.html:10
 msgid "Answers"
 msgstr ""
 
-#: pble_questions/templates/questions/detail.html:55
+#: pble_questions/templates/questions/detail.html:61
 msgid "Please"
 msgstr ""
 
-#: pble_questions/templates/questions/detail.html:55
+#: pble_questions/templates/questions/detail.html:61
 msgid "log in"
 msgstr ""
 
-#: pble_questions/templates/questions/detail.html:55
+#: pble_questions/templates/questions/detail.html:61
 msgid "to answer questions"
 msgstr ""
 
@@ -130,11 +134,11 @@ msgstr ""
 msgid "Tags"
 msgstr ""
 
-#: pble_questions/templatetags/questions.py:79
+#: pble_questions/templatetags/questions.py:80
 msgid "asked"
 msgstr ""
 
-#: pble_questions/templatetags/questions.py:81
+#: pble_questions/templatetags/questions.py:82
 msgid "answered"
 msgstr ""
 
@@ -148,6 +152,10 @@ msgstr ""
 
 #: pble_questions/views.py:30
 msgid "popular"
+msgstr ""
+
+#: pble_questions/views.py:38
+msgid "bounty questions"
 msgstr ""
 
 #: pble_subscriptions/templates/subscriptions/base.html:9
@@ -459,7 +467,7 @@ msgstr ""
 msgid "by"
 msgstr ""
 
-#: templates/questions/question_list.html:26
+#: templates/questions/question_list.html:31
 msgid "No questions at the moment"
 msgstr ""
 

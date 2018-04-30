@@ -2530,3 +2530,10 @@ a.pble-browse-cat-link:visited {
 	100% { background-color: #fff; }
 }
 
+.pble-bounty{
+	padding: 2px 5px;
+	background: #1C7BB1;
+	border-radius: 4px;
+	color: white;
+	font-size: 12px
+}

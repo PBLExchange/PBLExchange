@@ -6,5 +6,6 @@
         <li class="pble-nav-sub-item"><a href="{% url 'pble_questions:new' %}" class="pble-nav-sub-link">{% trans 'Recent' %}</a></li>
         <li class="pble-nav-sub-item pble-nav-sub-hot"><a href="{% url 'pble_questions:hot' %}" class="pble-nav-sub-link">{% trans 'Popular' %}!</a></li>
         <li class="pble-nav-sub-item"><a href="{% url 'pble_questions:unanswered' %}" class="pble-nav-sub-link">{% trans 'Unanswered' %}</a></li>
+        <li class="pble-nav-sub-item"><a href="{% url 'pble_questions:bounties' %}" class="pble-nav-sub-link">{% trans 'Unclaimed bounties' %}</a></li>
     </ul>
 {% endblock %}

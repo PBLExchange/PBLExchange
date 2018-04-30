@@ -32,6 +32,14 @@ def hot(request, base_template='pblexchange/base.html', **kwargs):
     })
 
 
+def bounties(request, base_template='pblexchange/base.html', **kwargs):
+    return render(request, 'questions/list.html', {
+        'base_template': base_template,
+        'title': _('bounty questions'),
+        'questions': Question.objects.filter(bounty__gt=0).order_by('-created_date'),
+    })
+
+
 def detail(request, question_id, base_template='pblexchange/base.html', **kwargs):
     question = Question.objects.get(pk=question_id)
     if not question:
