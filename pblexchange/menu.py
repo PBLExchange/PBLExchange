@@ -1,7 +1,7 @@
 from PBLExchangeDjango.settings import INSTALLED_APPS
 from pblexchange.models import Menu
 
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 
 
 Menu.register(_('Questions'), 'home')
