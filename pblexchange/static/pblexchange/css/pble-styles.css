@@ -78,7 +78,7 @@ html {
 }
 
 body {
-	background: #eeeeee url(images/bodybg.jpg) repeat left top;
+	background: #eeeeee;
 	text-align: center;
 	margin: 0 0 80px;
 	padding: 0;
@@ -441,7 +441,6 @@ div.header-banner {
 /* main wrapper */
 .pble-main-shadow {
 	padding: 10px 10px 0;
-	background: url(images/shadow.png) no-repeat center -10px;
 }
 
 .pble-main-wrapper {
@@ -486,21 +485,11 @@ div.header-banner {
 	display: block;
 	font-weight: 700;
 	padding: 7px 9px;
-	-moz-transition: all ease-in-out 0.5s;
-	-webkit-transition: all ease-in-out 0.5s;
-	-o-transition: all ease-in-out 0.5s;
-	-ms-transition: all ease-in-out 0.5s;
-	transition: all ease-in-out 0.5s;
 }
 
 .pble-nav-main-link:hover, .pble-nav-main-selected {
 	text-decoration: none;
 	color: #006699 !important;
-	-moz-transition: all ease-in-out 0.2s;
-	-webkit-transition: all ease-in-out 0.2s;
-	-o-transition: all ease-in-out 0.2s;
-	-ms-transition: all ease-in-out 0.2s;
-	transition: all ease-in-out 0.2s;
 }
 
 .pble-nav-main-custom-1 .pble-nav-main-link {
@@ -537,11 +526,6 @@ div.header-banner {
 	padding: 2px 6px;
 	text-decoration: none !important;
 	border: 1px solid transparent;
-	-moz-transition: all ease-in-out 0.5s;
-	-webkit-transition: all ease-in-out 0.5s;
-	-o-transition: all ease-in-out 0.5s;
-	-ms-transition: all ease-in-out 0.5s;
-	transition: all ease-in-out 0.5s;
 }
 
 .pble-nav-sub-link:hover, .pble-nav-sub-selected {
@@ -550,21 +534,11 @@ div.header-banner {
 	border-radius: 2px;
 	border: 1px solid #aaa;
 	box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.15) inset;
-	-moz-transition: all ease-in-out 0.2s;
-	-webkit-transition: all ease-in-out 0.2s;
-	-o-transition: all ease-in-out 0.2s;
-	-ms-transition: all ease-in-out 0.2s;
-	transition: all ease-in-out 0.2s;
 }
 
 .pble-nav-sub-hot .pble-nav-sub-link {
 	color: #af0000 !important;
 	font-weight: 700;
-	-moz-transition: all ease-in-out 0.5s;
-	-webkit-transition: all ease-in-out 0.5s;
-	-o-transition: all ease-in-out 0.5s;
-	-ms-transition: all ease-in-out 0.5s;
-	transition: all ease-in-out 0.5s;
 }
 
 .pble-nav-sub-hot .pble-nav-sub-link:hover, .pble-nav-sub-hot .pble-nav-sub-selected {
@@ -573,11 +547,6 @@ div.header-banner {
 	border-radius: 3px !important;
 	border: 1px solid #ff0000;
 	box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.15) inset;
-	-moz-transition: all ease-in-out 0.2s;
-	-webkit-transition: all ease-in-out 0.2s;
-	-o-transition: all ease-in-out 0.2s;
-	-ms-transition: all ease-in-out 0.2s;
-	transition: all ease-in-out 0.2s;
 }
 
 /* content and widgets */
