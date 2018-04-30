@@ -28,7 +28,7 @@ class UserProfile(models.Model):
             for k, v in reversed(settings.PBLE_GROUPS):
                 if self.points >= v:
                     self.user.groups.clear()  # TODO: should the user belong to one or multiple groups?
-                    k_group = Group.objects.get_or_create(name=k)
+                    k_group, c = Group.objects.get_or_create(name=k)
                     k_group.user_set.add(self.user)
                     self.title = k
                     break

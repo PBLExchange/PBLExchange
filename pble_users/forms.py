@@ -12,5 +12,6 @@ class BonusPointForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = [
-            'points'
+            'points',
+            'challenge_points'
         ]

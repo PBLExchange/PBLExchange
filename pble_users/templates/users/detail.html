@@ -18,7 +18,14 @@
                         <tr id="bonus">
                             <td class="pble-form-wide-label">{% trans 'Bonus points' %}:</td>
                             <td class="pble-form-wide-data">
-                                <input class="pble-form-wide-number" name="points" value="1" type="number" min="0" required id="id_points" />
+                                <input class="pble-form-wide-number" name="points" value="0" type="number" min="0" required id="id_points" />
+                                <span class="pble-form-wide-note">({% trans 'only shown to admins' %})</span>
+                            </td>
+                        </tr>
+                        <tr id="challenge">
+                            <td class="pble-form-wide-label">{% trans 'Add challenge points' %}:</td>
+                            <td class="pble-form-wide-data">
+                                <input class="pble-form-wide-number" name="challenge_points" value="0" type="number" min="0" required id="id_challenge_points" />
                                 <span class="pble-form-wide-note">({% trans 'only shown to admins' %})</span>
                             </td>
                         </tr>
@@ -29,11 +36,21 @@
                             <span class="pble-form-wide-static">
                                 <span class="pble-uf-user-points">{{ user_profile.points }}</span>
                                 {% trans 'points' %} ({% trans 'ranked' %} #
-                                <span class="pble-uf-user-rank">{{ user_profile|get_rank:user_profile.points }}</span>
-                                )
+                                <span class="pble-uf-user-rank">{{ user_profile|get_rank:user_profile.points }}</span>)
                             </span>
                         </td>
                     </tr>
+                    {% if user_profile.challenge_points > 0 %}
+                    <tr id="challenge_points">
+                        <td class="pble-form-wide-label">{% trans 'Challenge points' %}:</td>
+                        <td class="pble-form-wide-data">
+                            <span class="pble-form-wide-static">
+                                <span class="pble-uf-user-points">{{ user_profile.challenge_points }}</span>
+                                {% trans 'points' %}
+                            </span>
+                        </td>
+                    </tr>
+                    {% endif %}
                     <tr id="title">
                         <td class="pble-form-wide-label">{% trans 'Title' %}:</td>
                         <td class="pble-form-wide-data">
@@ -41,12 +58,11 @@
                         </td>
                     </tr>
                     <tr id="questions">
-                        <td class="pble-wide-form-label">{% trans 'Questions'%}:</td>
-                        <td class="qa-form-wide-data">
+                        <td class="pble-form-wide-label">{% trans 'Questions'%}:</td>
+                        <td class="pble-form-wide-data">
                             <span class="pble-form-wide-static">
                                 <span class="pble-uf-user-q-posts">{% user_questions_quantity user_profile.user %}</span>
-                                (
-                                <span class="pble-uf-user-q-selects">{% user_accepted_answers user_profile.user %}</span>
+                                (<span class="pble-uf-user-q-selecteds">{% user_accepted_answers user_profile.user %}</span>
                                 {% trans 'with best answer chosen' %})
                             </span>
                         </td>
@@ -56,15 +72,14 @@
                         <td class="pble-form-wide-data">
                             <span class="pble-form-wide-static">
                                 <span class="pble-uf-user-a-posts">{% user_answers user_profile.user %}</span>
-                                (
-                                <span class="pble-uf-user-a-selecteds">{% user_answers_chosen user_profile.user %}</span>
+                                (<span class="pble-uf-user-a-selecteds">{% user_answers_chosen user_profile.user %}</span>
                                 {% trans 'chosen as best' %})
                             </span>
                         </td>
                     </tr>
                     <tr id="comments">
                         <td class="pble-form-wide-label">{% trans 'Comments' %}:</td>
-                        <td class="qa-form-wide-data">
+                        <td class="pble-form-wide-data">
                             <span class="pble-form-wide-static">
                                 <span class="pble-uf-user-c-posts">{% user_comments_quantity user_profile.user %}</span>
                             </span>

@@ -1,3 +1,4 @@
+from django.core.exceptions import ValidationError
 from django.shortcuts import render, HttpResponseRedirect, Http404, HttpResponse, reverse, get_object_or_404
 from django.contrib.auth.models import User
 from django.utils.translation import check_for_language
@@ -45,6 +46,7 @@ def bonus_points(request, user_id, **kwargs):
             if form.is_valid():
                 target_profile = get_object_or_404(User, pk=user_id).userprofile
                 target_profile.points += form.cleaned_data['points']
+                target_profile.challenge_points += form.cleaned_data['challenge_points']
                 target_profile.save()
 
                 return HttpResponseRedirect(reverse('pble_users:detail', args=(target_profile.user_id,)))
