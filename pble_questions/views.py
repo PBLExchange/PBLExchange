@@ -1,12 +1,10 @@
 from django.db.models import Count
 from django.shortcuts import render, HttpResponseRedirect, Http404, reverse, get_object_or_404
-from django.core.validators import ValidationError
 from django.utils.translation import ugettext as _
 from pble_questions.forms import QuestionForm, AnswerForm, CommentForm, SearchForm
-from pble_questions.models import Question, Answer, QuestionVote, CommentVote, AnswerVote, Tag, Category
-from pble_users.models import UserProfile
+from pble_questions.models import Question, Answer, QuestionVote, Tag, Category
 from PBLExchangeDjango import settings
-from pblexchange.models import Setting
+from pble_users.points import post_vote, answer_accept
 
 
 # Create your views here.
@@ -82,52 +80,11 @@ def vote(request, post_id, amount, post_type=Question, vote_type=QuestionVote, *
     if not request.user.is_authenticated():
         return HttpResponseRedirect(reverse('login'))
     post = get_object_or_404(post_type, pk=post_id)
-
     prev_vote = vote_type.objects.filter(post=post.pk, user=request.user)
-    receiving_UP = UserProfile.objects.get(user=post.author.pk)
 
     if not prev_vote or prev_vote.first().vote != amount:
         if 'pble_users' in settings.INSTALLED_APPS:
-            if request.user != post.author:
-                v, _ = vote_type.objects.get_or_create(user=request.user, post=post)
-                v.vote += amount
-                if v.vote != 0:
-                    if amount > 0:
-                        if isinstance(v, QuestionVote):
-                            receiving_UP.points += int(Setting.get('question_up_vote_points'))
-                        elif isinstance(v, AnswerVote):
-                            receiving_UP.points += int(Setting.get('answer_up_vote_points'))
-                        elif isinstance(v, CommentVote):
-                            receiving_UP.points += int(Setting.get('comment_up_vote_points'))
-                    else:
-                        if isinstance(v, QuestionVote):
-                            receiving_UP.points += int(Setting.get('question_down_vote_points'))
-                        elif isinstance(v, AnswerVote):
-                            receiving_UP.points += int(Setting.get('answer_down_vote_points'))
-                        elif isinstance(v, CommentVote):
-                            receiving_UP.points += int(Setting.get('comment_down_vote_points'))
-                else:
-                    if prev_vote.first().vote == 1:
-                        if isinstance(v, QuestionVote):
-                            receiving_UP.points -= int(Setting.get('question_up_vote_points'))
-                        elif isinstance(v, AnswerVote):
-                            receiving_UP.points -= int(Setting.get('answer_up_vote_points'))
-                        elif isinstance(v, CommentVote):
-                            receiving_UP.points -= int(Setting.get('comment_up_vote_points'))
-                    else:
-                        if isinstance(v, QuestionVote):
-                            receiving_UP.points -= int(Setting.get('question_down_vote_points'))
-                        elif isinstance(v, AnswerVote):
-                            receiving_UP.points -= int(Setting.get('answer_down_vote_points'))
-                        elif isinstance(v, CommentVote):
-                            receiving_UP.points -= int(Setting.get('comment_down_vote_points'))
-                try:
-                    v.save()
-                    receiving_UP.full_clean()
-                    receiving_UP.save()
-                except ValidationError:
-                    receiving_UP.points = 1
-                    receiving_UP.save()
+            post_vote(request.user, post, vote_type, amount)
         else:
             raise Http404("'pble_users' module does not exist under INSTALLED_APPS in settings.py")
 
@@ -139,28 +96,17 @@ def accept_answer(request, post_id, **kwargs):
         return HttpResponseRedirect(reverse('login'))
     post = get_object_or_404(Answer, pk=post_id)
 
-    if 'pble_users' in settings.INSTALLED_APPS:
-        # Assign points and set post.accepted
-        if request.user != post.author:
-            acceptor_up = UserProfile.objects.get(user=request.user)
-            receiving_up = UserProfile.objects.get(user=post.author)
-            if Answer.objects.accepted(post.question):
-                post.accepted = False
-                post.save()
-                acceptor_up.points -= int(Setting.get('accepted_answer_acceptor_points'))
-                acceptor_up.save()
-                receiving_up.points -= int(Setting.get('accepted_answer_points'))
-                receiving_up.save()
-                return HttpResponseRedirect(reverse('pble_questions:detail', args=(post.question.pk,)))
-            acceptor_up.points += int(Setting.get('accepted_answer_acceptor_points'))
-            acceptor_up.save()
-            receiving_up.points += int(Setting.get('accepted_answer_points'))
-            receiving_up.save()
+    if not Answer.objects.accepted(post.question) or (Answer.objects.accepted(post.question) and post.accepted):
+        if 'pble_users' in settings.INSTALLED_APPS:
+            # Assign points and set post.accepted
+            answer_accept(request.user, post)
+        else:
+            raise Http404("'pble_users' module does not exist under INSTALLED_APPS in settings.py")
+
         post.accepted = not post.accepted
         post.save()
-        return HttpResponseRedirect(reverse('pble_questions:detail', args=(post.question.pk,)))
-    else:
-        raise Http404("'pble_users' module does not exist under INSTALLED_APPS in settings.py")
+
+    return HttpResponseRedirect(reverse('pble_questions:detail', args=(post.question.pk,)))
 
 
 def tags(request, base_template='pblexchange/base.html', **kwargs):
