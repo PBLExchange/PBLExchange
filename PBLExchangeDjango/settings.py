@@ -25,11 +25,18 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = ps.SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
+
+# Security settings
+SECURE_CONTENT_TYPE_NOSNIFF = True
+SECURE_BROWSER_XSS_FILTER = True
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
 
 PBL_VERSION = "1.0-dev"
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['pblexchange.sfx.aau.dk', 'pblexchange.aau.dk']
 
 
 # Application definition
@@ -111,11 +118,19 @@ WSGI_APPLICATION = 'PBLExchangeDjango.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
+def read_pg_settings(file):
+    with open(file, 'r') as pg_file:
+        pg_lines = pg_file.readlines()
+    pg_lines = [line[len("export PG"):].split('=', 1) for line in pg_lines]
+    pg = {k: v.replace('"', '') for k, v in pg_lines}
+    pg['ENGINE'] = 'django.db.backends.postgresql_psycopg2'
+    pg['NAME'] = pg['DATABASE']
+    del pg['DATABASE']
+    return pg
+
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+    'default': read_pg_settings('../postgres-credentials.sh')
 }
 
 
