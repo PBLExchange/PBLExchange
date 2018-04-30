@@ -1,5 +1,6 @@
 from django import template
 from pblexchange.models import Menu
+import pblexchange.menu
 
 register = template.Library()
 
