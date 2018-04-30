@@ -4,7 +4,7 @@ from django.utils.translation import ugettext as _
 from pble_questions.forms import QuestionForm, AnswerForm, CommentForm, SearchForm
 from pble_questions.models import Question, Answer, QuestionVote, Tag, Category
 from PBLExchangeDjango import settings
-from pble_users.points import post_vote, answer_accept
+from pble_users.points import post_vote, answer_accept, post_bounty
 
 
 # Create your views here.
@@ -47,15 +47,20 @@ def detail(request, question_id, base_template='pblexchange/base.html', **kwargs
 def ask(request, base_template='pblexchange/base.html', **kwargs):
     if not request.user.is_authenticated():
         return HttpResponseRedirect(reverse('login'))
+    form = QuestionForm()
+    if request.user.userprofile.challenge_points < 1:
+        del form.fields['challenge']
     return render(request, 'questions/ask.html', {
         'base_template': base_template,
-        'post_form': QuestionForm(),
+        'post_form': form,
     })
 
 
 def submit(request, question_id=None, answer_id=None, form_type=QuestionForm, **kwargs):
     if request.method == 'POST' and request.user.is_authenticated():
         post_form = form_type(request.POST)
+        if request.user.userprofile.challenge_points < 1:
+            del post_form.fields['challenge']
         post = post_form.save(commit=False)
         post.author = request.user
         is_question = True
@@ -66,6 +71,13 @@ def submit(request, question_id=None, answer_id=None, form_type=QuestionForm, **
                 answer = get_object_or_404(Answer, pk=answer_id)
                 post.answer = answer
             is_question = False
+        if is_question and 'pble_users' in settings.INSTALLED_APPS:
+            post_bounty(
+                request.user,
+                post,
+                post_form.cleaned_data['bounty'],
+                post_form.cleaned_data['challenge'] if request.user.userprofile.challenge_points > 0 else 0
+            )
         post.save()
         post_form.save_m2m()  # needed to save many-to-many relations.
         if is_question:

@@ -9,6 +9,7 @@ from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
 class QuestionForm(forms.ModelForm):
     tags = forms.CharField(required=False)
+    challenge = forms.IntegerField(min_value=0, initial=0)
     prefix = 'question'
 
     class Meta:
@@ -17,6 +18,8 @@ class QuestionForm(forms.ModelForm):
             'title',
             'category',
             'body',
+            'bounty',
+            'challenge',
             'anonymous',
             'tags',
         ]

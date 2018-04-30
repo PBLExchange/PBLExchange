@@ -91,6 +91,8 @@ class Question(Post):
     category = models.ForeignKey(Category, verbose_name=_('category'), null=True, blank=True)
     course = models.ManyToManyField(Course, verbose_name=_('course'), blank=True)
     tags = models.ManyToManyField(Tag, verbose_name=_('tags'), blank=True)
+    bounty = models.PositiveIntegerField(default=0)
+    is_challenge = models.BooleanField(default=False)
 
     objects = QuestionManager(default='title', fields=['title', 'body'])
 

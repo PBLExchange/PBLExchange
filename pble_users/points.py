@@ -61,5 +61,15 @@ def answer_accept(user, post):
         else:
             user.userprofile.points += int(Setting.get('accepted_answer_acceptor_points'))
             user.userprofile.save()
-            post.author.userprofile.points += int(Setting.get('accepted_answer_points'))
+            post.author.userprofile.points += int(Setting.get('accepted_answer_points')) + post.question.bounty
             post.author.userprofile.save()
+            post.question.bounty = 0
+            post.question.save()
+
+
+def post_bounty(user, post, bounty, challenge=0):
+    points = bounty + challenge
+    if user.userprofile.points < points:
+        return
+    user.userprofile.points -= points
+    post.is_challenge = challenge > 0

@@ -17,6 +17,7 @@ class UserProfileManager(models.Manager):
 class UserProfile(models.Model):
     user = models.OneToOneField(User, unique=True)
     points = models.PositiveIntegerField(default=1, validators=[MinValueValidator(1)])
+    challenge_points = models.PositiveIntegerField(default=0)
     title = models.CharField(max_length=32, default=settings.PBLE_GROUPS[0][0])  # By default join "lowest" user group
 
     objects = UserProfileManager()
