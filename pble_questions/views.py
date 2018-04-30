@@ -67,7 +67,7 @@ def ask(request, base_template='pblexchange/base.html', **kwargs):
 def submit(request, question_id=None, answer_id=None, form_type=QuestionForm, **kwargs):
     if request.method == 'POST' and request.user.is_authenticated():
         post_form = form_type(request.POST)
-        if request.user.userprofile.challenge_points < 1 and isinstance(form_type, QuestionForm):
+        if request.user.userprofile.challenge_points < 1 and isinstance(post_form, QuestionForm):
             del post_form.fields['challenge']
         post = post_form.save(commit=False)
         post.author = request.user
