@@ -1,8 +1,9 @@
 {% load i18n %}
 {% load news_articles %}
-{% if news_articles %}
+
 <div class="pble-nav-cat">
     <div class="pble-nav-cat-list pble-nav-cat-list-1">
+    {% if news_articles %}
         <ul>
             <li class="pble-nav-cat-item pble-nav-cat-all">{% trans 'PBL Exchange news:' %}</li>
 
@@ -10,6 +11,9 @@
             <li class="pble-nav-cat-item"><a href="{% url 'news_article' news_article.id %}">{{ news_article.headline }}</a>({{ news_article.start_date }})</li>
         {% endfor %}
         </ul>
+    {% else %}
+        <p>{% trans 'There are currently no news.' %}</p>
+    {% endif %}
     </div>
 </div>
-{% endif %}
+

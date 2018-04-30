@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-30 14:25+0000\n"
+"POT-Creation-Date: 2018-04-30 14:42+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -418,8 +418,12 @@ msgstr ""
 msgid "About"
 msgstr ""
 
-#: templates/pblexchange/news_articles.html:7
+#: templates/pblexchange/news_articles.html:8
 msgid "PBL Exchange news:"
+msgstr ""
+
+#: templates/pblexchange/news_articles.html:15
+msgid "There are currently no news."
 msgstr ""
 
 #: templates/pblexchange/write_news_article.html:5

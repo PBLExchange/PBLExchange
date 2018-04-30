@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-30 14:25+0000\n"
+"POT-Creation-Date: 2018-04-30 14:42+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -420,9 +420,13 @@ msgstr "Adminstrator"
 msgid "About"
 msgstr "Om"
 
-#: templates/pblexchange/news_articles.html:7
+#: templates/pblexchange/news_articles.html:8
 msgid "PBL Exchange news:"
 msgstr "PBL Exchange nyheder:"
+
+#: templates/pblexchange/news_articles.html:15
+msgid "There are currently no news."
+msgstr "Der er i øjeblikket ikke nogen nyheder."
 
 #: templates/pblexchange/write_news_article.html:5
 msgid "Write your article"
@@ -487,7 +491,7 @@ msgstr "Nyeste dusører"
 
 #: templates/questions/top_challenges.html:14
 msgid "No bounties have been posted lately."
-msgstr "Ingen dusører er blevet opslået fo nyligt."
+msgstr "Ingen dusører er blevet opslået for nyligt."
 
 #: templates/questions/vote.html:4
 msgid "Click to vote up"
