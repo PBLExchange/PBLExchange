@@ -5,7 +5,7 @@ from django.db.models import Count
 from django.contrib.sites.models import Site
 from django.shortcuts import reverse
 
-from pble_questions.models import Question, Answer, Comment, Category
+from pble_questions.models import Question, Answer, Comment, Category, FeaturedCategory
 from pble_questions.forms import CommentForm, SearchForm
 
 register = template.Library()
@@ -111,11 +111,13 @@ def categories_list():
     }
 
 
-@register.inclusion_tag('questions/category_href.html')
-def category_url(category):
-    current_site = Site.objects.get_current()
-    cat_url = current_site.domain + reverse('pble_questions:category', args=(
-        category.name,))
-    return {'cat_url': cat_url,
-            'cat_name': category.name,
-            }
+@register.inclusion_tag('questions/featured_category.html')
+def featured_category():
+    if FeaturedCategory.objects.all().exists():
+        featured_cat = FeaturedCategory.objects.all().order_by('-start_date')[0]
+
+        return {
+            'featured_cat': featured_cat,
+        }
+    else:
+        pass

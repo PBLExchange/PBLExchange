@@ -35,10 +35,16 @@ class Course(models.Model):
 class Category(models.Model):
     class Meta:
         verbose_name_plural = 'categories'
-    name = models.CharField(max_length=160)
+    name = models.CharField(max_length=160, unique=True)
 
     def __str__(self):
         return self.name
+
+
+class FeaturedCategory(models.Model):
+    category = models.ForeignKey(Category)
+    text = models.CharField(max_length=128)
+    start_date = models.DateField(unique=True)
 
 
 class Post(models.Model):

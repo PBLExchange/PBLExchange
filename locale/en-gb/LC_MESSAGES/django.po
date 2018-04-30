@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-30 09:57+0000\n"
+"POT-Creation-Date: 2018-04-30 10:20+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,28 +33,28 @@ msgstr ""
 msgid "Comment"
 msgstr ""
 
-#: pble_questions/models.py:48 pblexchange/forms.py:14
+#: pble_questions/models.py:54 pblexchange/forms.py:14
 msgid "body"
 msgstr ""
 
-#: pble_questions/models.py:50 pble_questions/templatetags/questions.py:92
+#: pble_questions/models.py:56 pble_questions/templatetags/questions.py:92
 #: pble_users/templatetags/users.py:16
 msgid "anonymous"
 msgstr ""
 
-#: pble_questions/models.py:90
+#: pble_questions/models.py:96
 msgid "title"
 msgstr ""
 
-#: pble_questions/models.py:91
+#: pble_questions/models.py:97
 msgid "category"
 msgstr ""
 
-#: pble_questions/models.py:92
+#: pble_questions/models.py:98
 msgid "course"
 msgstr ""
 
-#: pble_questions/models.py:93
+#: pble_questions/models.py:99
 msgid "tags"
 msgstr ""
 
@@ -281,7 +281,7 @@ msgstr ""
 
 #: pble_users/templates/users/detail.html:61
 #: pble_users/templates/users/user_questions.html:8 pblexchange/menu.py:7
-#: pblexchange/templates/pblexchange/base.html:84
+#: pblexchange/templates/pblexchange/base.html:89
 msgid "Questions"
 msgstr ""
 
@@ -369,28 +369,32 @@ msgstr ""
 msgid "PBL Exchange"
 msgstr ""
 
-#: pblexchange/templates/pblexchange/base.html:97
+#: pblexchange/templates/pblexchange/base.html:102
 msgid "Submit feedback and bugs"
 msgstr ""
 
-#: pblexchange/templates/pblexchange/base.html:98
+#: pblexchange/templates/pblexchange/base.html:103
 msgid "as a Github issue"
 msgstr ""
 
-#: pblexchange/templates/pblexchange/base.html:99
+#: pblexchange/templates/pblexchange/base.html:104
 msgid "or"
 msgstr ""
 
-#: pblexchange/templates/pblexchange/base.html:100
+#: pblexchange/templates/pblexchange/base.html:105
 msgid "via email"
 msgstr ""
 
-#: pblexchange/templates/pblexchange/base.html:106
+#: pblexchange/templates/pblexchange/base.html:111
 msgid "Powered by"
 msgstr ""
 
 #: templates/pblexchange/about.html:5
 msgid " About PBL Exchange"
+msgstr ""
+
+#: templates/pblexchange/featured_category.html:3
+msgid "PBLE featured category"
 msgstr ""
 
 #: templates/pblexchange/links.html:2
