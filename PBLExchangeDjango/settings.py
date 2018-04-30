@@ -130,7 +130,7 @@ def read_pg_settings(file):
 
 
 DATABASES = {
-    'default': read_pg_settings('../postgres-credentials.sh')
+    'default': read_pg_settings(BASE_DIR + '../postgres-credentials.sh')
 }
 
 
