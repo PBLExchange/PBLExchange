@@ -230,4 +230,4 @@ CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
 SITE_ID = 1     # TODO: On release set django_site domain field to pblexchange.aau.dk
 
 # Whoosh search settings
-WHOOSH_STORAGE_DIR = 'data/whoosh'
+WHOOSH_STORAGE_DIR = BASE_DIR + '/../tmp/data/whoosh'
