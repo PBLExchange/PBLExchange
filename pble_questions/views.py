@@ -138,10 +138,10 @@ def tag(request, tag_text, base_template='pblexchange/base.html', **kwargs):
 
 
 def categories(request, base_template='pblexchange/base.html', **kwargs):
-    return render(request, 'questions/list.html', {
+    return render(request, 'questions/categories.html', {
         'base_template': base_template,
         'title': _('Categories'),
-        'questions': Category.objects.get(name='').question_set,
+        'categories': Category.objects.all(),
     })
 
 

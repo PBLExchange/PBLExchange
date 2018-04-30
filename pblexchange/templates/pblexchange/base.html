@@ -73,17 +73,8 @@
                             {% links %}
                         </div>
 
-                        <div class="pble-nav-cat">
-                            <div class="pble-nav-cat-list pble-nav-cat-list-1">
-                                {% news_articles %}
-                            </div>
-                        </div>
-
-                        <div class="pble-nav-cat">
-                            <div class="pble-nav-cat-list pble-nav-cat-list-1">
-                                {% categories_list %}
-                            </div>
-                        </div>
+                        {% news_articles %}
+                        {% categories_list %}
 
                     </div>
                     {% endblock %}

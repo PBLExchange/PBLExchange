@@ -1,8 +1,15 @@
 {% load i18n %}
 {% load questions %}
-<ul>
-<li class="pble-nav-cat-item pble-nav-cat-all">{% trans 'All categories' %}:</li>
+{% if categories %}
+<div class="pble-nav-cat">
+    <div class="pble-nav-cat-list pble-nav-cat-list-1">
+        <ul>
+        <li class="pble-nav-cat-item pble-nav-cat-all">{% trans 'All categories' %}:</li>
 
-{% for category in categories %}
-    <li class="pble-nav-cat-item">{% category_url category %} ({{ category.cardinality }})</li>
-{% endfor %}
+        {% for category in categories %}
+            <li class="pble-nav-cat-item"><a href="{% url 'pble_questions:category' category.name %}">{{ category.name }}</a> ({{ category.cardinality }})</li>
+        {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endif %}
