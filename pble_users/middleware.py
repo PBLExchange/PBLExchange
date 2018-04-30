@@ -9,7 +9,8 @@ class LanguageMiddleware(object):
     def __call__(self, request):
         assert hasattr(request, 'user')
         if request.user.is_authenticated():
-            lang = request.user.usersetting.language
-            activate(lang)
+            if hasattr(request.user, 'usersetting'):
+                lang = request.user.usersetting.language
+                activate(lang)
 
         return self.get_response(request)
