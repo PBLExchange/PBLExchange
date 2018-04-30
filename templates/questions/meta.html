@@ -14,10 +14,12 @@
         {% endif %}
         <span class="{{ class_prefix }}-who">
             <span class="{{ class_prefix }}-who-pad">{% trans 'by' %} </span>
-            <span class="{{ class_prefix }}-who-data">{% get_user post.author %}</span>
+            <span class="{{ class_prefix }}-who-data">{% get_user post.author post.anonymous %}</span>
+            {% if not post.anonymous %}
             <span class="{{ class_prefix }}-who-points">
                 <span class="{{ class_prefix }}-who-points-pad">(</span><span class="{{ class_prefix }}-who-points-data">{{ post.author.userprofile.points }}</span><span class="{{ class_prefix }}-who-points-pad"> {% trans 'points' %})</span>
             </span>
+            {% endif %}
         </span>
     </span>
 </span>
