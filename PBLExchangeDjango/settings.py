@@ -122,7 +122,7 @@ def read_pg_settings(file):
     with open(file, 'r') as pg_file:
         pg_lines = pg_file.readlines()
     pg_lines = [line[len("export PG"):].split('=', 1) for line in pg_lines]
-    pg = {k: v.replace('"', '') for k, v in pg_lines}
+    pg = {k: v.replace('"', '').replace('\n', '') for k, v in pg_lines}
     pg['ENGINE'] = 'django.db.backends.postgresql_psycopg2'
     pg['NAME'] = pg['DATABASE']
     del pg['DATABASE']
