@@ -1,7 +1,12 @@
 {% load i18n %}
 {% load questions %}
-<p>
-{% trans 'Featured category' %}:
-<a href="{% url 'pble_questions:category' featured_cat.category.id %}">{{ featured_cat.category.name }}</a></p>
 
-<p>{{ featured_cat.text }}</p>
+{% if featured_cat %}
+    <p>
+    {% trans 'Featured category' %}:
+    <a href="{% url 'pble_questions:category' featured_cat.category.id %}">{{ featured_cat.category.name }}</a></p>
+
+    <p>{{ featured_text }}</p>
+{% else %}
+    <p>{% trans 'No featured category currently.' %}</p>
+{% endif %}

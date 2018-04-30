@@ -70,10 +70,14 @@
                         </div>
 
                         <div class="pble-sidebar">
-                            {% featured_category %}
+                            {% top_challenges %}
                         </div>
 
                         {% news_articles %}
+
+                        <div class="pble-sidebar">
+                            {% featured_category user %}
+                        </div>
 
                         {% categories_list %}
 

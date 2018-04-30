@@ -42,9 +42,15 @@ class Category(models.Model):
 
 
 class FeaturedCategory(models.Model):
+    class Meta:
+        verbose_name_plural = 'featured categories'
     category = models.ForeignKey(Category)
-    text = models.CharField(max_length=128)
+    en_text = models.CharField(max_length=128)
+    dk_text = models.CharField(max_length=128)
     start_date = models.DateField(unique=True)
+
+    def __str__(self):
+        return self.category.name
 
 
 class Post(models.Model):

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-30 09:57+0000\n"
+"POT-Creation-Date: 2018-04-30 12:55+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,28 +33,28 @@ msgstr "Svar"
 msgid "Comment"
 msgstr "Kommentar"
 
-#: pble_questions/models.py:48 pblexchange/forms.py:14
+#: pble_questions/models.py:59 pblexchange/forms.py:14
 msgid "body"
 msgstr "krop"
 
-#: pble_questions/models.py:50 pble_questions/templatetags/questions.py:92
+#: pble_questions/models.py:61 pble_questions/templatetags/questions.py:92
 #: pble_users/templatetags/users.py:16
 msgid "anonymous"
 msgstr "anonym"
 
-#: pble_questions/models.py:90
+#: pble_questions/models.py:101
 msgid "title"
 msgstr "titel"
 
-#: pble_questions/models.py:91
+#: pble_questions/models.py:102
 msgid "category"
 msgstr "kategori"
 
-#: pble_questions/models.py:92
+#: pble_questions/models.py:103
 msgid "course"
 msgstr "kursus"
 
-#: pble_questions/models.py:93
+#: pble_questions/models.py:104
 msgid "tags"
 msgstr "tags"
 
@@ -283,7 +283,7 @@ msgstr "Titel"
 
 #: pble_users/templates/users/detail.html:61
 #: pble_users/templates/users/user_questions.html:8 pblexchange/menu.py:7
-#: pblexchange/templates/pblexchange/base.html:84
+#: pblexchange/templates/pblexchange/base.html:93
 msgid "Questions"
 msgstr "Spørgsmål"
 
@@ -371,23 +371,23 @@ msgstr "Log ud"
 msgid "PBL Exchange"
 msgstr "PBL Exchange"
 
-#: pblexchange/templates/pblexchange/base.html:97
+#: pblexchange/templates/pblexchange/base.html:106
 msgid "Submit feedback and bugs"
 msgstr "Send feedback og rapportér fejl"
 
-#: pblexchange/templates/pblexchange/base.html:98
+#: pblexchange/templates/pblexchange/base.html:107
 msgid "as a Github issue"
 msgstr "som et Github issue"
 
-#: pblexchange/templates/pblexchange/base.html:99
+#: pblexchange/templates/pblexchange/base.html:108
 msgid "or"
 msgstr "eller"
 
-#: pblexchange/templates/pblexchange/base.html:100
+#: pblexchange/templates/pblexchange/base.html:109
 msgid "via email"
 msgstr "via email"
 
-#: pblexchange/templates/pblexchange/base.html:106
+#: pblexchange/templates/pblexchange/base.html:115
 msgid "Powered by"
 msgstr "Drevet af"
 
@@ -441,6 +441,14 @@ msgstr "Der er på nuværende tidspunkt ingen svar"
 msgid "All categories"
 msgstr "Alle kategorier"
 
+#: templates/questions/featured_category.html:6
+msgid "Featured category"
+msgstr "Fremhævet kategori"
+
+#: templates/questions/featured_category.html:11
+msgid "No featured category currently."
+msgstr "Ingen fremhævet kategori."
+
 #: templates/questions/meta.html:8
 msgid "ago"
 msgstr "siden"
@@ -464,6 +472,14 @@ msgstr "kommentarer"
 #: templates/questions/stats.html:13
 msgid "users"
 msgstr "brugere"
+
+#: templates/questions/top_challenges.html:6
+msgid "Newest bounties"
+msgstr "Nyeste dusører"
+
+#: templates/questions/top_challenges.html:14
+msgid "No bounties have been posted lately."
+msgstr "Ingen dusører er blevet opslået fo nyligt."
 
 #: templates/questions/vote.html:4
 msgid "Click to vote up"

@@ -3,10 +3,11 @@ from django.contrib.auth.models import User
 from django.utils.translation import ugettext as _
 from django.db.models import Count
 from django.contrib.sites.models import Site
-from django.shortcuts import reverse
+from django.shortcuts import reverse, get_object_or_404
 
 from pble_questions.models import Question, Answer, Comment, Category, FeaturedCategory
 from pble_questions.forms import CommentForm, SearchForm
+from pble_users.models import UserSetting
 
 register = template.Library()
 
@@ -111,13 +112,38 @@ def categories_list():
     }
 
 
+# TODO: Make these handle non-existent tables
 @register.inclusion_tag('questions/featured_category.html')
-def featured_category():
+def featured_category(user):
     if FeaturedCategory.objects.all().exists():
         featured_cat = FeaturedCategory.objects.all().order_by('-start_date')[0]
+        user_setting_lang = get_object_or_404(UserSetting, user=user).language
+
+        if user_setting_lang == 'en':
+            return {
+                'featured_cat': featured_cat,
+                'featured_text': featured_cat.en_text
+            }
+        elif user_setting_lang == 'da':
+            return {
+                'featured_cat': featured_cat,
+                'featured_text': featured_cat.dk_text
+            }
+    else:
+        return {
+            'featured_cat': '',
+        }
+
+
+@register.inclusion_tag('questions/top_challenges.html')
+def top_challenges():
+    if Question.objects.all():
+        top_qc = Question.objects.filter(bounty__gt=0).order_by('-created_date')[:8]
 
         return {
-            'featured_cat': featured_cat,
+            'top_challenges': top_qc,
         }
     else:
-        pass
+        return {
+            'top_challenges': '',
+        }
