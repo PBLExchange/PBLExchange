@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-30 14:42+0000\n"
+"POT-Creation-Date: 2018-05-01 08:14+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -57,6 +57,10 @@ msgstr "kursus"
 #: pble_questions/models.py:105
 msgid "tags"
 msgstr "tags"
+
+#: pble_questions/models.py:106
+msgid "bounty"
+msgstr "dusør"
 
 #: pble_questions/templates/questions/ask.html:5
 msgid "Ask a question"
@@ -489,7 +493,7 @@ msgstr "brugere"
 msgid "Newest bounties"
 msgstr "Nyeste dusører"
 
-#: templates/questions/top_challenges.html:14
+#: templates/questions/top_challenges.html:18
 msgid "No bounties have been posted lately."
 msgstr "Ingen dusører er blevet opslået for nyligt."
 
