@@ -15,9 +15,10 @@ def categories(request, base_template='pblexchange/base.html', error_message='',
     if not request.user.is_authenticated():
         HttpResponseRedirect(reverse('login'))
 
+    lang = request.user.usersetting.language[:2]
     user_sub, _ = Subscription.objects.get_or_create(user=request.user)
-    user_category_subs = user_sub.categories.order_by('name')
-    user_category_nonsubs = Category.objects.all().exclude(name__in=list(user_category_subs)).order_by('name')
+    user_category_subs = user_sub.categories.order_by(lang + '_name')
+    user_category_nonsubs = Category.objects.all().exclude(en_name__in=list(user_category_subs)).order_by(lang + '_name')
     answer_notifications = user_sub.answer_notifications
     comment_notifications = user_sub.comment_notifications
     return render(request, 'subscriptions/category_list.html', {
