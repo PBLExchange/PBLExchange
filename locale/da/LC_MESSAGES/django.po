@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-01 09:30+0000\n"
+"POT-Creation-Date: 2018-05-01 14:22+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,11 +25,15 @@ msgstr "Engelsk"
 msgid "Danish"
 msgstr "Dansk"
 
-#: pble_questions/forms.py:49
+#: pble_questions/forms.py:13
+msgid "Tags are comma separated<br><br>"
+msgstr ""
+
+#: pble_questions/forms.py:53
 msgid "Answer"
 msgstr "Svar"
 
-#: pble_questions/forms.py:61
+#: pble_questions/forms.py:65
 msgid "Comment"
 msgstr "Kommentar"
 
@@ -62,11 +66,61 @@ msgstr "tags"
 msgid "bounty"
 msgstr ""
 
-#: pble_questions/templates/questions/ask.html:5
+#: pble_questions/templates/questions/ask.html:6
 msgid "Ask a question"
 msgstr "Stil et spørgsmål"
 
 #: pble_questions/templates/questions/ask.html:10
+#: pble_users/templates/users/detail.html:55
+msgid "Title"
+msgstr "Titel"
+
+#: pble_questions/templates/questions/ask.html:12
+msgid "Category"
+msgstr "Kategori"
+
+#: pble_questions/templates/questions/ask.html:14
+msgid "Body"
+msgstr "Krop"
+
+#: pble_questions/templates/questions/ask.html:16
+msgid "Bounty"
+msgstr "Dusør"
+
+#: pble_questions/templates/questions/ask.html:16
+#: pble_questions/templates/questions/ask.html:19
+msgid "You have"
+msgstr "Du har"
+
+#: pble_questions/templates/questions/ask.html:16
+msgid "bounty points available"
+msgstr "dusør point til rådighed"
+
+#: pble_questions/templates/questions/ask.html:19
+#: pble_users/templates/users/detail.html:45
+msgid "Challenge points"
+msgstr "Udfordringspoint"
+
+#: pble_questions/templates/questions/ask.html:19
+msgid "challenge points available"
+msgstr "udfordringspoint til rådighed"
+
+#: pble_questions/templates/questions/ask.html:22
+msgid "Anonymous"
+msgstr "Anonym"
+
+#: pble_questions/templates/questions/ask.html:24
+#: pble_questions/templates/questions/tags.html:5
+#: pble_subscriptions/templates/subscriptions/base.html:8
+#: pblexchange/menu.py:12
+msgid "Tags"
+msgstr "Tags"
+
+#: pble_questions/templates/questions/ask.html:24
+msgid "Tags are separated by commas, and joined using hyphen"
+msgstr "Tags er separeret af kommaer, og sammensat ved brug af bindestreg"
+
+#: pble_questions/templates/questions/ask.html:26
 #: pble_questions/templates/questions/detail.html:39
 #: pble_questions/templates/questions/detail.html:58
 #: templates/pblexchange/write_news_article.html:10
@@ -92,7 +146,7 @@ msgid "Unclaimed bounties"
 msgstr "Aktive dusører"
 
 #: pble_questions/templates/questions/categories.html:5
-#: pble_questions/views.py:151
+#: pble_questions/views.py:155
 #: pble_subscriptions/templates/subscriptions/base.html:7
 msgid "Categories"
 msgstr "Kategorier"
@@ -132,12 +186,6 @@ msgstr "for at svar på spørgsmål"
 msgid "Recent questions tagged"
 msgstr "Nylige spørgsmål tagget med"
 
-#: pble_questions/templates/questions/tags.html:5
-#: pble_subscriptions/templates/subscriptions/base.html:8
-#: pblexchange/menu.py:12
-msgid "Tags"
-msgstr "Tags"
-
 #: pble_questions/templatetags/questions.py:80
 msgid "asked"
 msgstr "stillet for"
@@ -146,19 +194,19 @@ msgstr "stillet for"
 msgid "answered"
 msgstr "besvaret for"
 
-#: pble_questions/views.py:14
+#: pble_questions/views.py:15
 msgid "new"
 msgstr "nye"
 
-#: pble_questions/views.py:22
+#: pble_questions/views.py:23
 msgid "unanswered"
 msgstr "ubesvaret"
 
-#: pble_questions/views.py:30
+#: pble_questions/views.py:31
 msgid "popular"
 msgstr "populært"
 
-#: pble_questions/views.py:38
+#: pble_questions/views.py:39
 msgid "bounty questions"
 msgstr "dusør spørgsmål"
 
@@ -284,14 +332,6 @@ msgstr "point"
 #: pble_users/templates/users/detail.html:38
 msgid "ranked"
 msgstr "rangeret"
-
-#: pble_users/templates/users/detail.html:45
-msgid "Challenge points"
-msgstr "Udfordringspoint"
-
-#: pble_users/templates/users/detail.html:55
-msgid "Title"
-msgstr "Titel"
 
 #: pble_users/templates/users/detail.html:61
 #: pble_users/templates/users/user_questions.html:8 pblexchange/menu.py:7
@@ -508,15 +548,3 @@ msgstr "Klik for at stemme ned"
 #: templates/questions/vote.html:9
 msgid "votes"
 msgstr "stemmer"
-
-#~ msgid "There are currently no news."
-#~ msgstr "Der er i øjeblikket ikke nogen nyheder."
-
-#~ msgid "No featured category currently."
-#~ msgstr "Ingen fremhævet kategori."
-
-#~ msgid "Newest bounties"
-#~ msgstr "Nyeste dusører"
-
-#~ msgid "No bounties have been posted lately."
-#~ msgstr "Ingen dusører er blevet opslået for nyligt."

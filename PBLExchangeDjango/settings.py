@@ -190,7 +190,7 @@ CKEDITOR_UPLOAD_PATH = 'uploads/'
 
 # Login settings
 LOGIN_URL = 'login'
-EXEMPT_USERS = ['aklost11', 'gblegm13', 'csteph13']
+EXEMPT_USERS = ['aklost11', 'gblegm13']
 DISALLOWED_DOMAINS = ['student.aau.dk']
 
 # Login redirect

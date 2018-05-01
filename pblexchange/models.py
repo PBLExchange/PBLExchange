@@ -61,8 +61,8 @@ def delta_now():
 class NewsArticle(models.Model):
     id = models.AutoField(primary_key=True)
     author = models.ForeignKey(User)
-    headline = models.CharField(verbose_name=_('headline'), max_length=32)
-    lead = models.CharField(verbose_name=_('lead'), max_length=256, blank=True)
+    headline = models.CharField(verbose_name=_('headline'), max_length=128)
+    lead = models.CharField(verbose_name=_('lead'), max_length=512, blank=True)
     body = RichTextUploadingField(verbose_name=_('body'))
     start_date = models.DateField(verbose_name=_('start date'), default=timezone.now)
     end_date = models.DateField(verbose_name=_('end date'), default=delta_now)
