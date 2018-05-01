@@ -83,11 +83,16 @@ def post_meta(context, post, class_prefix='pble-q-item'):
     what = _('asked')
     if type(post) is Answer:
         what = _('answered')
+
+    try:
+        user = context['request'].user
+    except KeyError:
+        user = context['user']
     return {
         'class_prefix': class_prefix,
         'post': post,
         'what': what,
-        'user': context['request'].user
+        'user': user
     }
 
 
