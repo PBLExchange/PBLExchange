@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-01 08:23+0000\n"
+"POT-Creation-Date: 2018-05-01 09:30+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -42,21 +42,25 @@ msgstr "krop"
 msgid "anonymous"
 msgstr "anonym"
 
-#: pble_questions/models.py:102
+#: pble_questions/models.py:105
 msgid "title"
 msgstr "titel"
 
-#: pble_questions/models.py:103
+#: pble_questions/models.py:106
 msgid "category"
 msgstr "kategori"
 
-#: pble_questions/models.py:104
+#: pble_questions/models.py:107
 msgid "course"
 msgstr "kursus"
 
-#: pble_questions/models.py:105
+#: pble_questions/models.py:108
 msgid "tags"
 msgstr "tags"
+
+#: pble_questions/models.py:109
+msgid "bounty"
+msgstr ""
 
 #: pble_questions/templates/questions/ask.html:5
 msgid "Ask a question"
@@ -291,7 +295,7 @@ msgstr "Titel"
 
 #: pble_users/templates/users/detail.html:61
 #: pble_users/templates/users/user_questions.html:8 pblexchange/menu.py:7
-#: pblexchange/templates/pblexchange/base.html:93
+#: pblexchange/templates/pblexchange/base.html:87
 msgid "Questions"
 msgstr "Spørgsmål"
 
@@ -391,23 +395,23 @@ msgstr "Log ud"
 msgid "PBL Exchange"
 msgstr "PBL Exchange"
 
-#: pblexchange/templates/pblexchange/base.html:106
+#: pblexchange/templates/pblexchange/base.html:100
 msgid "Submit feedback and bugs"
 msgstr "Send feedback og rapportér fejl"
 
-#: pblexchange/templates/pblexchange/base.html:107
+#: pblexchange/templates/pblexchange/base.html:101
 msgid "as a Github issue"
 msgstr "som et Github issue"
 
-#: pblexchange/templates/pblexchange/base.html:108
+#: pblexchange/templates/pblexchange/base.html:102
 msgid "or"
 msgstr "eller"
 
-#: pblexchange/templates/pblexchange/base.html:109
+#: pblexchange/templates/pblexchange/base.html:103
 msgid "via email"
 msgstr "via email"
 
-#: pblexchange/templates/pblexchange/base.html:115
+#: pblexchange/templates/pblexchange/base.html:109
 msgid "Powered by"
 msgstr "Drevet af"
 
@@ -415,7 +419,7 @@ msgstr "Drevet af"
 msgid " About PBL Exchange"
 msgstr "Om PBL Exchange"
 
-#: templates/pblexchange/links.html:2
+#: templates/pblexchange/links.html:4
 msgid ""
 "Expand your knowledge of Problem Based Learning using the following links"
 msgstr "Udvid din viden om Problem Baseret Læring ved hjælp af følgende links"
@@ -435,10 +439,6 @@ msgstr "Om"
 #: templates/pblexchange/news_articles.html:8
 msgid "PBL Exchange news:"
 msgstr "PBL Exchange nyheder:"
-
-#: templates/pblexchange/news_articles.html:15
-msgid "There are currently no news."
-msgstr "Der er i øjeblikket ikke nogen nyheder."
 
 #: templates/pblexchange/write_news_article.html:5
 msgid "Write your article"
@@ -465,13 +465,9 @@ msgstr "Der er på nuværende tidspunkt ingen svar"
 msgid "All categories"
 msgstr "Alle kategorier"
 
-#: templates/questions/featured_category.html:6
+#: templates/questions/featured_category.html:7
 msgid "Featured category"
 msgstr "Fremhævet kategori"
-
-#: templates/questions/featured_category.html:11
-msgid "No featured category currently."
-msgstr "Ingen fremhævet kategori."
 
 #: templates/questions/meta.html:8
 msgid "ago"
@@ -497,13 +493,9 @@ msgstr "kommentarer"
 msgid "users"
 msgstr "brugere"
 
-#: templates/questions/top_challenges.html:6
-msgid "Newest bounties"
-msgstr "Nyeste dusører"
-
-#: templates/questions/top_challenges.html:18
-msgid "No bounties have been posted lately."
-msgstr "Ingen dusører er blevet opslået for nyligt."
+#: templates/questions/top_challenges.html:7
+msgid "Newest challenges"
+msgstr "Nyeste udfordringer"
 
 #: templates/questions/vote.html:4
 msgid "Click to vote up"
@@ -516,3 +508,15 @@ msgstr "Klik for at stemme ned"
 #: templates/questions/vote.html:9
 msgid "votes"
 msgstr "stemmer"
+
+#~ msgid "There are currently no news."
+#~ msgstr "Der er i øjeblikket ikke nogen nyheder."
+
+#~ msgid "No featured category currently."
+#~ msgstr "Ingen fremhævet kategori."
+
+#~ msgid "Newest bounties"
+#~ msgstr "Nyeste dusører"
+
+#~ msgid "No bounties have been posted lately."
+#~ msgstr "Ingen dusører er blevet opslået for nyligt."

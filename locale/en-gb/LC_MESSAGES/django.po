@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-01 08:23+0000\n"
+"POT-Creation-Date: 2018-05-01 09:30+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -42,20 +42,24 @@ msgstr ""
 msgid "anonymous"
 msgstr ""
 
-#: pble_questions/models.py:102
+#: pble_questions/models.py:105
 msgid "title"
 msgstr ""
 
-#: pble_questions/models.py:103
+#: pble_questions/models.py:106
 msgid "category"
 msgstr ""
 
-#: pble_questions/models.py:104
+#: pble_questions/models.py:107
 msgid "course"
 msgstr ""
 
-#: pble_questions/models.py:105
+#: pble_questions/models.py:108
 msgid "tags"
+msgstr ""
+
+#: pble_questions/models.py:109
+msgid "bounty"
 msgstr ""
 
 #: pble_questions/templates/questions/ask.html:5
@@ -289,7 +293,7 @@ msgstr ""
 
 #: pble_users/templates/users/detail.html:61
 #: pble_users/templates/users/user_questions.html:8 pblexchange/menu.py:7
-#: pblexchange/templates/pblexchange/base.html:93
+#: pblexchange/templates/pblexchange/base.html:87
 msgid "Questions"
 msgstr ""
 
@@ -389,23 +393,23 @@ msgstr ""
 msgid "PBL Exchange"
 msgstr ""
 
-#: pblexchange/templates/pblexchange/base.html:106
+#: pblexchange/templates/pblexchange/base.html:100
 msgid "Submit feedback and bugs"
 msgstr ""
 
-#: pblexchange/templates/pblexchange/base.html:107
+#: pblexchange/templates/pblexchange/base.html:101
 msgid "as a Github issue"
 msgstr ""
 
-#: pblexchange/templates/pblexchange/base.html:108
+#: pblexchange/templates/pblexchange/base.html:102
 msgid "or"
 msgstr ""
 
-#: pblexchange/templates/pblexchange/base.html:109
+#: pblexchange/templates/pblexchange/base.html:103
 msgid "via email"
 msgstr ""
 
-#: pblexchange/templates/pblexchange/base.html:115
+#: pblexchange/templates/pblexchange/base.html:109
 msgid "Powered by"
 msgstr ""
 
@@ -413,7 +417,7 @@ msgstr ""
 msgid " About PBL Exchange"
 msgstr ""
 
-#: templates/pblexchange/links.html:2
+#: templates/pblexchange/links.html:4
 msgid ""
 "Expand your knowledge of Problem Based Learning using the following links"
 msgstr ""
@@ -432,10 +436,6 @@ msgstr ""
 
 #: templates/pblexchange/news_articles.html:8
 msgid "PBL Exchange news:"
-msgstr ""
-
-#: templates/pblexchange/news_articles.html:15
-msgid "There are currently no news."
 msgstr ""
 
 #: templates/pblexchange/write_news_article.html:5
@@ -463,12 +463,8 @@ msgstr ""
 msgid "All categories"
 msgstr ""
 
-#: templates/questions/featured_category.html:6
+#: templates/questions/featured_category.html:7
 msgid "Featured category"
-msgstr ""
-
-#: templates/questions/featured_category.html:11
-msgid "No featured category currently."
 msgstr ""
 
 #: templates/questions/meta.html:8
@@ -495,12 +491,8 @@ msgstr ""
 msgid "users"
 msgstr ""
 
-#: templates/questions/top_challenges.html:6
-msgid "Newest bounties"
-msgstr ""
-
-#: templates/questions/top_challenges.html:18
-msgid "No bounties have been posted lately."
+#: templates/questions/top_challenges.html:7
+msgid "Newest challenges"
 msgstr ""
 
 #: templates/questions/vote.html:4

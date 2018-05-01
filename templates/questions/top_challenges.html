@@ -4,7 +4,7 @@
     <div class="pble-sidebar">
         <div class="pble-nav-cat-list pble-nav-cat-list-1">
             <ul>
-                <li class="pble-nav-cat-item pble-nav-cat-all">{% trans 'Newest bounties' %}:</li>
+                <li class="pble-nav-cat-item pble-nav-cat-all">{% trans 'Newest challenges' %}:</li>
 
             {% for challenge_q in top_challenges %}
                 <li class="pble-nav-cat-item"><a href="{% url 'pble_questions:detail' challenge_q.id %}">{{ challenge_q.title }}</a>
