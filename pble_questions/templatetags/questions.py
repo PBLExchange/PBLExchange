@@ -38,9 +38,13 @@ def comment_list(context, question, answer=None):
         comments = comments.filter(answer=answer.pk)
     else:
         comments = comments.filter(answer__isnull=True)
+    try:
+        user = context['request'].user
+    except KeyError:
+        user = context['user']
     return {
         'comments': comments,
-        'request': context['request']
+        'user': user
     }
 
 
