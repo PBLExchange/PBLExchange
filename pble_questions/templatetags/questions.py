@@ -31,8 +31,8 @@ def answer_list(context, question):
     }
 
 
-@register.inclusion_tag('questions/comment_list.html')
-def comment_list(question, answer=None):
+@register.inclusion_tag('questions/comment_list.html', takes_context=True)
+def comment_list(context, question, answer=None):
     comments = Comment.objects.filter(question=question.pk)
     if answer:
         comments = comments.filter(answer=answer.pk)
@@ -40,6 +40,7 @@ def comment_list(question, answer=None):
         comments = comments.filter(answer__isnull=True)
     return {
         'comments': comments,
+        'request': context['request']
     }
 
 
