@@ -39,4 +39,4 @@ class UserSetting(models.Model):
     user = models.OneToOneField(User, unique=True)
     post_notification_enabled = models.BooleanField(default=True)
     subscription_enabled = models.BooleanField(default=True)
-    language = models.CharField(verbose_name=_('language'), max_length=4, choices=settings.LANGUAGES, default=settings.LANGUAGE_CODE)
+    language = models.CharField(verbose_name=_('language'), max_length=5, choices=settings.LANGUAGES, default=settings.LANGUAGE_CODE)
