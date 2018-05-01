@@ -69,7 +69,6 @@ def peers(request, base_template='pblexchange/base.html', error_message='', **kw
     })
 
 
-# TODO: I assume that all categories, tags, and pble_users have unique names
 def alter_categories(request, category_id, **kwargs):
     if not request.user.is_authenticated():
         HttpResponseRedirect(reverse('login'))

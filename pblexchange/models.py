@@ -2,6 +2,7 @@ from django.db import models
 from django.core.exceptions import ValidationError
 from django.core.validators import URLValidator
 from django.contrib.auth.models import User
+from django.utils.translation import ugettext_lazy as _
 from datetime import timedelta
 from django.utils import timezone
 from ckeditor_uploader.fields import RichTextUploadingField
@@ -53,14 +54,18 @@ class ExternalLink(models.Model):
         return self.title
 
 
+def delta_now():
+    return timezone.now()+timedelta(days=14)
+
+
 class NewsArticle(models.Model):
     id = models.AutoField(primary_key=True)
     author = models.ForeignKey(User)
-    headline = models.CharField(max_length=32)
-    lead = models.CharField(max_length=256, blank=True)
-    body = RichTextUploadingField()
-    start_date = models.DateField(default=timezone.now)
-    end_date = models.DateField(default=timezone.now()+timedelta(days=14))
+    headline = models.CharField(verbose_name=_('headline'), max_length=32)
+    lead = models.CharField(verbose_name=_('lead'), max_length=256, blank=True)
+    body = RichTextUploadingField(verbose_name=_('body'))
+    start_date = models.DateField(verbose_name=_('start date'), default=timezone.now)
+    end_date = models.DateField(verbose_name=_('end date'), default=delta_now)
 
     def save(self, *args, **kw):
         if self.start_date > self.end_date:  # TODO: Better error handling than throwing and not handling an exception

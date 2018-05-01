@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-30 14:42+0000\n"
+"POT-Creation-Date: 2018-05-01 08:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,7 +33,7 @@ msgstr ""
 msgid "Comment"
 msgstr ""
 
-#: pble_questions/models.py:60 pblexchange/forms.py:14
+#: pble_questions/models.py:60 pblexchange/forms.py:14 pblexchange/models.py:66
 msgid "body"
 msgstr ""
 
@@ -349,7 +349,7 @@ msgstr ""
 msgid "No registered user(s) at the moment"
 msgstr ""
 
-#: pblexchange/forms.py:13
+#: pblexchange/forms.py:13 pblexchange/models.py:65
 msgid "lead"
 msgstr ""
 
@@ -363,6 +363,18 @@ msgstr ""
 
 #: pblexchange/menu.py:16
 msgid "Ask a Question"
+msgstr ""
+
+#: pblexchange/models.py:64
+msgid "headline"
+msgstr ""
+
+#: pblexchange/models.py:67
+msgid "start date"
+msgstr ""
+
+#: pblexchange/models.py:68
+msgid "end date"
 msgstr ""
 
 #: pblexchange/templates/pblexchange/base.html:28
@@ -487,7 +499,7 @@ msgstr ""
 msgid "Newest bounties"
 msgstr ""
 
-#: templates/questions/top_challenges.html:14
+#: templates/questions/top_challenges.html:18
 msgid "No bounties have been posted lately."
 msgstr ""
 

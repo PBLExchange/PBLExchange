@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-30 14:42+0000\n"
+"POT-Creation-Date: 2018-05-01 08:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,7 +33,7 @@ msgstr "Svar"
 msgid "Comment"
 msgstr "Kommentar"
 
-#: pble_questions/models.py:60 pblexchange/forms.py:14
+#: pble_questions/models.py:60 pblexchange/forms.py:14 pblexchange/models.py:66
 msgid "body"
 msgstr "krop"
 
@@ -264,7 +264,7 @@ msgstr "kun vist til adminstratorer"
 
 #: pble_users/templates/users/detail.html:26
 msgid "Add challenge points"
-msgstr ""
+msgstr "Tilføj udfordringspoint"
 
 #: pble_users/templates/users/detail.html:34
 msgid "Score"
@@ -283,7 +283,7 @@ msgstr "rangeret"
 
 #: pble_users/templates/users/detail.html:45
 msgid "Challenge points"
-msgstr ""
+msgstr "Udfordringspoint"
 
 #: pble_users/templates/users/detail.html:55
 msgid "Title"
@@ -351,7 +351,7 @@ msgstr "Top scorende brugere"
 msgid "No registered user(s) at the moment"
 msgstr "Ingen registrerede brugere på nuværende tidspunkt"
 
-#: pblexchange/forms.py:13
+#: pblexchange/forms.py:13 pblexchange/models.py:65
 msgid "lead"
 msgstr "underrubrik"
 
@@ -366,6 +366,18 @@ msgstr "Abonnementer"
 #: pblexchange/menu.py:16
 msgid "Ask a Question"
 msgstr "Stil et spørgsmål"
+
+#: pblexchange/models.py:64
+msgid "headline"
+msgstr "rubrik"
+
+#: pblexchange/models.py:67
+msgid "start date"
+msgstr "begyndelses dato"
+
+#: pblexchange/models.py:68
+msgid "end date"
+msgstr "slut dato"
 
 #: pblexchange/templates/pblexchange/base.html:28
 msgid "Hello"
@@ -489,7 +501,7 @@ msgstr "brugere"
 msgid "Newest bounties"
 msgstr "Nyeste dusører"
 
-#: templates/questions/top_challenges.html:14
+#: templates/questions/top_challenges.html:18
 msgid "No bounties have been posted lately."
 msgstr "Ingen dusører er blevet opslået for nyligt."
 
@@ -504,12 +516,3 @@ msgstr "Klik for at stemme ned"
 #: templates/questions/vote.html:9
 msgid "votes"
 msgstr "stemmer"
-
-#~ msgid "headline"
-#~ msgstr "rubrik"
-
-#~ msgid "start date"
-#~ msgstr "begyndelses dato"
-
-#~ msgid "end date"
-#~ msgstr "slut dato"
