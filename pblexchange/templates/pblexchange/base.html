@@ -69,21 +69,15 @@
                             </div>
                         </div>
 
-                        <div class="pble-sidebar">
-                            {% top_challenges %}
-                        </div>
+                        {% top_challenges %}
 
                         {% news_articles %}
 
-                        <div class="pble-sidebar">
-                            {% featured_category user %}
-                        </div>
+                        {% featured_category user %}
 
                         {% categories_list %}
 
-                        <div class="pble-sidebar">
-                            {% links %}
-                        </div>
+                        {% links %}
 
                     </div>
                     {% endblock %}

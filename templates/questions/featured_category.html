@@ -2,11 +2,11 @@
 {% load questions %}
 
 {% if featured_cat %}
-    <p>
-    {% trans 'Featured category' %}:
-    <a href="{% url 'pble_questions:category' featured_cat.category.id %}">{{ featured_cat.category.name }}</a></p>
+    <div class="pble-sidebar">
+        <p>
+        {% trans 'Featured category' %}:
+        <a href="{% url 'pble_questions:category' featured_cat.category.id %}">{{ featured_cat.category.name }}</a></p>
 
-    <p>{{ featured_text }}</p>
-{% else %}
-    <p>{% trans 'No featured category currently.' %}</p>
+        <p>{{ featured_text }}</p>
+    </div>
 {% endif %}

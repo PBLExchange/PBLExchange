@@ -2,7 +2,7 @@ from django import template
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext as _
 from django.db.models import Count
-from django.contrib.sites.models import Site
+from django.utils import timezone
 from django.shortcuts import reverse, get_object_or_404
 
 from pble_questions.models import Question, Answer, Comment, Category, FeaturedCategory
@@ -115,8 +115,8 @@ def categories_list():
 # TODO: Make these handle non-existent tables
 @register.inclusion_tag('questions/featured_category.html')
 def featured_category(user):
-    if FeaturedCategory.objects.all().exists():
-        featured_cat = FeaturedCategory.objects.all().order_by('-start_date')[0]
+    if FeaturedCategory.objects.filter(start_date__lte=timezone.now()).exists():
+        featured_cat = FeaturedCategory.objects.filter(start_date__lte=timezone.now()).order_by('-start_date')[0]
         user_setting_lang = get_object_or_404(UserSetting, user=user).language
 
         if user_setting_lang == 'en':
