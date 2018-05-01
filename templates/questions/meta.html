@@ -1,6 +1,8 @@
 {% load users %}
 {% load utils %}
+{% load questions %}
 {% load i18n %}
+
 <span class="{{ class_prefix }}-avatar-meta">
     <span class="{{ class_prefix }}-meta">
         <span class="{{ class_prefix }}-what">{{ what }}</span>
@@ -9,7 +11,7 @@
         </span>
         {% if post.category %}
         <span class="{{ class_prefix }}-where">
-            <span class="{{ class_prefix }}-where-pad">{% trans 'in' %} </span><span class="{{ class_prefix }}-where-data"><a href="{% url 'pble_questions:category' post.category.id %}">{{ post.category }}</a></span>
+            <span class="{{ class_prefix }}-where-pad">{% trans 'in' %} </span><span class="{{ class_prefix }}-where-data"><a href="{% url 'pble_questions:category' post.category.id %}">{% get_category_name user post.category %}</a></span>
         </span>
         {% endif %}
         <span class="{{ class_prefix }}-who">

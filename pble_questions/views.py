@@ -161,7 +161,7 @@ def category(request, category_id, base_template='pblexchange/base.html', **kwar
     cat = get_object_or_404(Category, id=category_id)
     return render(request, 'questions/category.html', {
         'base_template': base_template,
-        'title': cat.name,
+        'title': cat.get_i18n_name(request.user),
         'questions': cat.question_set.order_by('-created_date'),
     })
 

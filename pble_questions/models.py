@@ -35,11 +35,19 @@ class Course(models.Model):
 class Category(models.Model):
     class Meta:
         verbose_name_plural = 'categories'
-    name = models.CharField(max_length=160, unique=True)
-    description = models.TextField(default='')
+    en_name = models.CharField(max_length=160, unique=True)
+    da_name = models.CharField(max_length=160, unique=True)
+    en_description = models.TextField(default='')
+    da_description = models.TextField(default='')
 
     def __str__(self):
         return self.name
+
+    def get_i18n_name(self, user): # TODO: language options here should not be hard coded
+        if user.usersetting.language == 'da':
+            return self.da_name
+        else:
+            return self.en_name
 
 
 class FeaturedCategory(models.Model):
@@ -47,7 +55,7 @@ class FeaturedCategory(models.Model):
         verbose_name_plural = 'featured categories'
     category = models.ForeignKey(Category)
     en_text = models.CharField(max_length=128)
-    dk_text = models.CharField(max_length=128)
+    da_text = models.CharField(max_length=128)
     start_date = models.DateField(unique=True)
 
     def __str__(self):
