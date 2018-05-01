@@ -138,7 +138,7 @@ def featured_category(user):
 @register.inclusion_tag('questions/top_challenges.html')
 def top_challenges():
     if Question.objects.all():
-        top_qc = Question.objects.filter(is_challenge=True).order_by('-created_date')[:8]
+        top_qc = Question.objects.active_bounties()[:5]
 
         return {
             'top_challenges': top_qc,

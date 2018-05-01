@@ -2535,5 +2535,6 @@ a.pble-browse-cat-link:visited {
 	background: #1C7BB1;
 	border-radius: 4px;
 	color: white;
-	font-size: 12px
+	font-size: 12px;
+	margin-right: 4px;
 }
