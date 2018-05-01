@@ -1,12 +1,28 @@
 {% extends base_template %}
 {% load i18n %}
+{% load widget_tweaks %}
 
 {% block content %}
     <h1>{% trans 'Ask a question' %}</h1>
-    <form action="{% url 'pble_questions:submit' %}" method="post" class="pure-form pure-form-stacked">
+    <form method="POST" action="{% url 'pble_questions:submit' %}" class="pure-form pure-form-stacked">
         {% csrf_token %}
         {{ post_form.media }}
-        {{ post_form }}
+        <p>{% trans 'Title' %}:</p>
+        {{ post_form.title }}
+        <p>{% trans 'Category' %}:</p>
+        {{ post_form.category }}
+        <p>{% trans 'Body' %}:</p>
+        {{ post_form.body }}
+        <p>{% trans 'Bounty' %}: <small>({% trans 'You have' %} {{ current_user_points }} {% trans 'bounty points available' %})</small></p>
+        {{ post_form.bounty }}
+        {% if current_user_ch_points > 0 %}
+        <p>{% trans 'Challenge points' %}: <small>({% trans 'You have' %} {{ current_user_ch_points }} {% trans 'challenge points available' %})</small></p>
+        {{ post_form.challenge }}
+        {% endif %}
+        <p>{% trans 'Anonymous' %}:</p>
+        {{ post_form.anonymous }}
+        <p>{% trans 'Tags' %}: <small>({% trans 'Tags are separated by commas, and joined using hyphen' %})</small></p>
+        {{ post_form.tags }}
         <input type="submit" value="{% trans 'Submit' %}">
     </form>
 {% endblock %}

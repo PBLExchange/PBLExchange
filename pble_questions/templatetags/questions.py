@@ -103,16 +103,15 @@ def question_search():
     }
 
 
-@register.inclusion_tag('questions/categories_list.html')
-def categories_list():
+@register.inclusion_tag('questions/categories_list.html', takes_context=True)
+def categories_list(context):
     categories = Category.objects.annotate(cardinality=Count('question'))
-
     return {
         'categories': categories,
+        'user': context['request'].user
     }
 
 
-# TODO: Make these handle non-existent tables
 @register.inclusion_tag('questions/featured_category.html')
 def featured_category(user):
     if FeaturedCategory.objects.filter(start_date__lte=timezone.now()).exists():
@@ -127,7 +126,7 @@ def featured_category(user):
         elif user_setting_lang == 'da':
             return {
                 'featured_cat': featured_cat,
-                'featured_text': featured_cat.dk_text
+                'featured_text': featured_cat.da_text
             }
     else:
         return {
@@ -147,3 +146,18 @@ def top_challenges():
         return {
             'top_challenges': '',
         }
+
+
+@register.simple_tag
+def get_category_name(username, category):
+    #if user.usersetting.language == 'da':
+     #   return category.da_name
+    #else:
+    print(username)
+    return category.get_i18n_name(User.objects.first())
+#    return {'menu': Menu.fields, 'user': context['request'].user}
+
+
+@register.simple_tag(takes_context=True)
+def get_category_description(context, category):
+    return ''

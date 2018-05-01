@@ -145,7 +145,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en-gb'
 
 TIME_ZONE = 'UTC'
 
@@ -194,7 +194,7 @@ CKEDITOR_UPLOAD_PATH = 'uploads/'
 
 # Login settings
 LOGIN_URL = 'login'
-EXEMPT_USERS = ['aklost11', 'gblegm13', 'csteph13']
+EXEMPT_USERS = ['aklost11', 'gblegm13']
 DISALLOWED_DOMAINS = ['student.aau.dk']
 
 # Login redirect

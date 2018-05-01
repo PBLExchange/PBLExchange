@@ -68,11 +68,9 @@ def answer_accept(user, post):
 
 
 def post_bounty(user, post, bounty, challenge=0):
-    points = bounty + challenge
-    if user.userprofile.points < bounty and user.userprofile.challenge_points < challenge:
-        return
-    user.userprofile.points -= bounty
-    user.userprofile.challenge_points -= challenge
+    points = min(bounty, user.userprofile.points) + min(challenge, user.userprofile.challenge_points)
+    user.userprofile.points -= min(bounty, user.userprofile.points)
+    user.userprofile.challenge_points -= min(challenge, user.userprofile.challenge_points)
     user.userprofile.save()
     post.bounty = points
     post.is_challenge = challenge > 0

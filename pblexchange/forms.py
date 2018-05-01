@@ -22,3 +22,5 @@ class NewsArticleForm(forms.ModelForm):
             'start_date',
             'end_date'
         ]
+        widgets = {'headline': forms.TextInput(attrs={'size': 80})}
+        # TODO: Formatting of forms is best handled in CSS

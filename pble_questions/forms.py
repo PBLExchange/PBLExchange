@@ -8,7 +8,9 @@ from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
 
 class QuestionForm(forms.ModelForm):
-    tags = forms.CharField(required=False)
+    # TODO: Formatting of forms is best handled in CSS
+    tags = forms.CharField(required=False, widget=forms.TextInput(attrs={'size': 40}),
+                           help_text=_('Tags are comma separated<br><br>'))
     challenge = forms.IntegerField(min_value=0, initial=0)
     prefix = 'question'
 
@@ -23,6 +25,8 @@ class QuestionForm(forms.ModelForm):
             'anonymous',
             'tags',
         ]
+        widgets = {'title': forms.TextInput(attrs={'size': 80})}
+        # TODO: Formatting of forms is best handled in CSS
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
