@@ -4,7 +4,13 @@
 {% load i18n %}
 
 {% block content %}
-    <h1>{{ question.title }}</h1>
+    <h1>{{ question.title }}
+        {% if question.bounty > 0 %}
+            <span class="pble-bounty">
+                +{{ question.bounty }}
+            </span>
+        {% endif %}
+    </h1>
     <div class="pble-part-q-view">
         <div class="pble-q-view hentry question">
             <div class="pble-q-view-stats">

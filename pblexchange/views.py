@@ -60,3 +60,12 @@ def submit_article(request, form_type=NewsArticleForm, **kwargs):
             raise PermissionDenied
     else:
         return Http404()
+
+
+def about(request):
+    if not request.user.is_authenticated():
+        reverse('login')
+
+    return render(request, 'pblexchange/about.html', {
+        'base_template': 'pblexchange/base.html'
+    })

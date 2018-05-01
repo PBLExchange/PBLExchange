@@ -69,12 +69,11 @@ def peers(request, base_template='pblexchange/base.html', error_message='', **kw
     })
 
 
-# TODO: I assume that all categories, tags, and pble_users have unique names
-def alter_categories(request, category_text, **kwargs):
+def alter_categories(request, category_id, **kwargs):
     if not request.user.is_authenticated():
         HttpResponseRedirect(reverse('login'))
 
-    category = get_object_or_404(Category, name=category_text)
+    category = get_object_or_404(Category, id=category_id)
     user_sub, _ = Subscription.objects.get_or_create(user=request.user)
 
     if category in user_sub.categories.all():
@@ -86,11 +85,11 @@ def alter_categories(request, category_text, **kwargs):
     return HttpResponseRedirect(reverse('pble_subscriptions:categories'))
 
 
-def alter_tags(request, tag_text, **kwargs):
+def alter_tags(request, tag_id, **kwargs):
     if not request.user.is_authenticated():
         HttpResponseRedirect(reverse('login'))
 
-    tag = get_object_or_404(Tag, tag=tag_text)
+    tag = get_object_or_404(Tag, id=tag_id)
     user_sub, _ = Subscription.objects.get_or_create(user=request.user)
 
     if tag in user_sub.tags.all():
@@ -102,11 +101,11 @@ def alter_tags(request, tag_text, **kwargs):
     return HttpResponseRedirect(reverse('pble_subscriptions:tags'))
 
 
-def alter_peers(request, username, **kwargs):
+def alter_peers(request, userid, **kwargs):
     if not request.user.is_authenticated():
         HttpResponseRedirect(reverse('login'))
 
-    username_usr = User.objects.get(username=username)
+    username_usr = User.objects.get(id=userid)
 
     if request.user != username_usr:
         username_up = UserProfile.objects.get(user=username_usr)

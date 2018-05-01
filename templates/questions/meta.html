@@ -9,7 +9,7 @@
         </span>
         {% if post.category %}
         <span class="{{ class_prefix }}-where">
-            <span class="{{ class_prefix }}-where-pad">{% trans 'in' %} </span><span class="{{ class_prefix }}-where-data"><a href="{% url 'pble_questions:category' post.category %}">{{ post.category }}</a></span>
+            <span class="{{ class_prefix }}-where-pad">{% trans 'in' %} </span><span class="{{ class_prefix }}-where-data"><a href="{% url 'pble_questions:category' post.category.id %}">{{ post.category }}</a></span>
         </span>
         {% endif %}
         <span class="{{ class_prefix }}-who">

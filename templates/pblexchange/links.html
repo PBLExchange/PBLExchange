@@ -1,7 +1,11 @@
 {% load i18n %}
-{% trans 'Expand your knowledge of Problem Based Learning using the following links' %}:<br>
-<ul>
-{% for link in link_list %}
-    <li><a href="{{ link.url }}">{{ link.title }}</a></li>
-{% endfor %}
-</ul>
+{% if link_list %}
+    <div class="pble-sidebar">
+        {% trans 'Expand your knowledge of Problem Based Learning using the following links' %}:<br>
+        <ul>
+        {% for link in link_list %}
+            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+        {% endfor %}
+        </ul>
+    </div>
+{% endif %}

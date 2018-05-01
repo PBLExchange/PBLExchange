@@ -17,7 +17,7 @@ class Subscription(models.Model):
     peers = models.ManyToManyField(UserProfile)
     answer_notifications = models.BooleanField(default=True)
     comment_notifications = models.BooleanField(default=False)
-    digest = models.CharField(max_length=6, choices=DIGEST_CHOICES, default=DAILY)
+    digest = models.CharField(max_length=6, choices=DIGEST_CHOICES, default=NEVER)
 
 
 class Notification(models.Model):

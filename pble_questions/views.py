@@ -32,6 +32,14 @@ def hot(request, base_template='pblexchange/base.html', **kwargs):
     })
 
 
+def bounties(request, base_template='pblexchange/base.html', **kwargs):
+    return render(request, 'questions/list.html', {
+        'base_template': base_template,
+        'title': _('bounty questions'),
+        'questions': Question.objects.filter(bounty__gt=0).order_by('-created_date'),
+    })
+
+
 def detail(request, question_id, base_template='pblexchange/base.html', **kwargs):
     question = Question.objects.get(pk=question_id)
     if not question:
@@ -59,7 +67,7 @@ def ask(request, base_template='pblexchange/base.html', **kwargs):
 def submit(request, question_id=None, answer_id=None, form_type=QuestionForm, **kwargs):
     if request.method == 'POST' and request.user.is_authenticated():
         post_form = form_type(request.POST)
-        if request.user.userprofile.challenge_points < 1:
+        if request.user.userprofile.challenge_points < 1 and isinstance(post_form, QuestionForm):
             del post_form.fields['challenge']
         post = post_form.save(commit=False)
         post.author = request.user
@@ -145,12 +153,12 @@ def categories(request, base_template='pblexchange/base.html', **kwargs):
     })
 
 
-def category(request, category_text, base_template='pblexchange/base.html', **kwargs):
-    t = get_object_or_404(Category, name=category_text)
+def category(request, category_id, base_template='pblexchange/base.html', **kwargs):
+    cat = get_object_or_404(Category, id=category_id)
     return render(request, 'questions/category.html', {
         'base_template': base_template,
-        'title': category_text,
-        'questions': t.question_set.order_by('-created_date'),
+        'title': cat.name,
+        'questions': cat.question_set.order_by('-created_date'),
     })
 
 

@@ -2,11 +2,12 @@ from django import template
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext as _
 from django.db.models import Count
-from django.contrib.sites.models import Site
-from django.shortcuts import reverse
+from django.utils import timezone
+from django.shortcuts import reverse, get_object_or_404
 
-from pble_questions.models import Question, Answer, Comment, Category
+from pble_questions.models import Question, Answer, Comment, Category, FeaturedCategory
 from pble_questions.forms import CommentForm, SearchForm
+from pble_users.models import UserSetting
 
 register = template.Library()
 
@@ -111,11 +112,38 @@ def categories_list():
     }
 
 
-@register.inclusion_tag('questions/category_href.html')
-def category_url(category):
-    current_site = Site.objects.get_current()
-    cat_url = current_site.domain + reverse('pble_questions:category', args=(
-        category.name,))
-    return {'cat_url': cat_url,
-            'cat_name': category.name,
+# TODO: Make these handle non-existent tables
+@register.inclusion_tag('questions/featured_category.html')
+def featured_category(user):
+    if FeaturedCategory.objects.filter(start_date__lte=timezone.now()).exists():
+        featured_cat = FeaturedCategory.objects.filter(start_date__lte=timezone.now()).order_by('-start_date')[0]
+        user_setting_lang = get_object_or_404(UserSetting, user=user).language
+
+        if user_setting_lang == 'en':
+            return {
+                'featured_cat': featured_cat,
+                'featured_text': featured_cat.en_text
             }
+        elif user_setting_lang == 'da':
+            return {
+                'featured_cat': featured_cat,
+                'featured_text': featured_cat.dk_text
+            }
+    else:
+        return {
+            'featured_cat': '',
+        }
+
+
+@register.inclusion_tag('questions/top_challenges.html')
+def top_challenges():
+    if Question.objects.all():
+        top_qc = Question.objects.active_bounties()[:5]
+
+        return {
+            'top_challenges': top_qc,
+        }
+    else:
+        return {
+            'top_challenges': '',
+        }

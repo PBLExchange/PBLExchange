@@ -6,7 +6,7 @@
     <div class="pble-part-ranking">
     {% for userprofile in sub_users %}
         <span class="pble-ranking-item pble-top-tags-item">
-            <span class="pble-top-tags-label"><a href="{% url 'pble_subscriptions:subscribe_peer' userprofile.user.username %}" class="pble-tag-link">{{ userprofile.user.username }}</a></span>
+            <span class="pble-top-tags-label"><a href="{% url 'pble_subscriptions:subscribe_peer' userprofile.user.id %}" class="pble-tag-link">{{ userprofile.user.username }}</a></span>
         </span>
     {% endfor %}
     </div>
@@ -15,7 +15,7 @@
     <div class="pble-part-ranking">
     {% for userprofile in not_sub_users %}
         <span class="pble-ranking-item pble-top-tags-item">
-            <span class="pble-top-tags-label"><a href="{% url 'pble_subscriptions:subscribe_peer' userprofile.user.username %}" class="pble-tag-link">{{ userprofile.user.username }}</a></span>
+            <span class="pble-top-tags-label"><a href="{% url 'pble_subscriptions:subscribe_peer' userprofile.user.id %}" class="pble-tag-link">{{ userprofile.user.username }}</a></span>
             <!-- TODO: set proper href to category sub/unsub -->
         </span>
     {% endfor %}

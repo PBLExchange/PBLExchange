@@ -35,10 +35,22 @@ class Course(models.Model):
 class Category(models.Model):
     class Meta:
         verbose_name_plural = 'categories'
-    name = models.CharField(max_length=160)
+    name = models.CharField(max_length=160, unique=True)
 
     def __str__(self):
         return self.name
+
+
+class FeaturedCategory(models.Model):
+    class Meta:
+        verbose_name_plural = 'featured categories'
+    category = models.ForeignKey(Category)
+    en_text = models.CharField(max_length=128)
+    dk_text = models.CharField(max_length=128)
+    start_date = models.DateField(unique=True)
+
+    def __str__(self):
+        return self.category.name
 
 
 class Post(models.Model):
@@ -85,13 +97,16 @@ class QuestionManager(WhooshManager):
     def answered_by_user(self, user):
         return self.recent().filter(answer__author=user, answer__anonymous=False).distinct()
 
+    def active_bounties(self):
+        return self.recent().filter(is_challenge=True, bounty__gt=0)
+
 
 class Question(Post):
     title = models.CharField(verbose_name=_('title'), max_length=160)
     category = models.ForeignKey(Category, verbose_name=_('category'), null=True, blank=True)
     course = models.ManyToManyField(Course, verbose_name=_('course'), blank=True)
     tags = models.ManyToManyField(Tag, verbose_name=_('tags'), blank=True)
-    bounty = models.PositiveIntegerField(default=0)
+    bounty = models.PositiveIntegerField(verbose_name=_('bounty'), default=0)
     is_challenge = models.BooleanField(default=False)
 
     objects = QuestionManager(default='title', fields=['title', 'body'])
