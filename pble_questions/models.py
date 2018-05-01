@@ -97,6 +97,9 @@ class QuestionManager(WhooshManager):
     def answered_by_user(self, user):
         return self.recent().filter(answer__author=user, answer__anonymous=False).distinct()
 
+    def active_bounties(self):
+        return self.recent().filter(is_challenge=True, bounty__gt=0)
+
 
 class Question(Post):
     title = models.CharField(verbose_name=_('title'), max_length=160)
