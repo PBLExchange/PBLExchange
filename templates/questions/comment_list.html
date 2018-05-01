@@ -3,7 +3,7 @@
     {% for comment in comments %}
         <div class="pble-c-list-item hentry comment">
             <div class="pble-c-item-content">
-                {{ comment.body }}
+                {{ comment.body|safe }}
             </div>
             <div class="pble-c-item-footer">
                 {% post_meta comment %}
