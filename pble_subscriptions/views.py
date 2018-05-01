@@ -185,8 +185,11 @@ def send_comment_notifications(comment):
     q_url = current_site.domain + reverse('pble_questions:detail', args=(
         comment.question.id,))
 
-    connection = get_connection()  # uses SMTP server specified in settings.py
-    connection.open()  # If you don't open the connection manually, Django will automatically open, then tear down the connection in msg.send()
+    try:
+        connection = get_connection()  # uses SMTP server specified in settings.py
+        connection.open()  # If you don't open the connection manually, Django will automatically open, then tear down the connection in msg.send()
+    except ConnectionRefusedError:
+        return
 
     for e in comments:
         receivers_list.add(e.author)
