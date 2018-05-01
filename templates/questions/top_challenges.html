@@ -6,7 +6,11 @@
             <li class="pble-nav-cat-item pble-nav-cat-all">{% trans 'Newest bounties' %}:</li>
 
         {% for challenge_q in top_challenges %}
-            <li class="pble-nav-cat-item"><a href="{% url 'pble_questions:detail' challenge_q.id %}">{{ challenge_q.title }}</a> ({{ challenge_q.bounty }})</li>
+            <li class="pble-nav-cat-item"><a href="{% url 'pble_questions:detail' challenge_q.id %}">{{ challenge_q.title }}</a>
+                <span class="pble-bounty">
+                    +{{ challenge_q.bounty }}
+                </span>
+            </li>
         {% endfor %}
         </ul>
     </div>
