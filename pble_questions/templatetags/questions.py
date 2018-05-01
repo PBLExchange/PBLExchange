@@ -12,9 +12,12 @@ from pble_users.models import UserSetting
 register = template.Library()
 
 
-@register.inclusion_tag('questions/question_list.html')
-def question_list(questions):
-    return {'questions': questions}
+@register.inclusion_tag('questions/question_list.html', takes_context=True)
+def question_list(context, questions):
+    return {
+        'questions': questions,
+        'request': context['request']
+    }
 
 
 @register.inclusion_tag('questions/answer_list.html', takes_context=True)
@@ -75,8 +78,8 @@ def voting(post):
     }
 
 
-@register.inclusion_tag('questions/meta.html')
-def post_meta(post, class_prefix='pble-q-item'):
+@register.inclusion_tag('questions/meta.html', takes_context=True)
+def post_meta(context, post, class_prefix='pble-q-item'):
     what = _('asked')
     if type(post) is Answer:
         what = _('answered')
@@ -84,6 +87,7 @@ def post_meta(post, class_prefix='pble-q-item'):
         'class_prefix': class_prefix,
         'post': post,
         'what': what,
+        'user': context['request'].user
     }
 
 
@@ -112,11 +116,11 @@ def categories_list(context):
     }
 
 
-@register.inclusion_tag('questions/featured_category.html')
-def featured_category(user):
+@register.inclusion_tag('questions/featured_category.html', takes_context=True)
+def featured_category(context):
     if FeaturedCategory.objects.filter(start_date__lte=timezone.now()).exists():
         featured_cat = FeaturedCategory.objects.filter(start_date__lte=timezone.now()).order_by('-start_date')[0]
-        user_setting_lang = get_object_or_404(UserSetting, user=user).language
+        user_setting_lang = get_object_or_404(UserSetting, user=context['request'].user).language
 
         if user_setting_lang == 'en':
             return {
@@ -148,14 +152,9 @@ def top_challenges():
         }
 
 
-@register.simple_tag
-def get_category_name(username, category):
-    #if user.usersetting.language == 'da':
-     #   return category.da_name
-    #else:
-    print(username)
-    return category.get_i18n_name(User.objects.first())
-#    return {'menu': Menu.fields, 'user': context['request'].user}
+@register.simple_tag(takes_context=True)
+def get_category_name(context, category):
+    return category.get_i18n_name(context['user'])
 
 
 @register.simple_tag(takes_context=True)

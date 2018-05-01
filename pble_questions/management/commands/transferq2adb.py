@@ -54,7 +54,12 @@ class Command(BaseCommand):
         ''')
 
         for row in cursor.fetchall():
-            category, created = Category.objects.get_or_create(name=str(row[1]), description=str(row[2]))
+            category, created = Category.objects.get_or_create(
+                da_name=str(row[1]),
+                da_description=str(row[2]),
+                en_name=str(row[1]),
+                en_description=''
+            )
             category.save()
 
             if row[0] not in self.__category_lookup.keys():

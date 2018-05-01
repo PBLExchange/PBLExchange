@@ -41,7 +41,7 @@ class Category(models.Model):
     da_description = models.TextField(default='')
 
     def __str__(self):
-        return self.name
+        return self.en_name
 
     def get_i18n_name(self, user): # TODO: language options here should not be hard coded
         if user.usersetting.language == 'da':
@@ -59,7 +59,7 @@ class FeaturedCategory(models.Model):
     start_date = models.DateField(unique=True)
 
     def __str__(self):
-        return self.category.name
+        return self.category.__str__()
 
 
 class Post(models.Model):
