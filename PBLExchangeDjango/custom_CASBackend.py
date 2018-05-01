@@ -54,7 +54,7 @@ class CustomCASBackend(CASBackend):
                 # Extra parameter, attributes, added
                 user = self.configure_user(user, attributes)
             else:
-                fill_misc_info(user, attributes)
+                self.fill_misc_info(user, attributes)
         else:
             created = False
             try:
