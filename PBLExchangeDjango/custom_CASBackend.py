@@ -53,6 +53,8 @@ class CustomCASBackend(CASBackend):
             if created:
                 # Extra parameter, attributes, added
                 user = self.configure_user(user, attributes)
+            else:
+                fill_misc_info(user, attributes)
         else:
             created = False
             try:
@@ -126,3 +128,8 @@ class CustomCASBackend(CASBackend):
         new_user_subscription = Subscription.objects.create(user=user)
         new_user_subscription.save()
         return user
+
+    def fill_misc_info(self, user, attributes):
+        if not user.first_name or not user.last_name:
+            user.first_name = attributes['givenName']
+            user.last_name = attributes['sn']

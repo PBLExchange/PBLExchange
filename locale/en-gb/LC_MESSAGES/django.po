@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-01 09:30+0000\n"
+"POT-Creation-Date: 2018-05-01 14:22+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,11 +25,15 @@ msgstr ""
 msgid "Danish"
 msgstr ""
 
-#: pble_questions/forms.py:49
+#: pble_questions/forms.py:13
+msgid "Tags are comma separated<br><br>"
+msgstr ""
+
+#: pble_questions/forms.py:53
 msgid "Answer"
 msgstr ""
 
-#: pble_questions/forms.py:61
+#: pble_questions/forms.py:65
 msgid "Comment"
 msgstr ""
 
@@ -62,11 +66,61 @@ msgstr ""
 msgid "bounty"
 msgstr ""
 
-#: pble_questions/templates/questions/ask.html:5
+#: pble_questions/templates/questions/ask.html:6
 msgid "Ask a question"
 msgstr ""
 
 #: pble_questions/templates/questions/ask.html:10
+#: pble_users/templates/users/detail.html:55
+msgid "Title"
+msgstr ""
+
+#: pble_questions/templates/questions/ask.html:12
+msgid "Category"
+msgstr ""
+
+#: pble_questions/templates/questions/ask.html:14
+msgid "Body"
+msgstr ""
+
+#: pble_questions/templates/questions/ask.html:16
+msgid "Bounty"
+msgstr ""
+
+#: pble_questions/templates/questions/ask.html:16
+#: pble_questions/templates/questions/ask.html:19
+msgid "You have"
+msgstr ""
+
+#: pble_questions/templates/questions/ask.html:16
+msgid "bounty points available"
+msgstr ""
+
+#: pble_questions/templates/questions/ask.html:19
+#: pble_users/templates/users/detail.html:45
+msgid "Challenge points"
+msgstr ""
+
+#: pble_questions/templates/questions/ask.html:19
+msgid "challenge points available"
+msgstr ""
+
+#: pble_questions/templates/questions/ask.html:22
+msgid "Anonymous"
+msgstr ""
+
+#: pble_questions/templates/questions/ask.html:24
+#: pble_questions/templates/questions/tags.html:5
+#: pble_subscriptions/templates/subscriptions/base.html:8
+#: pblexchange/menu.py:12
+msgid "Tags"
+msgstr ""
+
+#: pble_questions/templates/questions/ask.html:24
+msgid "Tags are separated by commas, and joined using hyphen"
+msgstr ""
+
+#: pble_questions/templates/questions/ask.html:26
 #: pble_questions/templates/questions/detail.html:39
 #: pble_questions/templates/questions/detail.html:58
 #: templates/pblexchange/write_news_article.html:10
@@ -92,7 +146,7 @@ msgid "Unclaimed bounties"
 msgstr ""
 
 #: pble_questions/templates/questions/categories.html:5
-#: pble_questions/views.py:151
+#: pble_questions/views.py:155
 #: pble_subscriptions/templates/subscriptions/base.html:7
 msgid "Categories"
 msgstr ""
@@ -132,12 +186,6 @@ msgstr ""
 msgid "Recent questions tagged"
 msgstr ""
 
-#: pble_questions/templates/questions/tags.html:5
-#: pble_subscriptions/templates/subscriptions/base.html:8
-#: pblexchange/menu.py:12
-msgid "Tags"
-msgstr ""
-
 #: pble_questions/templatetags/questions.py:80
 msgid "asked"
 msgstr ""
@@ -146,19 +194,19 @@ msgstr ""
 msgid "answered"
 msgstr ""
 
-#: pble_questions/views.py:14
+#: pble_questions/views.py:15
 msgid "new"
 msgstr ""
 
-#: pble_questions/views.py:22
+#: pble_questions/views.py:23
 msgid "unanswered"
 msgstr ""
 
-#: pble_questions/views.py:30
+#: pble_questions/views.py:31
 msgid "popular"
 msgstr ""
 
-#: pble_questions/views.py:38
+#: pble_questions/views.py:39
 msgid "bounty questions"
 msgstr ""
 
@@ -281,14 +329,6 @@ msgstr ""
 
 #: pble_users/templates/users/detail.html:38
 msgid "ranked"
-msgstr ""
-
-#: pble_users/templates/users/detail.html:45
-msgid "Challenge points"
-msgstr ""
-
-#: pble_users/templates/users/detail.html:55
-msgid "Title"
 msgstr ""
 
 #: pble_users/templates/users/detail.html:61

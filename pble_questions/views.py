@@ -5,6 +5,7 @@ from pble_questions.forms import QuestionForm, AnswerForm, CommentForm, SearchFo
 from pble_questions.models import Question, Answer, QuestionVote, Tag, Category
 from PBLExchangeDjango import settings
 from pble_users.points import post_vote, answer_accept, post_bounty
+from pble_users.models import UserProfile
 
 
 # Create your views here.
@@ -56,11 +57,14 @@ def ask(request, base_template='pblexchange/base.html', **kwargs):
     if not request.user.is_authenticated():
         return HttpResponseRedirect(reverse('login'))
     form = QuestionForm()
+    user_up = UserProfile.objects.get(user=request.user)
     if request.user.userprofile.challenge_points < 1:
         del form.fields['challenge']
     return render(request, 'questions/ask.html', {
         'base_template': base_template,
         'post_form': form,
+        'current_user_points': user_up.points,
+        'current_user_ch_points': user_up.challenge_points
     })
 
 
@@ -157,7 +161,7 @@ def category(request, category_id, base_template='pblexchange/base.html', **kwar
     cat = get_object_or_404(Category, id=category_id)
     return render(request, 'questions/category.html', {
         'base_template': base_template,
-        'title': cat.name,
+        'title': cat.get_i18n_name(request.user),
         'questions': cat.question_set.order_by('-created_date'),
     })
 

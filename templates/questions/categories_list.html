@@ -7,7 +7,7 @@
         <li class="pble-nav-cat-item pble-nav-cat-all">{% trans 'All categories' %}:</li>
 
         {% for category in categories %}
-            <li class="pble-nav-cat-item"><a href="{% url 'pble_questions:category' category.id %}">{{ category.name }}</a> ({{ category.cardinality }})</li>
+            <li class="pble-nav-cat-item"><a href="{% url 'pble_questions:category' category.id %}">{% get_category_name category %}</a> ({{ category.cardinality }})</li>
         {% endfor %}
         </ul>
     </div>

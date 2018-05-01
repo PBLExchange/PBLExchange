@@ -5,7 +5,7 @@
     <div class="pble-sidebar">
         <p>
         {% trans 'Featured category' %}:
-        <a href="{% url 'pble_questions:category' featured_cat.category.id %}">{{ featured_cat.category.name }}</a></p>
+        <a href="{% url 'pble_questions:category' featured_cat.category.id %}">{% get_category_name featured_cat.category %}</a></p>
 
         <p>{{ featured_text }}</p>
     </div>
