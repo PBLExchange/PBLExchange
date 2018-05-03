@@ -38,7 +38,7 @@ class QuestionForm(forms.ModelForm):
     def clean_tags(self):
         # Removes all spaces in the string (tags cannot contain spaces),
         # replace æøå with normal letters, and splits on ','
-        tag_strings = re.sub(r'(?!\-)\W', '', re.sub('[\s+]', '', self.cleaned_data['tags']).lower()
+        tag_strings = re.sub(r'(?![-,])\W', '', re.sub('[\s+]', '', self.cleaned_data['tags']).lower()
                              .replace('æ', 'ae').replace('ø', 'oe').replace('å', 'aa')).split(',')
         tags = []
         for t in tag_strings:
