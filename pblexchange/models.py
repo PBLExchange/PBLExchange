@@ -83,5 +83,5 @@ class MiscContent(models.Model):
     en_content = RichTextUploadingField()
     da_content = RichTextUploadingField()
 
-    def __str(self):
+    def __str__(self):
         return self.en_title
