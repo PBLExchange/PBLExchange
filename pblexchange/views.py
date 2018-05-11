@@ -1,8 +1,10 @@
 from django.shortcuts import render, HttpResponseRedirect, Http404, reverse
 from django.utils.translation import ugettext as _, check_for_language
 from django.shortcuts import get_object_or_404
+from PBLExchangeDjango.settings import INSTALLED_APPS
 from pble_questions.models import Question
-from .models import ExternalLink, NewsArticle
+from .models import ExternalLink, NewsArticle, MiscContent
+from pble_users.models import UserSetting
 from .forms import NewsArticleForm
 from django.core.exceptions import PermissionDenied
 
@@ -66,6 +68,16 @@ def about(request):
     if not request.user.is_authenticated():
         reverse('login')
 
-    return render(request, 'pblexchange/about.html', {
-        'base_template': 'pblexchange/base.html'
-    })
+    if 'pble_users' in INSTALLED_APPS:
+        u_setting = UserSetting.objects.get(user=request.user)
+
+        if u_setting.language == 'da':
+                return render(request, 'pblexchange/about.html', {
+                    'base_template': 'pblexchange/base.html',
+                    'content': MiscContent.objects.get(en_title='about').da_content
+                })
+
+        return render(request, 'pblexchange/about.html', {
+            'base_template': 'pblexchange/base.html',
+            'content': MiscContent.objects.get(en_title='about').en_content
+        })
