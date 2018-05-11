@@ -135,12 +135,14 @@ def featured_category(context):
         if user_setting_lang == 'en':
             return {
                 'featured_cat': featured_cat,
-                'featured_text': featured_cat.en_text
+                'featured_text': featured_cat.en_text,
+                'user': context['request'].user,
             }
         elif user_setting_lang == 'da':
             return {
                 'featured_cat': featured_cat,
-                'featured_text': featured_cat.da_text
+                'featured_text': featured_cat.da_text,
+                'user': context['request'].user,
             }
     else:
         return {
