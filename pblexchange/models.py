@@ -82,3 +82,6 @@ class MiscContent(models.Model):
     da_title = models.CharField(max_length=160)
     en_content = RichTextUploadingField()
     da_content = RichTextUploadingField()
+
+    def __str(self):
+        return self.en_title
