@@ -27,7 +27,7 @@ msgstr "Dansk"
 
 #: pble_questions/forms.py:23
 msgid "Tags are comma separated<br><br>"
-msgstr ""
+msgstr "Tags er kommasepareret<br /><br />"
 
 #: pble_questions/forms.py:63
 msgid "Answer"
@@ -582,7 +582,7 @@ msgstr "Skriv artikel"
 
 #: templates/pblexchange/menu.html:10
 msgid "Admin"
-msgstr "Adminstrator"
+msgstr "Administrator"
 
 #: templates/pblexchange/menu.html:13
 msgid "About"
