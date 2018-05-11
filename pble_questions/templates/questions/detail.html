@@ -23,21 +23,28 @@
                 {% tag_list question 'pble-q-view' %}
                 {% post_meta question 'pble-q-view' %}
 
+                {% if question.comment_set.count %}
                 <div class="pble-q-view-c-list">
                     {% comment_list question %}
                 </div>
+                {% endif %}
 
-                <label for="comment-q">{% trans 'Add comment' %}</label>
-                <input type="checkbox" id="comment-q" class="add-comment">
-                <div class="comment-form pble-c-form" {# style="display: none;" #}>
-                    <h2>{% trans 'Your comment on this question' %}:</h2>
-                    <form action="{% url 'pble_questions:comments:submit:q' question.pk %}" method="post" class="pure-form pure-form-stacked">
-                        {% csrf_token %}
-                        {{ comment_form.media }}
-                        {{ comment_form }}
-                        <br/>
-                        <button type="submit" class="pure-button pure-button-primary">{% trans 'Submit' %}</button>
-                    </form>
+                <div class="pble-q-view-buttons">
+                    {% if request.user == question.author %}
+                    <a href="{% url 'pble_questions:edit' 'question' question.pk %}" class="pble-form-light-button pble-form-light-button-edit" style="text-decoration: none; color: inherit;">{% trans 'Edit' %}</a>
+                    {% endif %}
+                    <label for="comment-q" class="pble-form-light-button pble-form-light-button-comment">{% trans 'Add comment' %}</label>
+                    <input type="checkbox" id="comment-q" class="add-comment">
+                    <div class="comment-form pble-c-form" {# style="display: none;" #}>
+                        <h2>{% trans 'Your comment on this question' %}:</h2>
+                        <form action="{% url 'pble_questions:comments:submit:q' question.pk %}" method="post" class="pure-form pure-form-stacked">
+                            {% csrf_token %}
+                            {{ comment_form.media }}
+                            {{ comment_form }}
+                            <br/>
+                            <button type="submit" class="pure-button pure-button-primary">{% trans 'Submit' %}</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

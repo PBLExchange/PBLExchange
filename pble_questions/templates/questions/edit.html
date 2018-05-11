@@ -1,0 +1,12 @@
+{% extends base_template %}
+{% load i18n %}
+
+{% block content %}
+    <h1>{% trans 'edit' %}</h1>
+    <form method="POST" action="{% url 'pble_questions:edit_submit' post_type post_id %}" class="pure-form pure-form-stacked">
+        {% csrf_token %}
+        {{ post_form.media }}
+        {{ post_form.as_p }}
+        <input type="submit" value="{% trans 'Update' %}">
+    </form>
+{% endblock %}

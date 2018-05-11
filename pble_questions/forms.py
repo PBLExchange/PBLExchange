@@ -3,8 +3,18 @@ import re
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 
-from .models import Question, Answer, Comment, Tag, Category
+from .models import Question, Answer, Comment, Tag, Category, Post
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
+
+
+class PostEditForm(forms.ModelForm):
+    prefix = 'edit'
+
+    class Meta:
+        model = Post
+        fields = [
+            'body',
+        ]
 
 
 class QuestionForm(forms.ModelForm):

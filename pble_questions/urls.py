@@ -17,6 +17,8 @@ urlpatterns = [
     url(r'^categories/(?P<category_id>[0-9]+)$', views.category, name='category'),
     url(r'^ask', views.ask, name='ask'),
     url(r'^submit$', views.submit, name='submit'),
+    url(r'^edit/(?P<post_type>[a-z]+)/(?P<post_id>[0-9]+)$', views.edit, name='edit'),
+    url(r'^edit_submit/(?P<post_type>[a-z]+)/(?P<post_id>[0-9]+)$', views.edit_submit, name='edit_submit'),
     url(r'^upvote/(?P<post_id>[0-9]+)$', views.vote, {'amount': 1}, name='upvote'),
     url(r'^downvote/(?P<post_id>[0-9]+)$', views.vote, {'amount': -1}, name='downvote'),
 

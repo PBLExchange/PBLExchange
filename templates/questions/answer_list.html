@@ -23,20 +23,28 @@
                 </div>
                 {% post_meta answer 'pble-a-item' %}
 
+                {% if answer.comment_set.count %}
                 <div class="pble-a-item-c-list">
                     {% comment_list answer.question answer %}
                 </div>
-                <label for="comment-a-{{ answer.pk }}">{% trans 'Add comment' %}</label>
-                <input type="checkbox" id="comment-a-{{ answer.pk }}" class="add-comment">
-                <div class="comment-form pble-c-form" {# style="display: none;" #}>
-                    <h2>{% trans 'Your comment on this answer' %}:</h2>
-                    <form action="{% url 'pble_questions:comments:submit:a' question.pk answer.pk %}" method="post" class="pure-form pure-form-stacked">
-                        {% csrf_token %}
-                        {{ comment_form.media }}
-                        {{ comment_form }}
-                        <br/>
-                        <button type="submit" class="pure-button pure-button-primary">{% trans 'Submit' %}</button>
-                    </form>
+                {% endif %}
+
+                <div class="pble-a-item-buttons">
+                    {% if user == answer.author %}
+                    <a href="{% url 'pble_questions:edit' 'answer' answer.pk %}" class="pble-form-light-button pble-form-light-button-edit" style="text-decoration: none; color: inherit;">{% trans 'Edit' %}</a>
+                    {% endif %}
+                    <label for="comment-a-{{ answer.pk }}" class="pble-form-light-button pble-form-light-button-comment">{% trans 'Add comment' %}</label>
+                    <input type="checkbox" id="comment-a-{{ answer.pk }}" class="add-comment">
+                    <div class="comment-form pble-c-form" {# style="display: none;" #}>
+                        <h2>{% trans 'Your comment on this answer' %}:</h2>
+                        <form action="{% url 'pble_questions:comments:submit:a' question.pk answer.pk %}" method="post" class="pure-form pure-form-stacked">
+                            {% csrf_token %}
+                            {{ comment_form.media }}
+                            {{ comment_form }}
+                            <br/>
+                            <button type="submit" class="pure-button pure-button-primary">{% trans 'Submit' %}</button>
+                        </form>
+                    </div>
                 </div>
             </div>
             <div class="pble-a-item-clear"></div>

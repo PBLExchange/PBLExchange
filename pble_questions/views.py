@@ -1,8 +1,8 @@
 from django.db.models import Count
 from django.shortcuts import render, HttpResponseRedirect, Http404, reverse, get_object_or_404
 from django.utils.translation import ugettext as _
-from pble_questions.forms import QuestionForm, AnswerForm, CommentForm, SearchForm
-from pble_questions.models import Question, Answer, QuestionVote, Tag, Category
+from pble_questions.forms import QuestionForm, AnswerForm, CommentForm, SearchForm, PostEditForm
+from pble_questions.models import Question, Answer, QuestionVote, Tag, Category, Comment
 from PBLExchangeDjango import settings
 from pble_users.points import post_vote, answer_accept, post_bounty
 from pble_users.models import UserProfile
@@ -66,6 +66,57 @@ def ask(request, base_template='pblexchange/base.html', **kwargs):
         'current_user_points': user_up.points,
         'current_user_ch_points': user_up.challenge_points
     })
+
+
+def edit(request, post_type, post_id, base_template='pblexchange/base.html', *args, **kwargs):
+    if not request.user.is_authenticated():
+        return HttpResponseRedirect(reverse('login'))
+    try:
+        post_t = {
+            'question': Question,
+            'answer': Answer,
+            'comment': Comment,
+        }[post_type]
+    except LookupError:
+        return Http404()
+
+    post = get_object_or_404(post_t, pk=post_id)
+    if request.user != post.author:
+        return Http404()
+    form = PostEditForm(instance=post)
+    return render(request, 'questions/edit.html', {
+        'base_template': base_template,
+        'post_form': form,
+        'post_type': post_type,
+        'post_id': post.pk,
+    })
+
+
+def edit_submit(request, post_type, post_id, *args, **kwargs):
+    if not request.user.is_authenticated():
+        return HttpResponseRedirect(reverse('login'))
+    if request.method != 'POST':
+        return Http404()
+    try:
+        post_t = {
+            'question': Question,
+            'answer': Answer,
+            'comment': Comment,
+        }[post_type]
+    except LookupError:
+        return Http404()
+
+    post = get_object_or_404(post_t, id=post_id)
+    if request.user != post.author:
+        return Http404()
+    form = PostEditForm(request.POST)
+    if form.is_valid():
+        post.body = form.cleaned_data['body']
+        post.save()
+    else:
+        return Http404()  # TODO Use better error message
+    question_id = post.pk if isinstance(post, Question) else post.question.pk
+    return HttpResponseRedirect(reverse('pble_questions:detail', args=(question_id,)))
 
 
 def submit(request, question_id=None, answer_id=None, form_type=QuestionForm, **kwargs):
