@@ -3,27 +3,5 @@
 
 {% block content %}
     <h1>{% trans ' About PBL Exchange' %}</h1>
-    {% blocktrans %}
-        <p>PBL Exchange is a forum for the teaching staff at Aalborg University. It is intended for asking questions about supervision of student projects at Aalborg University.</p>
-
-        <p>We have divided the topics into several categories. All questions must be marked with a category.</p>
-
-        <p>You can ask questions. To do this, select Ask question from the top menu. You can tag your questions with tags of your own making.</p>
-
-        <p>You can answer questions. To do this, select the question from the list.</p>
-
-        <p>You can write comments to a question or to an answer. To do this, select Comment below the question/answer that you are</p>
-
-        <p>All users of PBL Exchange can collect points; the more points you get, the more rights you get as a user. Upvotes and downvotes both affect the point total of a users. To award points to other users, you can upvote their questions, answers and comments if you like these. Likewise, you can downvote those questions, answers and comments that you do not like. If someone has provided an answer to one of your questions that you are particulary happy with, you can mark it as the Best Answer.</p>
-
-        <p>If you have a question that is of particular importance to you, you can set a <b>bounty</b> amounting to some number of your points. The user that writes the best answer (selected by you) will then receive the points from you.</p>
-
-        <p>Sometimes the administrators will create a <b>challenge</b> by selecting certain users that will ask question of particular importance. The user that writes best answer to a challenge question will then be awared a number of points.</p>
-
-        <p>Every now and then there are <b>themes</b> within one of the categories; this is done to highlight issues of particular importance. The questions that fall under this category will be highlighted in the sidebar.</p>
-
-        <p>You can search the entire site for specific words. To do this, use the search function in the top right-hand corner.</p>
-
-        <p>PBL Exchange is the tangible outcome of a PBL Development Project carried out in 2017-2018 by Dorina Gnaur, Hans Hüttel, and Kurt Nørmark. The implementation was done by Andreas Klostergaard and Gideon Blegmand; the styling of the user interface is due to Ulrik Stoch Jensen. The software is released under the GPL 3.0 license.</p>
-    {% endblocktrans %}
+    {{ content|safe }}
 {% endblock %}
