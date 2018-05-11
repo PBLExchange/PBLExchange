@@ -1,7 +1,7 @@
 from datetime import timedelta
 
 from django.db.models.functions import Coalesce
-from django.utils import timezone
+from django.utils import timezone, translation
 from django.db import models
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.contrib.auth.models import User
@@ -34,17 +34,22 @@ class Course(models.Model):
 
 class Category(models.Model):
     class Meta:
-        verbose_name_plural = 'categories'
+        verbose_name = _('category')
+        verbose_name_plural = _('categories')
     en_name = models.CharField(max_length=160, unique=True)
     da_name = models.CharField(max_length=160, unique=True)
     en_description = models.TextField(default='')
     da_description = models.TextField(default='')
 
     def __str__(self):
-        return self.en_name
+        lang = translation.get_language()
+        return self.get_i18n_name(lang)
 
-    def get_i18n_name(self, user): # TODO: language options here should not be hard coded
-        if user.usersetting.language == 'da':
+    def user_get_i18n_name(self, user):  # TODO: language options here should not be hard coded
+        return self.get_i18n_name(user.usersetting.language)
+
+    def get_i18n_name(self, lang):
+        if lang == 'da':
             return self.da_name
         else:
             return self.en_name
@@ -52,10 +57,10 @@ class Category(models.Model):
 
 class FeaturedCategory(models.Model):
     class Meta:
-        verbose_name_plural = 'featured categories'
+        verbose_name_plural = _('featured categories')
     category = models.ForeignKey(Category)
-    en_text = models.CharField(max_length=128)
-    da_text = models.CharField(max_length=128)
+    en_text = RichTextUploadingField()
+    da_text = RichTextUploadingField()
     start_date = models.DateField(unique=True)
 
     def __str__(self):
@@ -66,7 +71,7 @@ class Post(models.Model):
     class Meta:
         abstract = True
 
-    body = RichTextUploadingField(verbose_name=_('body'))
+    body = RichTextUploadingField(verbose_name=_('body'), blank=True)
     author = models.ForeignKey(User)
     anonymous = models.BooleanField(verbose_name=_('anonymous'))
     created_date = models.DateTimeField(auto_now_add=True)

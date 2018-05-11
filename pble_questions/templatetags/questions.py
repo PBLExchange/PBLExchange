@@ -166,7 +166,7 @@ def top_challenges():
 
 @register.simple_tag(takes_context=True)
 def get_category_name(context, category):
-    return category.get_i18n_name(context['user'])
+    return category.user_get_i18n_name(context['user'])
 
 
 @register.simple_tag(takes_context=True)
