@@ -75,3 +75,10 @@ class NewsArticle(models.Model):
 
     def __str__(self):
         return self.headline
+
+
+class MiscContent(models.Model):
+    en_title = models.CharField(max_length=160)
+    da_title = models.CharField(max_length=160)
+    en_content = RichTextUploadingField()
+    da_content = RichTextUploadingField()
