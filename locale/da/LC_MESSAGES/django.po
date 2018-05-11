@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-02 06:44+0000\n"
+"POT-Creation-Date: 2018-05-11 10:19+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,15 +25,15 @@ msgstr "Engelsk"
 msgid "Danish"
 msgstr "Dansk"
 
-#: pble_questions/forms.py:13
+#: pble_questions/forms.py:23
 msgid "Tags are comma separated<br><br>"
 msgstr ""
 
-#: pble_questions/forms.py:53
+#: pble_questions/forms.py:63
 msgid "Answer"
 msgstr "Svar"
 
-#: pble_questions/forms.py:65
+#: pble_questions/forms.py:75
 msgid "Comment"
 msgstr "Kommentar"
 
@@ -64,7 +64,7 @@ msgstr "tags"
 
 #: pble_questions/models.py:118
 msgid "bounty"
-msgstr ""
+msgstr "dusør"
 
 #: pble_questions/templates/questions/ask.html:6
 msgid "Ask a question"
@@ -121,10 +121,10 @@ msgid "Tags are separated by commas, and joined using hyphen"
 msgstr "Tags er separeret af kommaer, og sammensat ved brug af bindestreg"
 
 #: pble_questions/templates/questions/ask.html:26
-#: pble_questions/templates/questions/detail.html:39
-#: pble_questions/templates/questions/detail.html:58
+#: pble_questions/templates/questions/detail.html:45
+#: pble_questions/templates/questions/detail.html:65
 #: templates/pblexchange/write_news_article.html:10
-#: templates/questions/answer_list.html:38
+#: templates/questions/answer_list.html:45
 msgid "Submit"
 msgstr "Send"
 
@@ -146,7 +146,7 @@ msgid "Unclaimed bounties"
 msgstr "Aktive dusører"
 
 #: pble_questions/templates/questions/categories.html:5
-#: pble_questions/views.py:155
+#: pble_questions/views.py:206
 #: pble_subscriptions/templates/subscriptions/base.html:7
 msgid "Categories"
 msgstr "Kategorier"
@@ -155,32 +155,47 @@ msgstr "Kategorier"
 msgid "Recent questions posted in"
 msgstr "Nylige spørgsmål under"
 
-#: pble_questions/templates/questions/detail.html:30
-#: templates/questions/answer_list.html:29
+#: pble_questions/templates/questions/detail.html:34
+#: templates/questions/answer_list.html:34
+#: templates/questions/comment_list.html:13
+msgid "Edit"
+msgstr "Redigér"
+
+#: pble_questions/templates/questions/detail.html:36
+#: templates/questions/answer_list.html:36
 msgid "Add comment"
 msgstr "Tilføj kommentar"
 
-#: pble_questions/templates/questions/detail.html:33
+#: pble_questions/templates/questions/detail.html:39
 msgid "Your comment on this question"
 msgstr "Din kommentar på dette spørgsmål"
 
-#: pble_questions/templates/questions/detail.html:46
+#: pble_questions/templates/questions/detail.html:53
 #: pble_users/templates/users/detail.html:71
 #: pble_users/templates/users/user_questions.html:10
 msgid "Answers"
 msgstr "Svar"
 
-#: pble_questions/templates/questions/detail.html:61
+#: pble_questions/templates/questions/detail.html:68
 msgid "Please"
 msgstr "Venligst"
 
-#: pble_questions/templates/questions/detail.html:61
+#: pble_questions/templates/questions/detail.html:68
 msgid "log in"
 msgstr "log in"
 
-#: pble_questions/templates/questions/detail.html:61
+#: pble_questions/templates/questions/detail.html:68
 msgid "to answer questions"
 msgstr "for at svar på spørgsmål"
+
+#: pble_questions/templates/questions/edit.html:5
+msgid "edit"
+msgstr "redigér"
+
+#: pble_questions/templates/questions/edit.html:10
+#: pble_subscriptions/templates/subscriptions/base.html:47
+msgid "Update"
+msgstr "Opdatér"
 
 #: pble_questions/templates/questions/questions.html:6
 msgid "Recent questions tagged"
@@ -239,10 +254,6 @@ msgstr "Svar notifikationer"
 #: pble_subscriptions/templates/subscriptions/base.html:39
 msgid "Comment notifications"
 msgstr "Kommentar notifikationer"
-
-#: pble_subscriptions/templates/subscriptions/base.html:47
-msgid "Update"
-msgstr "Opdatér"
 
 #: pble_subscriptions/templates/subscriptions/category_list.html:6
 msgid "Categories you are subscribed to:"
@@ -537,8 +548,8 @@ msgstr ""
 "er særligt tilfreds med, kan du markere det som det bedste svar med "
 "“flueben”.</p>\n"
 "\n"
-"<p>Hvis du har et spørgsmål, som er særlig vigtigt for dig, kan du udlodde en "
-"<b>dusør</b> på et antal point. Den bruger, der skriver det bedste svar "
+"<p>Hvis du har et spørgsmål, som er særlig vigtigt for dig, kan du udlodde "
+"en <b>dusør</b> på et antal point. Den bruger, der skriver det bedste svar "
 "(ifølge dig), modtager så pointene fra din pointsaldo.</p>\n"
 "\n"
 "<p>Sommetider kommer administratorerne med en <b>udfordring</b> ved at bede "
@@ -550,14 +561,15 @@ msgstr ""
 "sætte fokus på problematikker af særlig vigtighed. De spørgsmål, der falder "
 "under den udvalgte kategori, bliver fremhævet ude i siden.</p>\n"
 "\n"
-"<p>PBL Exchange har en søgefunktion, der gør det muligt at søge efter bestemte "
-"ord. Søgefeltet findes i øverste højre hjørne.</p>\n"
+"<p>PBL Exchange har en søgefunktion, der gør det muligt at søge efter "
+"bestemte ord. Søgefeltet findes i øverste højre hjørne.</p>\n"
 "\n"
 "\n"
 "<p>PBL Exchange er resultatet af et PBL-udviklingsprojekt gennemført i "
 "2017-2018 af Dorina Gnaur, Hans Hüttel og Kurt Nørmark. Implementationen "
 "skyldes Andreas Klostergaard og Gideon Blegmand; brugergrænsefladen skyldes "
-"Ulrik Stoch Jensen. Softwaren bag PBL Exchange udgives under GPL 3.0 licens.</p>"
+"Ulrik Stoch Jensen. Softwaren bag PBL Exchange udgives under GPL 3.0 licens."
+"</p>"
 
 #: templates/pblexchange/links.html:4
 msgid ""
@@ -593,11 +605,11 @@ msgstr "Klik for at vælge som bedste svar"
 msgid "Best answer"
 msgstr "Bedste svar"
 
-#: templates/questions/answer_list.html:32
+#: templates/questions/answer_list.html:39
 msgid "Your comment on this answer"
 msgstr "Din kommentar på dette svar"
 
-#: templates/questions/answer_list.html:46
+#: templates/questions/answer_list.html:54
 msgid "There are currently no answers"
 msgstr "Der er på nuværende tidspunkt ingen svar"
 
