@@ -1,3 +1,6 @@
+import os
+import sys
+
 from django.shortcuts import render, HttpResponseRedirect, reverse, get_object_or_404, Http404
 from django.contrib.auth.models import User
 from .models import Subscription
@@ -190,6 +193,7 @@ def send_comment_notifications(comment):
         connection = get_connection()  # uses SMTP server specified in settings.py
         connection.open()  # If you don't open the connection manually, Django will automatically open, then tear down the connection in msg.send()
     except ConnectionRefusedError:
+        sys.stderr.write('Could not open connection to SMTP server.')
         return
 
     for e in comments:
