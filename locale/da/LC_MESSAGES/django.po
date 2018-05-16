@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-11 10:19+0000\n"
+"POT-Creation-Date: 2018-05-16 11:01+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -37,32 +37,40 @@ msgstr "Svar"
 msgid "Comment"
 msgstr "Kommentar"
 
-#: pble_questions/models.py:69 pblexchange/forms.py:14 pblexchange/models.py:66
+#: pble_questions/models.py:37 pble_questions/models.py:120
+msgid "category"
+msgstr "kategori"
+
+#: pble_questions/models.py:38
+msgid "categories"
+msgstr "kategorier"
+
+#: pble_questions/models.py:60
+msgid "featured categories"
+msgstr "fremhævede kategorier"
+
+#: pble_questions/models.py:74 pblexchange/forms.py:14 pblexchange/models.py:66
 msgid "body"
 msgstr "krop"
 
-#: pble_questions/models.py:71 pble_questions/templatetags/questions.py:107
+#: pble_questions/models.py:76 pble_questions/templatetags/questions.py:107
 #: pble_users/templatetags/users.py:16
 msgid "anonymous"
 msgstr "anonym"
 
-#: pble_questions/models.py:114
+#: pble_questions/models.py:119
 msgid "title"
 msgstr "titel"
 
-#: pble_questions/models.py:115
-msgid "category"
-msgstr "kategori"
-
-#: pble_questions/models.py:116
+#: pble_questions/models.py:121
 msgid "course"
 msgstr "kursus"
 
-#: pble_questions/models.py:117
+#: pble_questions/models.py:122
 msgid "tags"
 msgstr "tags"
 
-#: pble_questions/models.py:118
+#: pble_questions/models.py:123
 msgid "bounty"
 msgstr "dusør"
 
@@ -200,6 +208,10 @@ msgstr "Opdatér"
 #: pble_questions/templates/questions/questions.html:6
 msgid "Recent questions tagged"
 msgstr "Nylige spørgsmål tagget med"
+
+#: pble_questions/templates/questions/search.html:6
+msgid "Results of search"
+msgstr "Søgeresultater"
 
 #: pble_questions/templatetags/questions.py:88
 msgid "asked"
@@ -366,7 +378,7 @@ msgstr "Kommentarer"
 msgid "Voted on"
 msgstr "Stemt på"
 
-#: pble_users/templates/users/detail.html:93 pblexchange/views.py:14
+#: pble_users/templates/users/detail.html:93 pblexchange/views.py:16
 #: templates/questions/stats.html:4
 msgid "questions"
 msgstr "spørgsmål"
@@ -405,6 +417,18 @@ msgstr "Top scorende brugere"
 #: pble_users/templates/users/user_list.html:16
 msgid "No registered user(s) at the moment"
 msgstr "Ingen registrerede brugere på nuværende tidspunkt"
+
+#: pble_users/urls.py:14
+msgid "Questions by "
+msgstr "Spørgsmål af "
+
+#: pble_users/urls.py:18
+msgid "Unanswered questions by "
+msgstr "Ubesvarede spørgsmål af "
+
+#: pble_users/urls.py:22
+msgid "Answers by "
+msgstr "Svar af "
 
 #: pblexchange/forms.py:13 pblexchange/models.py:65
 msgid "lead"
@@ -469,107 +493,6 @@ msgstr "Drevet af"
 #: templates/pblexchange/about.html:5
 msgid " About PBL Exchange"
 msgstr "Om PBL Exchange"
-
-#: templates/pblexchange/about.html:6
-msgid ""
-"\n"
-"        <p>PBL Exchange is a forum for the teaching staff at Aalborg "
-"University. It is intended for asking questions about supervision of student "
-"projects at Aalborg University.</p>\n"
-"\n"
-"        <p>We have divided the topics into several categories. All questions "
-"must be marked with a category.</p>\n"
-"\n"
-"        <p>You can ask questions. To do this, select Ask question from the "
-"top menu. You can tag your questions with tags of your own making.</p>\n"
-"\n"
-"        <p>You can answer questions. To do this, select the question from "
-"the list.</p>\n"
-"\n"
-"        <p>You can write comments to a question or to an answer. To do this, "
-"select Comment below the question/answer that you are</p>\n"
-"\n"
-"        <p>All users of PBL Exchange can collect points; the more points you "
-"get, the more rights you get as a user. Upvotes and downvotes both affect "
-"the point total of a users. To award points to other users, you can upvote "
-"their questions, answers and comments if you like these. Likewise, you can "
-"downvote those questions, answers and comments that you do not like. If "
-"someone has provided an answer to one of your questions that you are "
-"particulary happy with, you can mark it as the Best Answer.</p>\n"
-"\n"
-"        <p>If you have a question that is of particular importance to you, "
-"you can set a <b>bounty</b> amounting to some number of your points. The "
-"user that writes the best answer (selected by you) will then receive the "
-"points from you.</p>\n"
-"\n"
-"        <p>Sometimes the administrators will create a <b>challenge</b> by "
-"selecting certain users that will ask question of particular importance. The "
-"user that writes best answer to a challenge question will then be awared a "
-"number of points.</p>\n"
-"\n"
-"        <p>Every now and then there are <b>themes</b> within one of the "
-"categories; this is done to highlight issues of particular importance. The "
-"questions that fall under this category will be highlighted in the sidebar.</"
-"p>\n"
-"\n"
-"        <p>You can search the entire site for specific words. To do this, "
-"use the search function in the top right-hand corner.</p>\n"
-"\n"
-"        <p>PBL Exchange is the tangible outcome of a PBL Development Project "
-"carried out in 2017-2018 by Dorina Gnaur, Hans Hüttel, and Kurt Nørmark. The "
-"implementation was done by Andreas Klostergaard and Gideon Blegmand; the "
-"styling of the user interface is due to Ulrik Stoch Jensen. The software is "
-"released under the GPL 3.0 license.</p>\n"
-"    "
-msgstr ""
-"\n"
-"<p>PBL Exchange er et forum for underviserne ved Aalborg Universitet. Det er "
-"beregnet til at stille spørgsmål om vejledning af projekter ved "
-"uddannelserne på Aalborg Universitet.</p>\n"
-"\n"
-"<p>Emnerne er inddelt i kategorier, og alle spørgsmål tilhører en af disse "
-"kategorier.</p>\n"
-"\n"
-"<ul><li>Du kan stille spørgsmål. For at gøre dette, vælg da Stil et "
-"spørgsmål fra topmenuen. Du kan tagge dine spørgsmål med tags, som du selv "
-"laver.</li>\n"
-"<li>Du kan stille spørgsmål. For at gøre dette, vælg da det spørgsmål på "
-"listen, som du vil besvare.</li>\n"
-"<li>Du kan skrive kommentarer til spørgsmål og til svar. For at gøre dette, "
-"vælg da Tilføj en kommentar under det spørgsmål/svar, du vil kommentere.</"
-"li>\n"
-"</ul>\n"
-"<p>Alle brugere af PBL Exchange kan samle point; jo flere point du får, jo "
-"flere rettigheder får du som bruger. Op-stemmer og ned-stemmer påvirker "
-"begge en brugers pointsaldo. For at give andre brugere point, kan du stemme "
-"deres spørgsmål, svar og kommentarer op hvis du synes om dem. Helt "
-"tilsvarende kan du stemme spørgsmål, svar og kommentarer ned, hvis du ikke "
-"synes om dem. Hvis nogen har skrevet et svar på et af dine spørgsmål, som du "
-"er særligt tilfreds med, kan du markere det som det bedste svar med "
-"“flueben”.</p>\n"
-"\n"
-"<p>Hvis du har et spørgsmål, som er særlig vigtigt for dig, kan du udlodde "
-"en <b>dusør</b> på et antal point. Den bruger, der skriver det bedste svar "
-"(ifølge dig), modtager så pointene fra din pointsaldo.</p>\n"
-"\n"
-"<p>Sommetider kommer administratorerne med en <b>udfordring</b> ved at bede "
-"bestemte brugere om at stille spørgsmål, der er særligt vigtigt, og udlodde "
-"et antal nye point. Den bruger, der skriver det bedste svar på et sådant "
-"spørgsmål får så nye point fra systemet.</p>\n"
-"\n"
-"<p>Nu og da kan der være <b>temaer</b> under en af kategorierne; dette skal "
-"sætte fokus på problematikker af særlig vigtighed. De spørgsmål, der falder "
-"under den udvalgte kategori, bliver fremhævet ude i siden.</p>\n"
-"\n"
-"<p>PBL Exchange har en søgefunktion, der gør det muligt at søge efter "
-"bestemte ord. Søgefeltet findes i øverste højre hjørne.</p>\n"
-"\n"
-"\n"
-"<p>PBL Exchange er resultatet af et PBL-udviklingsprojekt gennemført i "
-"2017-2018 af Dorina Gnaur, Hans Hüttel og Kurt Nørmark. Implementationen "
-"skyldes Andreas Klostergaard og Gideon Blegmand; brugergrænsefladen skyldes "
-"Ulrik Stoch Jensen. Softwaren bag PBL Exchange udgives under GPL 3.0 licens."
-"</p>"
 
 #: templates/pblexchange/links.html:4
 msgid ""
