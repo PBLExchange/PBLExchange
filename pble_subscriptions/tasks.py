@@ -1,4 +1,6 @@
 # Celery tasks
+import sys
+
 from pble_subscriptions.models import Subscription, QuestionNotification
 from pble_questions.models import Tag
 from datetime import timedelta, time, date
@@ -30,8 +32,12 @@ def send_daily_digest():
     peer_questions = defaultdict(list)
     tag_questions = defaultdict(list)
 
-    connection = get_connection()  # uses SMTP server specified in settings.py
-    connection.open()  # If you don't open the connection manually, Django will automatically open, then tear down the connection in msg.send()
+    try:
+        connection = get_connection()  # uses SMTP server specified in settings.py
+        connection.open()  # If you don't open the connection manually, Django will automatically open, then tear down the connection in msg.send()
+    except ConnectionRefusedError:
+        sys.stderr.write('Could not open connection to SMTP server.')
+        return
 
     for qn in q_notifications:
         current_users = users.exclude(user=qn.question.author)
@@ -92,8 +98,12 @@ def send_weekly_digest():
     peer_questions = defaultdict(list)
     tag_questions = defaultdict(list)
 
-    connection = get_connection()  # uses SMTP server specified in settings.py
-    connection.open()  # If you don't open the connection manually, Django will automatically open, then tear down the connection in msg.send()
+    try:
+        connection = get_connection()  # uses SMTP server specified in settings.py
+        connection.open()  # If you don't open the connection manually, Django will automatically open, then tear down the connection in msg.send()
+    except ConnectionRefusedError:
+        sys.stderr.write('Could not open connection to SMTP server.')
+        return
 
     for qn in q_notifications:
         current_users = users.exclude(user=qn.question.author)
