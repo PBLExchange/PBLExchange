@@ -25,18 +25,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = ps.SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-
-# Security settings
-SECURE_CONTENT_TYPE_NOSNIFF = True
-SECURE_BROWSER_XSS_FILTER = True
-SECURE_SSL_REDIRECT = True
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
+DEBUG = True
 
 PBL_VERSION = "1.0-dev"
 
-ALLOWED_HOSTS = ['pblexchange.sfx.aau.dk', 'pblexchange.aau.dk']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -118,19 +111,11 @@ WSGI_APPLICATION = 'PBLExchangeDjango.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
-def read_pg_settings(file):
-    with open(file, 'r') as pg_file:
-        pg_lines = pg_file.readlines()
-    pg_lines = [line[len("export PG"):].split('=', 1) for line in pg_lines]
-    pg = {k: v.replace('"', '').replace('\n', '') for k, v in pg_lines}
-    pg['ENGINE'] = 'django.db.backends.postgresql_psycopg2'
-    pg['NAME'] = pg['DATABASE']
-    del pg['DATABASE']
-    return pg
-
-
 DATABASES = {
-    'default': read_pg_settings(BASE_DIR + '/../postgres-credentials.sh')
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    },
     'transferfrom': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'old.sqlite')
@@ -234,4 +219,4 @@ CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
 SITE_ID = 1     # TODO: On release set django_site domain field to pblexchange.aau.dk
 
 # Whoosh search settings
-WHOOSH_STORAGE_DIR = BASE_DIR + '/../tmp/data/whoosh'
+WHOOSH_STORAGE_DIR = 'data/whoosh'
