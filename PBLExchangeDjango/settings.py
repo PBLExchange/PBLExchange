@@ -27,7 +27,7 @@ SECRET_KEY = ps.SECRET_KEY
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-PBL_VERSION = "1.0-dev"
+PBL_VERSION = "1.1-dev"
 
 ALLOWED_HOSTS = []
 
@@ -194,7 +194,7 @@ CKEDITOR_UPLOAD_PATH = 'uploads/'
 
 # Login settings
 LOGIN_URL = 'login'
-EXEMPT_USERS = ['aklost11', 'gblegm13']
+EXEMPT_USERS = ['aklost11', 'gblegm13', 'mmort13']
 DISALLOWED_DOMAINS = ['student.aau.dk']
 
 # Login redirect
