@@ -20,6 +20,9 @@
     </head>
     <body class="pble-template-question pble-body-js-off">
         <div class="qam-login-bar">
+            <div class="pble-logo">
+                    <a href="{% url 'home' %}" class="pble-logo-link">PBL Exchange</a> <!--TODO: make dynamic-->
+                </div>
             <div class="qam-login-group">
                 <div class="pble-nav-user">
                     <div class="pble-logged-in-avatar"></div>
@@ -48,10 +51,6 @@
         </div>
         <div class="pble-body-wrapper">
             <div class="pble-header">
-                <div class="pble-logo">
-                    <a href="{% url 'home' %}" class="pble-logo-link">{% trans 'PBL Exchange' %}</a> {# TODO: make dynamic #}
-                </div>
-                <div class="pble-header-clear"></div>
             </div>
 
             <div class="pble-main-shadow">
@@ -78,7 +77,6 @@
                         {% categories_list %}
 
                         {% links %}
-
                     </div>
                     {% endblock %}
 

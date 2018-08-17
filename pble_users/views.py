@@ -15,12 +15,12 @@ def users(request, base_template='pblexchange/base.html', **kwargs):
     return render(request, 'users/user_list.html', {
         'base_template': base_template,
         'userprofiles': models.UserProfile.objects.sorted_score_descending(),
-        'link_list': ExternalLink.objects.filter(featured=True),
+        'link_list': ExternalLink.objects.filter(featured=True), 
     })
 
 
 def detail(request, user_id, base_template='pblexchange/base.html', **kwargs):
-    user_profile = models.UserProfile.objects.get(user=User.objects.get(id=user_id));
+    user_profile = models.UserProfile.objects.get(user=User.objects.get(id=user_id))
     return render(request, 'users/detail.html', {
         'base_template': base_template,
         'user_profile': user_profile

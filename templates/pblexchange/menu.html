@@ -1,7 +1,7 @@
 {% load admin_urls %}
 {% load i18n %}
 <div class="pble-nav-main">
-    <ul class="pble-nav-main-list">
+    <ul class="pble-nav-pble-q-item-statsmain-list">
         {% for field in menu %}
             <li class="pble-nav-main-item"><a href="{% url field.lookup %}" class="pble-nav-main-link">{{ field.title }}</a></li>
         {% endfor %}
@@ -10,7 +10,7 @@
             <li class="pble-nav-main-item"><a href="{% url 'admin:index' %}" class="pble-nav-main-link">{% trans 'Admin' %}</a></li>
         {% endif %}
 
-        <li class="pble-nav-main-item-opp"><a href="{% url 'about' %}" class="pble-nav-main-link">{% trans 'About' %}</a></li>
+        <li class="pble-nav-main-item"><a href="{% url 'about' %}" class="pble-nav-main-link">{% trans 'About' %}</a></li>
 
     </ul>
 </div>
