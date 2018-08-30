@@ -1,0 +1,114 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="50" height="150" viewBox="0 0 50 150">
+  <defs>
+    <linearGradient id="selected-icon-c" x1="50%" x2="50%" y1="100%" y2="0%">
+      <stop offset="0%" stop-color="#F9FBFB"/>
+      <stop offset="100%" stop-color="#FEFFFF"/>
+    </linearGradient>
+    <circle id="selected-icon-b" cx="14.5" cy="14.5" r="14.5"/>
+    <filter id="selected-icon-a" width="227.6%" height="227.6%" x="-63.8%" y="-39.7%" filterUnits="objectBoundingBox">
+      <feOffset dy="6" in="SourceAlpha" result="shadowOffsetOuter1"/>
+      <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="4.5"/>
+      <feColorMatrix in="shadowBlurOuter1" result="shadowMatrixOuter1" values="0 0 0 0 0.438930237   0 0 0 0 0.555032951   0 0 0 0 0.555032951  0 0 0 0.136803668 0"/>
+      <feOffset dy="1" in="SourceAlpha" result="shadowOffsetOuter2"/>
+      <feGaussianBlur in="shadowOffsetOuter2" result="shadowBlurOuter2" stdDeviation="1"/>
+      <feColorMatrix in="shadowBlurOuter2" result="shadowMatrixOuter2" values="0 0 0 0 0.243489574   0 0 0 0 0.289927426   0 0 0 0 0.33466199  0 0 0 0.216117527 0"/>
+      <feMerge>
+        <feMergeNode in="shadowMatrixOuter1"/>
+        <feMergeNode in="shadowMatrixOuter2"/>
+      </feMerge>
+    </filter>
+    <filter id="selected-icon-d" width="179.3%" height="179.3%" x="-39.7%" y="-15.5%" filterUnits="objectBoundingBox">
+      <feOffset dy="1" in="SourceAlpha" result="shadowOffsetInner1"/>
+      <feComposite in="shadowOffsetInner1" in2="SourceAlpha" k2="-1" k3="1" operator="arithmetic" result="shadowInnerInner1"/>
+      <feColorMatrix in="shadowInnerInner1" result="shadowMatrixInner1" values="0 0 0 0 1   0 0 0 0 1   0 0 0 0 1  0 0 0 1 0"/>
+      <feOffset dy="-1" in="SourceAlpha" result="shadowOffsetInner2"/>
+      <feComposite in="shadowOffsetInner2" in2="SourceAlpha" k2="-1" k3="1" operator="arithmetic" result="shadowInnerInner2"/>
+      <feColorMatrix in="shadowInnerInner2" result="shadowMatrixInner2" values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.0621886322 0"/>
+      <feMerge>
+        <feMergeNode in="shadowMatrixInner1"/>
+        <feMergeNode in="shadowMatrixInner2"/>
+      </feMerge>
+    </filter>
+    <circle id="selected-icon-f" cx="14.5" cy="14.5" r="14.5"/>
+    <filter id="selected-icon-e" width="231%" height="231%" x="-65.5%" y="-44.8%" filterUnits="objectBoundingBox">
+      <feOffset dy="3" in="SourceAlpha" result="shadowOffsetOuter1"/>
+      <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="4.5"/>
+      <feColorMatrix in="shadowBlurOuter1" result="shadowMatrixOuter1" values="0 0 0 0 0.438930237   0 0 0 0 0.555032951   0 0 0 0 0.555032951  0 0 0 0.136803668 0"/>
+      <feOffset dy="3" in="SourceAlpha" result="shadowOffsetOuter2"/>
+      <feGaussianBlur in="shadowOffsetOuter2" result="shadowBlurOuter2" stdDeviation="2"/>
+      <feColorMatrix in="shadowBlurOuter2" result="shadowMatrixOuter2" values="0 0 0 0 0.243489574   0 0 0 0 0.289927426   0 0 0 0 0.33466199  0 0 0 0.216117527 0"/>
+      <feMerge>
+        <feMergeNode in="shadowMatrixOuter1"/>
+        <feMergeNode in="shadowMatrixOuter2"/>
+      </feMerge>
+    </filter>
+    <filter id="selected-icon-g" width="193.1%" height="193.1%" x="-46.6%" y="-25.9%" filterUnits="objectBoundingBox">
+      <feOffset dy="1" in="SourceAlpha" result="shadowOffsetInner1"/>
+      <feComposite in="shadowOffsetInner1" in2="SourceAlpha" k2="-1" k3="1" operator="arithmetic" result="shadowInnerInner1"/>
+      <feColorMatrix in="shadowInnerInner1" result="shadowMatrixInner1" values="0 0 0 0 1   0 0 0 0 1   0 0 0 0 1  0 0 0 1 0"/>
+      <feOffset dy="-1" in="SourceAlpha" result="shadowOffsetInner2"/>
+      <feComposite in="shadowOffsetInner2" in2="SourceAlpha" k2="-1" k3="1" operator="arithmetic" result="shadowInnerInner2"/>
+      <feColorMatrix in="shadowInnerInner2" result="shadowMatrixInner2" values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.0621886322 0"/>
+      <feMerge>
+        <feMergeNode in="shadowMatrixInner1"/>
+        <feMergeNode in="shadowMatrixInner2"/>
+      </feMerge>
+    </filter>
+    <linearGradient id="selected-icon-j" x1="50%" x2="50%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#50F983"/>
+      <stop offset="100%" stop-color="#42CF6C"/>
+    </linearGradient>
+    <circle id="selected-icon-i" cx="14.5" cy="14.5" r="14.5"/>
+    <filter id="selected-icon-h" width="227.6%" height="227.6%" x="-63.8%" y="-39.7%" filterUnits="objectBoundingBox">
+      <feOffset dy="6" in="SourceAlpha" result="shadowOffsetOuter1"/>
+      <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="4.5"/>
+      <feColorMatrix in="shadowBlurOuter1" result="shadowMatrixOuter1" values="0 0 0 0 0.0481381694   0 0 0 0 0.333519345   0 0 0 0 0.188169926  0 0 0 0.0762567935 0"/>
+      <feOffset dy="1" in="SourceAlpha" result="shadowOffsetOuter2"/>
+      <feGaussianBlur in="shadowOffsetOuter2" result="shadowBlurOuter2" stdDeviation="1"/>
+      <feColorMatrix in="shadowBlurOuter2" result="shadowMatrixOuter2" values="0 0 0 0 0.067294269   0 0 0 0 0.31037415   0 0 0 0 0.18656949  0 0 0 0.221240942 0"/>
+      <feMerge>
+        <feMergeNode in="shadowMatrixOuter1"/>
+        <feMergeNode in="shadowMatrixOuter2"/>
+      </feMerge>
+    </filter>
+    <filter id="selected-icon-k" width="182.8%" height="182.8%" x="-41.4%" y="-17.2%" filterUnits="objectBoundingBox">
+      <feGaussianBlur in="SourceAlpha" result="shadowBlurInner1" stdDeviation=".5"/>
+      <feOffset dy="1" in="shadowBlurInner1" result="shadowOffsetInner1"/>
+      <feComposite in="shadowOffsetInner1" in2="SourceAlpha" k2="-1" k3="1" operator="arithmetic" result="shadowInnerInner1"/>
+      <feColorMatrix in="shadowInnerInner1" result="shadowMatrixInner1" values="0 0 0 0 1   0 0 0 0 1   0 0 0 0 1  0 0 0 0.397050498 0"/>
+      <feOffset dy="-1" in="SourceAlpha" result="shadowOffsetInner2"/>
+      <feComposite in="shadowOffsetInner2" in2="SourceAlpha" k2="-1" k3="1" operator="arithmetic" result="shadowInnerInner2"/>
+      <feColorMatrix in="shadowInnerInner2" result="shadowMatrixInner2" values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.0621886322 0"/>
+      <feMerge>
+        <feMergeNode in="shadowMatrixInner1"/>
+        <feMergeNode in="shadowMatrixInner2"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <g fill="none" fill-rule="evenodd">
+    <g transform="translate(11 62)">
+      <use fill="#000" filter="url(#selected-icon-a)" xlink:href="#selected-icon-b"/>
+      <use fill="url(#selected-icon-c)" xlink:href="#selected-icon-b"/>
+      <use fill="#000" filter="url(#selected-icon-d)" xlink:href="#selected-icon-b"/>
+      <g fill="#BAC6CA" transform="translate(8 9)">
+        <path d="M10.4938373,0.639413815 C11.052287,0.057695316 11.957713,0.057695316 12.5161627,0.639413815 C13.0746125,1.22113231 13.0746125,2.16428435 12.5161627,2.74600285 L5.36616274,10.1939195 C4.80771298,10.775638 3.90228702,10.775638 3.34383726,10.1939195 L0.483837263,7.21475285 C-0.0746124967,6.63303435 -0.0746124967,5.68988231 0.483837263,5.10816382 C1.04228702,4.52644532 1.94771298,4.52644532 2.50616274,5.10816382 L4.355,7.03403596 L10.4938373,0.639413815 Z"/>
+      </g>
+    </g>
+    <g transform="translate(11 112)">
+      <use fill="#000" filter="url(#selected-icon-e)" xlink:href="#selected-icon-f"/>
+      <use fill="url(#selected-icon-c)" xlink:href="#selected-icon-f"/>
+      <use fill="#000" filter="url(#selected-icon-g)" xlink:href="#selected-icon-f"/>
+      <g fill="#BAC6CA" transform="translate(8 9)">
+        <path d="M10.4938373,0.639413815 C11.052287,0.057695316 11.957713,0.057695316 12.5161627,0.639413815 C13.0746125,1.22113231 13.0746125,2.16428435 12.5161627,2.74600285 L5.36616274,10.1939195 C4.80771298,10.775638 3.90228702,10.775638 3.34383726,10.1939195 L0.483837263,7.21475285 C-0.0746124967,6.63303435 -0.0746124967,5.68988231 0.483837263,5.10816382 C1.04228702,4.52644532 1.94771298,4.52644532 2.50616274,5.10816382 L4.355,7.03403596 L10.4938373,0.639413815 Z"/>
+      </g>
+    </g>
+    <g transform="translate(11 12)">
+      <use fill="#000" filter="url(#selected-icon-h)" xlink:href="#selected-icon-i"/>
+      <use fill="url(#selected-icon-j)" xlink:href="#selected-icon-i"/>
+      <use fill="#000" filter="url(#selected-icon-k)" xlink:href="#selected-icon-i"/>
+      <g fill="#FFF" transform="translate(8 9)">
+        <path d="M10.4938373,0.639413815 C11.052287,0.057695316 11.957713,0.057695316 12.5161627,0.639413815 C13.0746125,1.22113231 13.0746125,2.16428435 12.5161627,2.74600285 L5.36616274,10.1939195 C4.80771298,10.775638 3.90228702,10.775638 3.34383726,10.1939195 L0.483837263,7.21475285 C-0.0746124967,6.63303435 -0.0746124967,5.68988231 0.483837263,5.10816382 C1.04228702,4.52644532 1.94771298,4.52644532 2.50616274,5.10816382 L4.355,7.03403596 L10.4938373,0.639413815 Z"/>
+      </g>
+    </g>
+  </g>
+</svg>
