@@ -74,10 +74,12 @@ def about(request):
         if u_setting.language == 'da':
                 return render(request, 'pblexchange/about.html', {
                     'base_template': 'pblexchange/base.html',
-                    'content': MiscContent.objects.get(en_title='about').da_content
+                    'content': MiscContent.objects.get().da_content 
+                    #'content': MiscContent.objects.get(en_title='about').da_content
                 })
 
         return render(request, 'pblexchange/about.html', {
             'base_template': 'pblexchange/base.html',
-            'content': MiscContent.objects.get(en_title='about').en_content
+            'content': MiscContent.objects.get().en_content
+            #'content': MiscContent.objects.get(en_title='about').en_content
         })
